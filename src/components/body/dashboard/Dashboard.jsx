@@ -22,7 +22,7 @@ function DashBoard() {
   ];
 
   return (
-    <div className="h-full overflow-x-scroll">
+    <div className="h-full overflow-x-scroll overflow-y-hidden scrollbar-hide">
       <div className="flex h-full w-fit">
         {sections.map((section, index) => (
           <Section
