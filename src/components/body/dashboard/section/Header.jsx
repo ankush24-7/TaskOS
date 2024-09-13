@@ -1,7 +1,5 @@
 function Header({ name, count, color}) {
     // use sectionId to access name, icon, color, and # of tasks of the header
-    console.log(color);
-    console.log(typeof(color));
 
     return (
         <div className="h-[3.75rem] flex justify-between items-center px-2 py-2" style={{backgroundColor : color}}>

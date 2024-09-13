@@ -1,5 +1,5 @@
-import Nav from '../nav/Nav';
-import DashBoard from '../dashboard/Dashboard';
+import Nav from './nav/Nav';
+import DashBoard from './dashboard/Dashboard';
 
 function Body() {
   return (
