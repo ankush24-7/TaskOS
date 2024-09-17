@@ -1,5 +1,6 @@
 import React from 'react';
 import Section from "./section/Section";
+import { headerIcons } from "../../../assets/icons/icons.js";
 
 function lightenColor(bgColor, percent) {
   const num = parseInt(bgColor.replace("#", ""), 16);
@@ -11,14 +12,13 @@ function lightenColor(bgColor, percent) {
 }
 
 function DashBoard() {
-  const baseColor = '#1a202c';   // bgColor
+  const baseColor = '#1a202c';   // bgColor  
   const sections = [
-    { name: 'Ready', count: 10, headerColor: '#ffd947' },
-    { name: 'Running', count: 2, headerColor: '#2563eb' },
-    { name: 'CPU', count: 1, headerColor: '#a855f7' },
-    { name: 'Blocked', count: 3, headerColor: '#16a34a' },
-    { name: 'Completed', count: 2, headerColor: '#047857' },
-    { name: 'Terminated', count: 2, headerColor: '#374151' }
+    { name: 'New', count: 4, headerColor: '#FBC02D', bgColor: baseColor },
+    { name: 'Ready', count: 2, headerColor: '#4CAF50', bgColor: baseColor },
+    { name: 'Running', count: 0, headerColor: '#2196F3', bgColor: baseColor },
+    { name: 'Blocked', count: 1, headerColor: '#F44336', bgColor: baseColor },
+    { name: 'Terminated', count: 10, headerColor: '#009688', bgColor: baseColor }
   ];
 
   return (
@@ -31,6 +31,7 @@ function DashBoard() {
             count={section.count}
             headerColor={section.headerColor}
             bgColor={lightenColor(baseColor, index * 0.5)}   // Increase lightness by 0.5%
+            icon={headerIcons[index]}
           />
         ))}
       </div>

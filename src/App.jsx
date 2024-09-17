@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <div className='flex'>
-        <ActivityBar />
+        {/* <ActivityBar /> */}
         <Body />
       </div>
     </>
