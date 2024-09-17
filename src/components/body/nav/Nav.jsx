@@ -1,7 +1,4 @@
-import add from "../../../assets/add.svg";
-import down from "../../../assets/down.svg";
-import user from "../../../assets/user.svg";
-import projectIcon from "../../../assets/currProject.svg";
+import { add, down, user, projectIcon } from "../../../assets/icons/icons.js";
 
 function Nav() {
   return (
