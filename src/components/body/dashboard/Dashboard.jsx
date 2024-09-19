@@ -1,6 +1,6 @@
 import React from 'react';
 import Section from "./section/Section";
-import { headerIcons } from "../../../assets/icons/icons.js";
+import { headerIcons } from "../../../assets/icons/icons.jsx";
 
 function lightenColor(bgColor, percent) {
   const num = parseInt(bgColor.replace("#", ""), 16);
@@ -14,11 +14,11 @@ function lightenColor(bgColor, percent) {
 function DashBoard() {
   const baseColor = '#1a202c';   // bgColor  
   const sections = [
-    { name: 'New', count: 4, headerColor: '#FBC02D', bgColor: baseColor },
-    { name: 'Ready', count: 2, headerColor: '#4CAF50', bgColor: baseColor },
-    { name: 'Running', count: 0, headerColor: '#2196F3', bgColor: baseColor },
-    { name: 'Blocked', count: 1, headerColor: '#F44336', bgColor: baseColor },
-    { name: 'Terminated', count: 10, headerColor: '#009688', bgColor: baseColor }
+    { name: 'New', count: 4, headerColor: '#FBC02D', bgColor: baseColor, icon: headerIcons.NewSectionIcon },
+    { name: 'Ready', count: 2, headerColor: '#4CAF50', bgColor: baseColor, icon: headerIcons.ReadySectionIcon },
+    { name: 'Running', count: 0, headerColor: '#2196F3', bgColor: baseColor, icon: headerIcons.RunningSectionIcon },
+    { name: 'Blocked', count: 1, headerColor: '#F44336', bgColor: baseColor , icon: headerIcons.BlockedSectionIcon },
+    { name: 'Terminated', count: 10, headerColor: '#009688', bgColor: baseColor, icon: headerIcons.TerminatedSectionIcon }
   ];
 
   return (
@@ -31,7 +31,7 @@ function DashBoard() {
             count={section.count}
             headerColor={section.headerColor}
             bgColor={lightenColor(baseColor, index * 0.5)}   // Increase lightness by 0.5%
-            icon={headerIcons[index]}
+            Icon={() => section.icon}
           />
         ))}
       </div>

@@ -4,13 +4,11 @@ import Body from './components/body/Body'
 
 function App() {
   return (
-    <>
-      <div className='flex'>
-        {/* <ActivityBar /> */}
-        <Body />
-      </div>
-    </>
+    <div className='flex'>
+      <ActivityBar />
+      <Body />
+    </div>
   )
-}
+} 
 
 export default App

@@ -1,5 +1,6 @@
+import React from "react";
 import Tags from "./Tags.jsx";
-import { priority, user, addTask } from "../../../../../assets/icons/icons.js";
+import { taskIcons, priorityIcons } from "../../../../../assets/icons/icons.jsx";
 
 function Task({ onClick }) {
   const taskDetails = {
@@ -12,8 +13,11 @@ function Task({ onClick }) {
     <>
       {/* Add button to create a new task inplace */}
       <div className="group h-2 flex justify-center">
-        <button className="absolute bg-white rounded-full mx-auto w-6 h-6 opacity-0 drop-shadow-xl -translate-y-1 group-hover:opacity-100">
-          <img src={ addTask } alt="icon_add" className="mx-auto w-4" />
+        <button 
+          className="absolute bg-white rounded-full mx-auto w-6 h-6 opacity-0 drop-shadow-xl -translate-y-1 group-hover:opacity-100"
+          onClick={ () => onClick() }  
+        >
+          <taskIcons.Plus className="mx-auto w-4" />
         </button>
       </div>
 
@@ -24,10 +28,10 @@ function Task({ onClick }) {
       >
         <div className="flex justify-between px-3 items-center">
           <div className="flex">
+              { React.createElement(priorityIcons[1]) }
               <p className="text-lg">Task Name</p>
-              <img src={ priority[0] } alt="priority" />
           </div>
-          <img src={ user } alt="assigned_user" className="w-7" />
+          <taskIcons.User width="28"/>
         </div>
 
         <div className="flex gap-2 px-3 items-center">

@@ -1,14 +1,25 @@
-import { priority, modalIcons, user, down } from "../../../../../assets/icons/icons";
+import React from "react";
+import { modalIcons, priorityIcons } from "../../../../../assets/icons/icons.jsx";
 
-function roundButton(icon) {
+function HeaderItem(Icon) {
     return (
-        <button className="hover:bg-[#18181a15] p-1.5 rounded-full">
-        <img src={icon} alt="icon-{icon}" className="w-6" />
+        <button className="hover:bg-gray-200 p-1.5 rounded-full">
+          {Icon}
         </button>
     );
 }
 
-function Modal({ task, onClose }) {
+function rightSectionItem(Icon, text) {
+  return (
+    <button className="w-full flex items-center justify-start gap-2 px-2.5 py-6 group">
+      {Icon}
+      <p className="text-base text-[#71717a]">{text}</p>
+      <modalIcons.ChevronDown className="rounded-full ml-auto group-hover:bg-gray-200" />
+    </button>
+  )
+};
+
+function Modal({ task, onClose }) { 
   const handleBackgroundClick = (e) => {
     if (e.target === e.currentTarget) {
       onClose();
@@ -17,14 +28,16 @@ function Modal({ task, onClose }) {
 
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-40 z-10"
+      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-10"
       onClick={ handleBackgroundClick }>
-      <div className="bg-white absolute top-10 w-2/3 h-[35rem] flex flex-col rounded-2xl drop-shadow-[0_0_1rem_rgba(0,0,0,0.5)] overflow-y-scroll scrollbar-hide">
+      {/* Pop-up Modal */}
+      <div className="bg-white absolute top-10 w-2/3 h-[35rem] flex flex-col rounded-2xl drop-shadow-[0_0_3rem_rgba(0,0,0,0.5)] overflow-y-scroll scrollbar-hide">
+        {/* Header */}
         <div className="flex justify-between items-center border-b-[1px] px-6 py-3.5">
           <button className="flex items-center rounded-full p-1 hover:bg-gray-200">
-            <img src={user} alt="icon-current-project" className="w-6 rounded-full" />
+            <modalIcons.User width="28" />
             <p className="text-zinc-700 text-lg pl-1"> Assign </p>
-            <img src={down} alt="logo_down" className="mt-1 w-5 pl-0.5" />
+            < modalIcons.ChevronDown className="mt-1 w-5 pl-0.5" />
           </button>
 
           <div className="flex items-center gap-5">
@@ -32,56 +45,63 @@ function Modal({ task, onClose }) {
               <p className="text-green-500 font-medium group-hover:text-white">
                 Complete Task
               </p>
-              <svg
-                className="group-hover:stroke-white"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24" height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#0ed100"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round">
-                <path d="M21.801 10A10 10 0 1 1 17 3.335" />
-                <path d="m9 11 3 3L22 4" />
-              </svg>
+              <modalIcons.Complete stroke="#0ed100" className="group-hover:stroke-white" />
             </button>
 
-            {roundButton(modalIcons.del)}
-            {roundButton(modalIcons.archive)}
-            {roundButton(modalIcons.copy)}
+            {HeaderItem(<modalIcons.Del />)}
+            {HeaderItem(<modalIcons.Archive />)}
+            {HeaderItem(<modalIcons.Copy />)}
 
             <button
-              className="bg-[#18181a15] p-1 rounded-full ml-4"
+              className="hover:bg-gray-200 p-1 rounded-full ml-4"
               onClick={onClose}>
-              <img src={modalIcons.close} alt="icon-close" className="w-4" />
+              <modalIcons.Close width="16" height="16" />
             </button>
           </div>
         </div>
 
         <div className="flex divide-x-[1px] h-full">
-            <div className="flex flex-col w-[75%] p-6">
-                <input type="text" placeholder={task.name} className="focus:outline-none hover:bg-[#18181a15] rounded-md px-4 py-2 text-lg" />
-                <input type="text" placeholder={"Add a description"} className="text-base focus:outline-none hover:bg-[#18181a15] rounded-md px-4 py-1" />
-                <button className="mb-4 rounded-full hover:bg-[#18181a15]">
-                    <img src={priority[task.priority]} alt="priority" className="h-8" />
+            {/* Left Section */}
+            <div className="flex flex-col w-[75%] pt-4">
+              <div className="flex px-4">
+                <button>
+                    {task ? React.createElement(priorityIcons[task.priority]): React.createElement(priorityIcons[3]) }
                 </button>
+                {task ? 
+                  <input 
+                    type="text" 
+                    placeholder={task.name} 
+                    className="focus:outline-none hover:bg-[#18181a15] placeholder:text-black placeholder:font-semibold placeholder:text-2xl rounded-md px-1 py-1 text-2xl grow" 
+                  />
+                :
+                  <input 
+                    type="text" 
+                    placeholder={"Task Title"} 
+                    className="focus:outline-none hover:bg-[#18181a15] placeholder:text-[#71717a] placeholder:text-2xl rounded-md px-1 py-1 text-2xl grow" 
+                  />
+                }
+                
+              </div>
+
+              <input type="text" placeholder={"Add a description"} className="font-light mx-4 mt-2 focus:bg-[#18181a15] focus:outline-none hover:bg-[#18181a15] rounded-md px-3 py-1" />
             </div>
-
+            {/* Right Section */}
             <div className="flex flex-col grow items-center divide-y-[1px]">
-                <button className="w-full flex items-center gap-3 px-4 py-6">
-                    <img src={modalIcons.calander} alt="icon-calander" />
-                    <p className="text-lg font-medium text-[#71717a]">Due Date</p>
-                    <img src={down} alt="icon-down" />
-                </button>
+              {rightSectionItem(<modalIcons.Calander />, "Due Date")}
+              {rightSectionItem(<modalIcons.Timeline stroke="#71717a" />, "Schedule Task")}
 
-                <div className="flex w-full gap-2 px-4 py-6">
-                    {task.tags.map((tag, index) => (
-                        <span key={index} className="bg-gray-200 px-2 py-1 rounded">
-                        {tag}
-                        </span>
-                    ))}
+              <button className="flex flex-col w-full">
+                {rightSectionItem(<modalIcons.Tags />, "Tags")}
+                <div className="flex gap-2 px-4 pb-2">
+                  {task && task.tags.map((tag, index) => (
+                      <span key={index} className="bg-gray-200 px-2 py-1 rounded-md">{tag}</span>
+                  ))}
                 </div>
+              </button>
+              
+              <div className="px-4 py-2 flex flex-col w-full">
+                <p className="text-sm font-medium text-gray-500">&#123;CurrentProject&#125;</p>
+              </div>
             </div>
         </div>
       </div>
