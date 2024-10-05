@@ -7,7 +7,7 @@ export function User({ stroke = "#000", width = "24", height = "24" }) {
       viewBox="0 0 24 24"
       fill="none"
       stroke={stroke}
-      strokeWidth="1.6"
+      strokeWidth="1.3"
       strokeLinecap="round"
       strokeLinejoin="round">
       <path d="M18 20a6 6 0 0 0-12 0" />
@@ -399,7 +399,7 @@ export function NewSectionIcon({ stroke = "#f1f1f1", className = "" }) {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        class={className}>
+        className={className}>
         <path d="M11 12H3" />
         <path d="M16 6H3" />
         <path d="M16 18H3" />
@@ -418,9 +418,9 @@ export function ReadySectionIcon({ stroke = "#f1f1f1", className = "" }) {
             viewBox="0 0 24 24"
             fill="none"
             stroke={stroke}
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             className={className}>
             <path d="M7 10v12" />
             <path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z" />
@@ -437,9 +437,9 @@ export function RunningSectionIcon({ stroke = "#f1f1f1", className = "" }) {
             viewBox="0 0 24 24"
             fill="none"
             stroke={stroke}
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             className={className}>
             <rect width="16" height="16" x="4" y="4" rx="2" />
             <rect width="6" height="6" x="9" y="9" rx="1" />
@@ -464,9 +464,9 @@ export function BlockedSectionIcon({ stroke = "#f1f1f1", className = "" }) {
             viewBox="0 0 24 24"
             fill="none"
             stroke={stroke}
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             className={className}>
             <circle cx="12" cy="12" r="10" />
             <path d="m4.9 4.9 14.2 14.2" />
@@ -483,9 +483,9 @@ export function TerminatedSectionIcon({ stroke = "#f1f1f1", className = "" }) {
             viewBox="0 0 24 24"
             fill="none"
             stroke={stroke}
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             className={className}>
             <path d="M18 6 7 17l-5-5" />
             <path d="m22 10-7.5 7.5L13 16" />
