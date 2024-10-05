@@ -10,7 +10,7 @@ function NavButton(props) {
 
 function Nav() {
   return (
-    <div className="py-2.5 px-6 w-full flex items-center justify-between shadow-2xl">
+    <nav className="py-2.5 px-6 w-full flex items-center justify-between shadow-2xl">
       <button className="flex items-center rounded-full w-fit py-1 px-2 hover:bg-gray-200">
         < navIcons.CurrentProject className="w-6 rounded-full bg-cyan-400 p-0.5" />
         <p className="text-zinc-700 text-lg font-semibold pl-1">CurrentProject</p>
@@ -25,7 +25,7 @@ function Nav() {
           < navIcons.User stroke="#2c2c31" width="30" height="30" />
         </button>
       </div>
-    </div>
+    </nav>
   );
 }
 
