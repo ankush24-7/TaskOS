@@ -3,11 +3,31 @@ import { useState } from "react";
 import Task from "./Task/Task.jsx";
 import Modal from "./Task/Modal.jsx";
 import { Plus } from "../../../../assets/icons/icons.jsx";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
-function Section(props) {  
-  const { name, count, headerColor, Icon } = props;
+function Section(props) {    
+  const { name, id, count } = props.section;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
+
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
+    id: id,
+    data: {
+      type: "section",
+      section: props.section,
+    },
+    attributes: {
+      role: name,
+      roleDescription: "sectionData.desc",
+      tabIndex: props.index,
+    }
+  });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  }
 
   const renderTasks = () => {
     const tasks = [];
@@ -28,10 +48,18 @@ function Section(props) {
   };
 
   return (
-    <div className="w-[19rem] h-full relative">
-      <Header name={name} count={count} color={headerColor} Icon={Icon} />
+    <div 
+      ref={setNodeRef}
+      style={style}
+      className="w-[19rem] h-full relative">
 
-      <div className="mt-[3.75rem] h-[calc(100%-7.5rem)] overflow-y-scroll scroll-smooth scrollbar-hide">
+      <Header 
+        sectionData={props.section} 
+        attributes={attributes}
+        listeners={listeners}
+      />
+
+      <div className=" h-[calc(100%-7.5rem)] overflow-y-scroll scroll-smooth scrollbar-hide">
         <div className="flex flex-col mb-6 items-center">
 
           {count == 0 ?

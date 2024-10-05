@@ -1,11 +1,18 @@
-function Header(props) {
-  const { name, count, color, Icon } = props;
-
+function Header(props) {   
+  const { name, count, headerColor, Icon } = props.sectionData;
   return (
-    <div className="h-[3.75rem] absolute inset-0 rounded-lg" style={{ backgroundColor: color }}>
+    <div 
+      {...props.attributes}
+      {...props.listeners}
+      className="h-[3.75rem] w-full rounded-lg cursor-grab" 
+      style={{ backgroundColor: headerColor }}
+    >
       <div className="flex justify-between items-center px-3 py-2 h-full gap-1">
         <div className="flex items-center grow">
-          <button className="rounded-full p-1 hover:bg-[#18181b20]">
+          <button 
+            className="rounded-full p-1 hover:bg-[#18181b20]"
+            onClick={ () => console.log("clicked") }
+          >
             <Icon />
           </button>
           <button className="rounded-lg hover:bg-[#18181b20] grow py-2 pl-1">
