@@ -19,7 +19,7 @@ function Nav() {
       <div className="flex justify-end items-center gap-8">
         <NavButton Icon={() => <navIcons.AddTask stroke="#2c2c31" />} />
         <NavButton Icon={() => <navIcons.Team stroke="#2c2c31" />} />
-        <NavButton Icon={() => <navIcons.Timeline stroke="#2c2c31" />} />
+        <NavButton Icon={() => <navIcons.Timeline stroke="#2c2c31" height="22" />} />
 
         <button>
           < navIcons.User stroke="#2c2c31" width="30" height="30" />

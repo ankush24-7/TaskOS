@@ -12,9 +12,9 @@ function Task({ onClick }) {
   return (
     <>
       {/* Add button to create a new task inplace */}
-      <div className="group h-2 flex justify-center">
+      <div className="group w-[94%] h-2 flex justify-center">
         <button 
-          className="absolute bg-white rounded-full mx-auto w-6 h-6 opacity-0 drop-shadow-xl -translate-y-1 group-hover:opacity-100"
+          className="bg-white rounded-full mx-auto w-6 h-6 opacity-0 drop-shadow-xl -translate-y-1 group-hover:opacity-100"
           onClick={ () => onClick() }  
         >
           <taskIcons.Plus className="mx-auto w-4" />
@@ -23,7 +23,7 @@ function Task({ onClick }) {
 
       {/* Task card */}
       <div 
-        className="flex flex-col mx-2 py-2 h-[7.75rem] rounded-2xl bg-white justify-between cursor-pointer"
+        className="flex flex-col py-2 w-[94%] h-[7.75rem] rounded-2xl bg-white justify-between cursor-pointer"
         onClick= { () => onClick(taskDetails) }
       >
         <div className="flex justify-between px-3 items-center">
