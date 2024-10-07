@@ -1,18 +1,17 @@
-export function User({ stroke = "#000", width = "24", height = "24" }) {
+export function User({ addedClass="" }) {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={width}
-      height={height}
-      viewBox="0 0 24 24"
+    <svg xmlns="http://www.w3.org/2000/svg" 
+      width="24" 
+      height="24" 
+      viewBox="0 0 24 24" 
       fill="none"
-      stroke={stroke}
-      strokeWidth="1.3"
-      strokeLinecap="round"
-      strokeLinejoin="round">
-      <path d="M18 20a6 6 0 0 0-12 0" />
-      <circle cx="12" cy="10" r="4" />
-      <circle cx="12" cy="12" r="10" />
+      className={`rounded-full bg-[#d77f38] p-0.5 ${addedClass}`}>
+      <path d="M6 21L7.5 15M18 21L16.5 15M16.5 15L14 5C14 5 13.5 3 12 3C10.5 3 10 5 10 5L7.5 15M16.5 15H7.5" 
+        stroke="#ffffff" 
+        strokeWidth="2" 
+        strokeLinecap="round" 
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
@@ -495,6 +494,7 @@ export function TerminatedSectionIcon({ stroke = "#f1f1f1", className = "" }) {
 
 export const priorityIcons = [Priority1, Priority2, Priority3, DefaultPriority];
 export const modalIcons = {Timeline, User, Copy, Del, Archive, Close, Complete, Calander, Tags, ChevronDown};
-export const navIcons = {User, Timeline, Team, AddTask, CurrentProject, ChevronDown}
+export const navIcons = {Timeline, Team, AddTask, CurrentProject, ChevronDown};
 export const taskIcons = {User, AddTask, Plus};
 export const headerIcons = {NewSectionIcon, ReadySectionIcon, RunningSectionIcon, BlockedSectionIcon, TerminatedSectionIcon};
+export const ActivityBarIcons = {User, SearchIcon, Rocket};
