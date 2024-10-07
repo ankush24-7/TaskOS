@@ -22,7 +22,7 @@ export function Rocket({ className="" }) {
             width="24" height="24" 
             viewBox="0 0 24 24" 
             fill="none" 
-            stroke="#71717a" 
+            stroke="#ffffff" 
             strokeWidth="2" 
             strokeLinecap="round" 
             strokeLinejoin="round"
@@ -41,7 +41,7 @@ export function SearchIcon({  className="" }){
             width="24" height="24" 
             viewBox="0 0 24 24" 
             fill="none" 
-            stroke="#71717a" 
+            stroke="#ffffff" 
             strokeWidth="2" 
             strokeLinecap="round" 
             strokeLinejoin="round"
@@ -70,27 +70,13 @@ export function Timeline({ stroke = "#000", width = "24", height = "24" }) {
   );
 }
 
-export function Team({ stroke = "#000", width = "24", height = "24" }) {
+export function Team({ stroke = "#000", className="" }) {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      width={width}
-      height={height}
-      fill="none"
-      strokeWidth="1.5"
+    <svg xmlns="http://www.w3.org/2000/svg" 
       stroke={stroke}
-      xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M12 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM5 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM19 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"
-        strokeLinejoin="round"></path>
-      <path
-        clipRule="evenodd"
-        d="M19 14c3.769 0 4.698 4 3.523 4H18.4c.676 1.569.504 3-.4 3H6c-.904 0-1.076-1.431-.4-3H1.477C.302 18 1.23 14 5 14c1.34 0 2.322.506 2.977 1.158C9.01 14.466 10.344 14 12 14c1.656 0 2.99.466 4.023 1.157C16.678 14.507 17.66 14 19 14Z"
-        strokeLinejoin="round"></path>
-      <path
-        clipRule="evenodd"
-        d="M18 21c2 0 .418-7-6-7s-8 7-6 7h12Z"
-        strokeLinejoin="round"></path>
+      className={className}
+      viewBox="0 0 24 24">
+      <path d="m17.979,23.359c.078.265-.073.542-.339.62-.047.014-.094.021-.141.021-.217,0-.416-.141-.479-.359-.631-2.144-2.695-3.641-5.021-3.641s-4.39,1.497-5.021,3.641c-.077.266-.357.416-.62.339-.266-.078-.417-.355-.339-.62.754-2.567,3.213-4.359,5.979-4.359s5.226,1.792,5.979,4.359Zm6-9c-.754-2.567-3.213-4.359-5.979-4.359-.276,0-.5.224-.5.5s.224.5.5.5c2.325,0,4.39,1.497,5.021,3.641.063.219.263.359.479.359.047,0,.094-.007.141-.021.266-.078.417-.355.339-.62Zm-17.479-3.859c0-.276-.224-.5-.5-.5C3.233,10,.774,11.792.021,14.359c-.078.265.073.542.339.62.047.014.094.021.141.021.217,0,.416-.141.479-.359.631-2.144,2.695-3.641,5.021-3.641.276,0,.5-.224.5-.5Zm5.5-1.5c2.206,0,4,1.794,4,4s-1.794,4-4,4-4-1.794-4-4,1.794-4,4-4Zm-3,4c0,1.654,1.346,3,3,3s3-1.346,3-3-1.346-3-3-3-3,1.346-3,3Zm5-9c0-2.206,1.794-4,4-4s4,1.794,4,4-1.794,4-4,4-4-1.794-4-4Zm1,0c0,1.654,1.346,3,3,3s3-1.346,3-3-1.346-3-3-3-3,1.346-3,3Zm-13,0C2,1.794,3.794,0,6,0s4,1.794,4,4-1.794,4-4,4-4-1.794-4-4Zm1,0c0,1.654,1.346,3,3,3s3-1.346,3-3-1.346-3-3-3-3,1.346-3,3Z"/>
     </svg>
   );
 }
@@ -386,6 +372,47 @@ export function Priority3({ fill = "#28a745", width = "24", height = "100%", cla
   );
 }
 
+export function Sun({ stroke="#ffffff", className= "" }){
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" 
+      width="24" 
+      height="24" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke={stroke} 
+      strokeWidth="2" 
+      strokeLinecap="round" 
+      strokeLinejoin="round" 
+      class={className}>
+      <circle cx="12" cy="12" r="4"/>
+      <path d="M12 2v2"/>
+      <path d="M12 20v2"/>
+      <path d="m4.93 4.93 1.41 1.41"/>
+      <path d="m17.66 17.66 1.41 1.41"/>
+      <path d="M2 12h2"/><path d="M20 12h2"/>
+      <path d="m6.34 17.66-1.41 1.41"/>
+      <path d="m19.07 4.93-1.41 1.41"/>
+    </svg>
+  );
+}
+
+export function Star({ stroke="#ffffff", className="" }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" 
+      width="24" 
+      height="24" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke={stroke} 
+      strokeWidth="2" 
+      strokeLinecap="round" 
+      strokeLinejoin="round" 
+      class={className}>
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+    </svg>
+  );
+}
+
 export function NewSectionIcon({ stroke = "#f1f1f1", className = "" }) {
   return (
     <svg
@@ -497,4 +524,4 @@ export const modalIcons = {Timeline, User, Copy, Del, Archive, Close, Complete, 
 export const navIcons = {Timeline, Team, AddTask, CurrentProject, ChevronDown};
 export const taskIcons = {User, AddTask, Plus};
 export const headerIcons = {NewSectionIcon, ReadySectionIcon, RunningSectionIcon, BlockedSectionIcon, TerminatedSectionIcon};
-export const ActivityBarIcons = {User, SearchIcon, Rocket};
+export const ActivityBarIcons = {User, SearchIcon, Rocket, Sun, Star, Timeline, Complete};
