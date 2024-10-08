@@ -1,0 +1,15 @@
+.activity-bar {
+    transition: all 0.4s ease-in;
+}
+
+.act-bar-label {
+    transition: all 1s ease-in-out;
+}
+
+.activity-bar-item:hover {
+    transition: background-color 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.activity-bar-item {
+    transition: all 0.2s ease-in-out;
+}

@@ -115,7 +115,7 @@ export function SearchIcon({  className="" }){
     )
 }
 
-export function Timeline({ stroke = "#000", width = "24", height = "24" }) {
+export function Timeline({ stroke = "#fff", width = "24", height = "24" }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -129,6 +129,73 @@ export function Timeline({ stroke = "#000", width = "24", height = "24" }) {
       <rect x="16.5" y="69.5" width="75" height="19" rx="4.5" />
       <rect x="31.5" y="39.5" width="54" height="19" rx="4.5" />
       <path d="M52.25 1.99669L52.25 93.9967" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function ChevronsRight({ stroke = "#fff", className="" }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" 
+      width="24" height="24" 
+      viewBox="0 0 24 24" 
+      fill="none"
+      stroke={stroke}
+      strokeWidth="2" 
+      strokeLinecap="round" 
+      strokeLinejoin="round" 
+      className={className}>
+      <path d="m6 17 5-5-5-5"/>
+      <path d="m13 17 5-5-5-5"/>
+    </svg>
+  )
+}
+
+export function Settings({ stroke = "#B7B5B3", className="" }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" 
+      width="24" 
+      height="24" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke={stroke} 
+      strokeWidth="2" 
+      strokeLinecap="round" 
+      strokeLinejoin="round" 
+      className={className}>
+      <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>
+    </svg>
+  )
+}
+
+export function QuestionMark({ stroke="", className="" }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" 
+      viewBox="0 0 24 24" 
+      width="24" 
+      height="24"
+      className={className}
+      fill={stroke}>
+      <path d="M12,0A12,12,0,1,0,24,12,12.013,12.013,0,0,0,12,0Zm0,22A10,10,0,1,1,22,12,10.011,10.011,0,0,1,12,22Z"/>
+      <path d="M12.717,5.063A4,4,0,0,0,8,9a1,1,0,0,0,2,0,2,2,0,0,1,2.371-1.967,2.024,2.024,0,0,1,1.6,1.595,2,2,0,0,1-1,2.125A3.954,3.954,0,0,0,11,14.257V15a1,1,0,0,0,2,0v-.743a1.982,1.982,0,0,1,.93-1.752,4,4,0,0,0-1.213-7.442Z"/>
+      <rect x="11" y="17" width="2" height="2" rx="1"/>
+    </svg>
+  );
+}
+
+export function Pen({ stroke="", className="", strokeWidth="2" }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" 
+      width="24" 
+      height="24" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke={stroke} 
+      strokeWidth={strokeWidth}
+      strokeLinecap="round" 
+      strokeLinejoin="round" 
+      className={className}>
+      <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/>
+      <path d="m15 5 4 4"/>
     </svg>
   );
 }
@@ -604,7 +671,8 @@ export function TerminatedSectionIcon({ stroke = "#f1f1f1", className = "" }) {
 
 export const priorityIcons = [Priority1, Priority2, Priority3, DefaultPriority];
 export const modalIcons = {Timeline, User, Copy, Del, Archive, Close, Complete, Calander, Tags, ChevronDown};
-export const navIcons = {Timeline, Team, AddTask, CurrentProject, ChevronDown};
+export const dashboardNavIcons = {Timeline, Team, AddTask, CurrentProject, ChevronDown};
 export const taskIcons = {User, AddTask, Plus};
 export const headerIcons = {NewSectionIcon, ReadySectionIcon, RunningSectionIcon, BlockedSectionIcon, TerminatedSectionIcon};
-export const ActivityBarIcons = {Logo, User, SearchIcon, Rocket, Sun, Star, Timeline, Notes};
+export const activityBarIcons = {Logo, SearchIcon, Rocket, Sun, Star, Notes, ChevronsRight, Settings, QuestionMark};
+export const homeNavIcons = {User, AddTask, QuestionMark, Pen};
