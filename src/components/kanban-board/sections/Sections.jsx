@@ -68,7 +68,7 @@ function Sections(props) {
 
           <button 
             onClick={ () => handleTaskClick() }
-            className="w-full rounded-xl mx-auto mt-2 h-[7.75rem] border-2 border-white border-dashed"
+            className="w-full rounded-2xl mx-auto mt-2 h-[7.75rem] border-2 border-white border-dashed"
           >
             <Plus className="mx-auto h-10 w-10 stroke-[1px]" stroke="#ffffff" />
           </button>
