@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const RegisteredUserLanding = () => {
+const HeroSectionUser = () => {
   const user = "Ankush";
   const [currentTime, setCurrentTime] = useState(new Date());
 
@@ -35,8 +35,8 @@ const RegisteredUserLanding = () => {
   };
 
   return (
-    <div className="w-full flex justify-between mt-16">
-      <div>
+    <div className="w-full flex gap-28 justify-evenly">
+      <div className="mt-20">
         <div className="flex flex-col items-start ">
           <p className="text-white text-3xl leading-none tracking-tight">{`${getGreetings(
             currentTime
@@ -52,13 +52,17 @@ const RegisteredUserLanding = () => {
             "Always be a first-rate version of yourself, instead of a
             second-rate version of somebody else."
           </p>
-          <p className="text-white text-lg mt-4">Judy Garland</p>
+          <p className="text-white text-lg mt-3.5">Judy Garland</p>
         </div>
       </div>
 
-      <div className="flex flex-col w-96 h-96 bg-black opacity-10 rounded-xl"></div>
+      <section className="bg-[#fff]/10 w-80 h-96 rounded-lg mt-20">
+        <div className="rounded-t-lg p-3 bg-[#111]/40">
+          <p className="text-white text-lg">Assigned</p>
+        </div>
+      </section>
     </div>
   );
 };
 
-export default RegisteredUserLanding;
+export default HeroSectionUser;
