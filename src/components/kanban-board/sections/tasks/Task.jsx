@@ -32,7 +32,7 @@ function Task({ onClick }) {
               <p className="text-lg">Task Name</p>
           </div>
 
-          <taskIcons.User addedClass="p-1.5 w-7 h-7" />
+          <taskIcons.Profile addedClass="p-1.5 w-7 h-7" />
         </div>
 
         <div className="flex gap-2 px-3 items-center">

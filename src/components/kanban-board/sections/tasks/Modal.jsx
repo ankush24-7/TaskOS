@@ -35,7 +35,7 @@ function Modal({ task, onClose }) {
         {/* Header */}
         <div className="flex justify-between items-center border-b-[1px] px-6 py-3.5">
           <button className="flex items-center rounded-full p-1 hover:bg-gray-200">
-            <modalIcons.User width="28" />
+            <modalIcons.Profile width="28" />
             <p className="text-zinc-700 text-lg pl-1"> Assign </p>
             < modalIcons.ChevronDown className="mt-1 w-5 pl-0.5" />
           </button>
