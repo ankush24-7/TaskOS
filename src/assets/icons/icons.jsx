@@ -1,67 +1,59 @@
 export function Logo({ className="" }) {
   return (
     <svg
-    xmlns="http://www.w3.org/2000/svg"
-    id="Layer_2"
-    data-name="Layer 2"
-    viewBox="0 0 344.83 452.28"
-    className={className}
-  >
-    <defs>
-      <style>
-        {".cls-2{fill:#d5c295}.cls-4{fill:#fff;opacity:.7}.cls-5{fill:#8c6239}"}
-      </style>
-    </defs>
-    <path
-      d="M319.92 81.39 235.47 47.5a5.28 5.28 0 0 0-4.87.36 4.76 4.76 0 0 0-1.76 2.55 118.85 118.85 0 0 0-8.22 39.67c-.7 23.94 6.44 43.52 16.94 72.19 10 27.41 17.08 37.51 17.18 57.45a85.31 85.31 0 0 1-5.3 29.95A85.31 85.31 0 0 1 232.55 275c-13.87 14.33-25.85 16.89-52.15 29.6-27.4 13.19-46.09 22.56-62.18 40.4-13.69 15.13-21.65 34.58-21.65 34.58-.87 1.87-1.55 3.43-2 4.5l4.34 1.7 84.36 33.9 4.21 1.69L276.21 457a4.69 4.69 0 0 0 3.07-.35 4.75 4.75 0 0 0 2.34-2.74A118.24 118.24 0 0 0 290 414c.72-23.93-6.43-43.51-16.94-72.2-10-27.41-17.08-37.5-17.18-57.45a85.3 85.3 0 0 1 5.3-29.94 85.2 85.2 0 0 1 16.9-25.29c13.86-14.33 25.93-16.75 52.15-29.59 27.58-13.52 46.14-22.66 62.18-40.41a119 119 0 0 0 21-33.11l3-5.87-6.13-2.38-86.8-34.94Z"
-      style={{
-        fill: "#f2f2f2",
-      }}
-      transform="translate(-82.94 -27)"
-    />
-    <path
-      d="M313.96 125.19a108.19 108.19 0 0 0-23.23-10.14c-14.37-4.33-25.62-4.37-43.95-4.09-51.32.77-54.05 2.47-65.35-.23-9.83-2.35-24-7.51-39.75-20.41 1.18 4.92 3.14 12.56 6 21.77 5 15.72 8 20.77 16.39 44.52 4.7 13.24 6.9 19.61 8 28.64a96.18 96.18 0 0 1 .51 18c-2.15 36.43-2.19 172.44-3.5 172.41-.95 0 4.44-71.67 3-118.79a73.31 73.31 0 0 1 1-14.68c4.77-27.69 24.33-44.46 29.29-48.59 3.25-2.71 13.38-8.45 34.32-18.11 23.69-10.92 36.26-16.72 49.87-26.3a168.4 168.4 0 0 0 27.4-24Z"
-      className="cls-2"
-    />
-    <path
-      d="M56.38 375c30 6.71 53.17 5.14 69.2 2.24 19.53-3.52 41.76-12.28 67-3a69.89 69.89 0 0 1 11.16 5.25 8.25 8.25 0 0 1 2.37 2.23 8 8 0 0 1 1 1.84 114.42 114.42 0 0 1-1.38 18.14 116.1 116.1 0 0 1-7.12 25.79l-2.3 4.92.51-1.1-3.82-1.4Q123.23 404 56.38 375Z"
-      className="cls-2"
-    />
-    <path
-      d="M403 145.37c2.9-4.39 5.46-9.13 5.46-9.13 1.71-3.15 3.07-6 4.15-8.43 1.26-2.57 2.51-5.13 3.76-7.7l-5.5-1.85a85.13 85.13 0 0 1-4.55 12.41c-6 13-14.56 23.08-25.85 32.79-4.11 3.54-15.93 13.35-46.68 28.92-32.06 16.24-38.32 15.25-52.37 27.21-7.16 6.1-18.48 16-25.39 32.68-9.92 24-4.49 46.86-2.29 56.13 2.53 10.67 3.91 9 13.79 36.78 6.25 17.58 9.38 26.37 11.16 35.07 5.53 27.14 1.91 47.39 1.13 51.46a119.45 119.45 0 0 1-7.16 23.85 7.92 7.92 0 0 1 2.38 1.2c2 1.47 2.18 3.12 3 3.23 2 .27 4.47-8.43 4.47-8.43 4.09-14.24 6.44-21.34 6.81-28.24.51-9.45 1-18.53-.93-31.52-2-13.26-5.22-22.31-10.95-38-7.29-19.9-10.55-23.85-16.52-43.08-3.45-11.1-4.73-17.41-5-24.67a76 76 0 0 1 22.43-57.25 82.38 82.38 0 0 1 15.38-12c6.11-3.78 10-5.16 20.34-9.8 0 0 5.88-2.64 21.23-10 18.93-9.1 36.24-17.43 51.11-31.77A135.06 135.06 0 0 0 403 145.37Z"
-      style={{
-        opacity: 0.05,
-      }}
-      transform="translate(-82.94 -27)"
-    />
-    <circle cx={157.3} cy={113.11} r={3.99} className="cls-4" />
-    <path
-      d="M151.2 49.81c-1.76-.46-4 .81-4.78 3.25a105.35 105.35 0 0 0 3.93 50 3.93 3.93 0 0 0 4.09 1.88 4 4 0 0 0 2.74-4.95 108.68 108.68 0 0 1-4.78-32.11 107.43 107.43 0 0 1 1.19-15.72 4 4 0 0 0-2.39-2.35Z"
-      className="cls-4"
-    />
-    <rect
-      width={211.12}
-      height={20.33}
-      x={78.76}
-      y={420.8}
-      className="cls-5"
-      rx={1.3}
-      transform="rotate(21.84 212.84 202.582)"
-    />
-    <rect
-      width={211.12}
-      height={20.33}
-      x={220.84}
-      y={65.16}
-      className="cls-5"
-      rx={1.29}
-      transform="rotate(21.84 354.961 -153.103)"
-    />
+      xmlns="http://www.w3.org/2000/svg"
+      id="Layer_2"
+      data-name="Layer 2"
+      viewBox="0 0 14.43 19.23"
+      className={className} >
+      <defs>
+        <style>{".cls-3{fill:#d5c295}.cls-6{fill:#fff;opacity:.8}"}</style>
+      </defs>
+      <path
+        d="M10.32 2.38c1.43.4 2.93.86 4.47 1.39s3 1.08 4.43 1.64a9.31 9.31 0 0 1-5.47-.51 9.18 9.18 0 0 1-3.43-2.52Z"
+        style={{
+          fill: "#999",
+        }}
+        transform="translate(-4.79 -2.38)"
+      />
+      <path
+        d="M10.32 2.38A5.91 5.91 0 0 0 10 4.49a9.19 9.19 0 0 0 1 3.35 7.63 7.63 0 0 1 1 2.65 4.05 4.05 0 0 1-.18 1.41 3.87 3.87 0 0 1-.82 1.23 7.28 7.28 0 0 1-2.37 1.52 8.6 8.6 0 0 0-2.81 2 6.12 6.12 0 0 0-.93 1.67 1.23 1.23 0 0 0-.08.22 34 34 0 0 0 3.89 1.65 34.08 34.08 0 0 0 5 1.37 5.42 5.42 0 0 0 .37-2.1 8.77 8.77 0 0 0-1-3.35 7.63 7.63 0 0 1-1-2.65 3.82 3.82 0 0 1 .18-1.41 4 4 0 0 1 .75-1.18 7.63 7.63 0 0 1 2.38-1.52 8.78 8.78 0 0 0 2.81-2 5.67 5.67 0 0 0 .91-1.6l.12-.29c-1.41-.36-2.92-.81-4.49-1.34S11.68 3 10.32 2.38Z"
+        style={{
+          fill: "#ccc",
+        }}
+        transform="translate(-4.79 -2.38)"
+      />
+      <path
+        d="M13.6 4.62a5 5 0 0 0-1.12-.42 6.06 6.06 0 0 0-2.07-.08 14.81 14.81 0 0 1-3.07.15 4.63 4.63 0 0 1-1.91-.86c.07.23.18.58.34 1 .27.72.42 1 .88 2a5.66 5.66 0 0 1 .44 1.33 4 4 0 0 1 .12.88c0 1.71.33 8.09.27 8.09s0-3.37-.16-5.57a4.2 4.2 0 0 1 0-.7 3.92 3.92 0 0 1 1.26-2.35 9.33 9.33 0 0 1 1.56-.93 14 14 0 0 0 2.27-1.36 8.35 8.35 0 0 0 1.19-1.18Z"
+        className="cls-3"
+      />
+      <path
+        d="M1.77 17.03a16.15 16.15 0 0 0 3.62-.16 7.28 7.28 0 0 1 3.13-.31 4.14 4.14 0 0 1 .54.22.27.27 0 0 1 .11.1l.06.09V17.82a5.12 5.12 0 0 1-.27 1.23l-.08.18a35.87 35.87 0 0 1-3.6-.91 33.63 33.63 0 0 1-3.51-1.29Z"
+        className="cls-3"
+      />
+      <path
+        d="M18.66 6.63c.12-.21.23-.44.23-.44a4 4 0 0 0 .17-.41l.16-.37-.22-.07a4.3 4.3 0 0 1-.23.59 5 5 0 0 1-1.13 1.61A10.81 10.81 0 0 1 15.53 9a11.64 11.64 0 0 0-2.39 1.4A4 4 0 0 0 12 12a4.33 4.33 0 0 0 0 2.64c.15.49.21.41.74 1.69a12 12 0 0 1 .67 1.67 6.23 6.23 0 0 1 .18 2.41 5.77 5.77 0 0 1-.27 1.15l.33.1a2.76 2.76 0 0 0 .12-.32c0-.08.08-.26.13-.5A6.26 6.26 0 0 0 14 20a5.88 5.88 0 0 0 0-1c0-.17-.05-.34-.09-.54a8.46 8.46 0 0 0-.6-1.75c-.4-.92-.56-1.09-.89-2a4 4 0 0 1-.29-1.14 3.4 3.4 0 0 1 .09-1.21 3.64 3.64 0 0 1 .78-1.5 3.77 3.77 0 0 1 .69-.61 7.59 7.59 0 0 1 .93-.51s.27-.13 1-.52a8.58 8.58 0 0 0 2.3-1.62 5.78 5.78 0 0 0 .74-.97Z"
+        style={{
+          opacity: 0.2,
+        }}
+        transform="translate(-4.79 -2.38)"
+      />
+      <g
+        style={{
+          opacity: 0.85,
+        }}
+      >
+      <circle cx={6.7} cy={4.81} r={0.24} className="cls-6" />
+      <path
+        d="M6.03.88a.26.26 0 0 0-.29.22 6.46 6.46 0 0 0 0 1.18 6.55 6.55 0 0 0 .44 2 .24.24 0 0 0 .42-.22 7.09 7.09 0 0 1-.41-2 6.51 6.51 0 0 1 0-1 .22.22 0 0 0-.16-.18Z"
+        className="cls-6"
+      />
+    </g>
   </svg>
   );
 }
 
-export function User({ addedClass="" }) {
+export function Profile({ addedClass="" }) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" 
       width="24" 
@@ -75,6 +67,24 @@ export function User({ addedClass="" }) {
         strokeLinecap="round" 
         strokeLinejoin="round"
       />
+    </svg>
+  );
+}
+
+export function Home({ stroke = "#fff", className="" }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" 
+      width="24" 
+      height="24" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke={stroke} 
+      strokeWidth="2" 
+      strokeLinecap="round" 
+      strokeLinejoin="round" 
+      className={className}>
+      <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/>
+      <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
     </svg>
   );
 }
@@ -115,16 +125,17 @@ export function SearchIcon({  className="" }){
     )
 }
 
-export function Timeline({ stroke = "#fff", width = "24", height = "24" }) {
+export function Timeline({ stroke = "#fff", className="" }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={width}
-      height={height}
+      width="24"
+      height="24"
       viewBox="0 0 93 96"
       stroke={stroke}
       strokeWidth="6"
-      fill="none">
+      fill="none"
+      className={className}>
       <rect x="1.5" y="9.5" width="75" height="19" rx="4.5" />
       <rect x="16.5" y="69.5" width="75" height="19" rx="4.5" />
       <rect x="31.5" y="39.5" width="54" height="19" rx="4.5" />
@@ -133,20 +144,36 @@ export function Timeline({ stroke = "#fff", width = "24", height = "24" }) {
   );
 }
 
-export function ChevronsRight({ stroke = "#fff", className="" }) {
+export function MyTasks({ stroke = "#fff", className="" }) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" 
-      width="24" height="24" 
+      width="24" 
+      height="24" 
       viewBox="0 0 24 24" 
-      fill="none"
-      stroke={stroke}
+      fill="none" 
+      stroke={stroke} 
       strokeWidth="2" 
       strokeLinecap="round" 
       strokeLinejoin="round" 
       className={className}>
-      <path d="m6 17 5-5-5-5"/>
-      <path d="m13 17 5-5-5-5"/>
+      <rect x="3" y="5" width="6" height="6" rx="1"/>
+      <path d="m3 17 2 2 4-4"/>
+      <path d="M13 6h8"/>
+      <path d="M13 12h8"/>
+      <path d="M13 18h8"/>
     </svg>
+  );
+}
+
+export function ChevronsLeft({ stroke = "#fff", className="" }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" 
+    fill="none" 
+    stroke={stroke}
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    className={className}><path d="m11 17-5-5 5-5"/><path d="m18 17-5-5 5-5"/></svg>
   )
 }
 
@@ -196,6 +223,23 @@ export function Pen({ stroke="", className="", strokeWidth="2" }) {
       className={className}>
       <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/>
       <path d="m15 5 4 4"/>
+    </svg>
+  );
+}
+
+export function Bell({ stroke = "#fff", className="" }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" 
+      width="24" height="24" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke={stroke} 
+      strokeWidth="2" 
+      strokeLinecap="round" 
+      strokeLinejoin="round" 
+      className={className}>
+      <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/>
+      <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
     </svg>
   );
 }
@@ -351,16 +395,16 @@ export function Tags({ stroke = "#71717a", width = "24", height = "24" }) {
   );
 }
 
-export function AddTask({ stroke = "#3f3f46", width = "24", height = "24", className = "" }) {
+export function AddTask({ stroke = "#3f3f46", strokeWidth = "2" ,className = "" }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={width}
-      height={height}
+      width="24"
+      height="24"
       viewBox="0 0 24 24"
       fill="none"
       stroke={stroke}
-      strokeWidth="2"
+      strokeWidth={strokeWidth}
       strokeLinecap="round"
       strokeLinejoin="round"
       className={className}>
@@ -670,9 +714,9 @@ export function TerminatedSectionIcon({ stroke = "#f1f1f1", className = "" }) {
 }
 
 export const priorityIcons = [Priority1, Priority2, Priority3, DefaultPriority];
-export const modalIcons = {Timeline, User, Copy, Del, Archive, Close, Complete, Calander, Tags, ChevronDown};
+export const modalIcons = {Timeline, Profile, Copy, Del, Archive, Close, Complete, Calander, Tags, ChevronDown};
 export const dashboardNavIcons = {Timeline, Team, AddTask, CurrentProject, ChevronDown};
-export const taskIcons = {User, AddTask, Plus};
+export const taskIcons = {Profile, AddTask, Plus};
 export const headerIcons = {NewSectionIcon, ReadySectionIcon, RunningSectionIcon, BlockedSectionIcon, TerminatedSectionIcon};
-export const activityBarIcons = {Logo, SearchIcon, Rocket, Sun, Star, Notes, ChevronsRight, Settings, QuestionMark};
-export const homeNavIcons = {User, AddTask, QuestionMark, Pen};
+export const activityBarIcons = {Logo, SearchIcon, Home, Rocket, Timeline, Star, Notes, MyTasks, ChevronsLeft, Settings, QuestionMark};
+export const homeNavIcons = {Profile, AddTask, Pen, Bell};
