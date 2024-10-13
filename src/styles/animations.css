@@ -3,9 +3,14 @@
 }
 
 .activity-bar-item:hover {
-    transition: background-color 0.4s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
 }
 
 .chevron-left {
     transition: transform 0.5s ease-in-out;
+}
+
+.rotate {
+    transform: perspective(80rem) rotateX(5deg) rotateY(-40deg) rotateZ(5deg);
+    box-shadow: 1rem 1rem 1rem rgba(0, 0, 0, 0.4);
 }
