@@ -24,7 +24,7 @@ const HeroSectionUser = () => {
     const day = time.toLocaleDateString("default", { weekday: "long" });
     const date = time.getDate();
     const month = time.toLocaleDateString("default", { month: "long" });
-    return `${day}, ${date} ${month} ${time.getFullYear()}`;
+    return `${day}, ${date} ${month}`;
   };
 
   const getGreetings = (time) => {
@@ -35,16 +35,18 @@ const HeroSectionUser = () => {
   };
 
   return (
-    <div className="w-full flex gap-28 justify-evenly">
+    <div className="w-full flex gap-20 justify-evenly">
       <div className="mt-20">
         <div className="flex flex-col items-start ">
-          <p className="text-white text-3xl leading-none tracking-tight">{`${getGreetings(
-            currentTime
-          )}, ${user}!`}</p>
-          <p className="text-white text-[90px] font-semibold tracking-wide leading-none">
+          <h2 className="text-white text-3xl leading-none tracking-tight">
+            {`${getGreetings(currentTime)}, ${user}!`}
+          </h2>
+          <h1 className="text-white text-[90px] font-semibold tracking-wide leading-none">
             {formatTime(currentTime)}
-          </p>
-          <p className="text-white text-3xl">{formatDate(currentTime)}</p>
+          </h1>
+          <h2 className="text-white text-3xl leading-normal tracking-tight">
+            {formatDate(currentTime)}
+          </h2>
         </div>
 
         <div className="w-[400px] mt-20">
@@ -58,7 +60,7 @@ const HeroSectionUser = () => {
 
       <section className="bg-[#fff]/10 w-80 h-96 rounded-lg mt-20">
         <div className="rounded-t-lg p-3 bg-[#111]/40">
-          <p className="text-white text-lg">Assigned</p>
+          <p className="text-white text-lg">Deadlines</p>
         </div>
       </section>
     </div>

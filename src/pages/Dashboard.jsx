@@ -1,4 +1,4 @@
-import DashboardNav from '../components/DashboardNav';
+import DashboardNav from '../components/navbars/DashboardNav';
 import KanbanBoard from '../components/kanban-board/KanbanBoard';
 
 function DashBoard() {
