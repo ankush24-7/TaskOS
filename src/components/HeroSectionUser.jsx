@@ -37,14 +37,14 @@ const HeroSectionUser = () => {
   return (
     <div className="w-full flex gap-20 justify-evenly">
       <div className="mt-20">
-        <div className="flex flex-col items-start ">
+        <div className="flex flex-col items-start gap-1">
           <h2 className="text-white text-3xl leading-none tracking-tight">
             {`${getGreetings(currentTime)}, ${user}!`}
           </h2>
-          <h1 className="text-white text-[90px] font-semibold tracking-wide leading-none">
+          <h1 className="text-white text-[90px] font-semibold tracking-wide leading-none -translate-x-1.5">
             {formatTime(currentTime)}
           </h1>
-          <h2 className="text-white text-3xl leading-normal tracking-tight">
+          <h2 className="text-white text-3xl leading-none tracking-tight">
             {formatDate(currentTime)}
           </h2>
         </div>
@@ -58,7 +58,7 @@ const HeroSectionUser = () => {
         </div>
       </div>
 
-      <section className="bg-[#fff]/10 w-80 h-96 rounded-lg mt-20">
+      <section className="bg-[#111]/10 w-80 h-96 rounded-lg mt-20">
         <div className="rounded-t-lg p-3 bg-[#111]/40">
           <p className="text-white text-lg">Deadlines</p>
         </div>
