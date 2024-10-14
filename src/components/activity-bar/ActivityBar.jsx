@@ -37,12 +37,12 @@ function ActivityBar({ setIsAuthenticated }) {
   }
 
   return (
-    <nav 
-      className={`activity-bar bg-[#111] h-[100vh] flex flex-col px-1.5 pt-6 pb-3 ${expanded ? 'w-[13rem]': 'w-20'}`}
-    >
+    <nav className={`activity-bar bg-[#111] h-[100vh] flex flex-col px-1.5 pt-6 pb-3 ${expanded ? 'w-[13rem]': 'w-20'}`}>
       <Link to="/home" className='flex ml-1.5 items-end'>
         <activityBarIcons.LogoIcon className='w-12 h-12 fixed translate-x-1 -translate-y-1.5' />
-        <p className={`act-bar-label text-white text-4xl ml-[2.75rem] overflow-hidden font-inconsolata ${expanded ? 'w-fit': 'w-0'}`}>TaskOS</p>
+        <p className={`act-bar-label text-white text-4xl ml-[2.75rem] overflow-hidden font-inconsolata ${expanded ? 'w-fit': 'w-0'}`}>
+          TaskOS
+        </p>
       </Link>
 
       <ul className='flex flex-col gap-2 mt-[4.75rem] flex-grow'>

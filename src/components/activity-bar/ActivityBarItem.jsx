@@ -12,7 +12,7 @@ function ActivityBarItem({
 }) {
   const isActive = currentPath === "" ? false : currentPath.startsWith(to);
   const style = expanded
-    ? `flex items-center py-2 px-3 rounded-lg overflow-hidden ${
+    ? `flex items-center py-2 px-3 rounded-lg ${
         isActive && "bg-[#1b234d]"
       }`
     : `ml-1.5 p-2 rounded-full w-fit h-fit ${isActive && "bg-[#1b234d]"}`;
@@ -20,15 +20,16 @@ function ActivityBarItem({
   return (
     <Link
       to={to}
-      onClick={ onClick && onClick }
-      className={style + " activity-bar-item hover:bg-[#1b234d]"}>
-      <Icon className={`w-7 h-7 ${expanded ? "fixed" : ""} `} stroke={stroke} />
+      onClick={ onClick }
+      className={style + " activity-bar-item overflow-hidden hover:bg-[#1b234d]"}>
+      <Icon className={`w-7 h-7 ${expanded && "fixed"} `} stroke={stroke} />
       <p
         className={`text-lg ml-10 text-nowrap ${
           expanded
             ? "relative opacity-100"
-            : "absolute opacity-0 -translate-y-10"
-        } `}
+            : "absolute opacity-0 -translate-y-10 -translate-x-20"
+          }`
+        }
         style={{ color: stroke }}>
         {label}
       </p>
