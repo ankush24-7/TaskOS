@@ -289,6 +289,52 @@ export function Sparkles({ stroke = "#000", className="" }) {
   );
 }
 
+export function ShowPassword({ fill = "#fff", className="" }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" 
+      viewBox="0 0 24 24" 
+      width="24" 
+      height="24"
+      fill={fill}
+      className={className}>
+      <g id="_01_align_center" data-name="01 align center">
+        <path d="M23.821,11.181v0C22.943,9.261,19.5,3,12,3S1.057,9.261.179,11.181a1.969,1.969,0,0,0,0,1.64C1.057,14.739,4.5,21,12,21s10.943-6.261,11.821-8.181A1.968,1.968,0,0,0,23.821,11.181ZM12,19c-6.307,0-9.25-5.366-10-6.989C2.75,10.366,5.693,5,12,5c6.292,0,9.236,5.343,10,7C21.236,13.657,18.292,19,12,19Z"/>
+        <path d="M12,7a5,5,0,1,0,5,5A5.006,5.006,0,0,0,12,7Zm0,8a3,3,0,1,1,3-3A3,3,0,0,1,12,15Z"/>
+      </g>
+    </svg>
+  );
+}
+
+export function HidePassword({ fill = "#fff", className="" }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" 
+      viewBox="0 0 24 24" 
+      width="24" height="24"
+      fill={fill}
+      className={className}>
+      <g id="_01_align_center" data-name="01 align center">
+        <path d="M23.821,11.181v0a15.736,15.736,0,0,0-4.145-5.44l3.032-3.032L21.293,1.293,18,4.583A11.783,11.783,0,0,0,12,3C4.5,3,1.057,9.261.179,11.181a1.969,1.969,0,0,0,0,1.64,15.736,15.736,0,0,0,4.145,5.44L1.293,21.293l1.414,1.414L6,19.417A11.783,11.783,0,0,0,12,21c7.5,0,10.943-6.261,11.821-8.181A1.968,1.968,0,0,0,23.821,11.181ZM2,12.011C2.75,10.366,5.693,5,12,5a9.847,9.847,0,0,1,4.518,1.068L14.753,7.833a4.992,4.992,0,0,0-6.92,6.92L5.754,16.832A13.647,13.647,0,0,1,2,12.011ZM15,12a3,3,0,0,1-3,3,2.951,2.951,0,0,1-1.285-.3L14.7,10.715A2.951,2.951,0,0,1,15,12ZM9,12a3,3,0,0,1,3-3,2.951,2.951,0,0,1,1.285.3L9.3,13.285A2.951,2.951,0,0,1,9,12Zm3,7a9.847,9.847,0,0,1-4.518-1.068l1.765-1.765a4.992,4.992,0,0,0,6.92-6.92l2.078-2.078A13.584,13.584,0,0,1,22,12C21.236,13.657,18.292,19,12,19Z"/>
+      </g>
+    </svg>
+  );
+}
+
+export function Google({ className="" }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" 
+      viewBox="-3 0 262 262" 
+      width="262px" 
+      height="262px" 
+      preserveAspectRatio="xMidYMid"
+      className={className}>
+      <path d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027" fill="#4285F4"/>
+      <path d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1" fill="#34A853"/>
+      <path d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782" fill="#FBBC05"/>
+      <path d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251" fill="#EB4335"/>
+    </svg>
+  );
+}
+
 export function Del({ stroke = "#f10000", width = "24", height = "24" }) {
   return (
     <svg
@@ -755,3 +801,4 @@ export const headerIcons = {NewSectionIcon, ReadySectionIcon, RunningSectionIcon
 export const activityBarIcons = {LogoIcon, SearchIcon, Home, Rocket, Timeline, Star, Notes, MyTasks, ChevronsLeft, Settings, Logout};
 export const projectNavIcons = {AddTask, Pen, Bell, Sparkles};
 export const homeNavIcons = {AddTask, Pen, Bell};
+export const authPageIcons = {ShowPassword, HidePassword, Google};
