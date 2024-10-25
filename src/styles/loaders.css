@@ -1,0 +1,14 @@
+.loader {
+    background: linear-gradient(90deg, #f0f0f020 25%, #f0f0f070 50%, #f0f0f020 75%);
+    background-size: 200% 100%;
+    animation: loader 2s infinite linear;
+}
+
+@keyframes loader {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}

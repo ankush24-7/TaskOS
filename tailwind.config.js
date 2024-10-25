@@ -5,7 +5,12 @@ export default {
     "./src/**/*.{jx,jsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'grad-b-1': '#224570',
+        'grad-b-2': '#4e81c3',
+      },
+    },
   },
   plugins: [],
 }
