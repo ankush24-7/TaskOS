@@ -19,6 +19,7 @@ export function IconBtn({ Icon, label }) {
   );
 }
 
+// login signup button
 export function NonIconBtn({ label, to }) {
   return (
     <Link 
@@ -30,10 +31,13 @@ export function NonIconBtn({ label, to }) {
   );
 }
 
-export function RoundBtn({ Icon }) {
+export function RoundBtn({ Icon, onClick }) {
   return (
-    <button className='p-1 w-fit rounded-full hover:bg-[#111]'>
-      <Icon stroke='#fff' width='28' height='28' />
+    <button 
+      onClick={onClick}
+      className='round-btn-hov-expand p-1.5 w-fit rounded-3xl hover:bg-[#111]'
+    >
+      <Icon width='28' height='28' />
     </button>
   );
 }
