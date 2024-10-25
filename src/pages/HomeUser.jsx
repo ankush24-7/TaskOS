@@ -4,7 +4,7 @@ import HeroSectionUser from "../components/HeroSectionUser";
 
 const HomeUser = () => {
   return (
-    <div className="bg-gradient-to-r from-[#0f3460] to-[#35639a] w-full">
+    <div className="bg-gradient-to-r from-grad-b-1 to-grad-b-2 w-full">
       <HomeUserNav />
       <HeroSectionUser />
     </div>

@@ -7,7 +7,7 @@ const Login = () => {
   const toggleShowPassword = () => setShowPassword(!showPassword);
 
   return (  
-    <div className="w-full pb-20 px-20 bg-gradient-to-r from-[#0f3460] to-[#35639a]">
+    <div className="w-full pb-20 px-20 bg-gradient-to-r from-grad-b-1 to-grad-b-2">
       <div className="flex w-[28rem] p-10 pb-20 mx-auto mt-20 rounded-2xl bg-[#111]/30">
         <div className="flex flex-col items-center w-full">
           <p className='text-white text-3xl'>Welcome Back</p>
