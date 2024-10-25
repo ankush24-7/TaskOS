@@ -1,6 +1,6 @@
-import { notesModalIcons } from "../../assets/icons/icons";
 import User from "./navbar-items/User";
 import { RoundBtn } from "./navbar-items/NavbarComp";
+import { notesContentIcons } from "../../assets/icons/icons";
 
 
 const NotesContentNav = ({title, setPinned, setReadOnly, pinned, readOnly}) => {
@@ -11,21 +11,21 @@ const NotesContentNav = ({title, setPinned, setReadOnly, pinned, readOnly}) => {
       <ul className="flex gap-8 items-center">
         <RoundBtn
           Icon={() =>
-            pinned ? <notesModalIcons.Unpin /> : <notesModalIcons.Pin />
+            pinned ? <notesContentIcons.Unpin /> : <notesContentIcons.Pin />
           }
           onClick={() => {setPinned(!pinned);}}
         />
         <RoundBtn
           Icon={() =>
             readOnly ? (
-              <notesModalIcons.Edit stroke="#fff" />
+              <notesContentIcons.Edit stroke="#fff" />
             ) : (
-              <notesModalIcons.Book stroke="#fff" />
+              <notesContentIcons.Book stroke="#fff" />
             )
           }
           onClick={() => setReadOnly(!readOnly)}
         />
-        <RoundBtn Icon={() => <notesModalIcons.Del stroke="#fff" />} />
+        <RoundBtn Icon={() => <notesContentIcons.Del stroke="#fff" />} />
         <User />
       </ul>
     </nav>

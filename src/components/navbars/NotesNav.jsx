@@ -1,6 +1,6 @@
 import User from "./navbar-items/User";
-import { projectNavIcons } from "../../assets/icons/icons";
 import * as navbarComp from "./navbar-items/NavbarComp";
+import { projectNavIcons } from "../../assets/icons/icons";
 
 const NotesNav = () => {
   return (
