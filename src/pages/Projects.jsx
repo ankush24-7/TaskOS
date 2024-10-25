@@ -3,7 +3,7 @@ import ProjectNav from "../components/navbars/ProjectNav";
 
 const Projects = () => {
   return (
-    <div className="w-full px-10 bg-gradient-to-r from-[#0f3460] to-[#35639a]">
+    <div className="w-full px-10 bg-gradient-to-r from-grad-b-1 to-grad-b-2">
       <ProjectNav />
       <ProjectTable />
     </div>

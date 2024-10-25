@@ -13,16 +13,14 @@ function ActivityBar({ setIsAuthenticated }) {
     setExpanded(isHomePage);
   },[isHomePage]);
   
-  const renderCollapseButton = (expanded) => {
+  const collapseButton = (expanded) => {
     const style = expanded 
-      ? 
-        'flex items-center gap-2 py-2 px-2.5 rounded-lg'
-      :
-        'w-fit p-1.5 ml-1 rounded-full';
+      ? 'flex items-center gap-2 py-2 px-2.5 rounded-lg'
+      : 'w-fit p-1.5 ml-1 rounded-3xl';
 
     return (
       <button 
-        className={style + ' activity-bar-item hover:bg-[#1b234d]'}
+        className={style + ' activity-bar-hov-expand activity-bar-item hover:bg-[#1b234d] hover:rounded-lg'}
         onClick={() => setExpanded(!expanded)}
       >
         <activityBarIcons.ChevronsLeft className={`w-8 h-8 chevron-left ${expanded ? 'rotate-0': '-rotate-180'}`} stroke='#7F7D76' />
@@ -37,8 +35,8 @@ function ActivityBar({ setIsAuthenticated }) {
   }
 
   return (
-    <nav className={`activity-bar bg-[#111] h-[100vh] flex flex-col px-1.5 pt-6 pb-3 ${expanded ? 'w-[13rem]': 'w-20'}`}>
-      <Link to="/home" className='flex ml-1.5 items-end'>
+    <nav className={`activity-bar bg-[#111] h-[100vh] flex flex-col px-1.5 pt-6 pb-3 ${expanded ? 'w-[13rem]': 'w-[4.5rem]'}`}>
+      <Link to="/home" className='flex ml-1.5 items-end -translate-x-1'>
         <activityBarIcons.LogoIcon className='w-12 h-12 fixed translate-x-1 -translate-y-1.5' />
         <p className={`act-bar-label text-white text-4xl ml-[2.75rem] overflow-hidden font-inconsolata ${expanded ? 'w-fit': 'w-0'}`}>
           TaskOS
@@ -55,7 +53,7 @@ function ActivityBar({ setIsAuthenticated }) {
       </ul>
 
       <ul className='flex flex-col'>
-        { renderCollapseButton(expanded) }
+        { collapseButton(expanded) }
         <ActivityBarItem Icon={activityBarIcons.Settings} label="Settings" to="/" expanded={expanded} stroke="#7F7D76" />
         <ActivityBarItem Icon={activityBarIcons.Logout} label="Logout" to="/" expanded={expanded} onClick={ handleLogout } stroke="#7F7D76" />
       </ul>

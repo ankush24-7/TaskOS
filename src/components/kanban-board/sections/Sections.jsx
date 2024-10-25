@@ -1,7 +1,7 @@
+import { useState } from "react";
 import Header from "./Header.jsx";
 import Task from "./tasks/Task.jsx";
 import Modal from "./tasks/Modal.jsx";
-import { useState } from "react";
 import { CSS } from "@dnd-kit/utilities";
 import { useSortable } from "@dnd-kit/sortable";
 import { Plus } from "../../../assets/icons/icons.jsx";
@@ -62,7 +62,7 @@ function Sections(props) {
       <div className=" h-[calc(100%-7.5rem)] overflow-y-scroll scroll-smooth scrollbar-hide">
         <div className="flex flex-col mb-10 items-center px-3">
 
-          {renderTasks()}
+          { renderTasks() }
 
           { isModalOpen && <Modal task={selectedTask} onClose={closeModal} /> }
 

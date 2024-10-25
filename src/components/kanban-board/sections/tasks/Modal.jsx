@@ -29,7 +29,8 @@ function Modal({ task, onClose }) {
   return (
     <div
       className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-10"
-      onClick={ handleBackgroundClick }>
+      onClick={ handleBackgroundClick }
+    >
       {/* Pop-up Modal */}
       <div className="bg-white absolute top-10 w-2/3 h-[35rem] flex flex-col rounded-2xl drop-shadow-[0_0_3rem_rgba(0,0,0,0.5)] overflow-y-scroll scrollbar-hide">
         {/* Header */}
@@ -83,7 +84,7 @@ function Modal({ task, onClose }) {
                 
               </div>
 
-              <input type="text" placeholder={"Add a description"} className="font-light mx-4 mt-2 focus:bg-[#18181a15] focus:outline-none hover:bg-[#18181a15] rounded-md px-3 py-1" />
+              <input type="text" placeholder={"Add a description"} className="font-light mx-4 mt-2 rounded-md px-3 py-1 focus:outline-none focus:bg-[#18181a15] hover:bg-[#18181a15]" />
             </div>
             {/* Right Section */}
             <div className="flex flex-col grow items-center divide-y-[1px]">
