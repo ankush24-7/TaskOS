@@ -7,14 +7,14 @@ import Projects from './pages/Projects'
 import DashBoard from './pages/Dashboard'
 import HomeGuest from './pages/HomeGuest'
 import NotesContent from './pages/NotesContent'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import ActivityBar from './components/activity-bar/ActivityBar'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 function App() { 
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   return (
     <Router>
-      <div className='flex'>
+      <div className='flex antialiased'>
         {isAuthenticated && <ActivityBar setIsAuthenticated={setIsAuthenticated} />}
         <Routes>
           <Route path='/' element={<HomeGuest />} exact />
