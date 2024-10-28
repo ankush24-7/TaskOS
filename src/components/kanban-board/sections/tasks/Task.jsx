@@ -1,14 +1,10 @@
 import React from "react";
 import Tags from "./Tags.jsx";
+import { CSS } from "@dnd-kit/utilities";
+import { useSortable } from "@dnd-kit/sortable";
 import { taskIcons, priorityIcons } from "../../../../assets/icons/icons.jsx";
 
-function Task({ onClick }) {
-  const taskDetails = {
-    name: "Task Name",
-    priority: 0,
-    tags: ["tag1", "tag2"]
-  };
-
+function Task({ task, onClick }) {
   return (
     <>
       {/* Add button to create a new inplace task */}
@@ -24,12 +20,12 @@ function Task({ onClick }) {
       {/* Task card */}
       <div 
         className="flex flex-col py-2 w-full h-[7.75rem] rounded-2xl bg-white justify-between cursor-pointer"
-        onClick= { () => onClick(taskDetails) }
+        onClick= { () => onClick(task) }
       >
         <div className="flex justify-between px-3 items-center">
           <div className="flex">
-              { React.createElement(priorityIcons[1]) }
-              <p className="text-lg">Task Name</p>
+              { React.createElement(priorityIcons[task.priority]) }
+              <p className="text-lg">{ task.name }</p>
           </div>
 
           <taskIcons.Profile addedClass="p-1.5 w-7 h-7" />

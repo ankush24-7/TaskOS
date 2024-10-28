@@ -6,36 +6,28 @@ import { CSS } from "@dnd-kit/utilities";
 import { useSortable } from "@dnd-kit/sortable";
 import { Plus } from "../../../assets/icons/icons.jsx";
 
-function Sections(props) {    
-  const { name, id, count } = props.section;
-  const [isModalOpen, setIsModalOpen] = useState(false);
+function Sections({ section, tasks, isModalOpen, setIsModalOpen }) {    
+  const { name, id, count } = section;
   const [selectedTask, setSelectedTask] = useState(null);
 
-  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: id,
     data: {
       type: "section",
-      section: props.section,
+      section: section,
     },
     attributes: {
       role: name,
       roleDescription: "sectionData.desc",
-      tabIndex: props.index,
+      tabIndex: section.index,
     }
   });
 
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
+    zIndex: isDragging ? 1 : 0,
   }
-
-  const renderTasks = () => {
-    const tasks = [];
-    for (let i = 0; i < count; i++) {
-      tasks.push(<Task key={i} onClick={ handleTaskClick } />);
-    }
-    return tasks;
-  };
 
   const handleTaskClick = (task) => {
     setSelectedTask(task);
@@ -51,19 +43,27 @@ function Sections(props) {
     <div 
       ref={setNodeRef}
       style={style}
-      className="w-[19rem] h-full relative">
+      className="w-[19rem] h-full rounded-lg bg-black/20">
 
       <Header 
-        sectionData={props.section} 
+        sectionData={section} 
         attributes={attributes}
         listeners={listeners}
       />
 
-      <div className=" h-[calc(100%-7.5rem)] overflow-y-scroll scroll-smooth scrollbar-hide">
-        <div className="flex flex-col mb-10 items-center px-3">
-
-          { renderTasks() }
-
+      <div className="h-full pb-28 overflow-y-scroll scroll-smooth scrollbar-hide">
+        <div className="flex flex-col items-center px-3">
+          { 
+            tasks.map(task => {
+              return (
+                <Task 
+                  key={task.taskId} 
+                  task={task} 
+                  onClick={ () => handleTaskClick(task) } 
+                  />
+                );
+              })
+          }
           { isModalOpen && <Modal task={selectedTask} onClose={closeModal} /> }
 
           <button 

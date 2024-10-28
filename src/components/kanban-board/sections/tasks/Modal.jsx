@@ -28,11 +28,11 @@ function Modal({ task, onClose }) {
 
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-10"
+      className="fixed inset-0 z-10 flex items-center justify-center backdrop-blur-[0.5px] bg-black/20"
       onClick={ handleBackgroundClick }
     >
       {/* Pop-up Modal */}
-      <div className="bg-white absolute top-10 w-2/3 h-[35rem] flex flex-col rounded-2xl drop-shadow-[0_0_3rem_rgba(0,0,0,0.5)] overflow-y-scroll scrollbar-hide">
+      <div className="bg-white absolute top-10 w-2/3 h-[35rem] flex flex-col rounded-2xl overflow-y-scroll scrollbar-hide">
         {/* Header */}
         <div className="flex justify-between items-center border-b-[1px] px-6 py-3.5">
           <button className="flex items-center rounded-full p-1 hover:bg-gray-200">

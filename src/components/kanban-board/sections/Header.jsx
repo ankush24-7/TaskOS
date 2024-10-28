@@ -4,10 +4,10 @@ function Header(props) {
     <div 
       {...props.attributes}
       {...props.listeners}
-      className="h-[3.75rem] w-full rounded-lg cursor-grab" 
+      className="h-[3.75rem] w-full rounded-t-lg cursor-grab" 
       style={{ backgroundColor: headerColor }}
     >
-      <div className="flex justify-between items-center px-3 py-2 h-full gap-1">
+      <div className="flex justify-between items-center px-3  h-full gap-1">
         <div className="flex items-center grow">
           <button 
             className="rounded-full p-1 hover:bg-[#18181b20]"
@@ -15,8 +15,8 @@ function Header(props) {
           >
             <Icon />
           </button>
-          <button className="rounded-lg hover:bg-[#18181b20] grow py-2 pl-1">
-            <p className="text-white text-xl font-semibold leading-none text-start">
+          <button className="rounded-lg hover:bg-[#1113] grow py-3 pl-1">
+            <p className="text-white text-xl leading-none text-start">
               {name}
             </p>
           </button>

@@ -1,14 +1,17 @@
-import { useState } from 'react';
-import React, { useMemo } from 'react';
+import "../../styles/kanban.css";
 import Sections from "./sections/Sections.jsx";
+import React, { useState, useMemo } from 'react';
+import { tasks } from "../../utils/TaskData.jsx";
 import { restrictToHorizontalAxis } from '@dnd-kit/modifiers';
 import { arrayMove, SortableContext } from '@dnd-kit/sortable';
-import { DndContext, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { sections as intitialDashboard } from "../../utils/Section-Data.jsx";
+import { DndContext, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 
 function KanbanBoard() {
   const [sections, setSections] = useState(intitialDashboard);
-  const sectionId = useMemo(() => sections.map((section) => section.id), [sections]);
+  const sectionIds = useMemo(() => sections.map((section) => section.id), [sections]);
+  const [taskData, setTaskData] = useState(tasks);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const onDragEnd = (event) => {
     const {active, over} = event;
@@ -26,14 +29,17 @@ function KanbanBoard() {
   );
 
   return (
-    <div className="h-full overflow-x-scroll overflow-y-hidden scrollbar-hide bg-gradient-to-r from-[#1a1a2e] via-[#16213e] to-[#0f3460]">
+    <div className="flex-grow scrollbar scroll-smooth overflow-x-scroll overflow-y-hidden">
       <DndContext onDragEnd={onDragEnd} modifiers={[restrictToHorizontalAxis]} sensors={sensors} >
         <div className="flex h-full w-fit gap-2 px-2 pt-1">
-          <SortableContext items={sectionId}>
+          <SortableContext items={sectionIds}>
             {sections.map((section) => (
               <Sections
                 key={section.id}
                 section={section}
+                tasks={taskData.filter(task => task.sectionId === section.id)}
+                isModalOpen={isModalOpen}
+                setIsModalOpen={setIsModalOpen}
               />
             ))}
           </SortableContext>
