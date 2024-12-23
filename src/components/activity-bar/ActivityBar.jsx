@@ -19,7 +19,7 @@ function ActivityBar({ setIsAuthenticated }) {
   }
 
   return (
-    <nav className={`activity-bar bg-[#111] h-[100vh] flex flex-col px-1.5 pt-6 pb-3 ${expanded ? 'w-[13rem]': 'w-[4.5rem]'}`}>
+    <nav className={`activity-bar h-[100vh] flex flex-col px-1.5 pt-6 pb-3 bg-[#111] ${expanded ? 'w-[13rem]': 'w-[4.5rem]'}`}>
       <Link to="/home" className='flex ml-1.5 items-end -translate-x-1'>
         <activityBarIcons.LogoIcon className='w-12 h-12 fixed translate-x-1 -translate-y-1.5' />
         <p className={`act-bar-label text-white text-4xl ml-[2.75rem] overflow-hidden font-inconsolata ${expanded ? 'w-fit': 'w-0'}`}>
