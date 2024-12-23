@@ -1,6 +1,6 @@
 import User from "./navbar-items/User";
-import { projectNavIcons } from "../../assets/icons/icons";
 import * as navbarComp from "./navbar-items/NavbarComp";
+import { projectNavIcons } from "../../assets/icons/icons";
 
 const ProjectNav = () => {
   return (
@@ -10,7 +10,7 @@ const ProjectNav = () => {
       <div className="flex items-center gap-8">
         <ul className="flex gap-4 items-center">
           <navbarComp.IconBtn
-            label="New Project"
+            label="Add Project"
             Icon={() => (
               <projectNavIcons.Sparkles className="w-5 h-5" stroke="#fff" />
             )}
@@ -18,6 +18,7 @@ const ProjectNav = () => {
         </ul>
 
         <ul className="flex gap-8 items-center">
+          <navbarComp.SearchBtn />
           <navbarComp.RoundBtn Icon={projectNavIcons.Bell} />
           <navbarComp.RoundBtn Icon={projectNavIcons.AddTask} />
           <User />

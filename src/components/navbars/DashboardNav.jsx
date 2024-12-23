@@ -14,6 +14,7 @@ function DashboardNav() {
         <navbarComp.RoundBtn Icon={() => <dashboardNavIcons.Team stroke="#fff" className="w-7 h-7 scale-110" /> } />
         <navbarComp.RoundBtn Icon={() => <dashboardNavIcons.Timeline stroke="#fff" /> } />
         <navbarComp.RoundBtn Icon={() => <dashboardNavIcons.Filter stroke="#fff" /> } />
+        <navbarComp.RoundBtn Icon={() => <dashboardNavIcons.VR stroke="#fff" /> } />
         <User />
       </div>
     </nav>

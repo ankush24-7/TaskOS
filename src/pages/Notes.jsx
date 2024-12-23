@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react"
 import { notesData } from "../utils/NotesData"
 import NotesCard from "../components/NotesCard"
+import React, { useEffect, useState } from "react"
 import NotesNav from "../components/navbars/NotesNav"
 
 const Notes = () => {  

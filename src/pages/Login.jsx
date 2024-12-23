@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import "../styles/scrollbars.css"
 import { Link } from 'react-router-dom'
 import { authPageIcons } from '../assets/icons/icons';
 
@@ -21,7 +22,6 @@ const Login = () => {
                 className="p-3 rounded-md mb-4 text-black focus:outline-none"
               />
             </label>
-
 
             <label className="text-white">Password</label>
             <div className="flex justify-between mb-4 bg-white rounded-md">

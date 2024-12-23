@@ -1,6 +1,6 @@
 const HeroSectionGuest = () => {
   return (
-    <>
+    <div className="flex-grow">
       <div className="pl-24 pt-14 relative z-10 font-lato">
         <h1 className="text-white z-10 text-6xl font-semibold max-w-80 tracking-wider">
           Operate Smoothly, Achieve Seamlessly
@@ -15,7 +15,7 @@ const HeroSectionGuest = () => {
         alt="dashboard image"
         className="absolute top-[17%] right-[6%] rotate w-[48rem] mt-10 mx-auto rounded-xl"
       />
-    </>
+    </div>
   );
 };
 

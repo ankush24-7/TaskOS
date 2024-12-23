@@ -2,12 +2,13 @@ import { useState } from "react";
 import Header from "./Header.jsx";
 import Task from "./tasks/Task.jsx";
 import Modal from "./tasks/Modal.jsx";
+import "../../../styles/scrollbars.css";
 import { CSS } from "@dnd-kit/utilities";
-import { useSortable } from "@dnd-kit/sortable";
 import { Plus } from "../../../assets/icons/icons.jsx";
+import { SortableContext, useSortable } from "@dnd-kit/sortable";
 
 function Sections({ section, tasks, isModalOpen, setIsModalOpen }) {    
-  const { name, id, count } = section;
+  const { name, id } = section;
   const [selectedTask, setSelectedTask] = useState(null);
 
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
@@ -26,7 +27,6 @@ function Sections({ section, tasks, isModalOpen, setIsModalOpen }) {
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    zIndex: isDragging ? 1 : 0,
   }
 
   const handleTaskClick = (task) => {
@@ -39,31 +39,29 @@ function Sections({ section, tasks, isModalOpen, setIsModalOpen }) {
     setIsModalOpen(false);
   };
 
+  if(isDragging) {
+    return (
+      <div ref={setNodeRef} style={style} className="w-[19rem] h-full rounded-lg bg-white/20"></div>
+    );
+  }
+
   return (
-    <div 
-      ref={setNodeRef}
-      style={style}
-      className="w-[19rem] h-full rounded-lg bg-black/20">
-
-      <Header 
-        sectionData={section} 
-        attributes={attributes}
-        listeners={listeners}
-      />
-
-      <div className="h-full pb-28 overflow-y-scroll scroll-smooth scrollbar-hide">
+    <div ref={setNodeRef} style={style}
+      className="w-[19rem] h-full rounded-lg bg-black/20"
+    >
+      <Header sectionData={section} attributes={attributes} listeners={listeners} />
+      <div className={`h-[88%] pb-20 overflow-y-auto vertical-scrollbar`} >
         <div className="flex flex-col items-center px-3">
-          { 
-            tasks.map(task => {
-              return (
-                <Task 
-                  key={task.taskId} 
-                  task={task} 
-                  onClick={ () => handleTaskClick(task) } 
-                  />
+          <SortableContext items={tasks.map(task => task.id)}> 
+            { 
+              tasks.map(task => {
+                return (
+                  <Task key={task.id} task={task} onClick={ () => handleTaskClick(task) } />
                 );
               })
-          }
+            }
+          </SortableContext>
+
           { isModalOpen && <Modal task={selectedTask} onClose={closeModal} /> }
 
           <button 

@@ -18,6 +18,7 @@ const NotesNav = () => {
         </ul>
 
         <ul className="flex gap-8 items-center">
+          <navbarComp.SearchBtn />
           <navbarComp.RoundBtn Icon={projectNavIcons.Bell} />
           <navbarComp.RoundBtn Icon={projectNavIcons.AddTask} />
           <User />

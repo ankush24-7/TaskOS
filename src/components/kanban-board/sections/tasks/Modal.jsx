@@ -31,9 +31,7 @@ function Modal({ task, onClose }) {
       className="fixed inset-0 z-10 flex items-center justify-center backdrop-blur-[0.5px] bg-black/20"
       onClick={ handleBackgroundClick }
     >
-      {/* Pop-up Modal */}
-      <div className="bg-white absolute top-10 w-2/3 h-[35rem] flex flex-col rounded-2xl overflow-y-scroll scrollbar-hide">
-        {/* Header */}
+      <div className="pop-up absolute top-10 w-2/3 h-[35rem] flex flex-col rounded-2xl overflow-y-scroll scrollbar-hide bg-white">
         <div className="flex justify-between items-center border-b-[1px] px-6 py-3.5">
           <button className="flex items-center rounded-full p-1 hover:bg-gray-200">
             <modalIcons.Profile width="28" />
@@ -62,7 +60,6 @@ function Modal({ task, onClose }) {
         </div>
 
         <div className="flex divide-x-[1px] h-full">
-            {/* Left Section */}
             <div className="flex flex-col w-[75%] pt-4">
               <div className="flex px-4">
                 <button>
@@ -86,7 +83,6 @@ function Modal({ task, onClose }) {
 
               <input type="text" placeholder={"Add a description"} className="font-light mx-4 mt-2 rounded-md px-3 py-1 focus:outline-none focus:bg-[#18181a15] hover:bg-[#18181a15]" />
             </div>
-            {/* Right Section */}
             <div className="flex flex-col grow items-center divide-y-[1px]">
               {rightSectionItem(<modalIcons.Calander />, "Due Date")}
               {rightSectionItem(<modalIcons.Timeline stroke="#71717a" />, "Schedule Task")}
