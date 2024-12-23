@@ -1,8 +1,7 @@
-import ActivityBarItem from './ActivityBarItem';
+import ActivityBarItem, { CollapseButton, GrayButton } from './ActivityBarItem';
 import React, { useMemo, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { activityBarIcons } from '../../assets/icons/icons.jsx';
-import '../../styles/animations.css';
 
 function ActivityBar({ setIsAuthenticated }) {
   const location = useLocation();
@@ -13,22 +12,7 @@ function ActivityBar({ setIsAuthenticated }) {
     setExpanded(isHomePage);
   },[isHomePage]);
   
-  const collapseButton = (expanded) => {
-    const style = expanded 
-      ? 'flex items-center gap-2 py-2 px-2.5 rounded-lg'
-      : 'w-fit p-1.5 ml-1 rounded-3xl';
-
-    return (
-      <button 
-        className={style + ' activity-bar-hov-expand activity-bar-item hover:bg-[#1b234d] hover:rounded-lg'}
-        onClick={() => setExpanded(!expanded)}
-      >
-        <activityBarIcons.ChevronsLeft className={`w-8 h-8 chevron-left ${expanded ? 'rotate-0': '-rotate-180'}`} stroke='#7F7D76' />
-        { expanded && <p className='act-bar-label text-lg overflow-hidden w-fit' style={{color: '#7F7D76'}}>Collapse</p> }
-      </button>
-    );
-  }
-
+  
   const handleLogout = () => {
     console.log('Logging out...');
     setIsAuthenticated(false);
@@ -52,10 +36,10 @@ function ActivityBar({ setIsAuthenticated }) {
         <ActivityBarItem Icon={activityBarIcons.Notes} label="Notes" to="/notes" expanded={expanded} currentPath={location.pathname} />        
       </ul>
 
-      <ul className='flex flex-col'>
-        { collapseButton(expanded) }
-        <ActivityBarItem Icon={activityBarIcons.Settings} label="Settings" to="/" expanded={expanded} stroke="#7F7D76" />
-        <ActivityBarItem Icon={activityBarIcons.Logout} label="Logout" to="/" expanded={expanded} onClick={ handleLogout } stroke="#7F7D76" />
+      <ul className='flex flex-col gap-0.5'>
+        <CollapseButton expanded={expanded} setExpanded={setExpanded} />
+        <GrayButton Icon={activityBarIcons.Settings} label="Settings" to="/" expanded={expanded} />
+        <GrayButton Icon={activityBarIcons.Logout} label="Logout" to="/" expanded={expanded} onClick={ handleLogout } />
       </ul>
     </nav>
   )
