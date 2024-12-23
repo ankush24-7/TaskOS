@@ -1,28 +1,37 @@
 .activity-bar {
-    transition: width 0.5s ease-in;
+  transition: width 0.5s ease-in;
 }
 
 .activity-bar-hov-expand {
-    transition: background-color 0.6s ease-in-out, border-radius 0.5s ease-in-out;
+  transition: background-color 0.6s ease-in-out, border-radius 0.5s ease-in-out;
 }
 
 .activity-bar-hov-expand:hover {
-    transition: background-color 0.3s ease-in-out, border-radius 0.8s ease-in-out;
+  transition: background-color 0.3s ease-in-out, border-radius 0.8s ease-in-out;
 }
 
-.round-btn-hov-expand{
-    transition: background-color 0.5s ease-in-out, border-radius 0.5s ease-in-out;
-}
-
-.round-btn-hov-expand:hover {
-    transition: background-color 0.5s ease-in-out, border-radius 0.8s ease-in-out;
-}
-
-.chevron-left {
-    transition: transform 0.5s ease-in-out;
+.rotation {
+  transition: transform 0.5s ease-in-out;
 }
 
 .rotate {
-    transform: perspective(80rem) rotateX(5deg) rotateY(-40deg) rotateZ(5deg);
-    box-shadow: 1rem 1rem 1rem rgba(0, 0, 0, 0.4);
+  transform: perspective(80rem) rotateX(5deg) rotateY(-40deg) rotateZ(5deg);
+  box-shadow: 1rem 1rem 1rem rgba(0, 0, 0, 0.4);
+}
+
+.expand-left {
+  transition: width 0.5s linear;
+}
+
+.pop-up {
+  animation: popUp 0.15s forwards;
+}
+
+@keyframes popUp {
+  0% {
+    transform: translateY(100rem);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }

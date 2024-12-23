@@ -1,0 +1,32 @@
+.horizontal-scrollbar::-webkit-scrollbar {
+  height: 10px;
+}
+
+.horizontal-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+  background-color: #0008;
+}
+
+.horizontal-scrollbar::-webkit-scrollbar-track {
+  border-radius: 10px;
+  display: none;
+}
+
+.vertical-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.vertical-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #1110;
+}
+
+.vertical-scrollbar:hover::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #0005;
+}
+
+.vertical-scrollbar::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
