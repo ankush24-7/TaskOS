@@ -131,13 +131,19 @@ export function MyTasks({ stroke = "#fff", className="" }) {
 
 export function ChevronsLeft({ stroke = "#fff", className="" }) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" 
-    fill="none" 
-    stroke={stroke}
-    strokeWidth="2" 
-    strokeLinecap="round" 
-    strokeLinejoin="round" 
-    className={className}><path d="m11 17-5-5 5-5"/><path d="m18 17-5-5 5-5"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg"
+      width="24" 
+      height="24" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke={stroke} 
+      strokeWidth="2" 
+      strokeLinecap="round" 
+      strokeLinejoin="round" 
+      className={className}>
+      <path d="m6 17 5-5-5-5"/>
+      <path d="m13 17 5-5-5-5"/>
+    </svg>
   )
 }
 
@@ -257,6 +263,19 @@ export function Filter({ stroke = "#fff", className="" }) {
       stroke={stroke}
       className={className}>
       <path d="m19.239,0H4.76C2.687,0,1,1.688,1,3.761c0,.922.337,1.81.95,2.498l7.05,7.932v6.31c0,.176.092.339.243.429l5,3c.079.048.168.071.257.071.085,0,.17-.021.246-.064.157-.089.254-.256.254-.436v-9.31l7.051-7.932c.612-.688.949-1.576.949-2.498,0-2.073-1.688-3.761-3.761-3.761Zm2.063,5.595l-7.177,8.073c-.081.092-.126.21-.126.332v8.617l-4-2.4v-6.217c0-.122-.045-.24-.126-.332L2.697,5.595c-.45-.506-.697-1.157-.697-1.834,0-1.522,1.238-2.761,2.76-2.761h14.479c1.522,0,2.761,1.238,2.761,2.761,0,.677-.247,1.328-.697,1.834Z"/>
+    </svg>
+  );
+}
+
+export function VR({ stroke = "#fff", className="" }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" 
+      viewBox="0 0 24 24"
+      width="24"
+      height="24"
+      stroke={stroke}
+      className={className}>
+      <path d="m7,8c-1.654,0-3,1.346-3,3s1.346,3,3,3,3-1.346,3-3-1.346-3-3-3Zm0,5c-1.103,0-2-.897-2-2s.897-2,2-2,2,.897,2,2-.897,2-2,2Zm10-5c-1.654,0-3,1.346-3,3s1.346,3,3,3,3-1.346,3-3-1.346-3-3-3Zm0,5c-1.103,0-2-.897-2-2s.897-2,2-2,2,.897,2,2-.897,2-2,2Zm2.5-10H4.5C2.019,3,0,5.019,0,7.5v9c0,2.481,2.019,4.5,4.5,4.5h2.505c.944,0,1.799-.523,2.228-1.365l1.468-2.883c.272-.467.759-.747,1.3-.747s1.027.279,1.287.724l1.505,2.916c.43.835,1.281,1.354,2.222,1.354h2.486c2.481,0,4.5-2.019,4.5-4.5V7.5c0-2.481-2.019-4.5-4.5-4.5Zm3.5,13.5c0,1.93-1.57,3.5-3.5,3.5h-2.486c-.564,0-1.075-.312-1.333-.813l-1.518-2.939c-.453-.778-1.263-1.243-2.163-1.243s-1.71.464-2.177,1.268l-1.481,2.908c-.258.505-.771.819-1.337.819h-2.505c-1.93,0-3.5-1.57-3.5-3.5V7.5c0-1.93,1.57-3.5,3.5-3.5h15c1.93,0,3.5,1.57,3.5,3.5v9Z"/>
     </svg>
   );
 }
@@ -475,15 +494,16 @@ export function Archive({ stroke = "#000", width = "24", height = "24" }) {
   );
 }
 
-export function Close({ stroke = "#000", width = "24", height = "24" }) {
+export function Close({ stroke = "#000", className = "" }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={width}
-      height={height}
+      width="24"
+      height="24"
       viewBox="0 0 24 24"
       fill="none"
       stroke={stroke}
+      className={className}
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round">
@@ -876,12 +896,14 @@ export function TerminatedSectionIcon({ stroke = "#f1f1f1", className = "" }) {
 }
 
 export const priorityIcons = [Priority1, Priority2, Priority3, DefaultPriority];
-export const modalIcons = {Timeline, Profile, Copy, Del, Archive, Close, Complete, Calander, Tags, ChevronDown};
-export const dashboardNavIcons = {Timeline, Team, AddTask, CurrentProject, ChevronDown, Filter};
+
 export const taskIcons = {Profile, AddTask, Plus};
-export const headerIcons = {NewSectionIcon, ReadySectionIcon, RunningSectionIcon, BlockedSectionIcon, TerminatedSectionIcon};
-export const activityBarIcons = {LogoIcon, SearchIcon, Home, Rocket, Timeline, Star, Notes, MyTasks, ChevronsLeft, Settings, Logout};
-export const projectNavIcons = {AddTask, Pen, Bell, Sparkles};
-export const homeNavIcons = {AddTask, Pen, Bell};
 export const authPageIcons = {ShowPassword, HidePassword, Google};
 export const notesContentIcons = {Close, Pin, Unpin, Edit, Book, Del, Filter}
+export const modalIcons = {Timeline, Profile, Copy, Del, Archive, Close, Complete, Calander, Tags, ChevronDown};
+export const headerIcons = {NewSectionIcon, ReadySectionIcon, RunningSectionIcon, BlockedSectionIcon, TerminatedSectionIcon};
+export const activityBarIcons = {LogoIcon, SearchIcon, Home, Rocket, Timeline, Star, Notes, MyTasks, ChevronsLeft, Settings, Logout};
+
+export const homeNavIcons = {AddTask, Pen, Bell};
+export const projectNavIcons = {AddTask, Pen, Bell, Sparkles, SearchIcon, Close};
+export const dashboardNavIcons = {Timeline, Team, AddTask, CurrentProject, ChevronDown, Filter, VR};
