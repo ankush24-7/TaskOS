@@ -7,6 +7,7 @@ export default {
   theme: {
     extend: {
       colors: {
+        'prim-black': '#111',
         'grad-b-1': '#224570',
         'grad-b-2': '#4e81c3',
       },
