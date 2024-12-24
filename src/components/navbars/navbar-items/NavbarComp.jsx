@@ -25,7 +25,7 @@ export function NonIconBtn({ label, to }) {
   return (
     <Link 
       to={to}
-      className='flex items-center rounded-lg px-5 py-2.5 border-[1.5px] border-[#fff] hover:bg-[#111] hover:border-[#111]'
+      className='border-[#fff] hover:bg-[#111] hover:border-[#111] flex items-center rounded-lg border-[1.5px] px-5 py-2.5'
     >
       <p className='text-white font-medium leading-none'>{label}</p>
     </Link>

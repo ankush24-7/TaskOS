@@ -58,20 +58,16 @@ function ActivityBarItem(props) {
     : `w-fit h-fit ml-1.5 p-2 rounded-3xl`;
 
   return (
-    <Link
-      to={to}
-      className={
-        style +
+    <Link to={to}
+      className={style +
         ` activity-bar-hov-expand overflow-hidden ${isActive && "bg-[#1b234d]"}
-          hover:rounded-lg hover:bg-[#1b234d]`
-      }>
-      <Icon className={`w-7 h-7 ${expanded && "fixed"} `} stroke={stroke} />
+          hover:rounded-lg hover:bg-[#1b234d]`}
+    >
+      <Icon className={`w-7 h-7 ${expanded && "sm:fixed"}`} stroke={stroke} />
       <p
-        className={`text-lg ml-10 text-nowrap ${
-          expanded
-            ? "relative opacity-100"
-            : "absolute opacity-0 -translate-y-10 -translate-x-20"
-        }`}
+        className={`hidden text-lg ml-10 text-nowrap sm:block
+          ${expanded ? "relative opacity-100"
+          : "absolute opacity-0 -translate-y-10 -translate-x-20"}`}
         style={{ color: stroke }}>
         {label}
       </p>

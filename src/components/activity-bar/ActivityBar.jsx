@@ -1,7 +1,7 @@
-import ActivityBarItem, { CollapseButton, GrayButton } from './ActivityBarItem';
 import React, { useMemo, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { activityBarIcons } from '../../assets/icons/icons.jsx';
+import ActivityBarItem, { CollapseButton, GrayButton } from './ActivityBarItem';
 
 function ActivityBar({ setIsAuthenticated }) {
   const location = useLocation();
@@ -12,22 +12,21 @@ function ActivityBar({ setIsAuthenticated }) {
     setExpanded(isHomePage);
   },[isHomePage]);
   
-  
   const handleLogout = () => {
     console.log('Logging out...');
     setIsAuthenticated(false);
   }
 
   return (
-    <nav className={`activity-bar h-[100vh] flex flex-col px-1.5 pt-6 pb-3 bg-[#111] ${expanded ? 'w-[13rem]': 'w-[4.5rem]'}`}>
-      <Link to="/home" className='flex ml-1.5 items-end -translate-x-1'>
-        <activityBarIcons.LogoIcon className='w-12 h-12 fixed translate-x-1 -translate-y-1.5' />
-        <p className={`act-bar-label text-white text-4xl ml-[2.75rem] overflow-hidden font-inconsolata ${expanded ? 'w-fit': 'w-0'}`}>
+    <nav className={`bg-prim-black activity-bar flex w-full p-1 ${expanded ? 'sm:w-[13rem]': 'sm:w-[4.5rem]'}`}>
+      <Link to="/home" className='ml-1.5 items-end -translate-x-1 hidden sm:flex'>
+        <activityBarIcons.LogoIcon className="w-12 h-12 fixed translate-x-1 -translate-y-1.5" />
+        <p className={`text-white act-bar-label text-4xl ml-[2.75rem] overflow-hidden font-inconsolata ${expanded ? 'w-fit': 'w-0'}`}>
           TaskOS
         </p>
       </Link>
 
-      <ul className='flex flex-col gap-2 mt-[4.75rem] flex-grow'>
+      <ul className='nav-lst-1 w-full flex justify-between gap-2'>
         <ActivityBarItem Icon={activityBarIcons.Home} label="Home" to="/home" expanded={expanded} currentPath={location.pathname} />
         <ActivityBarItem Icon={activityBarIcons.Timeline} label="Timeline" to="/timeline" expanded={expanded} currentPath={location.pathname} />
         <ActivityBarItem Icon={activityBarIcons.Rocket} label="Projects" to="/projects" expanded={expanded} currentPath={location.pathname} />
@@ -36,7 +35,7 @@ function ActivityBar({ setIsAuthenticated }) {
         <ActivityBarItem Icon={activityBarIcons.Notes} label="Notes" to="/notes" expanded={expanded} currentPath={location.pathname} />        
       </ul>
 
-      <ul className='flex flex-col gap-0.5'>
+      <ul className='hidden flex-col gap-0.5 sm:flex'>
         <CollapseButton expanded={expanded} setExpanded={setExpanded} />
         <GrayButton Icon={activityBarIcons.Settings} label="Settings" to="/" expanded={expanded} />
         <GrayButton Icon={activityBarIcons.Logout} label="Logout" to="/" expanded={expanded} onClick={ handleLogout } />

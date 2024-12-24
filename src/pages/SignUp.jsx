@@ -7,8 +7,8 @@ const SignUp = () => {
   const toggleShowPassword = () => setShowPassword(!showPassword);
     
   return (
-    <div className="w-full pb-20 px-20 bg-gradient-to-r from-grad-b-1 to-grad-b-2">
-      <div className="flex w-[28rem] p-10 pb-20 mx-auto mt-20 rounded-2xl bg-[#111]/30">
+    <div className="auth-form-container w-full flex-grow overflow-y-scroll scrollbar-hide bg-gradient-to-r from-grad-b-1 to-grad-b-2">
+      <div className="auth-form flex w-full h-full p-10 pb-20 mx-auto bg-prim-black/30">
         <div className="flex flex-col items-center w-full">
           <p className='text-white text-3xl'>Create Your Account</p>
           <form className="flex flex-col w-full mt-8">

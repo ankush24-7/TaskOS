@@ -1,3 +1,4 @@
+import { Plus } from "../assets/icons/icons";
 import React, { useState, useEffect } from "react";
 
 const HeroSectionUser = () => {
@@ -35,34 +36,30 @@ const HeroSectionUser = () => {
   };
 
   return (
-    <div className="w-full flex gap-20 justify-evenly">
-      <div className="mt-20">
-        <div className="flex flex-col items-start gap-1">
-          <h2 className="text-white text-3xl leading-none tracking-tight">
+    <div className="w-full flex gap-20 sm:justify-evenly">
+      <div className="mt-20 px-4 w-full">
+        <div className="flex flex-col items-center gap-1 sm:items-start">
+          <h2 className="text-white leading-none text-2xl sm:text-3xl sm:tracking-tight">
             {`${getGreetings(currentTime)}, ${user}!`}
           </h2>
-          <h1 className="text-white text-[90px] font-semibold tracking-wide leading-none -translate-x-1.5">
+          <h1 className="text-white font-medium tracking-wide leading-none -translate-x-1.5 text-7xl sm:text-[90px] sm:font-semibold">
             {formatTime(currentTime)}
           </h1>
-          <h2 className="text-white text-3xl leading-none tracking-tight">
+          <h2 className="text-white leading-none text-2xl sm:text-3xl sm:tracking-tight">
             {formatDate(currentTime)}
           </h2>
         </div>
-
-        <div className="w-[400px] mt-20">
-          <p className="text-white text-lg">
-            "Always be a first-rate version of yourself, instead of a
-            second-rate version of somebody else."
-          </p>
-          <p className="text-white text-lg mt-3.5">Judy Garland</p>
-        </div>
       </div>
 
-      <section className="bg-[#111]/10 w-80 h-96 rounded-lg mt-20">
+      <section className="bg-[#111]/10 w-80 h-96 rounded-lg mt-20 hidden sm:block">
         <div className="rounded-t-lg p-3 bg-[#111]/40">
           <p className="text-white text-lg">Deadlines</p>
         </div>
       </section>
+
+      <button className="bg-[#111] w-12 aspect-square rounded-full flex items-center justify-center absolute right-3 bottom-20 sm:hidden">
+        <Plus className="w-8 h-8" stroke="#fff" />
+      </button>
     </div>
   );
 };
