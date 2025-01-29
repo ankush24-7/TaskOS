@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+      "baseUrl": "./src",
+      "paths": {
+        "@/*": ["./*"],
+        "@assets/*": ["assets/*"],
+        "@styles/*": ["assets/styles/*"],
+        "@icons/*": ["assets/icons/icons.jsx*"],
+        "@components/*": ["components/*"],
+        "@pages/*": ["pages/*"],
+        "@utils/*": ["utils/*"],
+        "@navbtns/*": ["components/nav-items/NavbarBtns.jsx/*"],
+      }
+    },
+    "exclude": ["node_modules", "dist"]
+  }
