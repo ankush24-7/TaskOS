@@ -1,5 +1,5 @@
 import React from "react";
-import { Plus } from "@assets/icons/icons";
+import { Plus } from "@icons";
 
 const AddBtn = () => {
   return (

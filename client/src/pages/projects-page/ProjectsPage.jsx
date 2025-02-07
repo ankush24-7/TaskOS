@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { projectData } from "@utils/Project-Data";
+import { projectData } from "@data/Project-Data";
 import ProjectNav from "./components/ProjectNav";
 import ProjectRow from "./components/ProjectRow";
 import ProjectTable from "./components/ProjectTable";

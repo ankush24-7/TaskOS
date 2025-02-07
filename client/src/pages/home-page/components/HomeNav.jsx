@@ -1,6 +1,6 @@
 import * as navBtns from "@navbtns";
 import { Link } from "react-router-dom";
-import User from "@components/navbar-items/User";
+import User from "@/components/ui/User";
 import { homeNavIcons, activityBarIcons } from "@icons";
 
 const HomeNav = () => {

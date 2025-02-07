@@ -1,15 +1,14 @@
-import { tasks } from "@utils/TaskData";
+import { tasks } from "@data/TaskData";
 import { createPortal } from "react-dom";
 import React, { useMemo, useState } from "react";
-import Task from "./kanban-board-components/section-components/Task";
+import Task from "./kanban-board-components/Task";
 import Sections from "./kanban-board-components/Sections";
 import { arrayMove, SortableContext } from "@dnd-kit/sortable";
-import { sections as initialDashboard } from "@utils/Section-Data";
+import { sections as initialDashboard } from "@data/Section-Data";
 import {
   DndContext,
   DragOverlay,
   PointerSensor,
-  rectIntersection,
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
@@ -99,7 +98,8 @@ function KanbanBoard() {
             items={useMemo(
               () => sections.map((section) => section.id),
               [sections]
-            )}>
+            )}
+          >
             {sections.map((section) => (
               <Sections
                 key={section.id}

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { projectData } from "@utils/Project-Data";
+import { projectData } from "@data/Project-Data";
 
 const ProjectRow = ({ id }) => {
   const { title, status, dateCreated, deadline, createdBy } = projectData[id];

@@ -3,7 +3,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { notesData } from "@utils/NotesData";
+import { notesData } from "@data/NotesData";
 import NoteEditorNav from "./components/NoteEditorNav";
 import NotesLoader from "@components/loaders/NotesLoader";
 

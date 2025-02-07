@@ -1,5 +1,5 @@
+import { ChevronsLeft } from "@icons";
 import { Link } from "react-router-dom";
-import { ChevronsLeft } from "../../assets/icons/icons";
 
 export function CollapseButton({ expanded, setExpanded }) {
   const style = expanded
@@ -16,9 +16,11 @@ export function CollapseButton({ expanded, setExpanded }) {
       />
       <p
         className={`text-lg ml-10 text-nowrap text-[#7f7d76] group-hover:text-white 
-        ${expanded
-          ? "relative opacity-100"
-          : "absolute opacity-0 -translate-y-10 -translate-x-20"}`}>
+        ${
+          expanded
+            ? "relative opacity-100"
+            : "absolute opacity-0 -translate-y-10 -translate-x-20"
+        }`}>
         Collapse
       </p>
     </button>
@@ -37,13 +39,17 @@ export function GrayButton({ Icon, label, to, onClick, expanded }) {
       className={style + " group  overflow-hidden"}>
       <Icon
         stroke="#7F7D76"
-        className={`w-7 h-7 rotation group-hover:stroke-white ${expanded && 'fixed'}`}
+        className={`w-7 h-7 rotation group-hover:stroke-white ${
+          expanded && "fixed"
+        }`}
       />
       <p
         className={`text-lg ml-10 text-nowrap text-[#7f7d76] group-hover:text-white
-          ${expanded
-            ? "relative opacity-100"
-            : "absolute opacity-0 -translate-y-10 -translate-x-20"}`}>
+          ${
+            expanded
+              ? "relative opacity-100"
+              : "absolute opacity-0 -translate-y-10 -translate-x-20"
+          }`}>
         {label}
       </p>
     </Link>
@@ -51,23 +57,35 @@ export function GrayButton({ Icon, label, to, onClick, expanded }) {
 }
 
 function ActivityBarItem(props) {
-  const { Icon, label, to, expanded, stroke = "#fff", currentPath = "" } = props;
+  const {
+    Icon,
+    label,
+    to,
+    expanded,
+    stroke = "#fff",
+    currentPath = "",
+  } = props;
   const isActive = currentPath === "" ? false : currentPath.startsWith(to);
   const style = expanded
     ? `flex items-center py-2 px-3 rounded-lg`
     : `w-fit h-fit ml-1.5 p-2 rounded-3xl`;
 
   return (
-    <Link to={to}
-      className={style +
+    <Link
+      to={to}
+      className={
+        style +
         ` activity-bar-hov-expand overflow-hidden ${isActive && "bg-[#1b234d]"}
-          hover:rounded-lg hover:bg-[#1b234d]`}
-    >
+          hover:rounded-lg hover:bg-[#1b234d]`
+      }>
       <Icon className={`w-7 h-7 ${expanded && "sm:fixed"}`} stroke={stroke} />
       <p
         className={`hidden text-lg ml-10 text-nowrap sm:block
-          ${expanded ? "relative opacity-100"
-          : "absolute opacity-0 -translate-y-10 -translate-x-20"}`}
+          ${
+            expanded
+              ? "relative opacity-100"
+              : "absolute opacity-0 -translate-y-10 -translate-x-20"
+          }`}
         style={{ color: stroke }}>
         {label}
       </p>

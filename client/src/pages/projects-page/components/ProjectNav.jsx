@@ -1,6 +1,7 @@
 import * as navbarComp from "@navbtns";
 import { projectNavIcons } from "@icons";
-import User from "@components/navbar-items/User";
+import User from "@/components/ui/User";
+import SearchBtn from "@components/ui/SearchBtn";
 
 const ProjectNav = () => {
   return (
@@ -19,7 +20,7 @@ const ProjectNav = () => {
           </ul>
 
           <ul className="hidden sm:flex gap-8 items-center">
-            <navbarComp.SearchBtn />
+            <SearchBtn />
             <navbarComp.RoundBtn Icon={projectNavIcons.Bell} />
             <navbarComp.RoundBtn Icon={projectNavIcons.AddTask} />
           </ul>

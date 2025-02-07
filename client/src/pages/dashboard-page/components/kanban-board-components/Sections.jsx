@@ -1,10 +1,10 @@
 import { Plus } from "@icons";
+import Task from "./Task.jsx";
 import "@styles/scrollbars.css";
 import { useState } from "react";
 import Header from "./Header.jsx";
 import { CSS } from "@dnd-kit/utilities";
-import Task from "./section-components/Task.jsx";
-import EditTaskModal from "./section-components/EditTaskModal.jsx";
+import EditTaskModal from "./EditTaskModal.jsx";
 import { SortableContext, useSortable } from "@dnd-kit/sortable";
 
 function Sections({ section, tasks, isModalOpen, setIsModalOpen }) {
@@ -79,7 +79,9 @@ function Sections({ section, tasks, isModalOpen, setIsModalOpen }) {
             })}
           </SortableContext>
 
-          {isModalOpen && <EditTaskModal task={selectedTask} onClose={closeModal} />}
+          {isModalOpen && (
+            <EditTaskModal task={selectedTask} onClose={closeModal} />
+          )}
 
           <button
             onClick={() => handleTaskClick()}

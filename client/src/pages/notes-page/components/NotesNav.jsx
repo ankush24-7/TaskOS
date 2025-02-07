@@ -1,6 +1,7 @@
 import * as navBtns from "@navbtns";
 import { projectNavIcons } from "@icons";
-import User from "@components/navbar-items/User";
+import User from "@/components/ui/User";
+import SearchBtn from "@/components/ui/SearchBtn";
 
 const NotesNav = () => {
   return (
@@ -18,7 +19,7 @@ const NotesNav = () => {
         </ul>
 
         <ul className="flex gap-8 items-center">
-          <navBtns.SearchBtn />
+          <SearchBtn />
           <navBtns.RoundBtn Icon={projectNavIcons.Bell} />
           <navBtns.RoundBtn Icon={projectNavIcons.AddTask} />
           <User />

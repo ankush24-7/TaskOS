@@ -1,6 +1,6 @@
 import * as navbarComp from "@navbtns";
 import { dashboardNavIcons } from "@icons";
-import User from "@components/navbar-items/User";
+import User from "@/components/ui/User";
 
 function DashboardNav() {
   return (

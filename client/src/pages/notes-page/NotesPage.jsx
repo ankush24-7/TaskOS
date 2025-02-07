@@ -1,6 +1,6 @@
 import React from "react";
 import { projectNavIcons } from "@icons";
-import { notesData } from "@utils/NotesData";
+import { notesData } from "@data/NotesData";
 import NotesNav from "./components/NotesNav";
 import NotesCard from "./components/NotesCard";
 
