@@ -1,4 +1,4 @@
-import { Profile } from "@assets/icons/icons";
+import { Profile } from "@icons";
 
 const User = () => {
   return (

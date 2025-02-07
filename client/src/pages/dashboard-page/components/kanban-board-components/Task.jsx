@@ -1,8 +1,15 @@
 import React from "react";
-import Tags from "./Tags.jsx";
 import { CSS } from "@dnd-kit/utilities";
 import { useSortable } from "@dnd-kit/sortable";
 import { taskIcons, priorityIcons } from "@icons";
+
+function Tags() {
+  return (
+    <div className="rounded-lg bg-green-500 px-2 py-1">
+      <p className="text-white text-sm font-medium leading-none">Tag1</p>
+    </div>
+  );
+}
 
 function Task({ task, onClick }) {
   const {
