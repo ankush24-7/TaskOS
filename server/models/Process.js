@@ -25,7 +25,7 @@ const processSchema = new Schema(
       default: false,
     },
     starred: {
-        type: Boolean,
+        type: Boolean, 
         default: false,
     },
     assignedTo: [

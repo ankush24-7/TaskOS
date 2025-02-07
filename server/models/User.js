@@ -14,7 +14,10 @@ const userSchema = new Schema({
     type: String,
     required: [true, "Password is required"],
   },
-  refreshToken: String,
+  refreshToken: {
+    type: String,
+    default: "",
+  },
   projects: [
     {
       type: Schema.Types.ObjectId,
