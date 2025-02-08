@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 3000;
 const logger = require('./utils/logger');
 const connectDB = require('./config/dbConn');
 const cookieParser = require('cookie-parser');
+const verifyJWT = require('./middlewares/verifyJWT');
 
 connectDB();
 
@@ -19,8 +20,11 @@ app.use('/auth', require('./routes/authRoutes'));
 app.use('/refresh', require('./routes/refreshRoutes'));
 app.use('/logout', require('./routes/logoutRoutes'));
 
+app.use(verifyJWT);
+
+app.use('/project', require('./routes/projectRoutes'));
+
 // app.use('/user', require('./routers/userRouter'));
-// app.use('/project', require('./routers/projectRouter'));
 // app.use('/dashboard', require('./routers/dashboardRouter'));
 // app.use('/section', require('./routers/sectionRouter'));
 // app.use('/process', require('./routers/processRouter'));
