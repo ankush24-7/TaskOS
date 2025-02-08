@@ -19,13 +19,6 @@ const sectionSchema = new Schema(
     type: String,
     default: ""
   },
-  processes: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Process",
-      required: true
-    },
-  ]
 },
 {
   timestamps: true,

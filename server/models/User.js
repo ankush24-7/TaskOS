@@ -18,12 +18,12 @@ const userSchema = new Schema({
     type: String,
     default: "",
   },
-  projects: [
+  network: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Project",
+      ref: "User",
     },
-  ],
+  ]
 });
 
 module.exports = mongoose.model("User", userSchema);
