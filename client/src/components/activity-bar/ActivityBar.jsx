@@ -18,10 +18,7 @@ function ActivityBar({ setIsAuthenticated }) {
   };
 
   return (
-    <nav
-      className={`bg-prim-black activity-bar flex w-full p-1 ${
-        expanded ? "sm:w-[13rem]" : "sm:w-[4.5rem]"
-      }`}>
+    <nav className={`bg-prim-black activity-bar flex w-full p-1 ${expanded ? "sm:w-[13rem]" : "sm:w-[4.5rem]"}`}>
       <Link
         to="/home"
         className="ml-1.5 items-end -translate-x-1 hidden sm:flex">

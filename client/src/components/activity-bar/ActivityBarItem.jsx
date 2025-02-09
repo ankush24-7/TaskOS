@@ -56,27 +56,17 @@ export function GrayButton({ Icon, label, to, onClick, expanded }) {
   );
 }
 
-function ActivityBarItem(props) {
-  const {
-    Icon,
-    label,
-    to,
-    expanded,
-    stroke = "#fff",
-    currentPath = "",
-  } = props;
+function ActivityBarItem({ Icon, label, to, expanded, stroke = "#fff", currentPath = "" }) {
   const isActive = currentPath === "" ? false : currentPath.startsWith(to);
   const style = expanded
-    ? `flex items-center py-2 px-3 rounded-lg`
-    : `w-fit h-fit ml-1.5 p-2 rounded-3xl`;
+    ? "flex items-center py-2 px-3 rounded-lg"
+    : `w-fit h-fit ml-1.5 p-2 hover:rounded-2xl ${isActive ? "rounded-2xl": "rounded-3xl"}`;
 
   return (
     <Link
       to={to}
       className={
-        style +
-        ` activity-bar-hov-expand overflow-hidden ${isActive && "bg-[#1b234d]"}
-          hover:rounded-lg hover:bg-[#1b234d]`
+        style + ` activity-bar-hov-expand overflow-hidden hover:bg-[#134074] ${isActive && "bg-[#134074]"}`
       }>
       <Icon className={`w-7 h-7 ${expanded && "sm:fixed"}`} stroke={stroke} />
       <p
