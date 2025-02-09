@@ -11,6 +11,7 @@ export const projectData = [
     dateCreated: "10 Oct",
     deadline: "20 Oct",
     createdBy: "John Doe",
+    team: ["John Doe", "Jane Smith", "Alice Johnson", "Bob Brown", "Charlie Davis"],
   },
   {
     projectId: "xO1Fya342",
@@ -19,6 +20,7 @@ export const projectData = [
     dateCreated: formatDate("2021-11-01"),
     deadline: formatDate("2021-11-15"),
     createdBy: "Jane Smith",
+    team: ["Jane Smith", "Alice Johnson", "Bob Brown", "Charlie Davis", "David Evans"],
   },
   {
     projectId: "xO1Fya343",
@@ -27,6 +29,7 @@ export const projectData = [
     dateCreated: formatDate("2021-12-05"),
     deadline: formatDate("2021-12-20"),
     createdBy: "Alice Johnson",
+    team: ["Alice Johnson", "Bob Brown", "Charlie Davis", "David Evans", "Eve Foster"],
   },
   {
     projectId: "xO1Fya344",
@@ -35,5 +38,6 @@ export const projectData = [
     dateCreated: formatDate("2022-01-10"),
     deadline: formatDate("2022-01-25"),
     createdBy: "Bob Brown",
+    team: ["Bob Brown", "John Doe", "Jane Smith", "Alice Johnson", "Charlie Davis"],
   },
 ];

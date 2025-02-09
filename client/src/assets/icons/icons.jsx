@@ -1060,13 +1060,75 @@ export function Menu({ stroke = "#111", className = "" }) {
   );
 }
 
+export function SortIcon({ className = "" }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="#9ca3af"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}>
+      <path d="M13.73 4a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
+    </svg>
+  );
+}
+
 export const priorityIcons = [Priority1, Priority2, Priority3, DefaultPriority];
 export const taskIcons = { Profile, AddTask, Plus };
 export const authPageIcons = { ShowPassword, HidePassword, Google };
 export const notesContentIcons = { Close, Pin, Unpin, Edit, Book, Del, Filter };
-export const modalIcons = { Timeline, Profile, Copy, Del, Archive, Close, Complete, Calander, Tags, ChevronDown };
-export const headerIcons = { NewSectionIcon, ReadySectionIcon, RunningSectionIcon, BlockedSectionIcon, TerminatedSectionIcon };
-export const activityBarIcons = { LogoIcon, SearchIcon, Home, Rocket, Timeline, Star, Notes, MyTasks, ChevronsLeft, Settings, Logout, Menu };
-export const projectNavIcons = { AddTask, Pen, Bell, Sparkles, SearchIcon, Close };
-export const dashboardNavIcons = { Timeline, Team, AddTask, CurrentProject, ChevronDown, Filter, VR, Menu };
+export const modalIcons = {
+  Timeline,
+  Profile,
+  Copy,
+  Del,
+  Archive,
+  Close,
+  Complete,
+  Calander,
+  Tags,
+  ChevronDown,
+};
+export const headerIcons = {
+  NewSectionIcon,
+  ReadySectionIcon,
+  RunningSectionIcon,
+  BlockedSectionIcon,
+  TerminatedSectionIcon,
+};
+export const activityBarIcons = {
+  LogoIcon,
+  SearchIcon,
+  Home,
+  Rocket,
+  Timeline,
+  Star,
+  Notes,
+  MyTasks,
+  ChevronsLeft,
+  Settings,
+  Logout,
+  Menu,
+};
+export const projectNavIcons = {
+  AddTask,
+  Pen,
+  Bell,
+  Sparkles,
+  SearchIcon,
+  Close,
+};
+export const dashboardNavIcons = {
+  Timeline,
+  Team,
+  AddTask,
+  CurrentProject,
+  ChevronDown,
+  Filter,
+  VR,
+  Menu,
+};
 export const homeNavIcons = { AddTask, Pen, Bell };
