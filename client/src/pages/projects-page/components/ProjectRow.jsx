@@ -10,7 +10,7 @@ const ProjectRow = ({ id }) => {
   }, [team]);
 
   return (
-    <div className="mx-3 sm:mx-2 sm:rounded-lg text-white hover:bg-[#111]/30">
+    <tr className="mx-3 sm:mx-2 sm:rounded-lg text-white hover:bg-[#111]/30">
       <Link
         to={`/projects/${projectId}/dashboard`}
         className="flex justify-between items-center pt-3 pb-2 border-b border-gray-400 hover:border-transparent"
@@ -34,7 +34,7 @@ const ProjectRow = ({ id }) => {
           <p className="whitespace-nowrap overflow-hidden text-ellipsis">{ createdBy }</p>
         </div>
       </Link>
-    </div>
+    </tr>
   );
 };
 
