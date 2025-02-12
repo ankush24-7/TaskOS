@@ -13,7 +13,7 @@ const ProjectsPage = () => {
   }, [projectData]);
 
   return (
-    <div className="w-full flex-grow bg-gradient-to-r from-grad-b-1 to-grad-b-2 sm:px-10">
+    <div className="w-full flex-grow bg-gradient-to-r from-grad-l to-grad-r sm:px-10">
       <ProjectNav />
       <ProjectTable projects={projects} />
     </div>

@@ -12,7 +12,7 @@ const NotesPage = () => {
   ));
 
   return (
-    <div className="flex flex-col flex-grow w-full px-3 sm:px-10 bg-gradient-to-r from-grad-b-1 to-grad-b-2">
+    <div className="flex flex-col flex-grow w-full px-3 sm:px-10 bg-gradient-to-r from-grad-l to-grad-r">
       <NotesNav />
 
       <div className="relative w-full mt-4 sm:hidden">

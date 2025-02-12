@@ -8,11 +8,10 @@ export default {
     extend: {
       colors: {
         'prim-black': '#111',
-        'grad-b-1': '#224570',
-        'grad-b-2': '#4e81c3',
+        'grad-l': '#2E3038',
+        'grad-r': '#454955',
       },
     },
   },
   plugins: [],
 }
-

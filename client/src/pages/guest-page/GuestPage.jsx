@@ -4,7 +4,7 @@ import GuestHeroSection from "./components/GuestHeroSection";
 
 const GuestPage = () => {
   return (
-    <div className="w-full relative flex flex-col flex-grow bg-gradient-to-r from-grad-b-1 to-grad-b-2">
+    <div className="w-full relative flex flex-col flex-grow bg-gradient-to-r from-grad-l to-grad-r">
       <GuestNav />
       <GuestHeroSection />
     </div>

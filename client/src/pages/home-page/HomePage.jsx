@@ -4,7 +4,7 @@ import HomeHeroSection from "./components/HomeHeroSection";
 
 const HomePage = () => {
   return (
-    <div className="bg-gradient-to-r from-grad-b-1 to-grad-b-2 w-full flex-grow">
+    <div className="w-full flex-grow bg-gradient-to-r from-grad-l to-grad-r">
       <HomeNav />
       <HomeHeroSection />
     </div>

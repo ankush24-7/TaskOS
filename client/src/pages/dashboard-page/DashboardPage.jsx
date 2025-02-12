@@ -10,7 +10,7 @@ function DashBoardPage() {
   }, []);
 
   return (
-    <div className="h-screen w-full flex flex-col pb-0.5 overflow-y-hidden bg-gradient-to-r from-grad-b-1 to-grad-b-2">
+    <div className="h-screen w-full flex flex-col pb-0.5 overflow-y-hidden bg-gradient-to-r from-grad-l to-grad-r">
       <DashboardNav />
       <KanbanBoard />
     </div>

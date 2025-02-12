@@ -65,7 +65,7 @@ const NoteEditorPage = () => {
   };
 
   return (
-    <div className="h-full sm:px-10 w-full bg-gradient-to-r from-grad-b-1 to-grad-b-2">
+    <div className="h-full sm:px-10 w-full bg-gradient-to-r from-grad-l to-grad-r">
       {note === null ? (
         <NotesLoader />
       ) : (
