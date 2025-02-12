@@ -1,29 +1,20 @@
-import React, { useState } from "react";
-import { SearchIcon, Close } from "@icons";
+import { SearchIcon } from "@icons";
 
-const SearchBtn = ({ SearchBtn }) => {
-  const [isSearchExpanded, setIsSearchExpanded] = useState(false);
+const SearchBtn = () => {
   return (
-    <div className="flex">
+    <form className="relative group flex-grow">
+      <SearchIcon className="absolute top-1/2 -translate-y-1/2 ml-2 stroke-gray-300 group-focus:stoke-white" />
+      <label htmlFor="search" className="absolute -top-40">
+        Search
+      </label>
       <input
+        name="search"
         type="text"
-        placeholder="Search"
-        className={`expand-left rounded-l-full px-4 focus:outline-none text-white placeholder:text-[#dcdcdc] bg-[#111] ${
-          isSearchExpanded ? "w-44" : "w-0 absolute -z-10"
-        }`}
+        placeholder="Search..."
+        autoComplete="off"
+        className="rounded-2xl pl-10 pr-2 py-1.5 bg-transparent ring-[1.25px] focus:outline-none ring-white text-white placeholder:text-gray-400 focus:placeholder:text-gray-400 hover:bg-prim-black focus:bg-prim-black"
       />
-      <button
-        onClick={() => setIsSearchExpanded(!isSearchExpanded)}
-        className={`p-1.5 w-fit rounded-3xl hover:bg-[#111] ${
-          isSearchExpanded && "bg-[#111] rounded-r-full py-2.5"
-        }`}>
-        {isSearchExpanded ? (
-          <Close stroke="#fff" className="w-5 h-5" />
-        ) : (
-          <SearchIcon />
-        )}
-      </button>
-    </div>
+    </form>
   );
 };
 

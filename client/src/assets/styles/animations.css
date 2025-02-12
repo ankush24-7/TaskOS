@@ -15,10 +15,6 @@
   box-shadow: 1rem 1rem 1rem rgba(0, 0, 0, 0.4);
 }
 
-.expand-left {
-  transition: width 0.5s linear;
-}
-
 .pop-up {
   animation: popUp 0.15s forwards;
 }
