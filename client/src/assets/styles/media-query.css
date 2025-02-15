@@ -44,13 +44,10 @@
         right: 5% !important;
     }
 
-    .auth-form-container {
-        padding: 2.5rem 5rem;
-    }
-
     .auth-form {
         border-radius: 1rem;
-        width: 40% !important;
+        width: 35% !important;
+        min-width: 24rem;
         height: fit-content !important;
     }
 
