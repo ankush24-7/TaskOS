@@ -36,14 +36,20 @@ const handleRegistration = async (req, res) => {
 
 const handleLogin = async (req, res) => {
   const { email, password } = req.body;
-  if (!email || !password) return res.status(400).json({ message: 'Please enter all fields' });
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Please enter all fields' });
+  }
 
   const user = await User.findOne({ email }).exec();
-  if (!user) return res.status(404).json({ message: 'User does not exist' });
+  if (!user) {
+    return res.status(404).json({ message: 'Email not found' });
+  }
 
   try {
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(401).json({ message: 'Invalid credentials' });
+    if (!isMatch) {
+      return res.status(401).json({ message: 'Wrong Password' });
+    }
 
     const { accessToken, refreshToken } = await generateTokens(user);
     user.refreshToken = refreshToken;
@@ -55,7 +61,7 @@ const handleLogin = async (req, res) => {
     });
     return res.json({ message: 'User logged in successfully', accessToken });
   } catch (error) {
-    console.error(error);
+    console.log(error);
     return res.status(500).json({ message: 'Server error' });
   }
 };
