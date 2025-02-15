@@ -23,7 +23,18 @@ const userSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-  ]
+  ],
+  preferences: {
+    projects: {
+      sort: { 
+        type: String, 
+        default: "createdAt",
+        enum: ["title", "status", "createdAt", "deadline", "createdBy"],
+      },
+      order: { type: String, default: "desc" },
+    },
+    processes: {},
+  }
 });
 
 module.exports = mongoose.model("User", userSchema);
