@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const parseProjectQueryParams = require('../middlewares/parseProjectQueryParams');
-const { createProject, getProjects, getProjectByID, updateProject, deleteProject } = require('../controllers/projectController');
+const projectController = require('../controllers/projectController');
 
 router.route('/')
-  .post(createProject)
-  .get(parseProjectQueryParams, getProjects);
+  .post(projectController.createProject)
+  .get(parseProjectQueryParams, projectController.getProjects);
 
 router.route('/:id')
-  .get(getProjectByID)
-  .put(updateProject)
-  .delete(deleteProject);
+  .get(projectController.getProjectByID)
+  .put(projectController.updateProject)
+  .delete(projectController.deleteProject);
 
 module.exports = router;

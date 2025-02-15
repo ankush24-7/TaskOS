@@ -4,8 +4,8 @@ const handleParams = (req, res, next) => {
     const skip = (parseInt(page) - 1) * 10;
     const sortOrder = order === 'asc' ? 1 : -1;
     const filter = search
-        ? { userId, title: { $regex: search, $options: 'i' } }
-        : { userId };
+        ? { teamMembers: { $in: [userId] }, title: { $regex: search, $options: 'i' } }
+        : { teamMembers: { $in: [userId] } };
     
     let sortBy = {};
     if (sort) {
@@ -21,6 +21,9 @@ const handleParams = (req, res, next) => {
                 break;
             case 'createdAt':
                 sortBy.createdAt = sortOrder;
+                break;
+            case 'createdBy':
+                sortBy.userId.name = sortOrder;
                 break;
             default:
                 return res.status(400).json({ message: 'Invalid sort parameter' });
