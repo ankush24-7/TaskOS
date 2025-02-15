@@ -1,6 +1,4 @@
-import { createContext, useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { LogoIcon, SearchIcon, Close } from "@icons";
 
 export function IconBtn({ Icon, label }) {
   return (
@@ -13,20 +11,21 @@ export function IconBtn({ Icon, label }) {
 
 export function NonIconBtn({ label, to }) {
   return (
-    <Link
-      to={to}
-      className="border-[#fff] hover:bg-[#111] hover:border-[#111] flex items-center rounded-lg border-[1.5px] px-5 py-2.5">
-      <p className="text-white font-medium leading-none">{label}</p>
+    <Link to={to}>
+      <button className="border-[#fff] hover:bg-prim-black flex items-center rounded-lg border-[1.5px] px-5 py-2.5">
+        <p className="text-white font-medium leading-none">{label}</p>
+      </button>
     </Link>
   );
 }
 
-export function RoundBtn({ Icon, onClick }) {
+export function RoundBtn({ Icon, onClick, label="" }) {
   return (
     <button
+      aria-label={label}
       onClick={onClick}
-      className="round-btn-hov-expand p-1.5 w-fit rounded-3xl hover:bg-[#111]">
-      <Icon width="28" height="28" />
+      className="round-btn-hov-expand w-9 h-9 flex items-center justify-center rounded-3xl hover:bg-[#111]">
+      <Icon />
     </button>
   );
 }

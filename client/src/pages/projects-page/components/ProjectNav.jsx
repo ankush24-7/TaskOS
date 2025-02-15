@@ -1,15 +1,21 @@
+import { useState } from "react";
 import * as navbarComp from "@navbtns";
+import User from "@components/ui/User";
 import { projectNavIcons } from "@icons";
-import User from "@/components/ui/User";
 import SearchBtn from "@components/ui/SearchBtn";
 
 const ProjectNav = () => {
+  const [search, setSearch] = useState("");
   return (
     <header className="flex justify-between items-center flex-col gap-6 py-2 px-3 sm:flex-row sm:py-5 sm:px-0">
       <h1 className="text-white text-3xl sm:text-4xl">Projects</h1>
-      <SearchBtn />
+      <SearchBtn 
+        placeholder="Find a project..."
+        search={search} 
+        setSearch={setSearch}
+      />
       
-      <nav className="flex items-center gap-8">
+      <div className="flex items-center gap-8">
         <navbarComp.IconBtn
           label="Add Project"
           Icon={() => (
@@ -18,7 +24,7 @@ const ProjectNav = () => {
         />
         <navbarComp.RoundBtn Icon={projectNavIcons.Bell} />
         <User />
-      </nav>
+      </div>
 
       <div className="relative w-full sm:hidden">
         <projectNavIcons.SearchIcon className="absolute top-1/2 -translate-y-1/2 ml-1 stroke-prim-black" />
