@@ -14,7 +14,7 @@ const SearchBtn = ({ placeholder,search, setSearch }) => {
         autoComplete="off"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="rounded-2xl pl-10 pr-2 py-1.5 bg-transparent ring-[1.25px] focus:outline-none ring-white text-white placeholder:text-gray-400 focus:placeholder:text-gray-400 hover:bg-prim-black focus:bg-prim-black"
+        className="rounded-xl pl-10 pr-2 py-1.5 bg-transparent ring-[1.25px] focus:outline-none ring-white text-white placeholder:text-gray-400 focus:placeholder:text-gray-400 hover:bg-prim-black focus:bg-prim-black"
       />
     </form>
   );
