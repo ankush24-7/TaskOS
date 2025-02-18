@@ -1,5 +1,4 @@
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const generateTokens = require('../utils/generateTokens');
 
@@ -19,7 +18,7 @@ const handleRegistration = async (req, res) => {
       password: hashedPassword
     });
     
-    const { accessToken, refreshToken } = await generateTokens(newUser);
+    const { accessToken, refreshToken } = generateTokens(newUser);
     newUser.refreshToken = refreshToken;
     await newUser.save();
     
@@ -27,7 +26,7 @@ const handleRegistration = async (req, res) => {
       httpOnly: true,
       maxAge: 86400000,
     });
-    return res.json({ message: 'User created successfully', accessToken });
+    return res.status(201).json({ message: 'User created successfully', accessToken });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: 'Server error' });
@@ -51,7 +50,7 @@ const handleLogin = async (req, res) => {
       return res.status(401).json({ message: 'Wrong Password' });
     }
 
-    const { accessToken, refreshToken } = await generateTokens(user);
+    const { accessToken, refreshToken } = generateTokens(user);
     user.refreshToken = refreshToken;
     await user.save();
 

@@ -4,15 +4,13 @@ const whitelist = [
 ];
 
 const corsOptions = {
-  // origin: function (origin, callback) {
-  //   console.log("origin:", origin);
-  //   if (whitelist.indexOf(origin) !== -1) {
-  //     callback(null, true);
-  //   } else {
-  //     callback(new Error("Not allowed by CORS"));
-  //   }
-  // },
-  origin: '*',
+  origin: function (origin, callback) {
+    if (!origin || whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   optionsSuccessStatus: 200,
   credentials: true,
 };
