@@ -1,10 +1,10 @@
+import { useState } from "react";
 import { tasks } from "@data/TaskData";
 import { createPortal } from "react-dom";
-import React, { useMemo, useState } from "react";
 import Task from "./kanban-board-components/Task";
 import Sections from "./kanban-board-components/Sections";
+import { useDashboard } from "@/contexts/DashboardContext";
 import { arrayMove, SortableContext } from "@dnd-kit/sortable";
-import { sections as initialDashboard } from "@data/Section-Data";
 import {
   DndContext,
   DragOverlay,
@@ -14,11 +14,11 @@ import {
 } from "@dnd-kit/core";
 
 function KanbanBoard() {
+  const { sections, setSections } = useDashboard();
   const [taskData, setTaskData] = useState(tasks);
   const [activeTask, setActiveTask] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState(null);
-  const [sections, setSections] = useState(initialDashboard);
+  const [activeSection, setActiveSection] = useState(null)
 
   const onDragStart = (event) => {
     if (event.active.data.current.type === "task") {
@@ -93,16 +93,11 @@ function KanbanBoard() {
         onDragEnd={onDragEnd}
         onDragOver={onDragOver}
         onDragStart={onDragStart}>
-        <div className="flex h-full w-fit pt-1 px-2 gap-2">
-          <SortableContext
-            items={useMemo(
-              () => sections.map((section) => section.id),
-              [sections]
-            )}
-          >
-            {sections.map((section) => (
+        <div className="flex h-full w-fit pt-1 gap-1">
+          <SortableContext items={sections.map((section) => section._id)}>
+            {sections.map(section => (
               <Sections
-                key={section.id}
+                key={section._id}
                 section={section}
                 tasks={taskData.filter((task) => task.sectionId === section.id)}
                 isModalOpen={isModalOpen}
@@ -119,9 +114,7 @@ function KanbanBoard() {
               <Sections
                 key={activeSection.id}
                 section={activeSection}
-                tasks={taskData.filter(
-                  (task) => task.sectionId === activeSection.id
-                )}
+                tasks={taskData.filter((task) => task.sectionId === activeSection.id)}
               />
             )}
           </DragOverlay>,

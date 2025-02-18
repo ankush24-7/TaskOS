@@ -1,18 +1,21 @@
-import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import DashboardNav from "./components/DashboardNav";
 import KanbanBoard from "./components/KanbanBoard";
+import DashboardNav from "./components/DashboardNav";
+import { DashboardProvider } from "@/contexts/DashboardContext";
+
+/*
+  [ ] Fetch processes by projectId and filter by sections 
+*/
 
 function DashBoardPage() {
-  const _id = useParams().projectId;
-  useEffect(() => {
-    // getProjectByID(_id);
-  }, []);
+  const projectId = useParams().projectId;
 
   return (
-    <div className="h-screen w-full flex flex-col pb-0.5 overflow-y-hidden bg-gradient-to-r from-grad-l to-grad-r">
-      <DashboardNav />
-      <KanbanBoard />
+    <div className="h-screen w-full flex flex-col pb-0.5 px-7 overflow-y-hidden bg-gradient-to-r from-grad-l to-grad-r">
+      <DashboardProvider projectId={projectId}>
+        <DashboardNav />
+        <KanbanBoard />
+      </DashboardProvider>
     </div>
   );
 }

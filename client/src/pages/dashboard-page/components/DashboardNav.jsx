@@ -1,17 +1,23 @@
 import * as navbarComp from "@navbtns";
-import { dashboardNavIcons } from "@icons";
 import User from "@/components/ui/User";
+import { dashboardNavIcons } from "@icons";
+import { useDashboard } from "@/contexts/DashboardContext";
 
 function DashboardNav() {
+  const { project, addSection } = useDashboard();
   return (
-    <nav className="w-full flex flex-grow py-2 px-3 items-center justify-between sm:py-2.5">
+    <nav className="w-full flex py-2 items-center justify-between sm:py-3">
       <navbarComp.IconBtn
-        Icon={() => <dashboardNavIcons.ChevronDown stroke="#fff" />}
-        label="Demo Project 1"
+        Icon={() => <dashboardNavIcons.ChevronDown stroke="#fff" className="w-5 h-5 ml-1" />}
+        label={project.title}
       />
 
       <div className="hidden sm:flex justify-end items-center gap-8">
-        <navbarComp.RoundBtn Icon={() => <dashboardNavIcons.AddTask />} />
+        <navbarComp.IconBtn
+          label="Add Section"
+          onClick={addSection}
+          Icon={() => <dashboardNavIcons.Sparkles className="w-5 h-5 group-hover:stroke-prim-yellow-50" stroke="#fff" />}
+        />
         <navbarComp.RoundBtn
           Icon={() => (
             <dashboardNavIcons.Team

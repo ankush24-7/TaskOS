@@ -8,7 +8,6 @@ import EditTaskModal from "./EditTaskModal.jsx";
 import { SortableContext, useSortable } from "@dnd-kit/sortable";
 
 function Sections({ section, tasks, isModalOpen, setIsModalOpen }) {
-  const { name, id } = section;
   const [selectedTask, setSelectedTask] = useState(null);
 
   const {
@@ -19,13 +18,13 @@ function Sections({ section, tasks, isModalOpen, setIsModalOpen }) {
     transition,
     isDragging,
   } = useSortable({
-    id: id,
+    id: section._id,
     data: {
       type: "section",
       section: section,
     },
     attributes: {
-      role: name,
+      role: section.name,
       roleDescription: "sectionData.desc",
       tabIndex: section.index,
     },
@@ -61,7 +60,7 @@ function Sections({ section, tasks, isModalOpen, setIsModalOpen }) {
       style={style}
       className="w-[19rem] h-full rounded-lg bg-black/20">
       <Header
-        sectionData={section}
+        section={section}
         attributes={attributes}
         listeners={listeners}
       />
@@ -85,8 +84,8 @@ function Sections({ section, tasks, isModalOpen, setIsModalOpen }) {
 
           <button
             onClick={() => handleTaskClick()}
-            className="w-full rounded-2xl mx-auto mt-2 h-[7.75rem] border-2 border-white border-dashed">
-            <Plus className="mx-auto h-10 w-10 stroke-[1px]" stroke="#ffffff" />
+            className="group w-full rounded-2xl mx-auto mt-2 h-[7.75rem] border-2 border-dashed border-gray-400 hover:border-white hover:bg-prim-black/10">
+            <Plus className="mx-auto h-10 w-10 stroke-[1px] rounded-full stroke-gray-400 group-hover:stroke-white" />
           </button>
         </div>
       </div>
