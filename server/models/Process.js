@@ -3,7 +3,12 @@ const Schema = mongoose.Schema;
 
 const processSchema = new Schema(
   {
-    section: {
+    projectId: {
+      type: Schema.Types.ObjectId,
+      ref: "Project",
+      required: true,
+    },
+    sectionId: {
       type: Schema.Types.ObjectId,
       ref: "Section",
       required: true,
@@ -25,14 +30,14 @@ const processSchema = new Schema(
       default: false,
     },
     starred: {
-        type: Boolean, 
-        default: false,
+      type: Boolean, 
+      default: false,
     },
     assignedTo: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "User",
-        }
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      }
     ],
     tags: [{ tag: String, color: String }],
     log: [
@@ -45,10 +50,19 @@ const processSchema = new Schema(
         createdAt: {type: Date, default: Date.now},
       },
     ],
-    description: String,
+    notes: {
+      type: String,
+      default: "",
+    },
+    description: {
+      type: String,
+      default: "",
+    },
+    scheduledAt: {
+      startsAt: Date,
+      endsAt: Date,
+    },
     deadline: Date,
-    scheduledAt: Date,
-    notes: String,
   },
   {
     timestamps: true,
