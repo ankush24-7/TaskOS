@@ -1,26 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-body {
-  font-family: 'Roboto', monospace;
+@theme {
+  --color-prim-black: #111;
+  --color-grad-l: #2E3038;
+  --color-grad-r: #454955;
+  --color-prim-yellow-50: #FCCF5F;
+  --color-prim-yellow-100: #FBBD23;
+  --color-prim-yellow-200: #F0AD05;
+  --color-prim-yellow-300: #C89004;
 }
 
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
-.font-lato {
-  font-family: 'Lato', sans-serif;
-}
-
-.font-inconsolata {
-  font-family: 'Inconsolata', monospace;
-}

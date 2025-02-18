@@ -1,5 +1,7 @@
 import './index.css';
-import App from './App.jsx'
+import '@styles/global.css';
+import App from './App.jsx';
+import "@styles/scrollbars.css";
 import "@styles/media-query.css";
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -17,10 +19,10 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Router>
       <Routes>
+        <Route path="/" element={<GuestPage />} exact />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/" element={<App />} >
-          <Route path="/" element={<GuestPage />} exact />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/home" element={<HomePage />} exact />
           <Route path="/projects" element={<Projects />} exact />
           <Route path="/projects/:projectId/dashboard" element={<DashBoardPage />} />
