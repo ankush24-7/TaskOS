@@ -3,7 +3,9 @@ const Project = require('../models/Project');
 const Section = require('../models/Section');
 
 /*
-  [ ] Update team members controller
+  [ ] Remove team members controller
+  [ ] Leave a project controller
+  [ ] Accept invitation to project controller
 */
 
 const createProject = async(req, res) => {
@@ -19,32 +21,33 @@ const createProject = async(req, res) => {
   }
 
   try {
-    const project = await Project.create({
+    const newProject = await Project.create({
       userId,
       title,
       status,
       deadline,
       teamMembers,
     });
-    return res.status(201).json({ project });
+    return res.status(201).json({ _id: newProject._id, message: 'Project created successfully' });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
 };
 
 const getProjects = async(req, res) => {
-  const { skip, sort, filter } = req.query;
+  const { skip, sort, filter, limit } = req.query;
 
   try {
     const totalProjects = await Project.countDocuments(filter).exec();
     const projects = await Project.find(filter)
       .populate('userId', 'name')
+      .populate('teamMembers', 'name')
       .sort(sort)
       .skip(skip)
-      .limit(10)
+      .limit(limit)
       .lean()
       .exec();
-    const totalPages = Math.ceil(totalProjects / 10);
+    const totalPages = Math.ceil(totalProjects / limit);
     return res.json({ totalProjects, totalPages, projects });
   } catch (error) {
     return res.status(500).json({ message: error.message });
@@ -55,7 +58,7 @@ const getProjectByID = async(req, res) => {
   const projectId = req.params.id;
   try {
     const project = await Project.findOne({ _id: projectId }).exec();
-    return res.status(200).json({ project });
+    return res.json({ project });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -73,8 +76,8 @@ const updateProject = async(req, res) => {
     if(status) project.status = status;
     if(deadline) project.deadline = deadline;
 
-    const updatedProject = await project.save();
-    return res.status(200).json({ updatedProject });
+    await project.save();
+    return res.json({ message: 'Project updated successfully' });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -89,7 +92,7 @@ const deleteProject = async(req, res) => {
     await Process.deleteMany({ sectionId: { $in: project.sections } }).exec();
     await Section.deleteMany({ projectId }).exec();
     await Project.deleteOne({ _id: projectId }).exec();
-    return res.status(200).json({ message: 'Project deleted successfully' });
+    return res.json({ message: 'Project deleted successfully' });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

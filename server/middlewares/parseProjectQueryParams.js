@@ -1,11 +1,11 @@
 const handleParams = (req, res, next) => {
     const userId = req.user.userId;
-    const { sort = 'createdAt', order = 'desc', search, page = 1 } = req.query;
-    const skip = (parseInt(page) - 1) * 10;
+    const { sort = 'updatedat', order = 'desc', search, page = 1 } = req.query;
+    const limit = 8;
+    const skip = (parseInt(page) - 1) * limit;
     const sortOrder = order === 'asc' ? 1 : -1;
-    const filter = search
-        ? { teamMembers: { $in: [userId] }, title: { $regex: search, $options: 'i' } }
-        : { teamMembers: { $in: [userId] } };
+    const filter = { teamMembers: { $in: [userId] } };
+    if (search) filter.title = { $regex: search, $options: 'i' };
     
     let sortBy = {};
     if (sort) {
@@ -19,18 +19,18 @@ const handleParams = (req, res, next) => {
             case 'deadline':
                 sortBy.deadline = sortOrder;
                 break;
-            case 'createdAt':
-                sortBy.createdAt = sortOrder;
+            case 'updatedat':
+                sortBy.updatedAt = sortOrder;
                 break;
-            case 'createdBy':
+            case 'createdby':
                 sortBy.userId.name = sortOrder;
                 break;
             default:
                 return res.status(400).json({ message: 'Invalid sort parameter' });
         }
     }
-
-    req.query = { sort: sortBy, skip, filter };
+    
+    req.query = { sort: sortBy, skip, filter, limit };
     next();
 }
 
