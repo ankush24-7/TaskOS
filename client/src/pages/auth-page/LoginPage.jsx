@@ -1,15 +1,15 @@
 import { useState } from "react";
-import auth from "@/services/auth";
 import { authPageIcons } from "@icons";
 import { Toaster, toast } from "sonner";
+import authAPI from "@/services/AuthAPI";
 import validate from "@/utils/validateForm";
 import AuthHeader from "./components/AuthHeader";
 import { Link, useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({ email: "" });
+  const [showPassword, setShowPassword] = useState(false);
   const [colors, setColors] = useState({ email: "white" });
 
   const handleSubmit = async (e) => {
@@ -21,14 +21,10 @@ const LoginPage = () => {
     };
     if (user.email === "" || user.password === "") return;
 
-    const res = await auth.authenticate(user, "login");
-    if (res && res.startsWith("eyJ")) {
-      localStorage.setItem("accessToken", res);
-      navigate("/home");
-    } else {
-      return toast.error(res);
-    }
-  }
+    const res = await authAPI.authenticate(user, "login");
+    if (res === 200) navigate("/home");
+    else return toast.error(res);
+  };
 
   return (
     <div className="w-full h-dvh flex-grow overflow-y-scroll scrollbar-hide pb-10 bg-gradient-to-r from-grad-l to-grad-r">
@@ -43,7 +39,7 @@ const LoginPage = () => {
             type="text"
             placeholder="Email Address"
             onChange={(e) => validate.validateEmail(e.target.value, setColors, setErrors)}
-            className={`p-2.5 rounded-md focus:outline-none border-2 border-${colors.email}`}
+            className="p-2.5 rounded-md focus:outline-none border-2 border-white bg-white"
           />
           <p className="text-red-500 text-xs h-4 pt-0.5">{errors.email}</p>
 
@@ -62,15 +58,9 @@ const LoginPage = () => {
               onClick={() => setShowPassword(!showPassword)}
               className="rounded-r-md w-10 bg-white hover:bg-black/[0.15]">
               {showPassword ? (
-                <authPageIcons.HidePassword
-                  fill="#818181"
-                  className="w-5 mx-auto"
-                />
+                <authPageIcons.HidePassword fill="#818181" className="w-5 mx-auto" />
               ) : (
-                <authPageIcons.ShowPassword
-                  fill="#818181"
-                  className="w-5 mx-auto"
-                />
+                <authPageIcons.ShowPassword fill="#818181" className="w-5 mx-auto" />
               )}
             </button>
           </span>

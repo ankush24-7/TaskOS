@@ -3,24 +3,19 @@ import { Link } from "react-router-dom";
 
 export function CollapseButton({ expanded, setExpanded }) {
   const style = expanded
-    ? "flex items-center gap-2 py-2 px-2.5"
+    ? "flex items-center gap-2 py-2 pl-2 pr-2.5"
     : "w-full p-1.5 ml-1";
 
   return (
     <button
-      className={style + " group  overflow-hidden"}
+      className={style + " group  overflow-hidden cursor-pointer"}
       onClick={() => setExpanded(!expanded)}>
       <ChevronsLeft
-        stroke="#7F7D76"
+        stroke="#9ca3af"
         className={`w-8 h-8 rotation group-hover:stroke-white ${expanded && "rotate-180 fixed"}`}
       />
-      <p
-        className={`text-lg ml-10 text-nowrap text-[#7f7d76] group-hover:text-white 
-        ${
-          expanded
-            ? "relative opacity-100"
-            : "absolute opacity-0 -translate-y-10 -translate-x-20"
-        }`}>
+      <p className={`text-lg ml-10 text-nowrap text-gray-400 group-hover:text-white 
+        ${ expanded ? "relative opacity-100" : "absolute opacity-0 -translate-y-10 -translate-x-20" }`}>
         Collapse
       </p>
     </button>
@@ -38,13 +33,13 @@ export function GrayButton({ Icon, label, to, onClick, expanded }) {
       onClick={onClick}
       className={style + " group  overflow-hidden"}>
       <Icon
-        stroke="#7F7D76"
+        stroke="#9ca3af"
         className={`w-7 h-7 rotation group-hover:stroke-white ${
           expanded && "fixed"
         }`}
       />
       <p
-        className={`text-lg ml-10 text-nowrap text-[#7f7d76] group-hover:text-white
+        className={`text-lg ml-10 text-nowrap text-gray-400 group-hover:text-white
           ${
             expanded
               ? "relative opacity-100"
@@ -66,7 +61,7 @@ function ActivityBarItem({ Icon, label, to, expanded, stroke = "#fff", currentPa
     <Link
       to={to}
       className={
-        style + ` activity-bar-hov-expand overflow-hidden hover:bg-[#134074] ${isActive && "bg-[#134074]"}`
+        style + ` activity-bar-hov-expand overflow-hidden hover:bg-prim-yellow-200 ${isActive && "bg-prim-yellow-200"}`
       }>
       <Icon className={`w-7 h-7 ${expanded && "sm:fixed"}`} stroke={stroke} />
       <p

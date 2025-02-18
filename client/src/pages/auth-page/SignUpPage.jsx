@@ -1,15 +1,10 @@
 import { useState } from "react";
-import auth from "@/services/auth";
+import authAPI from "@/services/AuthAPI";
 import { authPageIcons } from "@icons";
 import { Toaster, toast } from "sonner";
 import validate from "@/utils/validateForm";
 import AuthHeader from "./components/AuthHeader";
 import { Link, useNavigate } from "react-router-dom";
-
-/*
-  1. Handle successful registration - redirect to login page and store accessToken
-
-*/
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -57,14 +52,10 @@ const SignUpPage = () => {
       password: password.value,
     };
     if (user.name === "" || user.email === "" || user.password === "") return;
-
-    const res = await auth.authenticate(user, "register");
-    if (res && res.startsWith("eyJ")) {
-      localStorage.setItem("accessToken", res);
-      navigate("/home");
-    } else {
-      return toast.error(res);
-    }
+    
+    const res = await authAPI.authenticate(user, "register");
+    if (res === 201) navigate("/home");
+    else return toast.error(res);
   };
 
   return (

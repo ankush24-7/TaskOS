@@ -1,11 +1,13 @@
 import axios from "@/utils/axiosInstance";
 import dateUtils from "@/utils/dateUtils";
 import HomeNav from "./components/HomeNav";
+import { useAuth } from "@/contexts/AuthContext";
 import React, { useEffect, useState } from "react";
 import HomeHeroSection from "./components/HomeHeroSection";
 
 const HomePage = () => {
-  const [user, setUser] = useState("");
+  const { accessToken } = useAuth();
+  const [user, setUser] = useState("User");
   const [currentTime, setCurrentTime] = useState(new Date());
   const [dateTimeGreeting, setDateTimeGreeting] = useState({
     date: "",
@@ -18,10 +20,9 @@ const HomePage = () => {
       try {
         const user = await axios.get("/user", {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            Authorization: `Bearer ${accessToken}`,
           },
         });
-        console.log(user);
         setUser(user.data.user.name);
       } catch (err) {
         console.log(err);
@@ -41,7 +42,7 @@ const HomePage = () => {
 
   useEffect(() => {
     setDateTimeGreeting({
-      date: dateUtils.formatDate(currentTime),
+      date: dateUtils.formatDayDDMonth(currentTime),
       time: dateUtils.formatTime(currentTime),
       greeting: dateUtils.getGreetings(currentTime)
     });

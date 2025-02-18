@@ -8,5 +8,12 @@
   --color-prim-yellow-100: #FBBD23;
   --color-prim-yellow-200: #F0AD05;
   --color-prim-yellow-300: #C89004;
+  --color-drop-bg:#272525; 
+  --color-drop-header: #99a1af09;
+  --color-drop-border: #ffffff19;
+  --color-drop-btn: #9f9fa909;
+  --color-drop-btn-hover: #9f9fa919;
+
+  --text-md: 1.05rem;
 }
 

@@ -1,20 +1,23 @@
+import authAPI from "@/services/AuthAPI";
 import { activityBarIcons } from "@icons";
-import React, { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 import { Link, useLocation } from "react-router-dom";
 import ActivityBarItem, { CollapseButton, GrayButton } from "./ActivityBarItem";
 
-function ActivityBar({ setIsAuthenticated }) {
+function ActivityBar() {
   const location = useLocation();
+  const { setAccessToken } = useAuth(); 
   const isHomePage = location.pathname === "/home";
   const [expanded, setExpanded] = useState(isHomePage);
 
-  useMemo(() => {
+  useEffect(() => {
     setExpanded(isHomePage);
   }, [isHomePage]);
 
   const handleLogout = () => {
-    console.log("Logging out...");
-    setIsAuthenticated(false);
+    authAPI.logout();
+    setAccessToken(null);
   };
 
   return (
@@ -76,7 +79,7 @@ function ActivityBar({ setIsAuthenticated }) {
         />
       </ul>
 
-      <ul className="hidden flex-col gap-0.5 sm:flex">
+      <ul className="hidden flex-col gap-0.5 sm:flex">        
         <CollapseButton expanded={expanded} setExpanded={setExpanded} />
         <GrayButton
           Icon={activityBarIcons.Settings}
