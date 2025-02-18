@@ -28,8 +28,8 @@ const userSchema = new Schema({
     projects: {
       sort: { 
         type: String, 
-        default: "createdAt",
-        enum: ["title", "status", "createdAt", "deadline", "createdBy"],
+        default: "updatedat",
+        enum: ["title", "status", "updatedat", "deadline", "createdby"],
       },
       order: { type: String, default: "desc" },
     },
