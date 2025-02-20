@@ -46,7 +46,11 @@ const updateUser = async (req, res) => {
     }
 
     if (preferences) {
-      user.preferences = { ...user.preferences, ...preferences };
+      for (const key in preferences) {
+        if (preferences.hasOwnProperty(key)) {
+          user.preferences[key] = { ...user.preferences[key], ...preferences[key] };
+        }
+      }
     }
 
     await user.save();

@@ -15,7 +15,7 @@ const getPreference = async (key) => {
 
 const updatePreferences = async (preferences) => {
   try {
-    const response = await axiosInstance.put("/user", preferences);
+    const response = await axiosInstance.put("/user/", preferences);
     return { status: 200, message: response.data.message };
   } catch (error) {
     return {
