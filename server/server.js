@@ -9,6 +9,7 @@ const connectDB = require('./config/dbConn');
 const cookieParser = require('cookie-parser');
 const corsOptions = require('./config/corsOptions');
 const verifyJWT = require('./middlewares/verifyJWT');
+const verifyProjectId = require('./middlewares/verifyProjectId');
 
 connectDB();
 
@@ -27,10 +28,13 @@ app.use(verifyJWT);
 
 app.use('/user', require('./routes/userRoutes'));
 app.use('/project', require('./routes/projectRoutes'));
+
+app.use(verifyProjectId);
+
 app.use('/section', require('./routes/sectionRoutes'));
+app.use('/process', require('./routes/processRoutes'));
 
 // app.use('/dashboard', require('./routers/dashboardRouter'));
-// app.use('/process', require('./routers/processRouter'));
 
 mongoose.connection.once('open', () => {
     console.log('Connected to MongoDB');
