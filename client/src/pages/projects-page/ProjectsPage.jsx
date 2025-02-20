@@ -52,9 +52,9 @@ const ProjectsPage = () => {
 
   useEffect(() => {
     const paginatePage = async () => {
-      if (!sort) sort = updatedAt;
-      if (!order) order = "desc";
-      const { status, data } = await projectAPI.getProjectPage({ page: currentPage, search, sort, order, archived: showArchived });
+      const sortBy = sort || "updatedat";
+      const orderBy = order || "desc";
+      const { status, data } = await projectAPI.getProjectPage({ page: currentPage, search, sort: sortBy, order: orderBy, archived: showArchived });
       if (status === 200) {
         const projects = data.projects.map(project => <ProjectRow key={project._id} {...project} />);
         setTotalPages(data.totalPages);
