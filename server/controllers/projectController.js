@@ -57,7 +57,10 @@ const getProjects = async(req, res) => {
 const getProjectByID = async(req, res) => {
   const projectId = req.params.id;
   try {
-    const project = await Project.findOne({ _id: projectId }).exec();
+    const project = await Project.findOne({ _id: projectId })
+      .populate('teamMembers', 'name')
+      .lean()
+      .exec();
     return res.json({ project });
   } catch (error) {
     return res.status(500).json({ message: error.message });
@@ -66,7 +69,7 @@ const getProjectByID = async(req, res) => {
 
 const updateProject = async(req, res) => {
   const projectId = req.params.id;
-  const { title, status, deadline } = req.body;
+  const { title, status, deadline, archived, updatedAt } = req.body;
   
   try {
     const project = await Project.findOne({ _id: projectId }).exec();
@@ -75,6 +78,8 @@ const updateProject = async(req, res) => {
     if(title) project.title = title;
     if(status) project.status = status;
     if(deadline) project.deadline = deadline;
+    if(archived) project.archived = archived;
+    if(updatedAt) project.updatedAt = updatedAt;
 
     await project.save();
     return res.json({ message: 'Project updated successfully' });
