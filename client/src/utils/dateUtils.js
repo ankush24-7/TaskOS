@@ -37,6 +37,7 @@ const formatDDMonYYYY = (time) => {
 };
 
 const formatProjectDate = (time) => {
+  if(!time) return "-";
   time = new Date(time);
   const now = new Date();
   if (time.toDateString() === now.toDateString()) {
