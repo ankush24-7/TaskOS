@@ -1,19 +1,26 @@
-import { useParams } from "react-router-dom";
+import useModal from "@/hooks/useModal";
 import KanbanBoard from "./components/KanbanBoard";
 import DashboardNav from "./components/DashboardNav";
+import ProjectModal from "./components/ProjectModal";
+import { useLocation, useParams } from "react-router-dom";
 import { DashboardProvider } from "@/contexts/DashboardContext";
 
-/*
-  [ ] Fetch processes by projectId and filter by sections 
-*/
-
 function DashBoardPage() {
+  const location = useLocation();
   const projectId = useParams().projectId;
+  const newProject = new URLSearchParams(location.search).get("new");
+  const { showModal, setShowModal, modalRef } = useModal({ modalState: newProject });
 
   return (
-    <div className="h-screen w-full flex flex-col pb-0.5 px-7 overflow-y-hidden bg-gradient-to-r from-grad-l to-grad-r">
+    <div className="h-screen w-full flex flex-col pb-0.5 px-5 overflow-y-hidden bg-gradient-to-r from-grad-l to-grad-r">
       <DashboardProvider projectId={projectId}>
-        <DashboardNav />
+        {showModal && (
+          <ProjectModal 
+            modalRef={modalRef}
+            setShowModal={setShowModal} 
+          />
+        )}
+        <DashboardNav setShowModal={setShowModal} />
         <KanbanBoard />
       </DashboardProvider>
     </div>

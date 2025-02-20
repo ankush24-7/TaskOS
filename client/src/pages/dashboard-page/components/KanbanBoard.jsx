@@ -14,16 +14,17 @@ import {
 } from "@dnd-kit/core";
 
 function KanbanBoard() {
-  const { sections, setSections } = useDashboard();
   const [taskData, setTaskData] = useState(tasks);
   const [activeTask, setActiveTask] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeSection, setActiveSection] = useState(null)
+  const { sections, setSections, sectionCRUD } = useDashboard();
 
   const onDragStart = (event) => {
-    if (event.active.data.current.type === "task") {
+    if (event.active.data.current.type === "task") 
       setActiveTask(event.active.data.current.task);
-    } else setActiveSection(event.active.data.current.section);
+    else 
+      setActiveSection(event.active.data.current.section);
   };
 
   const onDragOver = (event) => {
@@ -61,22 +62,19 @@ function KanbanBoard() {
     }
   };
 
-  const onDragEnd = (event) => {
+  const onDragEnd = async (event) => {
     setActiveTask(null);
     setActiveSection(null);
     const { active, over } = event;
     if (!over || active.id === over.id) return;
-    console.log(active, over);
     if (active.data.current.type === "section") {
-      setSections((sections) => {
-        const indexActive = sections.findIndex(
-          (section) => section.id === active.id
-        );
-        const indexOver = sections.findIndex(
-          (section) => section.id === over.id
-        );
-        return arrayMove(sections, indexActive, indexOver);
-      });
+      const newSections = arrayMove(
+        sections,
+        sections.findIndex((section) => section._id === active.id),
+        sections.findIndex((section) => section._id === over.id)    
+      );
+      setSections(newSections);
+      await sectionCRUD.updateSectionOrder(newSections);
     }
   };
 

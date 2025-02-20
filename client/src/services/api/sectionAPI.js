@@ -2,9 +2,8 @@ import axiosInstance from "@/utils/axiosInstance";
 
 const createSection = async (section, projectId) => {
   try {
-    const response = await axiosInstance.post("/section", section, {
-      params: { projectId },
-    });
+    const response = await axiosInstance.post("/section", section, { params: { projectId }});
+    await axiosInstance.put(`/project/${projectId}`, { updatedAt: new Date()});
     return { status: 200, id: response.data.id, message: response.data.message };
   } catch (error) {
     return {
@@ -30,9 +29,8 @@ const getSections = async (projectId) => {
 
 const updateSection = async (section, projectId) => {
   try {
-    const response = await axiosInstance.put(`/section/${section._id}`, section, {
-      params: { projectId },
-    });
+    const response = await axiosInstance.put(`/section/${section._id}`, section, { params: { projectId }});
+    await axiosInstance.put(`/project/${projectId}`, { updatedAt: new Date()});
     return { status: 200, message: response.data.message };
   } catch (error) {
     return {
@@ -44,9 +42,8 @@ const updateSection = async (section, projectId) => {
 
 const deleteSection = async (sectionId, projectId) => {
   try {
-    const response = await axiosInstance.delete(`/section/${sectionId}`, {
-      params: { projectId },
-    });
+    const response = await axiosInstance.delete(`/section/${sectionId}`, { params: { projectId }});
+    await axiosInstance.put(`/project/${projectId}`, { updatedAt: new Date()});
     return { status: 200, message: response.data.message };
   } catch (error) {
     return {

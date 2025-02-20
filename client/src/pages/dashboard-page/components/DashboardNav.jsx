@@ -1,21 +1,30 @@
 import * as navbarComp from "@navbtns";
 import User from "@/components/ui/User";
 import { dashboardNavIcons } from "@icons";
+import useDropDown from "@/hooks/useDropDown";
 import { useDashboard } from "@/contexts/DashboardContext";
+import ProjectDropDown from "./kanban-board-components/ProjectDropDown";
 
-function DashboardNav() {
-  const { project, addSection } = useDashboard();
+function DashboardNav({ setShowModal }) {
+  const { project, sectionCRUD } = useDashboard();
+  const { dropdownRef, isOpen, setIsOpen } = useDropDown();
+
   return (
     <nav className="w-full flex py-2 items-center justify-between sm:py-3">
-      <navbarComp.IconBtn
-        Icon={() => <dashboardNavIcons.ChevronDown stroke="#fff" className="w-5 h-5 ml-1" />}
-        label={project.title}
-      />
+      <div className="relative" ref={dropdownRef}>
+        <navbarComp.IconBtn
+          onClick={() => setIsOpen(true)}
+          label={project.title}
+          Icon={() => <dashboardNavIcons.ChevronDown stroke="#fff" className="w-5 h-5 ml-1 -rotate-90" />}
+        />
+
+        {isOpen && <ProjectDropDown setIsOpen={setIsOpen} setShowModal={setShowModal} />}
+      </div>
 
       <div className="hidden sm:flex justify-end items-center gap-8">
         <navbarComp.IconBtn
           label="Add Section"
-          onClick={addSection}
+          onClick={sectionCRUD.addSection}
           Icon={() => <dashboardNavIcons.Sparkles className="w-5 h-5 group-hover:stroke-prim-yellow-50" stroke="#fff" />}
         />
         <navbarComp.RoundBtn

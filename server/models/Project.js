@@ -12,6 +12,10 @@ const projectSchema = new Schema(
       type: String,
       required: true,
     },
+    archived: {
+      type: Boolean,
+      default: false,
+    },
     teamMembers: [
       {
         type: Schema.Types.ObjectId,
