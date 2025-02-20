@@ -1,22 +1,21 @@
 import * as navbarComp from "@navbtns";
 import User from "@components/ui/User";
-import { Link, useNavigate } from "react-router-dom";
 import { projectNavIcons } from "@icons";
+import { useNavigate } from "react-router-dom";
 import SearchBtn from "@components/ui/SearchBtn";
 import projectAPI from "@/services/api/projectAPI";
 
-const ProjectNav = ({ search, setSearch }) => {
+const ProjectNav = ({ search, setSearch, showArchived, setShowArchived }) => {
   const navigate = useNavigate();
 
   const openNewProject = async () => {
     const project = { title: "untitled" };
     const { status, _id } = await projectAPI.createProject(project);
-    if (status === 200) {
-      navigate(`/projects/${_id}/dashboard/`);
-    } else {
-      console.log(`Error ${status}: ${message}`);
-    }
+    if (status === 200) navigate(`/projects/${_id}/dashboard/?new=true`);
+    else console.log(`Error ${status}: ${message}`);
   }
+
+  const toggleArchived = () => setShowArchived(!showArchived);
 
   return (
     <header className="flex justify-between items-center flex-col gap-6 py-2 px-3 sm:flex-row sm:py-3 sm:px-0">
@@ -35,6 +34,13 @@ const ProjectNav = ({ search, setSearch }) => {
             <projectNavIcons.Sparkles className="w-5 h-5 group-hover:stroke-prim-yellow-50" stroke="#fff" />
           )}
         />
+        <button
+          aria-label={showArchived ? "Hide Archived" : "Show Archived"}
+          onClick={toggleArchived}
+          style={{ backgroundColor: showArchived ? "#111" : "" }}
+          className="round-btn-hov-expand w-9 h-9 flex cursor-pointer items-center justify-center rounded-3xl hover:bg-prim-black active:bg-prim-black/10">
+          <projectNavIcons.Archive />
+        </button>
         <navbarComp.RoundBtn Icon={projectNavIcons.Bell} />
         <User />
       </div>

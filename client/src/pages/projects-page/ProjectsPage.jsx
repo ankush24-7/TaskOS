@@ -13,6 +13,7 @@ const ProjectsPage = () => {
   const [projects, setProjects] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const [showArchived, setShowArchived] = useState(false);
 
   useEffect(() => {
     const getPreferences = async () => {
@@ -30,8 +31,12 @@ const ProjectsPage = () => {
 
   useEffect(() => {
     const updatePreferences = async () => {
-      const projects = { sort, order };
-      const response = await userAPI.updatePreferences(projects);
+      const newPreferences = { 
+        preferences: {
+          projects: { sort, order }
+        }
+      }
+      const response = await userAPI.updatePreferences(newPreferences);
       if(response.status !== 200) {
         console.log(`Error ${response.status}: ${response.message}`);
       }
@@ -47,7 +52,9 @@ const ProjectsPage = () => {
 
   useEffect(() => {
     const paginatePage = async () => {
-      const { status, data } = await projectAPI.getProjectPage({ page: currentPage, search, sort, order });
+      if (!sort) sort = updatedAt;
+      if (!order) order = "desc";
+      const { status, data } = await projectAPI.getProjectPage({ page: currentPage, search, sort, order, archived: showArchived });
       if (status === 200) {
         const projects = data.projects.map(project => <ProjectRow key={project._id} {...project} />);
         setTotalPages(data.totalPages);
@@ -58,13 +65,15 @@ const ProjectsPage = () => {
     };
 
     paginatePage();
-  }, [search, order, sort, currentPage]);
+  }, [search, order, sort, currentPage, showArchived]);
 
   return (
     <div className="flex flex-col w-full flex-grow sm:px-10 bg-gradient-to-r from-grad-l to-grad-r">
       <ProjectNav 
         search={search} 
         setSearch={setSearch} 
+        showArchived={showArchived}
+        setShowArchived={setShowArchived}
       />
       <ProjectTable 
         sort={sort}
@@ -72,6 +81,7 @@ const ProjectsPage = () => {
         order={order}
         setOrder={setOrder}
         projects={projects} 
+        showArchived={showArchived}
       />
       <Pagination 
         totalPages={totalPages} 
