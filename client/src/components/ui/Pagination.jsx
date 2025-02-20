@@ -9,7 +9,8 @@ const pagination = ({ currentPage, setCurrentPage, totalPages }) => {
     return (
       <button 
         onClick={() => handleClick(page)}
-        className={`flex items-center justify-center rounded-lg w-9 h-9 text-white hover:bg-prim-black/40 ${currentPage === page ? "border-[1.5px] border-prim-yellow-100" : ""}`}>
+        className={`flex items-center justify-center rounded-lg w-9 h-9 cursor-pointer text-white hover:bg-prim-black/40 
+          ${currentPage === page ? "border-[1.5px] border-prim-yellow-100 bg-prim-black/40" : ""}`}>
         <p>{page}</p>
       </button>
     );
@@ -21,7 +22,8 @@ const pagination = ({ currentPage, setCurrentPage, totalPages }) => {
         <button
           onClick={handlePrev}
           disabled={currentPage === 1}
-          className={`flex items-center justify-center rounded-lg pl-1 pr-2 py-2 hover:bg-prim-black/40 ${currentPage === 1 ? "text-gray-400" : "text-white"}`}>
+          className={`flex items-center justify-center rounded-lg pl-1 pr-2 py-2 cursor-pointer 
+            ${currentPage === 1 ? "text-gray-400" : "text-white hover:bg-prim-black/40"}`}>
           <ChevronDown className="w-5 h-5 rotate-90" stroke={currentPage === 1 ? "#9ca3af": "#fff" } />
           <p>Prev</p>
         </button>
@@ -49,7 +51,8 @@ const pagination = ({ currentPage, setCurrentPage, totalPages }) => {
         <button
           onClick={handleNext}
           disabled={currentPage === totalPages}
-          className={`flex items-center justify-center rounded-lg pl-2 pr-1 py-2 hover:bg-prim-black/40 ${currentPage === totalPages ? "text-gray-400" : "text-white"}`}>
+          className={`flex items-center justify-center rounded-lg pl-2 pr-1 py-2 cursor-pointer 
+            ${currentPage === totalPages ? "text-gray-400" : "text-white hover:bg-prim-black/40"}`}>
           <p>Next</p>
           <ChevronDown className="w-5 h-5 -rotate-90" stroke={currentPage === totalPages ? "#9ca3af" : "#fff"} />
         </button>

@@ -26,7 +26,7 @@ export function RoundBtn({ Icon, onClick, label="" }) {
     <button
       aria-label={label}
       onClick={onClick}
-      className="round-btn-hov-expand w-9 h-9 flex cursor-pointer items-center justify-center rounded-3xl hover:bg-[#111]">
+      className="round-btn-hov-expand w-9 h-9 flex cursor-pointer items-center justify-center rounded-3xl hover:bg-prim-black">
       <Icon />
     </button>
   );

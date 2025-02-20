@@ -558,18 +558,19 @@ export function Copy({ stroke = "#000", width = "24", height = "24" }) {
   );
 }
 
-export function Archive({ stroke = "#000", width = "24", height = "24" }) {
+export function Archive({ stroke = "#fff", className = "" }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={width}
-      height={height}
+      width="24"
+      height="24"
       viewBox="0 0 24 24"
       fill="none"
       stroke={stroke}
       strokeWidth="2"
       strokeLinecap="round"
-      strokeLinejoin="round">
+      strokeLinejoin="round"
+      className={className}>
       <rect width="20" height="5" x="2" y="3" rx="1" />
       <path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8" />
       <path d="M10 12h4" />
@@ -665,11 +666,7 @@ export function Tags({ stroke = "#71717a", width = "24", height = "24" }) {
   );
 }
 
-export function AddTask({
-  stroke = "#fff",
-  strokeWidth = "2",
-  className = "",
-}) {
+export function AddTask({ stroke = "#fff", className = "" }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -678,7 +675,7 @@ export function AddTask({
       viewBox="0 0 24 24"
       fill="none"
       stroke={stroke}
-      strokeWidth={strokeWidth}
+      strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
       className={className}>
@@ -1132,29 +1129,31 @@ export function Ellipses({ stroke = "#fff", className = "" }) {
   )
 }
 
+export function RemoveIcon({ stroke = "#fff", className = "" }){
+  return (
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      width="24" height="24" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke={stroke} 
+      strokeWidth="2" 
+      strokeLinecap="round" 
+      strokeLinejoin="round" 
+      className={className}>
+      <circle cx="12" cy="12" r="10"/>
+      <path d="m15 9-6 6"/>
+      <path d="m9 9 6 6"/>
+    </svg>
+  )
+}
+
 export const priorityIcons = [Priority1, Priority2, Priority3, DefaultPriority];
 export const taskIcons = { Profile, AddTask, Plus };
 export const authPageIcons = { ShowPassword, HidePassword, Google };
 export const notesContentIcons = { Close, Pin, Unpin, Edit, Book, Del, Filter };
-export const modalIcons = {
-  Timeline,
-  Profile,
-  Copy,
-  Del,
-  Archive,
-  Close,
-  Complete,
-  Calander,
-  Tags,
-  ChevronDown,
-};
-export const headerIcons = {
-  NewSectionIcon,
-  ReadySectionIcon,
-  RunningSectionIcon,
-  BlockedSectionIcon,
-  TerminatedSectionIcon,
-};
+export const modalIcons = { Timeline, Profile, Copy, Del, Archive, Close, Complete, Calander, Tags, ChevronDown };
+export const headerIcons = { NewSectionIcon, ReadySectionIcon, RunningSectionIcon, BlockedSectionIcon, TerminatedSectionIcon };
 export const activityBarIcons = {
   LogoIcon,
   SearchIcon,
@@ -1174,6 +1173,7 @@ export const projectNavIcons = {
   Pen,
   Bell,
   Sparkles,
+  Archive,
   SearchIcon,
   Close,
   ChevronDown

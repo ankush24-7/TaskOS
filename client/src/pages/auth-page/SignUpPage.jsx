@@ -1,7 +1,7 @@
 import { useState } from "react";
-import authAPI from "@/services/AuthAPI";
 import { authPageIcons } from "@icons";
 import { Toaster, toast } from "sonner";
+import authAPI from "@/services/AuthAPI";
 import validate from "@/utils/validateForm";
 import AuthHeader from "./components/AuthHeader";
 import { Link, useNavigate } from "react-router-dom";
@@ -71,7 +71,8 @@ const SignUpPage = () => {
             type="text"
             placeholder="Name"
             onChange={(e) => validateField(e)}
-            className={`p-2.5 rounded-md focus:outline-none border-2 border-${colors.name}`}
+            style={{ "borderColor": colors.name }}
+            className="p-2.5 rounded-md focus:outline-none border-2 bg-white"
           />
           <p className="text-red-500 text-xs h-4 pt-0.5">{errors.name}</p>
 
@@ -82,12 +83,15 @@ const SignUpPage = () => {
             type="text"
             placeholder="Email Address"
             onChange={(e) => validateField(e)}
-            className={`p-2.5 rounded-md focus:outline-none border-2 border-${colors.email}`}
+            style={{ "borderColor": colors.email }}
+            className="p-2.5 rounded-md focus:outline-none border-2 bg-white"
           />
           <p className="text-red-500 text-xs h-4 pt-0.5">{errors.email}</p>
 
           <label className="text-white mt-2">Password</label>
-          <span className={`flex justify-between bg-white rounded-md border-2 border-${colors.password}`}>
+          <span 
+            style={{ "borderColor": colors.password }}
+            className="flex justify-between bg-white rounded-md border-2">
             <input
               id="password"
               name="password"
@@ -110,7 +114,9 @@ const SignUpPage = () => {
           <p className="text-red-500 text-xs h-4 pt-0.5">{errors.password}</p>
 
           <label className="text-white mt-2">Confirm Password</label>
-          <span className={`flex justify-between bg-white rounded-md border-2 border-${colors.confirmPassword}`}>
+          <span 
+            style={{ "borderColor": colors.confirmPassword }}
+            className="flex justify-between bg-white rounded-md border-2">
             <input
               id="confirm password"
               name="confirmPassword"

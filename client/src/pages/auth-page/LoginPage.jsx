@@ -39,6 +39,7 @@ const LoginPage = () => {
             type="text"
             placeholder="Email Address"
             onChange={(e) => validate.validateEmail(e.target.value, setColors, setErrors)}
+            style={{ "borderColor": colors.email }}
             className="p-2.5 rounded-md focus:outline-none border-2 border-white bg-white"
           />
           <p className="text-red-500 text-xs h-4 pt-0.5">{errors.email}</p>
