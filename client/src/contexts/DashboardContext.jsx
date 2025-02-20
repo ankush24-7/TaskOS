@@ -1,6 +1,8 @@
+import { Toaster, toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import sectionAPI from "@/services/api/sectionAPI";
 import projectAPI from "@/services/api/projectAPI";
+import processAPI from "@/services/api/processAPI";
 import { useEffect, useContext, useState, createContext } from "react";
 
 /*
@@ -16,6 +18,7 @@ export const DashboardProvider = ({ projectId, children }) => {
   const [project, setProject] = useState({});
   const [sections, setSections] = useState([]);
   const [processes, setProcesses] = useState([]);
+  const [notification, setNotification] = useState(null);
 
   const fetchProject = async () => {
     try {
@@ -58,12 +61,12 @@ export const DashboardProvider = ({ projectId, children }) => {
     }
   };
 
-  const addSection = async () => {
+  const createSection = async () => {
     const section = { name: "New Section", pos: sections.length };
     try {
       const response = await sectionAPI.createSection(section, projectId);
-      if (response.status === 200) await fetchSections();
-      else console.log(response.message);
+      if (response.status === 201) await fetchSections();
+      return response;
     } catch (error) {
       console.log(error);
     }
@@ -103,6 +106,26 @@ export const DashboardProvider = ({ projectId, children }) => {
     }
   };
 
+  const fetchProcesses = async () => {
+    try {
+      const processResponse = await processAPI.getProcesses(projectId);
+      if (processResponse.status === 200) setProcesses(processResponse.data);
+      else console.log("Error:", processResponse.data);
+    } catch (error) {
+      console.log("Error:", error);
+    }
+  }
+
+  const createProcess = async (process) => {
+    try {
+      const response = await processAPI.createProcess(process, projectId);
+      if (response.status === 201) await fetchProcesses();
+      else console.log(response.message);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -116,25 +139,34 @@ export const DashboardProvider = ({ projectId, children }) => {
     fetchData();
   }, [projectId]);
 
-  const sectionCRUD = {
-    addSection,
-    updateSection,
-    updateSectionOrder,
-    deleteSection,
-  };
+  useEffect(() => {
+    if (notification) {
+      const { type, message } = notification;
+      if (type === "success") toast.success(message);
+      else toast.error(message);
+    }
+  }, [notification]);
+
   const projectCRUD = { updateProject, deleteProject };
+  const sectionCRUD = { createSection, updateSection, updateSectionOrder, deleteSection };
+  const processCRUD = { createProcess };
 
   return (
     <DashboardContext.Provider
-      value={{
-        project,
-        setProject,
-        projectCRUD,
-        sections,
-        setSections,
-        sectionCRUD,
+      value={{ 
+        project, 
+        setProject, 
+        projectCRUD, 
+        sections, 
+        setSections, 
+        sectionCRUD, 
+        processes, 
+        setProcesses, 
+        processCRUD,
+        setNotification
       }}>
       {children}
+      <Toaster richColors position="bottom-right" />
     </DashboardContext.Provider>
   );
 };

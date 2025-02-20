@@ -6,8 +6,14 @@ import { useDashboard } from "@/contexts/DashboardContext";
 import ProjectDropDown from "./kanban-board-components/ProjectDropDown";
 
 function DashboardNav({ setShowModal }) {
-  const { project, sectionCRUD } = useDashboard();
   const { dropdownRef, isOpen, setIsOpen } = useDropDown();
+  const { project, sectionCRUD, setNotification } = useDashboard();
+
+  const handleCreateSection = async () => {
+    const response = await sectionCRUD.createSection();
+    if (response.status === 201) setNotification({ message: response.message, type: "success" });
+    else setNotification({ message: response.message, type: "error" });
+  }
 
   return (
     <nav className="w-full flex py-2 items-center justify-between sm:py-3">
@@ -23,8 +29,8 @@ function DashboardNav({ setShowModal }) {
 
       <div className="hidden sm:flex justify-end items-center gap-8">
         <navbarComp.IconBtn
-          label="Add Section"
-          onClick={sectionCRUD.addSection}
+          label="New Section"
+          onClick={handleCreateSection}
           Icon={() => <dashboardNavIcons.Sparkles className="w-5 h-5 group-hover:stroke-prim-yellow-50" stroke="#fff" />}
         />
         <navbarComp.RoundBtn

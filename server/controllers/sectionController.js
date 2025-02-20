@@ -12,8 +12,8 @@ const createSection = async (req, res) => {
   }
 
   try {
-    const newSection = await Section.create({ projectId, name, color, pos });
-    res.status(201).json({ id: newSection._id, message: 'Section created successfully' });
+    await Section.create({ projectId, name, color, pos });
+    res.status(201).json({ message: 'New section created!' });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

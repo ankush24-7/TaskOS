@@ -4,7 +4,7 @@ const createSection = async (section, projectId) => {
   try {
     const response = await axiosInstance.post("/section", section, { params: { projectId }});
     await axiosInstance.put(`/project/${projectId}`, { updatedAt: new Date()});
-    return { status: 200, id: response.data.id, message: response.data.message };
+    return { status: 201, message: response.data.message };
   } catch (error) {
     return {
       status: error.response.status,
