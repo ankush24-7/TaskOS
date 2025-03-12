@@ -7,6 +7,7 @@
   --color-prim-yellow-50: #FCCF5F;
   --color-prim-yellow-100: #FBBD23;
   --color-prim-yellow-200: #F0AD05;
+  --color-prim-yellow-250: #DC9F04;
   --color-prim-yellow-300: #C89004;
   --color-drop-header: #99a1af09;
   --color-drop-border: #ffffff19;
@@ -15,5 +16,16 @@
   --color-drop-btn-active: #9f9fa935;
 
   --text-md: 1.05rem;
+
+  --scale-101: 1.01;
+
+  --default-transition-duration: 0.4s;
 }
 
+.truncate-2-lines {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

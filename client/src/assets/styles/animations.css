@@ -6,24 +6,7 @@
   transition: background-color 0.3s ease-in, border-radius 0.6s ease-in;
 }
 
-.rotation {
-  transition: transform 0.5s ease-in-out;
-}
-
 .rotate {
   transform: perspective(80rem) rotateX(5deg) rotateY(-40deg) rotateZ(5deg);
   box-shadow: 1rem 1rem 1rem rgba(0, 0, 0, 0.4);
-}
-
-.pop-up {
-  animation: popUp 0.15s forwards;
-}
-
-@keyframes popUp {
-  0% {
-    transform: translateY(100rem);
-  }
-  100% {
-    transform: translateY(0);
-  }
 }

@@ -1,74 +1,57 @@
 .quill {
-  gap: 0.5rem;
   flex-grow: 1;
   display: flex;
-  border-radius: 0.5rem;
+  border-radius: 6px;
   flex-direction: column;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .ql-toolbar.ql-snow {
   height: fit;
+  gap: 0.25rem;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 0.25rem;
   border: 0px !important;
-  background-color: rgba(17, 17, 17, 0.603);
-}
-
-.ql-snow .ql-fill {
-  fill: #a1a1a1 !important;
-}
-
-.ql-snow .ql-stroke {
-  stroke: #8e8e8e !important;
+  background-color: white;
+  padding: 4px 0px 4px 0px !important;
 }
 
 .ql-snow.ql-toolbar button:hover .ql-stroke,
 .ql-snow.ql-toolbar button.ql-active .ql-stroke {
-  stroke: #fff !important;
+  stroke: #f0ad05 !important;
 }
 
 .ql-snow.ql-toolbar button:hover .ql-fill,
 .ql-snow.ql-toolbar button.ql-active .ql-fill {
-  fill: #fff !important;
-}
-
-.ql-toolbar .ql-picker-label {
-  color: #fff;
-}
-
-.ql-expanded {
-  color: #333;
+  fill: #f0ad05  !important;
 }
 
 .ql-container.ql-snow {
   flex-grow: 1;
-  max-height: 28rem;
   border: 0px !important;
 }
 
 .ql-editor {
-  color: #fff;
-  padding: 1rem;
-  font-size: 1.1rem;
+  color: #171717;
+  font-size: 1.2em;
   overflow-y: auto;
-  border-radius: 0.6rem;
+  border-radius: 6px;
+  max-height: 9rem;
+  padding: 8px !important;
 }
 
 .ql-editor::-webkit-scrollbar {
-  width: 0.5rem;
+  width: 5px;
 }
 
 .ql-editor::-webkit-scrollbar-thumb {
+  cursor:default;
   border-radius: 10px;
-  background-color: #111;
+  background-color: #11111180;
 }
 
 .ql-editor::-webkit-scrollbar-track {
-  border-radius: 10px;
-  background-color: #e4e4e400;
+  background-color: #11111120;
 }
 
 .palette-toggle {
@@ -77,7 +60,7 @@
 
 @media (min-width: 768px) {
   .ql-toolbar.ql-snow {
-    border-top-left-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
   }
 }
