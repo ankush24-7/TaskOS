@@ -13,9 +13,13 @@ const processSchema = new Schema(
       ref: "Section",
       required: true,
     },
+    pos: {
+      type: Number,
+      required: true,
+    },
     title: {
       type: String,
-      required: [true, "Title is required"],
+      required: true,
     },
     priority: {
       type: Number,
@@ -33,13 +37,24 @@ const processSchema = new Schema(
       type: Boolean, 
       default: false,
     },
-    assignedTo: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-      }
-    ],
-    tags: [{ tag: String, color: String }],
+    assignedTo: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+    description: {
+      type: String,
+      default: "",
+    },
+    color: {
+      name: {
+        type: String,
+        default: "Light blue",
+      },
+      hex: {
+        type: String,
+        default: "#E0EBF5",
+      },
+    },
     log: [
       {
         description: String,
@@ -50,19 +65,9 @@ const processSchema = new Schema(
         createdAt: {type: Date, default: Date.now},
       },
     ],
-    notes: {
-      type: String,
-      default: "",
-    },
-    description: {
-      type: String,
-      default: "",
-    },
-    scheduledAt: {
-      startsAt: Date,
-      endsAt: Date,
-    },
     deadline: Date,
+    startsAt: Date,
+    duration: Number,
   },
   {
     timestamps: true,
