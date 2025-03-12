@@ -12,7 +12,7 @@ export function CollapseButton({ expanded, setExpanded }) {
       onClick={() => setExpanded(!expanded)}>
       <ChevronsLeft
         stroke="#9ca3af"
-        className={`w-8 h-8 rotation group-hover:stroke-white ${expanded && "rotate-180 fixed"}`}
+        className={`w-8 h-8 transition-transform duration-700 ease-in-out group-hover:stroke-white ${expanded && "rotate-180 fixed"}`}
       />
       <p className={`text-lg ml-10 text-nowrap text-gray-400 group-hover:text-white 
         ${ expanded ? "relative opacity-100" : "absolute opacity-0 -translate-y-10 -translate-x-20" }`}>
@@ -61,7 +61,7 @@ function ActivityBarItem({ Icon, label, to, expanded, stroke = "#fff", currentPa
     <Link
       to={to}
       className={
-        style + ` activity-bar-hov-expand overflow-hidden hover:bg-prim-yellow-200 ${isActive && "bg-prim-yellow-200"}`
+        style + ` activity-bar-hov-expand overflow-hidden hover:bg-prim-yellow-250 ${isActive && "bg-prim-yellow-250"}`
       }>
       <Icon className={`w-7 h-7 ${expanded && "sm:fixed"}`} stroke={stroke} />
       <p

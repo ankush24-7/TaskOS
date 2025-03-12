@@ -1,13 +1,11 @@
 import authAPI from "@/services/AuthAPI";
 import { activityBarIcons } from "@icons";
 import { useEffect, useState } from "react";
-import { useAuth } from "@/contexts/AuthContext";
 import { Link, useLocation } from "react-router-dom";
 import ActivityBarItem, { CollapseButton, GrayButton } from "./ActivityBarItem";
 
 function ActivityBar() {
   const location = useLocation();
-  const { setAccessToken } = useAuth(); 
   const isHomePage = location.pathname === "/home";
   const [expanded, setExpanded] = useState(isHomePage);
 
@@ -15,10 +13,7 @@ function ActivityBar() {
     setExpanded(isHomePage);
   }, [isHomePage]);
 
-  const handleLogout = () => {
-    authAPI.logout();
-    setAccessToken(null);
-  };
+  const handleLogout = () => authAPI.logout();
 
   return (
     <nav className={`bg-prim-black activity-bar flex w-full p-1 ${expanded ? "sm:w-[13rem]" : "sm:w-[4.5rem]"}`}>
@@ -70,16 +65,9 @@ function ActivityBar() {
           expanded={expanded}
           currentPath={location.pathname}
         />
-        <ActivityBarItem
-          Icon={activityBarIcons.Notes}
-          label="Notes"
-          to="/notes"
-          expanded={expanded}
-          currentPath={location.pathname}
-        />
       </ul>
 
-      <ul className="hidden flex-col gap-0.5 sm:flex">        
+      <ul className="hidden flex-col sm:flex">        
         <CollapseButton expanded={expanded} setExpanded={setExpanded} />
         <GrayButton
           Icon={activityBarIcons.Settings}
