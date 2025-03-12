@@ -36,6 +36,7 @@ const ProjectsPage = () => {
           projects: { sort, order }
         }
       }
+
       const response = await userAPI.updatePreferences(newPreferences);
       if(response.status !== 200) {
         console.log(`Error ${response.status}: ${response.message}`);

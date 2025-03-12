@@ -82,7 +82,7 @@ const updateProject = async(req, res) => {
     if(updatedAt) project.updatedAt = updatedAt;
 
     await project.save();
-    return res.json({ message: 'Project updated successfully' });
+    return res.json({ id: project._id, message: 'Project updated successfully' });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

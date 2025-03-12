@@ -45,7 +45,7 @@ const ProjectTable = ({ projects, sort, setSort, order, setOrder, showArchived }
 
   return (
     <>
-      <table className="flex flex-col flex-grow max-h-[31rem] mt-1 pb-2 rounded-lg sm:bg-prim-black/10">
+      <table className="flex flex-col flex-grow max-h-[31rem] mt-1 pb-2 rounded-lg sm:bg-stone-900/80">
         <thead>
           <tr className="w-full hidden sm:flex p-2 text-lg rounded-t-lg divide-x divide-gray-400/0 hover:divide-gray-400 bg-prim-black"> 
             {renderHeader()}
@@ -54,8 +54,11 @@ const ProjectTable = ({ projects, sort, setSort, order, setOrder, showArchived }
 
         <tbody className="w-full px-2 overflow-y-scroll vertical-scrollbar">
           {projects.length === 0 ? (
-            <p className="text-xl text-center mt-20 text-gray-300">
-              {showArchived ? "No archived projects" : "No projects found. Start a new project to see it here!"}
+            <p className="text-xl text-center mt-20 text-gray-300 whitespace-pre-line">
+              {showArchived 
+                ? "No archived projects" 
+                : `No projects found.\n Start a new project to see it here !`
+              }
             </p>
           ): (
             projects

@@ -8,14 +8,12 @@ import projectAPI from "@/services/api/projectAPI";
 const ProjectNav = ({ search, setSearch, showArchived, setShowArchived }) => {
   const navigate = useNavigate();
 
-  const openNewProject = async () => {
-    const project = { title: "untitled" };
-    const { status, _id } = await projectAPI.createProject(project);
-    if (status === 200) navigate(`/projects/${_id}/dashboard/?new=true`);
-    else console.log(`Error ${status}: ${message}`);
-  }
-
   const toggleArchived = () => setShowArchived(!showArchived);
+  const openNewProject = async () => {
+    const response = await projectAPI.createProject({ title: "untitled" });
+    if (response.status === 201) navigate(`/projects/${response._id}/dashboard/?new=true`);
+    else console.log(response.data);
+  };
 
   return (
     <header className="flex justify-between items-center flex-col gap-6 py-2 px-3 sm:flex-row sm:py-3 sm:px-0">

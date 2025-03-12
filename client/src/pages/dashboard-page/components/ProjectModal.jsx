@@ -3,12 +3,14 @@ import CloseBtn from "@/components/ui/CloseBtn";
 import { RemoveIcon } from "@/assets/icons/icons";
 import { validateProjectName } from "@/utils/validateForm";
 import { useDashboard } from "@/contexts/DashboardContext";
+import { useNavigate } from "react-router-dom";
 
-const ProjectModal = ({ modalRef, setShowModal }) => {
-    const [error, setError] = useState("");
-    const [color, setColor] = useState("white");
-    const { project, setProject, projectCRUD } = useDashboard();
-    const [name, setName] = useState(project.title || "");
+const ProjectModal = ({ newProject, setShowModal }) => {
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
+  const [color, setColor] = useState("white");
+  const { project, setProject, projectCRUD } = useDashboard();
+  const [name, setName] = useState(project.title || "");
 
   const renderTeam = () => {
     if (!project.teamMembers) return;
@@ -21,7 +23,7 @@ const ProjectModal = ({ modalRef, setShowModal }) => {
           alt={member.name}
           className="w-8 h-8 rounded-full"
         /> */}
-        <p className="text-white">{member.name}</p>
+        <p className="text-white">{member.name.firstName + " " + (member.name.lastName || "")}</p>
         <button className="cursor-pointer">
           <RemoveIcon className="w-4 h-4 hover:stroke-red-500" />
         </button>
@@ -36,24 +38,24 @@ const ProjectModal = ({ modalRef, setShowModal }) => {
         status: document.getElementById('status').value,
         deadline: document.getElementById('deadline').value || null,
     }
-    await projectCRUD.updateProject(project);
+    const id = await projectCRUD.updateProject(project);
     setProject(project);
     setShowModal(false);
+    if (newProject) navigate(`/projects/${id}/dashboard`);
   }
 
   const handleCancel = () => {
+    if(newProject) projectCRUD.deleteProject(project._id);
     if (!name) validateProjectName(name, setColor, setError);
     else setShowModal(false);
   }
 
   return (
-    <div className="absolute z-20 inset-0 flex justify-center pt-16 backdrop-blur-[1px] bg-white/5">
-      <div
-        ref={modalRef}
-        className="absolute z-30 flex flex-col items-center w-[40rem] h-[30rem] rounded-3xl bg-prim-black">
+    <div className="absolute z-20 inset-0 flex justify-center pt-10 backdrop-blur-[1px] bg-white/10">
+      <div className="absolute z-30 flex flex-col items-center w-[50rem] h-[34rem] rounded-3xl bg-prim-black">
         <div className="flex w-full justify-between px-4 py-3 rounded-t-3xl border-b border-drop-border bg-drop-header">
           <h1 className="text-lg text-white">Edit Project</h1>
-          <CloseBtn onClick={() => setShowModal(false)} />
+          <CloseBtn onClick={() => setShowModal(false)} dark={true} />
         </div>
 
         <div className="flex p-4 w-full h-full border-b border-drop-border">
