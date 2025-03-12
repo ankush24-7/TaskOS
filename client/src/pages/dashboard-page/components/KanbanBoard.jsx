@@ -1,77 +1,80 @@
 import { useState } from "react";
-import { tasks } from "@data/TaskData";
 import { createPortal } from "react-dom";
-import Task from "./kanban-board-components/Task";
-import Sections from "./kanban-board-components/Sections";
+import Task from "./kanban-board-components/ProcessCard";
+import Section from "./kanban-board-components/Section";
 import { useDashboard } from "@/contexts/DashboardContext";
 import { arrayMove, SortableContext } from "@dnd-kit/sortable";
-import {
-  DndContext,
-  DragOverlay,
-  PointerSensor,
-  useSensor,
-  useSensors,
-} from "@dnd-kit/core";
+import { DndContext, DragOverlay, PointerSensor, useSensor, useSensors, closestCorners } from "@dnd-kit/core";
 
 function KanbanBoard() {
-  const [taskData, setTaskData] = useState(tasks);
-  const [activeTask, setActiveTask] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState(null)
-  const { sections, setSections, sectionCRUD } = useDashboard();
+  const [activeSection, setActiveSection] = useState(null);
+  const [activeProcess, setActiveProcess] = useState(null);
+  const { sections, setSections, sectionCRUD, processes, setProcesses, processCRUD } = useDashboard();
 
   const onDragStart = (event) => {
-    if (event.active.data.current.type === "task") 
-      setActiveTask(event.active.data.current.task);
-    else 
-      setActiveSection(event.active.data.current.section);
+    event.active.data.current.type === "process"
+      ? setActiveProcess(event.active.data.current.process)
+      : setActiveSection(event.active.data.current.section);
   };
 
-  const onDragOver = (event) => {
+  const onDragOver = async (event) => {
     const { active, over } = event;
-    if (!over || active.id === over.id) return;
-
-    const isActiveTask = active.data.current.type === "task";
-    const isOverTask = over.data.current.type === "task";
-    const isOverSection = over.data.current.type === "section";
-
-    if (!isActiveTask) return;
-
-    if (isActiveTask && isOverTask) {
-      setTaskData((taskData) => {
-        const indexActive = taskData.findIndex(
-          (task) => task.id === active.data.current.task.id
-        );
-        const indexOver = taskData.findIndex(
-          (task) => task.id === over.data.current.task.id
-        );
-        taskData[indexActive].sectionId = taskData[indexOver].sectionId;
-        return arrayMove(taskData, indexActive, indexOver);
-      });
+    if (!over || active.id === over.id) {
+      for (let process of processes) {
+        if (process._id === activeProcess._id) {
+          process = activeProcess;
+          return;
+        }
+      }
+      return;
     }
 
-    if (isActiveTask && isOverSection) {
-      setTaskData((tasks) => {
-        const indexActive = tasks.findIndex(
-          (task) => task.id === active.data.current.task.id
-        );
-        const sectionId = over.data.current.section.id;
-        taskData[indexActive].sectionId = sectionId;
-        return arrayMove(tasks, indexActive, indexActive);
+    const isActiveProcess = active.data.current.type === "process";
+    const isOverProcess = over.data.current.type === "process";
+    const isOverSection = over.data.current.type === "section";
+
+    if (!isActiveProcess) return;
+
+    if (isActiveProcess && isOverProcess) {
+      const activeProcess = active.data.current.process;
+      const overProcess = over.data.current.process;
+
+      const getNewOrder = (processes) => {
+        const indexActive = processes.findIndex(process => process._id === activeProcess._id);
+        const indexOver = processes.findIndex(process => process._id === overProcess._id);
+        processes[indexActive].sectionId = processes[indexOver].sectionId;
+        processes = arrayMove(processes, indexActive, indexOver);
+        return processes;
+      };
+
+      const newOrder = getNewOrder(processes);
+      setProcesses(newOrder);
+    }
+
+    if (isActiveProcess && isOverSection) {
+      setProcesses(processes => {
+        const indexActive = processes.findIndex(process => process._id === active.data.current.process._id);
+        const sectionId = over.data.current.section._id;
+        processes[indexActive].sectionId = sectionId;
+        return arrayMove(processes, indexActive, indexActive);
       });
     }
   };
 
   const onDragEnd = async (event) => {
-    setActiveTask(null);
+    setActiveProcess(null);
     setActiveSection(null);
     const { active, over } = event;
+    if (over && active.data.current.type === "process") {
+      processCRUD.updateProcessOrder(processes);
+    }
+
     if (!over || active.id === over.id) return;
     if (active.data.current.type === "section") {
       const newSections = arrayMove(
         sections,
         sections.findIndex((section) => section._id === active.id),
-        sections.findIndex((section) => section._id === over.id)    
+        sections.findIndex((section) => section._id === over.id)
       );
       setSections(newSections);
       await sectionCRUD.updateSectionOrder(newSections);
@@ -90,16 +93,17 @@ function KanbanBoard() {
         sensors={sensors}
         onDragEnd={onDragEnd}
         onDragOver={onDragOver}
-        onDragStart={onDragStart}>
+        onDragStart={onDragStart}
+        collisionDetection={closestCorners}>
         <div className="flex h-full w-fit pt-1 gap-1">
           <SortableContext items={sections.map((section) => section._id)}>
-            {sections.map(section => (
-              <Sections
+            {sections.map((section) => (
+              <Section
                 key={section._id}
                 section={section}
-                tasks={taskData.filter((task) => task.sectionId === section.id)}
-                isModalOpen={isModalOpen}
-                setIsModalOpen={setIsModalOpen}
+                processes={processes.filter(
+                  (process) => process.sectionId === section._id
+                )}
               />
             ))}
           </SortableContext>
@@ -107,12 +111,16 @@ function KanbanBoard() {
 
         {createPortal(
           <DragOverlay>
-            {activeTask && <Task key={activeTask.id} task={activeTask} />}
+            {activeProcess && (
+              <Task key={activeProcess._id} process={activeProcess} />
+            )}
             {activeSection && (
-              <Sections
+              <Section
                 key={activeSection.id}
                 section={activeSection}
-                tasks={taskData.filter((task) => task.sectionId === activeSection.id)}
+                processes={processes.filter(
+                  (process) => process.sectionId === activeSection._id
+                )}
               />
             )}
           </DragOverlay>,

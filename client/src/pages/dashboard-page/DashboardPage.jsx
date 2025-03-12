@@ -9,14 +9,14 @@ function DashBoardPage() {
   const location = useLocation();
   const projectId = useParams().projectId;
   const newProject = new URLSearchParams(location.search).get("new");
-  const { showModal, setShowModal, modalRef } = useModal({ modalState: newProject });
+  const { showModal, setShowModal } = useModal({ modalState: newProject });
 
   return (
     <div className="h-screen w-full flex flex-col pb-0.5 px-5 overflow-y-hidden bg-gradient-to-r from-grad-l to-grad-r">
       <DashboardProvider projectId={projectId}>
         {showModal && (
           <ProjectModal 
-            modalRef={modalRef}
+            newProject={newProject}
             setShowModal={setShowModal} 
           />
         )}

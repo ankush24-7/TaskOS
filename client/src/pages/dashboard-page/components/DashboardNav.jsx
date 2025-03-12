@@ -7,12 +7,10 @@ import ProjectDropDown from "./kanban-board-components/ProjectDropDown";
 
 function DashboardNav({ setShowModal }) {
   const { dropdownRef, isOpen, setIsOpen } = useDropDown();
-  const { project, sectionCRUD, setNotification } = useDashboard();
+  const { project, sectionCRUD } = useDashboard();
 
   const handleCreateSection = async () => {
-    const response = await sectionCRUD.createSection();
-    if (response.status === 201) setNotification({ message: response.message, type: "success" });
-    else setNotification({ message: response.message, type: "error" });
+    await sectionCRUD.createSection();
   }
 
   return (
