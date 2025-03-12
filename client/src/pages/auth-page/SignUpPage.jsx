@@ -11,13 +11,17 @@ const SignUpPage = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
+    username: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
   const [colors, setColors] = useState({
-    name: "white",
+    firstName: "white",
+    lastName: "white",
+    username: "white",
     email: "white",
     password: "white",
     confirmPassword: "white",
@@ -26,8 +30,14 @@ const SignUpPage = () => {
   const validateField = (e) => {
     const { name, value } = e.target;
     switch (name) {
-      case "name":
-        validate.validateName(value, setColors, setErrors);
+      case "firstName":
+        validate.validateFirstName(value, setColors, setErrors);
+        break;
+      case "lastName": 
+        validate.validateLastName(value, setColors, setErrors);
+        break;
+      case "username": 
+        validate.validateUsername(value, setColors, setErrors);
         break;
       case "email":
         validate.validateEmail(value, setColors, setErrors);
@@ -45,13 +55,17 @@ const SignUpPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { name, email, password } = e.target;
+    const { firstName, lastName, username, email, password } = e.target;
     const user = {
-      name: name.value,
+      name: {
+        firstName: firstName.value,
+        lastName: lastName.value,
+      },
+      username: username.value,
       email: email.value,
       password: password.value,
     };
-    if (user.name === "" || user.email === "" || user.password === "") return;
+    if (!user.name.firstName || !user.username || !user.email || !user.password) return;
     
     const res = await authAPI.authenticate(user, "register");
     if (res === 201) navigate("/home");
@@ -64,17 +78,41 @@ const SignUpPage = () => {
       <div className="auth-form flex flex-col items-center w-full h-full px-10 pt-6 pb-10 mt-10 mx-auto bg-prim-black/30">
         <p className="text-white text-3xl">Create Your Account</p>
         <form className="flex flex-col w-full mt-5" onSubmit={handleSubmit}>
-          <label className="text-white">Name</label>
+          <label htmlFor="firstName" className="text-white">First Name</label>
           <input
-            id="name"
-            name="name"
+            id="firstName"
+            name="firstName"
             type="text"
-            placeholder="Name"
+            placeholder="First Name"
             onChange={(e) => validateField(e)}
-            style={{ "borderColor": colors.name }}
-            className="p-2.5 rounded-md focus:outline-none border-2 bg-white"
+            style={{ "borderColor": colors.firstName }}
+            className="px-2.5 py-2 rounded-md focus:outline-none border-2 bg-white"
           />
-          <p className="text-red-500 text-xs h-4 pt-0.5">{errors.name}</p>
+          <p className="text-red-500 text-xs h-4 pt-0.5">{errors.firstName}</p>
+
+          <label htmlFor="lastName" className="text-white">Last Name</label>
+          <input
+            id="lastName"
+            name="lastName"
+            type="text"
+            placeholder="Last Name"
+            onChange={(e) => validateField(e)}
+            style={{ "borderColor": colors.lastName }}
+            className="px-2.5 py-2 rounded-md focus:outline-none border-2 bg-white"
+          />
+          <p className="text-red-500 text-xs h-4 pt-0.5">{errors.lastName}</p>
+
+          <label htmlFor="username" className="text-white">Username</label>
+          <input
+            id="username"
+            name="username"
+            type="text"
+            placeholder="Username"
+            onChange={(e) => validateField(e)}
+            style={{ "borderColor": colors.username }}
+            className="px-2.5 py-2 rounded-md focus:outline-none border-2 bg-white"
+          />
+          <p className="text-red-500 text-xs h-4 pt-0.5">{errors.username}</p>
 
           <label className="text-white mt-2">Email Address</label>
           <input
@@ -84,7 +122,7 @@ const SignUpPage = () => {
             placeholder="Email Address"
             onChange={(e) => validateField(e)}
             style={{ "borderColor": colors.email }}
-            className="p-2.5 rounded-md focus:outline-none border-2 bg-white"
+            className="px-2.5 py-2 rounded-md focus:outline-none border-2 bg-white"
           />
           <p className="text-red-500 text-xs h-4 pt-0.5">{errors.email}</p>
 
@@ -98,7 +136,7 @@ const SignUpPage = () => {
               type={showPassword ? "text" : "password"}
               placeholder="Create a Password"
               onChange={(e) => validateField(e)}
-              className="p-2.5 rounded-l-md focus:outline-none grow"
+              className="px-2.5 py-2 rounded-l-md focus:outline-none grow"
             />
             <button
               type="button"
@@ -123,7 +161,7 @@ const SignUpPage = () => {
               type={showPassword ? "text" : "password"}
               placeholder="Confirm your Password"
               onChange={(e) => validateField(e)}
-              className="p-2.5 rounded-l-md focus:outline-none grow"
+              className="px-2.5 py-2 rounded-l-md focus:outline-none grow"
             />
             <button
               type="button"
@@ -140,7 +178,7 @@ const SignUpPage = () => {
 
           <button
             type="submit"
-            className="p-3 rounded-md mt-5 mb-2 w-full text-white bg-prim-yellow-200 hover:bg-prim-yellow-300">
+            className="p-3 rounded-md mt-5 mb-2 w-full cursor-pointer text-white bg-prim-yellow-200 hover:bg-prim-yellow-300">
             Create Account
           </button>
         </form>
@@ -155,17 +193,6 @@ const SignUpPage = () => {
         </p>
 
         <Toaster richColors position="top-center" />
-
-        {/* <div className="flex items-center justify-center gap-4 w-full my-6">
-          <span className="w-2/5 h-[0.5px] bg-white"></span>
-          <p className="text-white text-sm">OR</p>
-          <span className="w-2/5 h-[0.5px] bg-white"></span>
-        </div>
-
-        <button className="flex gap-3 p-3 items-center justify-center rounded-md w-full bg-white">
-          <authPageIcons.Google className="w-7 h-7" />
-          <p className="text-black">Sign up with Google</p>
-        </button> */}
       </div>
     </div>
   );

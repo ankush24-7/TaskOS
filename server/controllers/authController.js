@@ -3,17 +3,23 @@ const User = require('../models/User');
 const generateTokens = require('../utils/generateTokens');
 
 const handleRegistration = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, username, email, password } = req.body;
 
-  const alreadyExists = await User.findOne({ email }).exec();
-  if (alreadyExists) {
+  const emailAlreadyExists = await User.findOne({ email }).lean().exec();
+  if (emailAlreadyExists) {
     return res.status(400).json({ message: 'User already exists' });
+  }
+
+  const usernameAlreadyExists = await User.findOne({ username }).lean().exec();
+  if (usernameAlreadyExists) {
+    return res.status(400).json({ message: 'Username already exists' });
   }
   
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await User.create({
       name,
+      username,
       email,
       password: hashedPassword
     });
@@ -34,14 +40,17 @@ const handleRegistration = async (req, res) => {
 };
 
 const handleLogin = async (req, res) => {
-  const { email, password } = req.body;
-  if (!email || !password) {
+  const { input, password } = req.body;
+  if (!input || !password) {
     return res.status(400).json({ message: 'Please enter all fields' });
   }
 
-  const user = await User.findOne({ email }).exec();
+  const user = input.includes('@') 
+    ? await User.findOne({ email: input }).exec() 
+    : await User.findOne({ username: input }).exec();
+
   if (!user) {
-    return res.status(404).json({ message: 'Email not found' });
+    return res.status(404).json({ message: 'User not found' });
   }
 
   try {

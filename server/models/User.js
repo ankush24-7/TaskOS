@@ -3,16 +3,23 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   name: {
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: String,
+  },
+  username: {
     type: String,
-    required: [true, "Name is required"],
+    required: true,
   },
   email: {
     type: String,
-    required: [true, "Email is required"],
+    required: true,
   },
   password: {
     type: String,
-    required: [true, "Password is required"],
+    required: true,
   },
   refreshToken: {
     type: String,
@@ -34,7 +41,7 @@ const userSchema = new Schema({
       order: { type: String, default: "desc" },
     },
     processes: {},
-  }
+  } 
 });
 
 module.exports = mongoose.model("User", userSchema);

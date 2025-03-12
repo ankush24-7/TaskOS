@@ -2,24 +2,21 @@ import { useState } from "react";
 import { authPageIcons } from "@icons";
 import { Toaster, toast } from "sonner";
 import authAPI from "@/services/AuthAPI";
-import validate from "@/utils/validateForm";
 import AuthHeader from "./components/AuthHeader";
 import { Link, useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const [errors, setErrors] = useState({ email: "" });
   const [showPassword, setShowPassword] = useState(false);
-  const [colors, setColors] = useState({ email: "white" });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { email, password } = e.target;
+    const { input, password } = e.target;
     const user = {
-      email: email.value,
+      input: input.value,
       password: password.value,
     };
-    if (user.email === "" || user.password === "") return;
+    if (user.input === "" || user.password === "") return;
 
     const res = await authAPI.authenticate(user, "login");
     if (res === 200) navigate("/home");
@@ -32,26 +29,23 @@ const LoginPage = () => {
       <div className="auth-form flex flex-col items-center w-full h-full px-10 pt-8 pb-16 mt-20 mx-auto bg-prim-black/30">
         <p className="text-white text-3xl">Welcome Back</p>
         <form className="flex flex-col w-full mt-10" onSubmit={handleSubmit}>
-          <label className="text-white">Email Address</label>
+          <label htmlFor="input" className="text-white">Username or Email</label>
           <input
-            id="email"
-            name="email"
+            id="input"
+            name="input"
             type="text"
-            placeholder="Email Address"
-            onChange={(e) => validate.validateEmail(e.target.value, setColors, setErrors)}
-            style={{ "borderColor": colors.email }}
+            placeholder="Username or Email"
             className="p-2.5 rounded-md focus:outline-none border-2 border-white bg-white"
           />
-          <p className="text-red-500 text-xs h-4 pt-0.5">{errors.email}</p>
 
-          <label className="text-white mt-2">Password</label>
+          <label className="text-white mt-6">Password</label>
           <span
             className="flex justify-between bg-white rounded-md border-2 border-white">
             <input
               id="password"
               name="password"
               type={showPassword ? "text" : "password"}
-              placeholder="Create a Password"
+              placeholder="Password"
               className="p-2.5 rounded-l-md focus:outline-none grow"
             />
             <button
@@ -74,14 +68,14 @@ const LoginPage = () => {
 
           <button
             type="submit"
-            className="p-3 rounded-md my-2 w-full text-white bg-prim-yellow-200 hover:bg-prim-yellow-300">
+            className="p-3 rounded-md my-2 w-full cursor-pointer text-white bg-prim-yellow-200 hover:bg-prim-yellow-300">
             Log In
           </button>
         </form>
 
         <p className="text-white text-start text-[0.9rem]">
-          {"Already have an account? "}
-          <Link to="/login">
+          {"Don't have an account? "}
+          <Link to="/sign-up">
             <span className="text-blue-200 underline hover:text-blue-400">
               Sign Up
             </span>
@@ -89,17 +83,6 @@ const LoginPage = () => {
         </p>
 
         <Toaster richColors position="top-center" />
-
-        {/* <div className="flex items-center justify-center gap-4 w-full my-6">
-          <span className="w-2/5 h-[0.5px] bg-white"></span>
-          <p className="text-white text-sm">OR</p>
-          <span className="w-2/5 h-[0.5px] bg-white"></span>
-        </div>
-
-        <button className="flex gap-3 p-3 items-center justify-center rounded-md w-full bg-white">
-          <authPageIcons.Google className="w-7 h-7" />
-          <p className="text-black">Sign in with Google</p>
-        </button> */}
       </div>
     </div>
   );
