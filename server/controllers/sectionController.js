@@ -1,10 +1,6 @@
 const Section = require('../models/Section');
 const Process = require('../models/Process');
 
-/*
-  [ ] handle task dnd - remove the task from the old section and add it to the new section
-*/
-
 const createSection = async (req, res) => {
   const { projectId, name, color, pos } = req.body;
   if (!name || pos === undefined) {
@@ -25,7 +21,7 @@ const getSections = async (req, res) => {
   
   try {
     const sections = await Section.find({ projectId }).sort('pos').lean().exec();
-    res.status(200).json(sections);
+    res.json(sections);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -45,8 +41,8 @@ const updateSection = async (req, res) => {
 
     await section.save();
     res.json({ message: 'Section updated successfully' });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -59,11 +55,9 @@ const deleteSection = async (req, res) => {
     await Process.deleteMany({ sectionId }).exec();
     await Section.deleteOne({ _id: sectionId }).exec();
     res.json({ message: 'Section deleted successfully' });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };
-
-const handleTaskDrag = async (req, res) => {};
 
 module.exports = { createSection, getSections, updateSection, deleteSection };

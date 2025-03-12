@@ -1,33 +1,23 @@
 import DropDown from "@/components/ui/DropDown";
+import ColorPalette from "@/components/ui/ColorPalette";
 import { useDashboard } from "@/contexts/DashboardContext";
 
 const SectionDropDown = ({ section, color, setColor, desc, setDesc, setIsOpen }) => {
   const { sectionCRUD } = useDashboard();  
-
-  const renderColors = (color) => {
-    const colors = [
-      "#FF0000",
-      "#F59F00",
-      "#E16036",
-      "#F67280",
-      "#5E807F",
-      "#008000",
-      "#3D7AB8",
-      "#4B0082",
-      "#E43AE4",
-      "#00CCA0",
-      "#B6A391",
-      "#6B7280",
-    ];
-    return colors.map((c, i) => (
-      <button
-        key={i}
-        onClick={() => setColor(c)}
-        className={`w-6 h-6 rounded-full cursor-pointer ${c === color && "border-2"} border-white`}
-        style={{ backgroundColor: c }}
-      />
-    ));
-  };
+  const stateColors = [
+    "#FF0000",
+    "#F59F00",
+    "#E16036",
+    "#F67280",
+    "#5E807F",
+    "#008000",
+    "#3D7AB8",
+    "#8F00F5",
+    "#E43AE4",
+    "#00CCA0",
+    "#B6A391",
+    "#6B7280",
+  ];
 
   const handleDescKeyDown = async (e) => {
     if (e.key === "Enter" || e.key === "Escape") {
@@ -53,7 +43,11 @@ const SectionDropDown = ({ section, color, setColor, desc, setDesc, setIsOpen })
         <div className="flex flex-col px-2 pb-2">
           <div className="flex flex-col border-b py-4 gap-2 border-drop-border">
             <span className="flex gap-4 flex-wrap">
-              {renderColors(color)}
+              <ColorPalette 
+                colors={stateColors}
+                color={color}
+                setColor={setColor}
+              />
             </span>
           </div>
           <form

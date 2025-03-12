@@ -5,7 +5,7 @@ import { Ellipses, DragIcon } from "@/assets/icons/icons";
 import { useDashboard } from "@/contexts/DashboardContext";
 
 function Header({ section, attributes, listeners }) {
-  const count = section.processes.length;
+  const count = section.processes.length;  
   const { sectionCRUD } = useDashboard();
   const [name, setName] = useState(section.name);
   const [color, setColor] = useState(section.color);
@@ -63,11 +63,11 @@ function Header({ section, attributes, listeners }) {
             onBlur={handleNameBlur}
             onKeyDown={handleNameKeyDown}
             className={`max-w-52 rounded-lg py-2 pl-1 text-xl leading-none text-white focus:outline-none
-              focus:bg-prim-black/15 hover:bg-prim-black/15 bg-[${color}]`}
+              focus:bg-prim-black/10 hover:bg-prim-black/10 bg-[${color}]`}
           />
         </form>
 
-        <span className="flex items-center justify-between p-1 mx-1 w-4 h-4 rounded-full bg-prim-black/15">
+        <span className="flex items-center justify-between p-1 mx-1 w-4 h-4 rounded-full bg-prim-black/10">
           <p className="text-sm text-white">{count}</p>
         </span>
 
