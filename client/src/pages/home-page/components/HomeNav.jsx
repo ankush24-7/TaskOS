@@ -1,7 +1,7 @@
 import * as navBtns from "@navbtns";
+import { homeNavIcons } from "@icons";
 import Logo from "@/components/ui/Logo";
 import User from "@/components/ui/User";
-import { homeNavIcons } from "@icons";
 
 const HomeNav = ({ greeting, user }) => {
   return (
@@ -9,14 +9,12 @@ const HomeNav = ({ greeting, user }) => {
       <span className="block sm:hidden">
         <Logo />
       </span>
-      <h2 className="text-white text-2xl self-end tracking-tighter">
+      <h2 className="text-white text-2xl self-end">
         {`${greeting}, `}
-        <span className="text-prim-yellow-200">{`${user}!`}</span>
+        <span className="text-prim-yellow-200">{`${user.firstName}!`}</span>
       </h2>
       <ul className="flex items-center sm:gap-8">
         <span className="hidden gap-8 sm:flex">
-          <navBtns.RoundBtn Icon={homeNavIcons.Handshake} label="network" />
-          <navBtns.RoundBtn Icon={homeNavIcons.Bell} label="Notifications" />
           <navBtns.RoundBtn Icon={homeNavIcons.AddTask} label="Add" />
         </span>
         <User />

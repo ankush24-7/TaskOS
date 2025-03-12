@@ -1,29 +1,21 @@
-import axios from "@/utils/axiosInstance";
+import Clock from "./components/Clock";
 import dateUtils from "@/utils/dateUtils";
+import axios from "@/utils/axiosInstance";
+import HomeHub from './components/HomeHub';
 import HomeNav from "./components/HomeNav";
-import { useAuth } from "@/contexts/AuthContext";
 import React, { useEffect, useState } from "react";
-import HomeHeroSection from "./components/HomeHeroSection";
 
 const HomePage = () => {
-  const { accessToken } = useAuth();
   const [user, setUser] = useState("User");
-  const [currentTime, setCurrentTime] = useState(new Date());
-  const [dateTimeGreeting, setDateTimeGreeting] = useState({
-    date: "",
-    time: "",
-    greeting: "",
-  });
-
+  const [greeting, setGreeting] = useState("");
+  const [currentTab, setCurrentTab] = useState("Alerts");
+  
   useEffect(() => {
     const getUser = async () => {
       try {
-        const user = await axios.get("/user", {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
+        const user = await axios.get("/user");
         setUser(user.data.user.name);
+        setGreeting(dateUtils.getGreetings(new Date()));
       } catch (err) {
         console.log(err);
       }
@@ -32,29 +24,16 @@ const HomePage = () => {
     getUser();
   }, []);
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
-    
-    return () => clearInterval(intervalId);
-  }, []);
-
-  useEffect(() => {
-    setDateTimeGreeting({
-      date: dateUtils.formatDayDDMonth(currentTime),
-      time: dateUtils.formatTime(currentTime),
-      greeting: dateUtils.getGreetings(currentTime)
-    });
-  }, [currentTime]);
-
   return (
     <div className="w-full flex-grow bg-gradient-to-r from-grad-l to-grad-r">
-      <HomeNav greeting={dateTimeGreeting.greeting} user={user} />
-      <HomeHeroSection
-        date={dateTimeGreeting.date}
-        time={dateTimeGreeting.time}
-      />
+      <HomeNav greeting={greeting} user={user} />
+      <div className="w-full flex py-10 sm:justify-between sm:px-10">
+        <Clock />
+        <HomeHub 
+          currentTab={currentTab}
+          setCurrentTab={setCurrentTab}
+        />
+      </div>
     </div>
   );
 };

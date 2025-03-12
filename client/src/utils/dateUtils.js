@@ -1,3 +1,7 @@
+const padZero = (num) => {
+  return num < 10 ? "0" + num : num;
+}
+
 const formatTime = (time) => {
   const hourFormat24 = time.getHours();
   const hourFormat12 = time.getHours() % 12 === 0 ? "12" : time.getHours() % 12;
@@ -51,13 +55,37 @@ const formatProjectDate = (time) => {
   }
 };
 
+const formatScheduledAt = (scheduledAt) => {
+  const start = new Date(scheduledAt.startsAt);
+  const end = new Date(scheduledAt.endsAt);
+  const diffMs = end - start;
+  const diffMins = Math.floor(diffMs / 60000);
+  const diffHrs = Math.floor(diffMins / 60);
+  const diffDays = Math.floor(diffHrs / 24);
+  if (diffDays > 0) 
+    return (diffDays === 1) ? `${diffDays} day` : `${diffDays} days`;
+  if (diffHrs > 0) 
+    return (diffHrs === 1) ? `${diffHrs} hr` : `${diffHrs} hrs`;
+  if (diffMins > 0) 
+    return `${diffMins} min`;
+}
+
+const formatDuration = (duration) => {
+  const hours = Math.floor(duration / 60);
+  const mins = duration % 60;
+  return hours > 0 ? mins > 0 ? `${hours}h ${mins}m` : `${hours}h` : `${mins}m`;
+}
+
 const dateUtils = {
+  padZero,
   formatTime,
   formatDDMon,
   getGreetings,
+  formatDuration,
   formatDDMonYYYY,
   formatDayDDMonth,
   formatProjectDate,
+  formatScheduledAt,
 };
 
 export default dateUtils;
