@@ -36,12 +36,11 @@ const createProject = async(req, res) => {
 
 const getProjects = async(req, res) => {
   const { skip, sort, filter, limit } = req.query;
-
   try {
     const totalProjects = await Project.countDocuments(filter).exec();
     const projects = await Project.find(filter)
-      .populate('userId', 'name')
-      .populate('teamMembers', 'name')
+      .populate('userId', 'name username')
+      .populate('teamMembers', 'name username')
       .sort(sort)
       .skip(skip)
       .limit(limit)
@@ -58,7 +57,7 @@ const getProjectByID = async(req, res) => {
   const projectId = req.params.id;
   try {
     const project = await Project.findOne({ _id: projectId })
-      .populate('teamMembers', 'name')
+      .populate('teamMembers', 'name username')
       .lean()
       .exec();
     return res.json({ project });
@@ -69,7 +68,7 @@ const getProjectByID = async(req, res) => {
 
 const updateProject = async(req, res) => {
   const projectId = req.params.id;
-  const { title, status, deadline, archived, updatedAt } = req.body;
+  const { title, status, deadline, teamMembers, archived, updatedAt } = req.body;
   
   try {
     const project = await Project.findOne({ _id: projectId }).exec();
@@ -80,6 +79,7 @@ const updateProject = async(req, res) => {
     if(deadline) project.deadline = deadline;
     if(archived) project.archived = archived;
     if(updatedAt) project.updatedAt = updatedAt;
+    if(teamMembers) project.teamMembers = teamMembers;
 
     await project.save();
     return res.json({ id: project._id, message: 'Project updated successfully' });

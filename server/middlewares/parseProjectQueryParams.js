@@ -23,7 +23,7 @@ const handleParams = (req, res, next) => {
         sortBy.updatedAt = sortOrder;
         break;
       case "createdby":
-        sortBy.userId.name = sortOrder;
+        sortBy["userId.name.firstName"] = sortOrder;
         break;
       default:
         return res.status(400).json({ message: "Invalid sort parameter" });
