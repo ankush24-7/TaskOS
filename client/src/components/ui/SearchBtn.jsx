@@ -1,10 +1,10 @@
 import { SearchIcon } from "@icons";
 
-const SearchBtn = ({ placeholder,search, setSearch }) => {
+const SearchBtn = ({ placeholder, search, setSearch }) => {
   return (
     <form className="relative group flex-grow" onSubmit={(e) => e.preventDefault()}>
       <SearchIcon className="absolute top-1/2 -translate-y-1/2 ml-2 stroke-gray-300 group-focus:stoke-white" />
-      <label htmlFor="search" className="absolute -top-40">
+      <label htmlFor="search" className="absolute -top-96">
         Search
       </label>
       <input

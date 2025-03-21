@@ -6,7 +6,7 @@ const authenticate = async (user, route) => {
     localStorage.setItem("accessToken", response.data.accessToken);
     return response.status;
   } catch (error) {
-    return error.message;
+    return error.response.data.message;
   }
 };
 

@@ -875,7 +875,7 @@ export function SortIcon({ className = "" }) {
   );
 }
 
-export function Network({ className = "" }) {
+export function NetworkIcon({ className = "" }) {
   return (
     <svg 
       viewBox="0 0 20.37 23.47"

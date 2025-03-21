@@ -1,22 +1,47 @@
-export const validateName = (name, setColors, setErrors) => {
+export const validateFirstName = (name, setColors, setErrors) => {
   if (!name) {
-    setColors((prev) => ({ ...prev, name: "#fb2c36" }));
-    setErrors((prev) => ({ ...prev, name: "Name is required" }));
-    return;
-  }
-  if (name.length < 3) {
-    setColors((prev) => ({ ...prev, name: "#fb2c36" }));
-    setErrors((prev) => ({ ...prev, name: "Name must be at least 3 characters" }));
+    setColors((prev) => ({ ...prev, firstName: "#fb2c36" }));
+    setErrors((prev) => ({ ...prev, firstName: "Name is required" }));
     return;
   }
   if (/[^a-zA-Z -]/.test(name)) {
-    setColors((prev) => ({ ...prev, name: "#fb2c36" }));
-    setErrors((prev) => ({ ...prev, name: "Name must contain only letters" }));
+    setColors((prev) => ({ ...prev, firstName: "#fb2c36" }));
+    setErrors((prev) => ({ ...prev, firstName: "Name must contain only letters" }));
     return;
   }
-  setColors((prev) => ({ ...prev, name: "#00a63e" }));
-  setErrors((prev) => ({ ...prev, name: "" }));
+  setColors((prev) => ({ ...prev, firstName: "#00a63e" }));
+  setErrors((prev) => ({ ...prev, firstName: "" }));
 };
+
+export const validateLastName = (name, setColors, setErrors) => {
+  if (/[^a-zA-Z -]/.test(name)) {
+    setColors((prev) => ({ ...prev, lastName: "#fb2c36" }));
+    setErrors((prev) => ({ ...prev, lastName: "Name must contain only letters" }));
+    return;
+  }
+  setColors((prev) => ({ ...prev, lastName: "#00a63e" }));
+  setErrors((prev) => ({ ...prev, lastName: "" }));
+};
+
+export const validateUsername = (username, setColors, setErrors) => {
+  if (!username) {
+    setColors((prev) => ({ ...prev, username: "#fb2c36" }));
+    setErrors((prev) => ({ ...prev, username: "Username is required" }));
+    return;
+  }
+  if (username.length < 3) {
+    setColors((prev) => ({ ...prev, username: "#fb2c36" }));
+    setErrors((prev) => ({ ...prev, username: "Username must be at least 3 characters" }));
+    return;
+  }
+  if (/[^a-z0-9_]/.test(username)) {
+    setColors((prev) => ({ ...prev, username: "#fb2c36" }));
+    setErrors((prev) => ({ ...prev, username: "Username must contain only small letters, numbers, and underscores" }));
+    return;
+  }
+  setColors((prev) => ({ ...prev, username: "#00a63e" }));
+  setErrors((prev) => ({ ...prev, username: "" }));
+}
 
 export const validateEmail = (email, setColors, setErrors) => {
   if (!email) {
@@ -89,9 +114,9 @@ export const validateProjectName = (name, setColor, setError) => {
     setError("Project Name must be at least 3 characters");
     return;
   }
-  if (/[^a-zA-Z0-9 -]/.test(name)) {
+  if (/[^a-zA-Z0-9 '-]/.test(name)) {
     setColor("#fb2c36");
-    setError("Project Name must contain only letters and numbers");
+    setError("Project Name must contain only letters, numbers, and apostrophes");
     return;
   }
 
@@ -99,8 +124,21 @@ export const validateProjectName = (name, setColor, setError) => {
   setError("");
 }
 
+export const validateProcessName = (name, setColor, setError) => {
+  if (!name) {
+    setColor("#fb2c36");
+    setError("Project Name is required");
+    return;
+  }
+
+  setColor("#ffffff25");
+  setError("");
+}
+
 const validate = {
-  validateName,
+  validateFirstName,
+  validateLastName,
+  validateUsername,
   validateEmail,
   validatePassword,
   confirmPassword,
