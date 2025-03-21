@@ -8,7 +8,7 @@ import React, { useEffect, useState } from "react";
 const HomePage = () => {
   const [user, setUser] = useState("User");
   const [greeting, setGreeting] = useState("");
-  const [currentTab, setCurrentTab] = useState("Alerts");
+  
   
   useEffect(() => {
     const getUser = async () => {
@@ -29,10 +29,7 @@ const HomePage = () => {
       <HomeNav greeting={greeting} user={user} />
       <div className="w-full flex py-10 sm:justify-between sm:px-10">
         <Clock />
-        <HomeHub 
-          currentTab={currentTab}
-          setCurrentTab={setCurrentTab}
-        />
+        <HomeHub />
       </div>
     </div>
   );

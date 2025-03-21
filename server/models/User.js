@@ -31,6 +31,27 @@ const userSchema = new Schema({
       ref: "User",
     },
   ],
+  requests: [{
+    _id: false,
+    sender: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    }, 
+    type: {
+      type: String,
+      enum: ["connect", "invite"],
+      required: true,
+    },
+    read: {
+      type: Boolean,
+      default: false,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    }
+  }],
   preferences: {
     projects: {
       sort: { 
@@ -41,7 +62,7 @@ const userSchema = new Schema({
       order: { type: String, default: "desc" },
     },
     processes: {},
-  } 
+  },
 });
 
 module.exports = mongoose.model("User", userSchema);
