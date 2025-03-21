@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { authPageIcons } from "@icons";
-import { Toaster, toast } from "sonner";
 import authAPI from "@/services/AuthAPI";
 import validate from "@/utils/validateForm";
 import AuthHeader from "./components/AuthHeader";
+import { useToast } from "@/contexts/ToastContext";
 import { Link, useNavigate } from "react-router-dom";
 
 const SignUpPage = () => {
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const { setToastMessage } = useToast();
   const [errors, setErrors] = useState({
     firstName: "",
     lastName: "",
@@ -68,8 +69,11 @@ const SignUpPage = () => {
     if (!user.name.firstName || !user.username || !user.email || !user.password) return;
     
     const res = await authAPI.authenticate(user, "register");
-    if (res === 201) navigate("/home");
-    else return toast.error(res);
+    if (res === 201) {
+      navigate("/home");
+      setToastMessage({ message: "Welcome to TaskOS", type: "success" });
+    }
+    else setToastMessage({ message: res, type: "error" });
   };
 
   return (
@@ -191,8 +195,6 @@ const SignUpPage = () => {
             </span>
           </Link>
         </p>
-
-        <Toaster richColors position="top-center" />
       </div>
     </div>
   );

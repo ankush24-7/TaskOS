@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { authPageIcons } from "@icons";
-import { Toaster, toast } from "sonner";
 import authAPI from "@/services/AuthAPI";
 import AuthHeader from "./components/AuthHeader";
+import { useToast } from "@/contexts/ToastContext";
 import { Link, useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const { setToastMessage } = useToast();
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -19,8 +20,11 @@ const LoginPage = () => {
     if (user.input === "" || user.password === "") return;
 
     const res = await authAPI.authenticate(user, "login");
-    if (res === 200) navigate("/home");
-    else return toast.error(res);
+    if (res === 200) {
+      navigate("/home");
+      setToastMessage({ message: "Welcome Back", type: "success" });
+    }
+    else setToastMessage({ message: res, type: "error" });
   };
 
   return (
@@ -81,8 +85,6 @@ const LoginPage = () => {
             </span>
           </Link>
         </p>
-
-        <Toaster richColors position="top-center" />
       </div>
     </div>
   );
