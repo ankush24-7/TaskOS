@@ -116,7 +116,7 @@ function ProcessModal({ selectedProcess: process, setShowProcessModal, section }
   }
 
   return (
-    <div className="absolute z-20 inset-0 flex justify-center pt-10 backdrop-blur-[1px] bg-black/5"j>
+    <div className="absolute z-20 inset-0 flex justify-center pt-10 backdrop-blur-[1px] bg-black/5">
       <div
         style={{ backgroundColor: color.hex }}
         className="absolute z-30 flex flex-col w-[50rem] h-[34rem] rounded-3xl divide-y divide-black/10">
