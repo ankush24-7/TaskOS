@@ -3,9 +3,11 @@ import dateUtils from "@/utils/dateUtils";
 import { useSortable } from "@dnd-kit/sortable";
 import { taskIcons, priorityIcons } from "@icons";
 import { useDashboard } from "@/contexts/DashboardContext";
+import DisplayPicture from "@/components/ui/DisplayPicture";
 
 function ProcessCard({ process, openModal }) {
   const { setProcessPosition } = useDashboard();
+  const duration = process.endsAt && process.startsAt && (new Date(process.endsAt) - new Date(process.startsAt)) / 60000 || 0;
 
   const {
     attributes,
@@ -93,7 +95,7 @@ function ProcessCard({ process, openModal }) {
             setProcessPosition(process.pos);
           }}
           className="absolute z-20 left-1/2 -translate-x-1/2 -translate-y-2 p-0.5 rounded-full cursor-pointer opacity-0 group-hover:opacity-100 bg-white">
-            <taskIcons.Plus className="stroke-neutral-900" />
+            <taskIcons.Plus className="stroke-[2.5px] stroke-neutral-900" />
         </button>
       </span>
 
@@ -101,14 +103,29 @@ function ProcessCard({ process, openModal }) {
         onClick={() => openModal(process)}
         id={process._id}
         style={{ backgroundColor: process.color.hex, willChange: "transform" }}
-        className="w-full h-40 flex flex-col px-2.5 py-2 rounded-2xl cursor-pointer transition-transform duration-200 ease-in-out hover:scale-[101%] drop-shadow-[4px_4px_5px_rgba(0,0,0,0.4)]">
+        className="w-full h-40 flex flex-col px-2.5 py-2 rounded-2xl cursor-pointer transition-transform duration-200 
+        ease-in-out hover:scale-101 drop-shadow-[4px_4px_5px_rgba(0,0,0,0.4)] hover:drop-shadow-[6px_6px_12px_rgba(0,0,0,0.8)]">
         <div className="flex justify-between items-center">
-          <span className="flex items-center gap-1 mt-auto">
-            <taskIcons.Profile className="w-7 h-7 stroke-1 stroke-neutral-900" />
-            <p className="text-[15px] mt-[2px] leading-none text-neutral-900">
-              {process.assignedTo?.name?.firstName || "Assign"}
-            </p>
-          </span>
+          {process.assignedTo ? (
+            <span className="flex items-center gap-1">
+              <DisplayPicture
+                radius={"24px"}
+                color={process.assignedTo.color || "#B1401B"}
+                firstName={process.assignedTo.name.firstName}
+                publicId={process.assignedTo.displayPicture.publicId || ""}
+              />
+              <p className="text-[15px] mt-[2px] max-w-28 leading-none text-ellipsis overflow-hidden whitespace-nowrap text-neutral-900">
+                {process.assignedTo.username}
+              </p>
+            </span>
+          ) : (
+            <span className="flex items-center gap-1 mt-auto">
+              <taskIcons.Profile className="w-7 h-7 stroke-1 stroke-neutral-900" />
+              <p className="text-[15px] mt-[2px] leading-none text-neutral-900">
+                Assign
+              </p>
+            </span>
+          )}
           <taskIcons.Star
             className={`stroke-[1.5] stroke-prim-black ${process.starred && "fill-amber-300"}`}
           />
@@ -129,11 +146,11 @@ function ProcessCard({ process, openModal }) {
                 </p>
               </span>
             )}
-            {process.duration !== 0 && (
+            {duration > 0 && (
               <span className="flex items-end gap-1">
                 <taskIcons.StopwatchIcon className="w-4 h-4 stroke-neutral-900" />
                 <p className="text-sm leading-none text-neutral-900">
-                  {dateUtils.formatDuration(process.duration)}
+                  {dateUtils.formatDuration(duration)}
                 </p>
               </span>
             )}

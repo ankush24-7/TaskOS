@@ -29,25 +29,12 @@ function DashboardNav({ setShowModal }) {
         <navbarComp.IconBtn
           label="New Section"
           onClick={handleCreateSection}
-          Icon={() => <dashboardNavIcons.Sparkles className="w-5 h-5 group-hover:stroke-prim-yellow-50" stroke="#fff" />}
+          Icon={() => <dashboardNavIcons.Sparkles className="w-5 h-5" stroke="#fff" />}
         />
         <navbarComp.RoundBtn
-          Icon={() => (
-            <dashboardNavIcons.Team
-              stroke="#fff"
-              className="w-7 h-7 scale-110"
-            />
-          )}
+          Icon={() => <dashboardNavIcons.Team className="w-8 h-8 stroke-[0.75px] stroke-white" />}
         />
-        <navbarComp.RoundBtn
-          Icon={() => <dashboardNavIcons.Timeline stroke="#fff" />}
-        />
-        <navbarComp.RoundBtn
-          Icon={() => <dashboardNavIcons.Filter stroke="#fff" />}
-        />
-        <navbarComp.RoundBtn
-          Icon={() => <dashboardNavIcons.VR stroke="#fff" />}
-        />
+        <navbarComp.RoundBtn Icon={() => <dashboardNavIcons.Timeline />} />
         <User />
       </div>
 

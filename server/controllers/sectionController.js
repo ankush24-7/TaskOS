@@ -29,15 +29,16 @@ const getSections = async (req, res) => {
 
 const updateSection = async (req, res) => {
   const sectionId = req.params.id;
-  const { name, color, description, pos } = req.body;
+  const { name, color, description, pos, processes } = req.body;
   try {
     const section = await Section.findOne({ _id: sectionId }).exec();
     if (!section) return res.status(404).json({ message: 'Section not found' });
 
     if (name && section.name !== name) section.name = name;
+    if (processes !== undefined) section.processes = processes;
     if (color && section.color !== color) section.color = color;
-    if (typeof pos === 'number' && pos >= 0 && section.pos !== pos) section.pos = pos;
     if (section.description !== description) section.description = description;
+    if (typeof pos === 'number' && pos >= 0 && section.pos !== pos) section.pos = pos;
 
     await section.save();
     res.json({ message: 'Section updated successfully' });

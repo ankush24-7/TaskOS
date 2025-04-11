@@ -44,12 +44,6 @@ function Section({ section, processes }) {
     setShowProcessModal(true);
   };
 
-  const closeModal = () => {
-    setShowProcessModal(false);
-    setSelectedProcess(null);
-    setSelectedSection(null);
-  };
-
   return (
     <div
       ref={setNodeRef}
@@ -77,7 +71,7 @@ function Section({ section, processes }) {
             }}
             className={`w-full h-40 group flex flex-col items-center justify-center gap-2 mx-auto px-2 py-2.5 rounded-2xl 
               cursor-pointer border-dashed border-2 border-gray-400 hover:border-white hover:bg-prim-black/10 
-              ${ processes.length ? "mt-4" : "mt-3" } hover:scale-101 transition-transform duration-200 ease-in-out
+              ${ processes.length ? "mt-4" : "mt-3" } hover:scale-101 transition-all duration-200 ease-in-out
             `}>
             <AddTask className="w-16 h-16 stroke-1 stroke-gray-400 group-hover:stroke-white" />
             <p className="text-md text-gray-400 group-hover:text-white">

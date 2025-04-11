@@ -1,7 +1,9 @@
 import useModal from "@/hooks/useModal";
-import { Toaster, toast } from "sonner";
-import { useNavigate } from "react-router-dom";
+import { useToast } from "./ToastContext";
 import axiosInstance from "@/utils/axiosInstance";
+import projectAPI from "@/services/api/projectAPI";
+import processAPI from "@/services/api/processAPI";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useContext, useState, createContext } from "react";
 import ProcessModal from "@/components/modals/process-modal/ProcessModal";
 
@@ -9,12 +11,13 @@ const DashboardContext = createContext();
 
 export const useDashboard = () => useContext(DashboardContext);
 
-export const DashboardProvider = ({ projectId, children }) => {
+export const DashboardProvider = ({ children }) => {
   const navigate = useNavigate();
+  const { setToastMessage } = useToast();
+  const projectId = useParams().projectId;
   const [project, setProject] = useState({});
   const [sections, setSections] = useState([]);
   const [processes, setProcesses] = useState([]);
-  const [toastMessage, setToastMessage] = useState(null);
   const [processPosition, setProcessPosition] = useState(null);
   const [selectedProcess, setSelectedProcess] = useState(null);
   const [selectedSection, setSelectedSection] = useState(null);
@@ -22,8 +25,8 @@ export const DashboardProvider = ({ projectId, children }) => {
 
   const fetchProject = async () => {
     try {
-      const response = await axiosInstance.get(`/project/${projectId}`);
-      if (response.status === 200) setProject(response.data.project);
+      const { status, project } = await projectAPI.getProject(projectId);
+      if (status === 200) setProject(project);
     } catch (error) {
       console.log("Error:", error);
     }
@@ -31,10 +34,10 @@ export const DashboardProvider = ({ projectId, children }) => {
 
   const updateProject = async (project) => {
     try {
-      const response = await axiosInstance.put(`/project/${projectId}`, project);
-      if (response.status === 200) {
+      const { status, id } = await projectAPI.updateProject(projectId, project);
+      if (status === 200) {
         await fetchProject();
-        return response.data.id;
+        return id;
       }
       else throw new Error(response.data.message);
     } catch (error) {
@@ -44,7 +47,7 @@ export const DashboardProvider = ({ projectId, children }) => {
 
   const updateProjectTimestamp = async () => {
     try {
-      await axiosInstance.put(`/project/${projectId}`, { updatedAt: new Date() });
+      await projectAPI.updateTimestamp(projectId);
     } catch (error) {
       console.log(error);
     }
@@ -52,8 +55,8 @@ export const DashboardProvider = ({ projectId, children }) => {
 
   const deleteProject = async () => {
     try {
-      const response = await axiosInstance.delete(`/project/${projectId}`)
-      if (response.status === 200) navigate("/projects");
+      const { status } = await projectAPI.deleteProject(projectId);
+      if (status === 200) navigate("/projects");
       else throw new Error(response.data.message);
     } catch (error) {
       console.log(error);
@@ -124,8 +127,8 @@ export const DashboardProvider = ({ projectId, children }) => {
 
   const fetchProcesses = async () => {
     try {
-      const response = await axiosInstance.get("/process", { params: { projectId }});
-      if (response.status === 200) setProcesses(response.data);
+      const { status, processes } = await processAPI.getProcessesByProject(projectId);
+      if (status === 200) setProcesses(processes);
       else return null;
     } catch (error) {
       console.log(error);
@@ -134,8 +137,8 @@ export const DashboardProvider = ({ projectId, children }) => {
 
   const fetchProcessesBySection = async (sectionId) => {
     try {
-      const processes = await axiosInstance.get(`/process/${sectionId}`, { params: { sectionId, projectId }});
-      if (processes.status === 200) return processes.data;
+      const { status, processes } = await processAPI.getProcessesBySection(sectionId, projectId);
+      if (status === 200) return processes;
       else return null;
     } catch (error) {
       console.log(error);
@@ -148,36 +151,32 @@ export const DashboardProvider = ({ projectId, children }) => {
         const processes = await fetchProcessesBySection(sectionId);
         Promise.all(processes.map((process) => {
           if (process.pos >= processPosition) {
-            updateProcess({ ...process, pos: process.pos + 1 }, sectionId);
+            updateProcess({ ...process, pos: process.pos + 1 });
           }
         }))
       }
 
       process.pos = processPosition;
     
-      const response = await axiosInstance.post("/process", process, { params: { sectionId, projectId }});
-      if (response.status === 201) {
+      const { status, message } = await processAPI.createProcess(process, sectionId, projectId);
+      if (status === 201) {
         await fetchSections();
         await fetchProcesses();
         await updateProjectTimestamp();
-        setToastMessage({ message: response.data.message, type: "success" });
+        setToastMessage({ message, type: "success" });
       }
-      else throw new Error(response.data.message);
     } catch (error) {
       console.log(error);
     }
   }
 
-  const updateProcess = async (process, sectionId, reRender = true) => {
+  const updateProcess = async (process, reRender = true) => {
     try {
-      const response = await axiosInstance.put(`/process/${process._id}`, process, {
-        params: { sectionId, projectId },
-      });
-      if (response.status === 200) {
+      const { status } = await processAPI.updateProcess(process);
+      if (status === 200) {
         if (reRender) await fetchProcesses();
         await updateProjectTimestamp();
       }
-      else setToastMessage({ message: "Could not update process", type: "error" });
     } catch (error) {
       console.log(error);
     }
@@ -187,7 +186,12 @@ export const DashboardProvider = ({ projectId, children }) => {
     try {
       Promise.all(processes.map((process, index) => {
         updateProcess({ ...process, pos: index }, process.sectionId, false);
-      }))
+      }));
+      
+      Promise.all(sections.map((section) => {
+        const sectionProcesses = processes.filter((process) => process.sectionId === section._id);
+        updateSection({ ...section, processes: sectionProcesses.map(process => process._id) });
+      }));
     } catch (error) {
       console.log(error);
     }
@@ -195,17 +199,13 @@ export const DashboardProvider = ({ projectId, children }) => {
 
   const deleteProcess = async (processId, sectionId) => {
     try {
-      const response = await axiosInstance.delete(`/process/${processId}`, {
-        params: { sectionId, projectId },
-      });
-      if (response.status === 200) {
+      const { status } = await processAPI.deleteProcess(processId, sectionId, projectId);
+      if (status === 200) {
         await fetchSections();
         await fetchProcesses();
         await updateProjectTimestamp();
-        setToastMessage({ message: response.data.message, type: "success" });
-        return response;
+        setToastMessage({ message: "Process deleted successfully", type: "success" });
       }
-      else throw new Error(response.data.message);
     } catch (error) {
       console.log(error);
     }
@@ -223,14 +223,6 @@ export const DashboardProvider = ({ projectId, children }) => {
     };
     fetchData();
   }, [projectId]);
-
-  useEffect(() => {
-    if (toastMessage) {
-      const { type, message } = toastMessage;
-      if (type === "success") toast.success(message);
-      else toast.error(message);
-    }
-  }, [toastMessage]);
 
   const projectCRUD = { updateProject, deleteProject };
   const sectionCRUD = { createSection, updateSection, updateSectionOrder, deleteSection };
@@ -263,7 +255,6 @@ export const DashboardProvider = ({ projectId, children }) => {
           section={selectedSection}
         />
       )}
-      <Toaster richColors position="bottom-right" />
     </DashboardContext.Provider>
   );
 };

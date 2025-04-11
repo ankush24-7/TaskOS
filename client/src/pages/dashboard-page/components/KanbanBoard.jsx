@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
-import Task from "./kanban-board-components/ProcessCard";
 import Section from "./kanban-board-components/Section";
+import Task from "./kanban-board-components/ProcessCard";
 import { useDashboard } from "@/contexts/DashboardContext";
 import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 import { DndContext, DragOverlay, PointerSensor, useSensor, useSensors, closestCorners } from "@dnd-kit/core";
