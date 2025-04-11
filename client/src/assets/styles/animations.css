@@ -7,6 +7,25 @@
 }
 
 .rotate {
-  transform: perspective(80rem) rotateX(5deg) rotateY(-40deg) rotateZ(5deg);
+  transform: perspective(80rem) rotateX(3deg) rotateY(-35deg) rotateZ(5deg);
   box-shadow: 1rem 1rem 1rem rgba(0, 0, 0, 0.4);
+}
+
+.modal {
+  animation : fadeIn 0.2s linear forwards;
+}
+
+.dropdown {
+  animation: fadeIn 0.1s linear forwards
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    scale: 0.8;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
 }
