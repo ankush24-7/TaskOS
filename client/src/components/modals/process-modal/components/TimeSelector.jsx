@@ -1,40 +1,14 @@
 import dateUtils from "@/utils/dateUtils";
 import useDropDown from "@/hooks/useDropDown";
-import { useEffect, useRef, useState } from "react";
 
-const TimeSelector = ({ dateTime, setDateTime }) => {
-  const {
-    isOpen: showTime,
-    setIsOpen: setTime,
-    dropdownRef: timeRef,
-  } = useDropDown();
-
-  const initialRender = useRef(true);
-  const [hour, setHour] = useState(dateTime?.getHours() || "HH");
-  const [minute, setMinute] = useState(dateTime?.getMinutes() || "MM");
-
-  useEffect(() => {
-    if (initialRender.current) {
-      initialRender.current = false;
-      return;
-    }
-
-    const updateTime = () => {
-      const updatedTime = new Date(dateTime);
-      updatedTime.setHours(hour);
-      updatedTime.setMinutes(minute);
-      setDateTime(updatedTime);
-    }
-
-    updateTime();
-  }, [hour, minute]);
-
+const TimeSelector = ({ hour, setHour, minute, setMinute }) => {
+  const { isOpen: showTime, setIsOpen: setShowTime, dropdownRef: timeRef } = useDropDown();
+ 
   return (
     <div ref={timeRef} className="relative">
       <button
-        onClick={() => setTime(!showTime)}
-        style={{ backgroundColor: showTime && "#fff" }}
-        className="flex items-center gap-2 px-3 py-[0.33rem] rounded-lg cursor-pointer text-neutral-500 bg-white/60 hover:bg-white">
+        onClick={() => setShowTime(!showTime)}
+        className="flex items-center gap-2 px-3 py-[0.33rem] rounded-lg cursor-pointer text-neutral-500 bg-white">
         <p className="w-6">{dateUtils.padZero(hour)}</p>
         <p>:</p>
         <p className="w-6">{dateUtils.padZero(minute)}</p>
@@ -53,12 +27,12 @@ const TimeSelector = ({ dateTime, setDateTime }) => {
             ))}
           </div>
           <div className="flex flex-col overflow-y-scroll scrollbar-hide">
-            {[...Array(60).keys()].map((m) => (
+            {[...Array(4).keys()].map((m) => (
               <button
                 key={m}
-                onClick={() => setMinute(m)}
+                onClick={() => setMinute(m * 15)}
                 className="px-3 py-0.5 rounded-lg cursor-pointer hover:bg-gray-100">
-                <p className="text-neutral-500">{dateUtils.padZero(m)}</p>
+                <p className="text-neutral-500">{dateUtils.padZero(m * 15)}</p>
               </button>
             ))}
           </div>

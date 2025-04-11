@@ -30,8 +30,7 @@ const DurationSelector = ({ duration, setDuration }) => {
     <div ref={timeRef} className="relative">
       <button
         onClick={() => setTime(!showTime)}
-        style={{ backgroundColor: showTime && "#fff" }}
-        className="flex py-1.5 rounded-lg cursor-pointer text-neutral-500 bg-white/60 hover:bg-white">
+        className="flex py-1.5 rounded-lg cursor-pointer text-neutral-500 bg-white">
         <p className="px-1.5">{dateUtils.padZero(hour)}</p>
         <p>:</p>
         <p className="px-1.5">{dateUtils.padZero(minute)}</p>
