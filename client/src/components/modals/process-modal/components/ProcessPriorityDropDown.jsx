@@ -1,11 +1,10 @@
 import { priorityIcons } from "@icons";
 import DropDown from "@/components/ui/DropDown";
 
-const ProcessPriorityDropDown = ({ setPriority, setShowPriority }) => {
+const ProcessPriorityDropDown = ({ setPriority }) => {
   return (
     <DropDown
       showHeader={false}
-      setIsOpen={setShowPriority}
       position="bottom-left"
       bgColor="#fff"
       children={

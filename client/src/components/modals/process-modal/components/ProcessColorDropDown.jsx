@@ -2,15 +2,15 @@ import DropDown from "@/components/ui/DropDown";
 
 const ProcessColorDropDown = ({ color, setColor, setShowColors }) => {
   const processColors = [
-    ["#FFD6D6", "Tea rose"],
-    ["#FFF1D6", "Papaya whip"],
-    ["#E8EEED", "Ash gray"],
-    ["#D6FFD6", "Tea green"],
-    ["#E0EBF5", "Light blue"],
-    ["#EED6FF", "Pale purple"],
-    ["#C2FFF2", "Celeste"],
-    ["#E7E0DA", "Timberwolf"],
-    ["#DEDFE3", "Platinum"],
+    ["#FFADAD", "Melon"],
+    ["#FFDB99", "Sunset"],
+    ["#C5C2EA", "Periwinkle"],
+    ["#98ECC7", "Aquamarine"],
+    ["#C2D6EB", "Light blue"],
+    ["#E5C2FF", "Mauve"],
+    ["#D6C2CB", "Thistle"],
+    ["#DFD6CE", "Timberwolf"],
+    ["#C6C6D2", "French gray"],
   ];
 
   const renderColors = () => {
@@ -19,7 +19,7 @@ const ProcessColorDropDown = ({ color, setColor, setShowColors }) => {
         key={i}
         type="button"
         onClick={() => setColor({ hex: c[0], name: c[1] })}
-        className={`w-6 h-6 rounded-full cursor-pointer ${c[0] === color ? "border-2" : "border"}`}
+        className={`w-6 h-6 rounded-full cursor-pointer ${c[0] === color ? "border-[1.5px]" : "border"}`}
         style={{ backgroundColor: c[0] }}
       />
     ));

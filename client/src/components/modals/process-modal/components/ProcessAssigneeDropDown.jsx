@@ -1,33 +1,36 @@
 import DropDown from "@/components/ui/DropDown"
-import { modalIcons } from "@/assets/icons/icons";
 import { useDashboard } from "@/contexts/DashboardContext"
+import DisplayPicture from "@/components/ui/DisplayPicture";
 
-const ProcessAssigneeDropDown = ({ assignedTo, setAssignedTo, setShowAssign }) => {
+const ProcessAssigneeDropDown = ({ assignedTo, setAssignedTo, setShowAssignee }) => {
   const { project } = useDashboard();
 
   const handleClick = (member) => {
     (member._id === assignedTo?._id) ? setAssignedTo(null) : setAssignedTo(member);
+    setShowAssignee(false);
   }
-
-  console.log(project.teamMembers);
-
+  
   return (
     <DropDown
       showHeader={false}
-      setIsOpen={setShowAssign}
       position="bottom-left"
       bgColor="#fff"
       children={
-        <div className="flex flex-col max-h-60">
-          {project.teamMembers.map((member, i) => {
+        <div className="flex flex-col min-w-28 max-h-60">
+          {project.teamMembers.map((member) => {
             return (
               <button
-                key={i}
+                key={member._id}
                 type="button"
                 onClick={() => handleClick(member)}
-                className={`flex items-center gap-1.5 px-2 py-1.5 rounded-lg cursor-pointer text-neutral-900 ${member._id === assignedTo?._id ? "bg-neutral-100" : "hover:bg-gray-100"}`}>
-                <modalIcons.Profile className="w-6 h-6 stroke-1 stroke-neutral-900"/>
-                <p>{member.name.firstName}</p>
+                className="flex items-center gap-1.5 px-2 py-1.5 rounded-xl cursor-pointer text-neutral-900 hover:bg-gray-100">
+                <DisplayPicture
+                  radius="24px"
+                  color={member.color}
+                  firstName={member.name.firstName}
+                  publicId={member.displayPicture.publicId}
+                />
+                <p>{member.username}</p>
               </button>
             )
           })}

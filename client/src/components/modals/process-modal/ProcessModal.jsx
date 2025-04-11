@@ -3,10 +3,12 @@ import useDropDown from "@/hooks/useDropDown";
 import CloseBtn from "@/components/ui/CloseBtn";
 import { modalIcons, priorityIcons } from "@icons";
 import DateSelector from "./components/DateSelector";
-import TimeSelector from "./components/TimeSelector";
+import RadioSwitch from "@/components/ui/RadioSwitch";
+import useDateSelector from "@/hooks/useDateSelector";
 import { validateProcessName } from "@/utils/validateForm";
 import { useDashboard } from "@/contexts/DashboardContext";
-import DurationSelector from "./components/DurationSelector";
+import DisplayPicture from "@/components/ui/DisplayPicture";
+import ProcessScheduler from "./components/ProcessScheduler";
 import ProcessDescription from "./components/ProcessDescription";
 import ProcessColorDropDown from "./components/ProcessColorDropDown";
 import ProcessAssigneeDropDown from "./components/ProcessAssigneeDropDown";
@@ -49,23 +51,23 @@ function ProcessModal({ selectedProcess: process, setShowProcessModal, section }
   const [error, setError] = useState("");
   const [border, setBorder] = useState("#ffffff25");
   const [title, setTitle] = useState(process?.title || "");
-  const [duration, setDuration] = useState(process?.duration || 0);
   const [priority, setPriority] = useState(process?.priority || 0);
   const [starred, setStarred] = useState(process?.starred || false);
-  const [deadline, setDeadline] = useState(process?.deadline || null);
+  const [schedule, setSchedule] = useState(process?.schedule || false);
   const [completed, setCompleted] = useState(process?.completed || false);
   const [assignedTo, setAssignedTo] = useState(process?.assignedTo || null);
   const [description, setDescription] = useState(process?.description || "");
-  const [color, setColor] = useState(process?.color || { hex: "#E0EBF5", name: "Light blue" });
+  const [showDeadline, setShowDeadline] = useState(process?.showDeadline || false);
+  const [endsAt, setEndsAt] = useState(process?.endsAt && new Date(process.endsAt) || null);
+  const [color, setColor] = useState(process?.color || { hex: "#C2D6EB", name: "Light blue" });
   const [startsAt, setStartsAt] = useState(process?.startsAt && new Date(process.startsAt) || null);
-  
-  const { processCRUD } = useDashboard();
-  const [showDueDate, setShowDueDate] = useState(false);
-  const [showSchedule, setShowSchedule] = useState(false);
+  const [deadline, setDeadline] = useState(process?.deadline && new Date(process.deadline) || new Date());
 
+  const { processCRUD } = useDashboard();
   const { isOpen: showColors, setIsOpen: setShowColors, dropdownRef: colorsRef } = useDropDown();
   const { isOpen: showAssignee, setIsOpen: setShowAssignee, dropdownRef: assigneeRef } = useDropDown();
   const { isOpen: showPriority, setIsOpen: setShowPriority, dropdownRef: priorityRef } = useDropDown();
+  const { day, setDay, month, setMonth, year, setYear } = useDateSelector({ date: deadline, setDate: setDeadline });
 
   const handleDelete = async () => {
     await processCRUD.deleteProcess(process._id, process.sectionId);
@@ -83,14 +85,15 @@ function ProcessModal({ selectedProcess: process, setShowProcessModal, section }
         starred,
         completed,
         assignedTo,
+        showDeadline,
         deadline,
+        schedule,
         startsAt,
-        duration,
+        endsAt,
       };
       await processCRUD.createProcess(newProcess, section._id, section.processes.length);
     }
     else {
-      console.log("Updating process...");
       const updatedProcess = {
         ...process,
         title,
@@ -100,11 +103,13 @@ function ProcessModal({ selectedProcess: process, setShowProcessModal, section }
         starred,
         completed,
         assignedTo,
+        showDeadline,
         deadline,
+        schedule,
         startsAt,
-        duration,
+        endsAt,
       };
-      await processCRUD.updateProcess(updatedProcess, process.sectionId);
+      await processCRUD.updateProcess(updatedProcess);
     }
     setShowProcessModal(false);
   }
@@ -115,11 +120,11 @@ function ProcessModal({ selectedProcess: process, setShowProcessModal, section }
     else setShowProcessModal(false);
   }
 
-  return (
+   return (
     <div className="absolute z-20 inset-0 flex justify-center pt-10 backdrop-blur-[1px] bg-black/5">
       <div
         style={{ backgroundColor: color.hex }}
-        className="absolute z-30 flex flex-col w-[50rem] h-[34rem] rounded-3xl divide-y divide-black/10">
+        className="modal absolute z-30 flex flex-col w-[50rem] h-[34rem] rounded-3xl divide-y drop-shadow-[20px_20px_20px_rgba(0,0,0,0.3)] divide-black/10">
         <div className="w-full flex justify-between items-center px-4 py-2.5 rounded-t-3xl">
           <div className="relative w-fit" ref={assigneeRef}>
             <button
@@ -128,12 +133,17 @@ function ProcessModal({ selectedProcess: process, setShowProcessModal, section }
               style={{ backgroundColor: showAssignee && "#fff" }}
               className="group flex items-center justify-center rounded-full cursor-pointer bg-white/60 hover:bg-white">
               {assignedTo ? (
-                <span className="flex gap-1 items-center justify-between py-0.5 pl-1.5 pr-3">
-                  <modalIcons.Profile className="w-7 h-7 stroke-1 stroke-neutral-900" />
+                <span className="flex gap-1.5 items-center justify-between py-0.5 pl-1.5 pr-3">
+                  <DisplayPicture
+                    radius={"24px"}
+                    color={assignedTo.color || "#B1401B"}
+                    firstName={assignedTo.name.firstName}
+                    publicId={assignedTo.displayPicture.publicId || ""}
+                  />
                   <div className="flex flex-col items-start">
                     <p className="text-xs leading-none text-neutral-700">Assigned to</p>
                     <span className="flex items-center gap-1">
-                      <p className="text-[0.95rem] leading-tight text-neutral-900">{assignedTo.name.firstName}</p>
+                      <p className="text-[0.95rem] leading-tight text-neutral-900">{assignedTo.username}</p>
                       <modalIcons.ChevronDown className="w-4 h-4 opacity-0 group-hover:opacity-100 stroke-neutral-900" />
                     </span>
                   </div>
@@ -185,7 +195,7 @@ function ProcessModal({ selectedProcess: process, setShowProcessModal, section }
         <div className="h-full flex divide-x divide-black/5">
           <div className="flex flex-col w-2/3 pt-4 pb-10 px-4">
             <label htmlFor="title" className="text-neutral-900">
-              Title
+              Title*
             </label>
             <textarea
               id="title"
@@ -214,12 +224,7 @@ function ProcessModal({ selectedProcess: process, setShowProcessModal, section }
                   {renderPriority(priority)}
                 </button>
 
-                {showPriority && (
-                  <ProcessPriorityDropDown
-                    setPriority={setPriority}
-                    setShowPriority={setShowPriority}
-                  />
-                )}
+                {showPriority && <ProcessPriorityDropDown setPriority={setPriority} />}
               </div>
 
               <div className="relative w-fit" ref={colorsRef}>
@@ -259,80 +264,62 @@ function ProcessModal({ selectedProcess: process, setShowProcessModal, section }
             </div>
           </div>
 
-          <div className="flex flex-col grow items-center pt-2 divide-y divide-black/10">
-            <div className="w-full flex flex-col px-2.5 pt-4 pb-2">
-              <button
-                type="button"
-                onClick={() => setShowDueDate(!showDueDate)}
-                className="flex items-center justify-between pb-1 group cursor-pointer">
-                <span className="flex items-start gap-2">
-                  <modalIcons.CalendarIcon className="w-5 h-5 stroke-[1.5] stroke-neutral-900" />
-                  <p className="text-md text-neutral-900">Deadline</p>
+          <div className="flex flex-col grow items-center divide-y divide-black/10">
+            <div className="w-full flex flex-col px-2.5 py-4">
+              <div className="flex items-center justify-between">
+                <span className="flex items-center gap-2">
+                  <modalIcons.CalendarIcon className="w-6 h-6 stroke-[1.5] stroke-neutral-900" />
+                  <p className="mt-1 leading-none text-neutral-900">Deadline</p>
                 </span>
-                <button
-                  type="button"
-                  className={`${showDueDate ? "opacity-100" : "opacity-0"} group-hover:opacity-100`}>
-                  <modalIcons.ChevronDown className={`w-5 h-5 m-auto ${showDueDate && "rotate-180"} stroke-black`}/>
-                </button>
-              </button>
+                <RadioSwitch
+                  color={color.hex}
+                  state={showDeadline}
+                  setState={setShowDeadline}
+                />
+              </div>
 
-              {showDueDate && 
-                <div className="flex justify-center">
+              {showDeadline && 
+                <div className="flex items-center justify-center gap-3 pt-4">
+                  <p className="text-neutral-900 mb-1">Due on</p>
                   <DateSelector 
-                    date={deadline && new Date(deadline)} 
-                    setDate={setDeadline} 
+                    day={day}
+                    setDay={setDay}
+                    month={month}
+                    setMonth={setMonth}
+                    year={year}
+                    setYear={setYear}
                   />
                 </div>
               }
             </div>
 
             <div className="w-full flex flex-col px-2.5 pt-4">
-              <button
-                type="button"
-                onClick={() => setShowSchedule(!showSchedule)}
-                className="flex items-center justify-between pb-3 group cursor-pointer">
+              <div 
+                style={{ paddingBottom: schedule ? "0.5rem": "1rem" }}
+                className="flex items-center justify-between">
                 <span className="flex items-start gap-2">
-                  <modalIcons.Timeline className="w-5 h-5 stroke-neutral-900" />
+                  <modalIcons.Timeline className="w-6 h-6 stroke-neutral-900" />
                   <p className="text-md text-neutral-900">Schedule</p>
                 </span>
-                <button
-                  type="button"
-                  className={`${
-                    showSchedule ? "opacity-100" : "opacity-0"
-                  } group-hover:opacity-100`}>
-                  <modalIcons.ChevronDown
-                    className={`w-5 h-5 m-auto ${
-                      showSchedule && "rotate-180"
-                    } stroke-black`}
-                  />
-                </button>
-              </button>
+                <RadioSwitch 
+                  state={schedule} 
+                  color={color.hex}
+                  setState={setSchedule} 
+                />
+              </div>
 
-              {showSchedule && (
-                <div className="flex flex-col pb-2">
-                  <p className="text-md text-neutral-900 mb-1">Start</p>
-                  <div className="flex items-center justify-center gap-1.5 pb-2">
-                    <DateSelector
-                      date={startsAt}
-                      setDate={setStartsAt}
-                    />
-                    <TimeSelector
-                      dateTime={startsAt && new Date(startsAt)}
-                      setDateTime={setStartsAt}  
-                    />
-                  </div>
-                  <div className="flex items-center gap-3 pb-2">
-                    <p className="text-md leading-none pt-1 text-neutral-900 mb-1">Duration</p>
-                    <DurationSelector 
-                      duration={duration} 
-                      setDuration={setDuration}
-                    />
-                  </div>
-                </div>
+              {schedule && (
+                <ProcessScheduler
+                  startsAt={startsAt}
+                  setStartsAt={setStartsAt}
+                  endsAt={endsAt}
+                  setEndsAt={setEndsAt}
+                  assignedTo={assignedTo}
+                />
               )}
             </div>
 
-            <div className="w-full flex flex-col px-2.5 pt-4 ">
+            <div className="w-full flex flex-col px-2.5 py-4 ">
               <span className="flex items-start gap-2">
                 <modalIcons.LogIcon className="stroke-1 stroke-neutral-900" />
                 <p className="text-md text-neutral-900">Logs</p>

@@ -1,7 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const verifyProjectId = require('../middlewares/verifyProjectId');
 const verifySectionId = require('../middlewares/verifySectionId');
 const processController = require('../controllers/processController.js');
+
+router.route('/timeline')
+  .get(processController.getProcessesForTimeline);
+
+router.use(verifyProjectId);
 
 router.route('/')
   .post(verifySectionId, processController.createProcess)

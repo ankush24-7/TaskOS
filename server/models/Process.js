@@ -45,6 +45,14 @@ const processSchema = new Schema(
       type: String,
       default: "",
     },
+    schedule: {
+      type: Boolean,
+      default: false,
+    },
+    showDeadline: {
+      type: Boolean,
+      default: false,
+    },
     color: {
       name: {
         type: String,
@@ -67,6 +75,7 @@ const processSchema = new Schema(
     ],
     deadline: Date,
     startsAt: Date,
+    endsAt: Date,
     duration: Number,
   },
   {

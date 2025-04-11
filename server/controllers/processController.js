@@ -12,11 +12,13 @@ const createProcess = async (req, res) => {
     color,
     starred,
     assignedTo,
+    schedule,
     startsAt,
-    duration,
+    endsAt,
+    showDeadline,
     deadline,
   } = req.body;
-  
+
   if (!sectionId || !title || pos === undefined) {
     return res.status(400).json({ message: "All fields are required" });
   }
@@ -32,8 +34,10 @@ const createProcess = async (req, res) => {
       color,
       starred,
       assignedTo,
+      schedule,
       startsAt,
-      duration,
+      endsAt,
+      showDeadline,
       deadline,
     });
 
@@ -52,7 +56,7 @@ const getProcesses = async (req, res) => {
 
   try {
     const processes = await Process.find({ projectId })
-      .populate("assignedTo", "name")
+      .populate("assignedTo", "name username color displayPicture")
       .sort({ sectionId: 1, pos: 1 })
       .lean()
       .exec();
@@ -61,6 +65,45 @@ const getProcesses = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+const getProcessesForTimeline = async (req, res) => {
+  const user = req.user.userId;
+  
+  try {
+    const processes = await Process.find({ assignedTo: user })
+      .populate("assignedTo", "name username")
+      .lean()
+      .exec();
+
+    const dividedProcesses = [];
+
+    processes.forEach((process) => {
+      if (process.startsAt) {
+        if (process.startsAt.getDate() !== process.endsAt.getDate()) {
+          const nextDay = new Date(process.endsAt);
+          nextDay.setHours(0, 0, 0, 0);
+
+          const newProcess = {
+            ...process,
+            part: 2,
+            startsAt: nextDay,
+            prevStart: process.startsAt,
+          }
+          dividedProcesses.push(newProcess);
+
+          process.part = 1;
+          process.prevEnd = process.endsAt;
+          process.endsAt = nextDay;
+        }
+      }
+    });
+
+    processes.push(...dividedProcesses);
+    res.json(processes);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
 
 const getProcessesBySection = async (req, res) => {
   const sectionId = req.params.id;
@@ -90,28 +133,44 @@ const updateProcess = async (req, res) => {
     assignedTo,
     description,
     color,
+    schedule,
+    showDeadline,
     deadline,
     startsAt,
-    duration,
+    endsAt,
   } = req.body;
-
+  
   try {
     const process = await Process.findOne({ _id: processId }).exec();
     if (!process) return res.status(404).json({ message: "Process not found" });
 
+    if (endsAt) process.endsAt = endsAt;
     if (startsAt) process.startsAt = startsAt;
     if (starred !== undefined) process.starred = starred;
     if (completed !== undefined) process.completed = completed;
     if (title && process.title !== title) process.title = title;
     if (color && process.color !== color) process.color = color;
+    if (process.deadline !== deadline) process.deadline = deadline;
     if (pos !== undefined && process.pos !== pos) process.pos = pos;
     if (priority && process.priority !== priority) process.priority = priority;
-    if (deadline && process.deadline !== deadline) process.deadline = deadline;
     if (sectionId && process.sectionId !== sectionId) process.sectionId = sectionId;
     if (assignedTo && process.assignedTo !== assignedTo) process.assignedTo = assignedTo;
-    if (duration !== undefined && process.duration !== duration) process.duration = duration;
     if (archived !== undefined && process.archived !== archived) process.archived = archived;
     if (description !== undefined && process.description !== description) process.description = description;
+    if (schedule !== undefined) {
+      process.schedule = schedule;
+      if (!schedule) {
+        process.startsAt = null;
+        process.endsAt = null;
+      }
+    }
+    if (showDeadline !== undefined) {
+      process.showDeadline = showDeadline;
+      if (!showDeadline) {
+        process.deadline = null;
+        process.showDeadline = false;
+      }
+    }
 
     await process.save();
     res.json({ message: "Process updated successfully" });
@@ -143,6 +202,7 @@ const processController = {
   createProcess,
   getProcesses,
   getProcessesBySection,
+  getProcessesForTimeline,
   updateProcess,
   deleteProcess,
 };
