@@ -6,8 +6,8 @@ import { FoundUserCard, NetworkUserCard } from "@/components/ui/UserCards";
 
 const Network = () => {
   const [search, setSearch] = useState("");
-  const { user: currentUser, network } = useUser();
   const [foundUsers, setFoundUsers] = useState([]);
+  const { user: currentUser, network } = useUser();
 
   useEffect(() => {
     const searchUsers = async () => {
@@ -15,11 +15,10 @@ const Network = () => {
         if (!search) return setFoundUsers([]);
         const { status, data } = await userAPI.searchUsers(search);
         if (status === 200) {
-          const foundUsers = data.map((user, i) => (
+          const foundUsers = data.map((user) => (
             <FoundUserCard
               key={user._id}
               user={user}
-              backgroundColor={i % 2 ? "transparent" : "#11111190"}
               label={
                 user.network.find((u) => u._id === currentUser._id)
                   ? "Connected"
