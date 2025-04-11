@@ -3,11 +3,10 @@ import userAPI from "@/services/api/userAPI";
 import { useToast } from "@/contexts/ToastContext";
 import { CameraIcon, Del } from "@/assets/icons/icons";
 import DisplayPicture from "@/components/ui/DisplayPicture";
-import ProgressCircle from "@/components/ui/ProgressCircle";
+import ProfileLoader from "@/components/loaders/ProfileLoader";
 
 const Profile = ({ user, setUser, viewOnly }) => {
   const { setToastMessage } = useToast();
-  const [percentage, setPercentage] = useState(0);
   const [uploading, setUploading] = useState(false);
 
   const handlePictureUpload = async (e) => {
@@ -23,29 +22,12 @@ const Profile = ({ user, setUser, viewOnly }) => {
         return;
       }
 
-      setPercentage(0);
       setUploading(true);
-
-      let fakePercentage = 0;
-      const interval = setInterval(() => {
-        fakePercentage += 5;
-        if (fakePercentage < 95) {
-          setPercentage(prev => prev + 5);
-        } else {
-          clearInterval(interval);
-        }
-      }, 500 * Math.ceil(fileSize));
-
       const formData = new FormData();
       formData.append("displayPicture", file);
       const { status, displayPicture } = await userAPI.postDisplayPicture(formData);
 
-      clearTimeout(interval);
-      setPercentage(100);
-      setTimeout(() => {
-        setPercentage(0);
-        setUploading(false);
-      }, 1000);
+      setUploading(false);
 
       if (status === 200) {
         setUser((prev) => {
@@ -59,6 +41,7 @@ const Profile = ({ user, setUser, viewOnly }) => {
   };
 
   const handlePictureDelete = async () => {
+    setUploading(true);
     const { status } = await userAPI.deleteDisplayPicture();
     if (status === 200) {
       setUser((prev) => {
@@ -76,14 +59,14 @@ const Profile = ({ user, setUser, viewOnly }) => {
         position: "top-center",
       });
     }
+    setUploading(false);
   };
 
   return (
-    <div className="relative w-fit h-23.5 mt-9 ml-2.5">
+    <div className="relative w-fit h-23.5 mt-9 ml-4.5">
       {uploading && (
-        <div className="absolute inset-0 scale-[102.15%] rounded-full">
-          <ProgressCircle
-            percentage={percentage}
+        <div className="absolute inset-0 rounded-full">
+          <ProfileLoader
             width={2}
             radius={47}
             color="#F0AD05"
@@ -100,7 +83,7 @@ const Profile = ({ user, setUser, viewOnly }) => {
         />
       </button>
 
-      {!viewOnly && (
+      {!viewOnly && !uploading && (
         <div className="absolute group z-10 inset-0.5 rounded-full overflow-hidden">
           {user.displayPicture.publicId ? (
             <>

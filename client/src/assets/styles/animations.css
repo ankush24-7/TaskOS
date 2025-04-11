@@ -29,3 +29,23 @@
     scale: 1;
   }
 }
+
+.loader {
+  animation: dash 2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 0, 289;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 289, 0;
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dasharray: 0, 289;
+    stroke-dashoffset: -289;
+  }
+}
