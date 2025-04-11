@@ -9,6 +9,10 @@ const userSchema = new Schema({
     },
     lastName: String,
   },
+  color: {
+    type: String,
+    required: true,
+  },
   username: {
     type: String,
     required: true,
@@ -24,6 +28,20 @@ const userSchema = new Schema({
   refreshToken: {
     type: String,
     default: "",
+  },
+  organization: {
+    type: String,
+    default: "",
+  },
+  bio: {
+    type: String,
+    default: "",
+  },
+  displayPicture: {
+    publicId: {
+      type: String,
+      default: "",
+    },
   },
   network: [
     {

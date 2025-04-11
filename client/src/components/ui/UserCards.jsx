@@ -1,10 +1,10 @@
 import { useState } from "react";
 import userAPI from "@/services/api/userAPI";
+import DisplayPicture from "./DisplayPicture";
 import SpinLoader from "../loaders/SpinLoader";
-import { Profile } from "@/assets/icons/icons";
 import { useUser } from "@/contexts/UserContext";
 
-export function FoundUserCard({ user, backgroundColor, label }) {
+export function FoundUserCard({ user, label }) {
   const { setNetwork } = useUser();
   const [text, setText] = useState(label);
   const [isLoading, setIsLoading] = useState(false);
@@ -34,11 +34,14 @@ export function FoundUserCard({ user, backgroundColor, label }) {
   };
 
   return (
-    <div
-      style={{ backgroundColor }}
-      className="flex justify-between items-center px-2 py-1.5 rounded-lg">
+    <div className="flex justify-between items-center px-2 py-1.5 rounded-lg odd:bg-prim-black/50">
       <div className="flex items-center gap-2">
-        <Profile className="w-10 h-10 stroke-1 stroke-white" />
+        <DisplayPicture
+          radius="44px"
+          color={user.color}
+          firstName={user.name.firstName}
+          publicId={user.displayPicture.publicId}
+        />
         <span className="flex flex-col">
           <p className="text-white">{user.username}</p>
           <p className="text-sm text-gray-300">
@@ -80,9 +83,9 @@ export function FoundUserCard({ user, backgroundColor, label }) {
   );
 }
 
-export function NetworkUserCard({ user, backgroundColor }) {
-  const { setNetwork } = useUser();
+export function NetworkUserCard({ user }) {
   const [isLoading, setIsLoading] = useState(false);
+  const { setNetwork, setSelectedProfile, setShowModal } = useUser();
 
   const handleRemove = async () => {
     setIsLoading(true);
@@ -90,20 +93,30 @@ export function NetworkUserCard({ user, backgroundColor }) {
     if (response.status === 200) setNetwork((prev) => prev.filter((u) => u._id !== user._id));
     setIsLoading(false);
   };
+
+  const handleShowProfile = () => {
+    setSelectedProfile(user);
+    setShowModal(true);
+  }
   
   return (
-    <div
-      style={{ backgroundColor }}
-      className="flex justify-between items-center px-2 py-1.5 rounded-lg">
-      <div className="flex items-center gap-2">
-        <Profile className="w-10 h-10 stroke-1 stroke-white" />
-        <span className="flex flex-col">
-          <p className="text-white">{user.username}</p>
+    <div className="flex justify-between items-center px-2 py-1.5 rounded-lg odd:bg-prim-black/50">
+      <button 
+        onClick={handleShowProfile}
+        className="flex group items-center gap-2 cursor-pointer">
+        <DisplayPicture
+          radius="44px"
+          color={user.color}
+          firstName={user.name.firstName}
+          publicId={user.displayPicture.publicId}
+        />
+        <span className="flex flex-col items-start">
+          <p className="group-hover:underline text-white">{user.username}</p>
           <p className="text-sm text-gray-300">
             {user.name.firstName + " " + (user.name.lastName || "")}
           </p>
         </span>
-      </div>
+      </button>
 
       {isLoading ? (
         <SpinLoader width="1.5rem" height="1.5rem" />

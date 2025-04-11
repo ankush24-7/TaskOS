@@ -24,6 +24,39 @@ const searchUsers = async (search) => {
   }
 };
 
+const postDisplayPicture = async (formData) => {
+  try {
+    const response = await axiosInstance.post("/user/dp", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      }
+    });
+
+    return { 
+      status: 200, 
+      displayPicture: response.data.displayPicture, 
+      message: response.data.message 
+    };
+  } catch (error) {
+    return {
+      status: error.response.status,
+      message: error.response?.data?.message,
+    };
+  }
+}
+
+const deleteDisplayPicture = async () => {
+  try {
+    const response = await axiosInstance.delete("/user/dp");
+    return { status: 200, message: response.data.message };
+  } catch (error) {
+    return {
+      status: error.response.status,
+      message: error.response?.data?.message,
+    };
+  }
+}
+
 const sendConnectRequest = async (userId) => {
   try {
     await axiosInstance.post(`/user/sender/connect-request/${userId}`);
@@ -112,6 +145,8 @@ const updatePreferences = async (preferences) => {
 const userAPI = {
   getUser,
   searchUsers,
+  postDisplayPicture,
+  deleteDisplayPicture,
   sendConnectRequest,
   cancelConnectRequest,
   acceptRequest,
