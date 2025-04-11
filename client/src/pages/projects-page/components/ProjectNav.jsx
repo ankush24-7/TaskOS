@@ -9,6 +9,7 @@ const ProjectNav = ({ search, setSearch, showArchived, setShowArchived }) => {
   const navigate = useNavigate();
 
   const toggleArchived = () => setShowArchived(!showArchived);
+
   const openNewProject = async () => {
     const response = await projectAPI.createProject({ title: "untitled" });
     if (response.status === 201) navigate(`/projects/${response._id}/dashboard/?new=true`);
@@ -16,7 +17,7 @@ const ProjectNav = ({ search, setSearch, showArchived, setShowArchived }) => {
   };
 
   return (
-    <header className="flex justify-between items-center flex-col gap-6 py-2 px-3 sm:flex-row sm:py-3 sm:px-0">
+    <header className="flex justify-between items-center gap-6 py-2 px-3 sm:flex-row sm:py-3 sm:px-0">
       <h1 className="text-white text-3xl sm:text-4xl">Projects</h1>
       <SearchBtn 
         placeholder="Find a project..."
@@ -39,7 +40,6 @@ const ProjectNav = ({ search, setSearch, showArchived, setShowArchived }) => {
           className="round-btn-hov-expand w-9 h-9 flex cursor-pointer items-center justify-center rounded-3xl hover:bg-prim-black active:bg-prim-black/10">
           <projectNavIcons.Archive />
         </button>
-        <navbarComp.RoundBtn Icon={projectNavIcons.Bell} />
         <User />
       </div>
 

@@ -2,11 +2,13 @@ import { useState } from "react";
 import SearchSection from "./SearchSection";
 import { useNavigate } from "react-router-dom";
 import CloseBtn from "@/components/ui/CloseBtn";
+import { useUser } from "@/contexts/UserContext";
 import { validateProjectName } from "@/utils/validateForm";
 import { useDashboard } from "@/contexts/DashboardContext";
 
 const ProjectModal = ({ newProject, setShowModal }) => {
   const navigate = useNavigate();
+  const { user } = useUser();
   const [error, setError] = useState("");
   const [search, setSearch] = useState("");
   const [color, setColor] = useState("white");
@@ -17,12 +19,13 @@ const ProjectModal = ({ newProject, setShowModal }) => {
 
   const handleSubmit = async () => {
     if (!name) return;
+    if (!team.some(member => member._id === user._id)) team.push(user);
     const project = {
-        title: name,
-        status: document.getElementById('status').value,
-        deadline,
-        teamMembers: team
-    }
+      title: name,
+      status: document.getElementById('status').value,
+      deadline,
+      teamMembers: team
+    };
     const id = await projectCRUD.updateProject(project);
     setProject(project);
     setShowModal(false);
@@ -37,7 +40,7 @@ const ProjectModal = ({ newProject, setShowModal }) => {
 
   return (
     <div className="absolute z-20 inset-0 flex justify-center pt-10 backdrop-blur-[1px] bg-black/5">
-      <div className="absolute z-30 flex flex-col items-center w-[50rem] h-[34rem] rounded-3xl bg-[#E0EBF5]">
+      <div className="modal relative z-30 flex flex-col items-center w-[50rem] h-[34rem] rounded-3xl drop-shadow-[20px_20px_20px_rgba(0,0,0,0.3)] bg-[#E0EBF5]">
         <div className="flex w-full justify-between px-4 py-3 rounded-t-3xl border-b border-black/10 bg-drop-header">
           <h1 className="text-lg text-neutral-900">
             {newProject ? "Create Project" : "Edit Project"}

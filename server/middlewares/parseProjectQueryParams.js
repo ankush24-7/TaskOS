@@ -4,7 +4,10 @@ const handleParams = (req, res, next) => {
   const limit = 8;
   const skip = (parseInt(page) - 1) * limit;
   const sortOrder = order === "asc" ? 1 : -1;
-  const filter = { teamMembers: { $in: [userId] }, archived: archived === "true" };
+  const filter = {
+    teamMembers: { $in: [userId] }, 
+    archived: archived === "true"
+  };
   if (search) filter.title = { $regex: search, $options: "i" };
   
   let sortBy = {};

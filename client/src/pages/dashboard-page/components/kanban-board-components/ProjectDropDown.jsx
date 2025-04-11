@@ -1,4 +1,5 @@
 import DropDown from "@/components/ui/DropDown";
+import { Pen, Archive, Del } from "@/assets/icons/icons";
 import { useDashboard } from "@/contexts/DashboardContext";
 
 const ProjectDropDown = ({ setIsOpen, setShowModal }) => {
@@ -17,26 +18,27 @@ const ProjectDropDown = ({ setIsOpen, setShowModal }) => {
 
   return (
     <DropDown
-      width={12}
-      position="bottom-left"
-      header="Options"
-      setIsOpen={setIsOpen}
+      showHeader={false}
+      position="right"
       children={
-        <div className="flex flex-col px-1.5 py-2 gap-1.5">
+        <div className="flex flex-col p-0.75 rounded-xl bg-neutral-800">
           <button
             onClick={handleEdit}
-            className="py-2 rounded-lg cursor-pointer bg-drop-btn hover:bg-drop-btn-hover active:bg-drop-btn-active">
-            <p className="text-md text-white">Edit</p>
+            className="w-full flex gap-2 pl-2 pr-4 py-2 items-center whitespace-nowrap cursor-pointer rounded-xl text-white hover:bg-neutral-900">
+            <Pen className="w-5 h-5 stroke-white" />
+            <p>Edit</p>
           </button>
           <button
             onClick={handleArchive}
-            className="py-2 rounded-lg cursor-pointer bg-drop-btn hover:bg-drop-btn-hover active:bg-drop-btn-active">
-            <p className="text-md text-white">{ project.archived === false ? "Archive" : "Unarchive"}</p>
+            className="w-full flex gap-2 pl-2 pr-4 py-2 items-center whitespace-nowrap cursor-pointer rounded-xl text-white hover:bg-neutral-900">
+            <Archive className="w-5 h-5 stroke-white" />
+            <p>{ project.archived === false ? "Archive" : "Unarchive"}</p>
           </button>
           <button
             onClick={() => projectCRUD.deleteProject()}
-            className="py-2 rounded-lg cursor-pointer bg-drop-btn hover:bg-drop-btn-hover active:bg-drop-btn-active">
-            <p className="text-md text-red-500">Delete</p>
+            className="w-full flex gap-2 pl-2 pr-4 py-2 items-center whitespace-nowrap cursor-pointer rounded-xl hover:bg-neutral-900">
+            <Del className="w-5 h-5 stroke-red-500" />
+            <p className="text-red-500">Delete</p>
           </button>
         </div>
       }

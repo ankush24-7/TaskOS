@@ -26,7 +26,7 @@ const ProjectTable = ({ projects, sort, setSort, order, setOrder, showArchived }
 
   const renderHeader = () => {
     return titles.map(([title, width], index) => (
-      <th key={index} style={{ width }} className="pl-3 flex items-center gap-3">
+      <span key={index} style={{ width }} className="pl-3 flex items-center gap-3">
         <button
           onClick={() => handleSortChange(title)}
           className="cursor-pointer font-normal text-gray-300 hover:text-white">
@@ -39,20 +39,18 @@ const ProjectTable = ({ projects, sort, setSort, order, setOrder, showArchived }
             />
           )}
         </button>
-      </th>
+      </span>
     ));
   };
 
   return (
     <>
-      <table className="flex flex-col flex-grow max-h-[31rem] mt-1 pb-2 rounded-lg sm:bg-stone-900/80">
-        <thead>
-          <tr className="w-full hidden sm:flex p-2 text-lg rounded-t-lg divide-x divide-gray-400/0 hover:divide-gray-400 bg-prim-black"> 
-            {renderHeader()}
-          </tr>
-        </thead>
+      <div className="flex flex-col flex-grow max-h-[31rem] mt-1 pb-2 rounded-3xl sm:bg-stone-900/80">
+        <div className="w-full hidden sm:flex p-2 text-lg rounded-t-3xl divide-x divide-gray-400/0 hover:divide-gray-400 bg-prim-black"> 
+          {renderHeader()}
+        </div>
 
-        <tbody className="w-full px-2 overflow-y-scroll vertical-scrollbar">
+        <div className="w-full px-2 pt-0.5 overflow-y-scroll vertical-scrollbar">
           {projects.length === 0 ? (
             <p className="text-xl text-center mt-20 text-gray-300 whitespace-pre-line">
               {showArchived 
@@ -63,9 +61,9 @@ const ProjectTable = ({ projects, sort, setSort, order, setOrder, showArchived }
           ): (
             projects
           )}
-        </tbody>
+        </div>
 
-      </table>
+      </div>
       <AddBtn />
     </>
   );

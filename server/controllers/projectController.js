@@ -39,7 +39,7 @@ const getProjects = async(req, res) => {
   try {
     const totalProjects = await Project.countDocuments(filter).exec();
     const projects = await Project.find(filter)
-      .populate('userId', 'name username')
+      .populate('userId', '_id name username')
       .populate('teamMembers', 'name username')
       .sort(sort)
       .skip(skip)
@@ -57,7 +57,7 @@ const getProjectByID = async(req, res) => {
   const projectId = req.params.id;
   try {
     const project = await Project.findOne({ _id: projectId })
-      .populate('teamMembers', 'name username')
+      .populate('teamMembers', 'name username color displayPicture')
       .lean()
       .exec();
     return res.json({ project });
@@ -94,7 +94,7 @@ const deleteProject = async(req, res) => {
   if(!project) return res.status(404).json({ message: 'Project not found' });
 
   try {
-    await Process.deleteMany({ sectionId: { $in: project.sections } }).exec();
+    await Process.deleteMany({ projectId }).exec();
     await Section.deleteMany({ projectId }).exec();
     await Project.deleteOne({ _id: projectId }).exec();
     return res.json({ message: 'Project deleted successfully' });
