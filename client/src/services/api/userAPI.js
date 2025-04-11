@@ -12,6 +12,18 @@ const getUser = async () => {
   }
 };
 
+const updateUserInfo = async (user) => {
+  try {
+    const response = await axiosInstance.put("/user", user);
+    return { status: 200, user: response.data.user ,message: response.data.message };
+  } catch (error) {
+    return {
+      status: error.response.status,
+      message: error.response?.data?.message,
+    };
+  }
+}
+
 const searchUsers = async (search) => {
   try {
     const response = await axiosInstance.get(`/user/search?search=${search}`);
@@ -145,15 +157,16 @@ const updatePreferences = async (preferences) => {
 const userAPI = {
   getUser,
   searchUsers,
-  postDisplayPicture,
-  deleteDisplayPicture,
-  sendConnectRequest,
-  cancelConnectRequest,
   acceptRequest,
-  dismissRequest,
   getPreference,
+  dismissRequest,
+  updateUserInfo,
   removeConnection,
   updatePreferences,
+  sendConnectRequest,
+  postDisplayPicture,
+  cancelConnectRequest,
+  deleteDisplayPicture,
 };
 
 export default userAPI;

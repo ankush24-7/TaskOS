@@ -85,7 +85,6 @@ const postDisplayPicture = async (req, res) => {
   }
 };
 
-
 const deleteDisplayPicture = async (req, res) => {
   const userId = req.user.userId;
   if(!userId) {
@@ -137,8 +136,8 @@ const updateUser = async (req, res) => {
     }
 
     if (bio !== user.bio) user.bio = bio;
+    if (firstName) user.name.firstName = firstName;
     if (lastName !== user.name.lastName) user.name.lastName = lastName;
-    if (firstName !== user.name.firstName) user.name.firstName = firstName;
     if (organization !== user.organization) user.organization = organization;
 
     if (username) {
@@ -173,7 +172,16 @@ const updateUser = async (req, res) => {
     }
 
     await user.save();
-    return res.json({ message: "User updated" });
+    return res.json({ 
+      user: {
+        name: user.name,
+        username: user.username,
+        email: user.email,
+        organization: user.organization,
+      },
+      status: 200,
+      message: "User updated" 
+    });
   } catch (err) {
     return res.status(500).json({ message: "Server error" });
   }
