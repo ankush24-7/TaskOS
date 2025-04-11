@@ -1,6 +1,6 @@
 import CloseBtn from "./CloseBtn";
 
-const DropDown = ({ width, position, bgColor = "#111", header, setIsOpen, children, showHeader = true }) => {
+const DropDown = ({ showHeader = true, width, position, bgColor = "#111", children, header, setIsOpen }) => {
   switch (position) {
     case "right":
       position = "top-0 left-full translate-x-0.5";
@@ -32,14 +32,14 @@ const DropDown = ({ width, position, bgColor = "#111", header, setIsOpen, childr
   }
 
   const style = { 
-    width: `${width}rem`,
+    width: width && `${width}rem`,
     backgroundColor: bgColor,
   };
 
   return (
     <div 
       style={ style }
-      className={`absolute z-10 flex flex-col rounded-xl shadow-md ${position}`}>
+      className={`dropdown absolute z-40 flex flex-col rounded-xl shadow-[5px_5px_7px_rgba(0,0,0,0.3)] ${position}`}>
       {showHeader && (
         <div className="flex items-center justify-between px-2.5 py-1 rounded-t-xl border-b border-drop-border bg-drop-header">
           <h1 className="text-lg text-center py-1 text-white">{header}</h1>

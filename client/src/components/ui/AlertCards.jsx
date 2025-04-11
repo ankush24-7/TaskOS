@@ -1,6 +1,6 @@
 import userAPI from "@/services/api/userAPI";
-import { Profile } from "@/assets/icons/icons";
 import { useUser } from "@/contexts/UserContext";
+import DisplayPicture from "./DisplayPicture";
 
 export function ConnectCard({ req }) {
   const { setRequests, setNetwork } = useUser();
@@ -21,7 +21,12 @@ export function ConnectCard({ req }) {
   return (
     <div className="flex items-center justify-between px-2 py-3 rounded-lg bg-prim-black/50">
       <span className="flex items-center gap-2">
-        <Profile className="w-8 h-8 stroke-1 stroke-white" />
+        <DisplayPicture 
+          radius="44px"
+          color={req.sender.color}
+          firstName={req.sender.name.firstName}
+          publicId={req.sender.displayPicture.publicId}
+        />
         <p className="leading-5 text-white">
           <span className="font-medium">{req.sender.username}</span> wants to connect with you
         </p>
