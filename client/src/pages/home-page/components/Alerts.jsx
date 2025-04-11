@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useUser } from "@/contexts/UserContext";
+import { ConnectCard, InviteCard } from "./AlertCards";
 import AlertLoader from "@/components/loaders/AlertLoader";
-import { ConnectCard, InviteCard } from "@/components/ui/AlertCards";
 
 const Alerts = () => {
   const { requests } = useUser();

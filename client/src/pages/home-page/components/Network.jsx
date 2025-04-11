@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import userAPI from "@/services/api/userAPI";
 import { useUser } from "@/contexts/UserContext";
 import { SearchIcon } from "@/assets/icons/icons";
-import { FoundUserCard, NetworkUserCard } from "@/components/ui/UserCards";
+import { FoundUserCard, NetworkUserCard } from "./NetworkUserCards";
 
 const Network = () => {
   const [search, setSearch] = useState("");

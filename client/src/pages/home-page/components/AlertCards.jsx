@@ -1,6 +1,6 @@
 import userAPI from "@/services/api/userAPI";
 import { useUser } from "@/contexts/UserContext";
-import DisplayPicture from "./DisplayPicture";
+import DisplayPicture from "@/components/ui/DisplayPicture";
 
 export function ConnectCard({ req }) {
   const { setRequests, setNetwork } = useUser();
