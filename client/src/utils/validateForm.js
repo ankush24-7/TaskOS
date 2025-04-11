@@ -36,7 +36,7 @@ export const validateUsername = (username, setColors, setErrors) => {
   }
   if (/[^a-z0-9_]/.test(username)) {
     setColors((prev) => ({ ...prev, username: "#fb2c36" }));
-    setErrors((prev) => ({ ...prev, username: "Username must contain only small letters, numbers, and underscores" }));
+    setErrors((prev) => ({ ...prev, username: "Only use small letters, numbers, or underscore" }));
     return;
   }
   setColors((prev) => ({ ...prev, username: "#00a63e" }));

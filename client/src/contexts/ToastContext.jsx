@@ -7,10 +7,12 @@ export const useToast = () => useContext(ToastContext);
 
 export const ToastProvider = ({ children }) => {
   const [toastMessage, setToastMessage] = useState(null);
+  const [position, setPosition] = useState("bottom-right");
 
   useEffect(() => {
     if (toastMessage) {
-      const { type, message } = toastMessage;
+      const { type, message, position } = toastMessage;
+      setPosition(position);
       if (type === "success") toast.success(message);
       else toast.error(message);
     }
@@ -19,7 +21,7 @@ export const ToastProvider = ({ children }) => {
   return (
     <ToastContext.Provider value={{ setToastMessage }}>
       {children}
-      <Toaster richColors position="bottom-right" />
+      <Toaster richColors position={position} />
     </ToastContext.Provider>
   );
 };

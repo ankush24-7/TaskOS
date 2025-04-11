@@ -29,11 +29,11 @@ app.use(verifyJWT);
 app.use('/user', require('./routes/userRoutes'));
 app.use('/alert', require('./routes/alertRoutes'));
 app.use('/project', require('./routes/projectRoutes'));
+app.use('/process', require('./routes/processRoutes'));
 
 app.use(verifyProjectId);
 
 app.use('/section', require('./routes/sectionRoutes'));
-app.use('/process', require('./routes/processRoutes'));
 
 mongoose.connection.once('open', () => {
     console.log('Connected to MongoDB');

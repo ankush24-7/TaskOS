@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { authPageIcons } from "@icons";
-import authAPI from "@/services/AuthAPI";
+import authAPI from "@/services/authAPI";
 import validate from "@/utils/validateForm";
 import AuthHeader from "./components/AuthHeader";
 import { useToast } from "@/contexts/ToastContext";
@@ -27,6 +27,20 @@ const SignUpPage = () => {
     password: "white",
     confirmPassword: "white",
   });
+  const displayColors = [
+    "#E00000",
+    "#F59F00",
+    "#B1401B",
+    "#F0192E",
+    "#5E807F",
+    "#4E6A69",
+    "#336699",
+    "#8300E0",
+    "#C51BC5",
+    "#008F70",
+    "#625141",
+    "#545964",
+  ];
 
   const validateField = (e) => {
     const { name, value } = e.target;
@@ -65,13 +79,18 @@ const SignUpPage = () => {
       username: username.value,
       email: email.value,
       password: password.value,
+      color: displayColors[Math.floor(Math.random() * displayColors.length)],
     };
     if (!user.name.firstName || !user.username || !user.email || !user.password) return;
     
     const res = await authAPI.authenticate(user, "register");
     if (res === 201) {
       navigate("/home");
-      setToastMessage({ message: "Welcome to TaskOS", type: "success" });
+      setToastMessage({ 
+        type: "success",
+        position: "top-center",
+        message: "Welcome to TaskOS", 
+      });
     }
     else setToastMessage({ message: res, type: "error" });
   };

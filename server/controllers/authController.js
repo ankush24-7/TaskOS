@@ -3,7 +3,7 @@ const User = require('../models/User');
 const generateTokens = require('../utils/generateTokens');
 
 const handleRegistration = async (req, res) => {
-  const { name, username, email, password } = req.body;
+  const { name, username, email, color, password } = req.body;
 
   const emailAlreadyExists = await User.findOne({ email }).lean().exec();
   if (emailAlreadyExists) {
@@ -21,6 +21,7 @@ const handleRegistration = async (req, res) => {
       name,
       username,
       email,
+      color,
       password: hashedPassword
     });
     

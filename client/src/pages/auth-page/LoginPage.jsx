@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { authPageIcons } from "@icons";
-import authAPI from "@/services/AuthAPI";
+import authAPI from "@/services/authAPI";
 import AuthHeader from "./components/AuthHeader";
 import { useToast } from "@/contexts/ToastContext";
 import { Link, useNavigate } from "react-router-dom";
