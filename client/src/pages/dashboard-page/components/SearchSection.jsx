@@ -1,23 +1,21 @@
 import { useEffect, useState } from "react";
 import { useUser } from "@/contexts/UserContext";
-import { useDashboard } from "@/contexts/DashboardContext";
 import { AddTask, RemoveIcon, Profile, Close } from "@/assets/icons/icons";
 
 const SearchSection = ({ search, setSearch, team, setTeam }) => {
   const { user, network } = useUser();
-  const { projectCRUD } = useDashboard();
   const [loading, setLoading] = useState(true);
   const [resultLength, setResultLength] = useState(0);
   const [searchResult, setSearchResult] = useState([]);
 
   const renderTeam = () => {
     if (!team) return;
-    return team.map((member, i) => {
-      if (member._id === user._id) return;
+    return team.map((member) => {
       return (
         <div
           key={member._id}
-          className="flex items-center justify-between gap-2 rounded-xl px-1 py-2 bg-white/40">
+          style={{ display: member._id === user._id && "none" }}
+          className="flex items-center justify-between gap-2 rounded-xl px-1 py-2 odd:bg-white/20 even:bg-white/50">
           <span className="flex items-center gap-1">
             <Profile className="w-8 h-8 stroke-1 stroke-neutral-900" />
             <span className="flex flex-col">
@@ -62,7 +60,7 @@ const SearchSection = ({ search, setSearch, team, setTeam }) => {
         searchFilter.map((user, i) => (
           <div
             key={user._id}
-            className="flex items-center justify-between rounded-lg px-1 py-1.5 bg-black/4">
+            className="flex items-center justify-between rounded-lg px-1 py-1.5 odd:bg-black/7">
             <div className="flex items-center gap-2">
               <Profile className="w-8 h-8 stroke-1 stroke-neutral-900" />
               <span className="flex flex-col">

@@ -1,4 +1,4 @@
-import authAPI from "@/services/AuthAPI";
+import authAPI from "@/services/authAPI";
 import { activityBarIcons } from "@icons";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -72,7 +72,7 @@ function ActivityBar() {
         <GrayButton
           Icon={activityBarIcons.Settings}
           label="Settings"
-          to="/"
+          to="/settings"
           expanded={expanded}
         />
         <GrayButton
