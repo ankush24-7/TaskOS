@@ -1,39 +1,23 @@
-import { useState } from "react";
 import validate from "@/utils/validateForm";
-import { useUser } from "@/contexts/UserContext";
 
-const EditPersonalInfo = ({ user, setUser }) => {
-  const [errors, setErrors] = useState({
-    firstName: "",
-    lastName: "",
-    username: "",
-    email: "",
-  });
-  const [colors, setColors] = useState({
-    organization: "#ffffff30",
-    firstName: "#ffffff30",
-    lastName: "#ffffff30",
-    username: "#ffffff30",
-    email: "#ffffff30",
-  });
-
+const EditPersonalInfo = ({ user, errors, setErrors, colors, setColors }) => {
   const validateField = (e) => {
     const { name, value } = e.target;
     switch (name) {
       case "firstName":
         validate.validateFirstName(value, setColors, setErrors);
         break;
-      case "lastName": 
+      case "lastName":
         validate.validateLastName(value, setColors, setErrors);
         break;
-      case "username": 
+      case "username":
         validate.validateUsername(value, setColors, setErrors);
         break;
       case "email":
         validate.validateEmail(value, setColors, setErrors);
         break;
       case "organization":
-        value.length 
+        value.length
           ? setColors({ ...colors, organization: "#00a63e" })
           : setColors({ ...colors, organization: "#ffffff30" });
         break;
@@ -46,18 +30,19 @@ const EditPersonalInfo = ({ user, setUser }) => {
         <div className="flex">
           <div className="flex flex-col w-1/2">
             <label htmlFor="firstName" className="text-gray-300">
-              First Name
+              First Name*
             </label>
             <input
               type="text"
               name="firstName"
-              placeholder={user.name.firstName}
               autoComplete="off"
+              defaultValue={user.name.firstName}
+              placeholder="Enter your first name"
               onChange={(e) => validateField(e)}
-              style={{ "borderColor": colors.firstName }}
+              style={{ borderColor: colors.firstName }}
               className="text-md max-w-60 rounded-lg px-1.5 py-1 mt-1 focus:outline-none border border-white/20 text-white hover:bg-prim-black/30 focus:bg-prim-black/30"
             />
-            <p className="text-red-500 text-[10px] h-1 pt-0.5">{errors.firstName}</p>
+            <p className="text-red-500 text-[10px] h-1">{errors.firstName}</p>
           </div>
           <div className="flex flex-col w-1/2">
             <label htmlFor="lastName" className="text-gray-300">
@@ -66,45 +51,48 @@ const EditPersonalInfo = ({ user, setUser }) => {
             <input
               type="text"
               name="lastName"
-              placeholder={user.name.lastName || "Enter your last name"}
               autoComplete="off"
+              defaultValue={user.name.lastName}
+              placeholder="Enter your last name"
               onChange={(e) => validateField(e)}
-              style={{ "borderColor": colors.lastName }}
+              style={{ borderColor: colors.lastName }}
               className="text-md max-w-60 rounded-lg px-1.5 py-1 mt-1 focus:outline-none border border-white/20 text-white hover:bg-prim-black/30 focus:bg-prim-black/30"
             />
-            <p className="text-red-500 text-[10px] h-1 pt-0.5">{errors.lastName}</p>
+            <p className="text-red-500 text-[10px] h-1">{errors.lastName}</p>
           </div>
         </div>
         <div className="flex">
           <div className="flex flex-col w-1/2">
             <label htmlFor="username" className="text-gray-300">
-              Username
+              Username*
             </label>
             <input
               type="text"
               name="username"
-              placeholder={user.username}
               autoComplete="off"
+              defaultValue={user.username}
+              placeholder="Enter your username"
               onChange={(e) => validateField(e)}
-              style={{ "borderColor": colors.username }}
+              style={{ borderColor: colors.username }}
               className="text-md max-w-60 rounded-lg px-1.5 py-1 mt-1 focus:outline-none border border-white/20 text-white hover:bg-prim-black/30 focus:bg-prim-black/30"
             />
-            <p className="text-red-500 text-[10px] h-1 pt-0.5">{errors.username}</p>
+            <p className="text-red-500 text-[10px] h-1">{errors.username}</p>
           </div>
           <div className="flex flex-col w-1/2">
             <label htmlFor="email" className="text-gray-300">
-              Email
+              Email*
             </label>
             <input
               type="email"
               name="email"
-              placeholder={user.email}
               autoComplete="off"
+              defaultValue={user.email}
+              placeholder="Enter your email"
               onChange={(e) => validateField(e)}
-              style={{ "borderColor": colors.email }}
+              style={{ borderColor: colors.email }}
               className="text-md max-w-60 rounded-lg px-1.5 py-1 mt-1 focus:outline-none border border-white/20 text-white hover:bg-prim-black/30 focus:bg-prim-black/30"
             />
-            <p className="text-red-500 text-[10px] h-1 pt-0.5">{errors.email}</p>
+            <p className="text-red-500 text-[10px] h-1">{errors.email}</p>
           </div>
         </div>
         <div className="flex flex-col">
@@ -114,10 +102,11 @@ const EditPersonalInfo = ({ user, setUser }) => {
           <input
             type="text"
             name="organization"
-            placeholder={user.organization || "Enter your organization"}
             autoComplete="off"
+            defaultValue={user.organization}
+            placeholder="Enter your organization"
             onChange={(e) => validateField(e)}
-            style={{ "borderColor": colors.organization }}
+            style={{ borderColor: colors.organization }}
             className="text-md max-w-60 rounded-lg px-1.5 py-1 mt-1 focus:outline-none border border-white/20 text-white hover:bg-prim-black/30 focus:bg-prim-black/30"
           />
         </div>
