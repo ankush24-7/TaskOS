@@ -7,7 +7,7 @@ import { useUser } from "@/contexts/UserContext";
 export function FoundUserCard({ user, label }) {
   const [text, setText] = useState(label);
   const [isLoading, setIsLoading] = useState(false);
-  const { setNetwork, setShowModal, setSelectedProfile } = useUser();
+  const { setNetwork, handleShowModal } = useUser();
 
   const handleConnect = async () => {
     setIsLoading(true);
@@ -33,15 +33,10 @@ export function FoundUserCard({ user, label }) {
     setIsLoading(false);
   };
 
-  const handleShowProfile = () => {
-    setSelectedProfile(user);
-    setShowModal(true);
-  }
-
   return (
     <div className="flex justify-between items-center px-2 py-1.5 rounded-lg odd:bg-prim-black/50">
       <button 
-        onClick={handleShowProfile}
+        onClick={() => handleShowModal(user)}
         className="flex group items-center gap-2 cursor-pointer">
         <DisplayPicture
           radius="44px"
@@ -92,7 +87,7 @@ export function FoundUserCard({ user, label }) {
 
 export function NetworkUserCard({ user }) {
   const [isLoading, setIsLoading] = useState(false);
-  const { setNetwork, setSelectedProfile, setShowModal } = useUser();
+  const { setNetwork, handleShowModal } = useUser();
 
   const handleRemove = async () => {
     setIsLoading(true);
@@ -100,16 +95,11 @@ export function NetworkUserCard({ user }) {
     if (response.status === 200) setNetwork((prev) => prev.filter((u) => u._id !== user._id));
     setIsLoading(false);
   };
-
-  const handleShowProfile = () => {
-    setSelectedProfile(user);
-    setShowModal(true);
-  }
   
   return (
     <div className="flex justify-between items-center px-2 py-1.5 rounded-lg odd:bg-prim-black/50">
       <button 
-        onClick={handleShowProfile}
+        onClick={() => handleShowModal(user)}
         className="flex group items-center gap-2 cursor-pointer">
         <DisplayPicture
           radius="44px"

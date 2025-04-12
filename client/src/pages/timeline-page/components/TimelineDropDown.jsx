@@ -9,24 +9,23 @@ const TimelineDropDown = () => {
       showHeader={false}
       width={7}
       position="bottom-left"
-      bgColor="#fff"
       children={
-        <div className="flex flex-col p-0.5">
+        <div className="flex flex-col p-0.75 rounded-xl bg-neutral-800">
           <button
             onClick={() => setDays(1)}
-            className="flex items-center justify-between px-2 py-1.5 rounded-xl cursor-pointer text-neutral-900 hover:bg-prim-black/15">
+            className="w-full flex items-center justify-between p-1.5 rounded-lg cursor-pointer text-white hover:bg-neutral-900">
             <p>Day</p>
             <p>D</p>
           </button>
           <button
             onClick={() => setDays(4)}
-            className="flex items-center justify-between px-2 py-1.5 rounded-lg cursor-pointer text-neutral-900 hover:bg-prim-black/15">
+            className="w-full flex items-center justify-between p-1.5 rounded-lg cursor-pointer text-white hover:bg-neutral-900">
             <p>4 days</p>
             <p>X</p>
           </button>
           <button
             onClick={() => setDays(7)}
-            className="flex items-center justify-between px-2 py-1.5 rounded-lg cursor-pointer text-neutral-900 hover:bg-prim-black/15">
+            className="w-full flex items-center justify-between p-1.5 rounded-lg cursor-pointer text-white hover:bg-neutral-900">
             <p>Week</p>
             <p>W</p>
           </button>

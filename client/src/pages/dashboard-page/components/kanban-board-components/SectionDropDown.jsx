@@ -35,14 +35,14 @@ const SectionDropDown = ({ section, color, setColor, desc, setDesc, setIsOpen })
 
   return (
     <DropDown
-      width={18}
+      width={17}
       position="bottom-right"
       header="Options"
       setIsOpen={setIsOpen}
       children={
-        <div className="flex flex-col px-2 pb-2">
-          <div className="flex flex-col border-b py-4 gap-2 border-drop-border">
-            <span className="flex gap-4 flex-wrap">
+        <div className="flex flex-col px-1.5 pb-1 rounded-b-xl bg-neutral-800">
+          <div className="flex flex-col border-b py-4 gap-2 border-white/10">
+            <span className="flex gap-4 flex-wrap justify-evenly">
               <ColorPalette 
                 colors={stateColors}
                 color={color}
@@ -52,7 +52,7 @@ const SectionDropDown = ({ section, color, setColor, desc, setDesc, setIsOpen })
           </div>
           <form
             onSubmit={(e) => e.preventDefault()}
-            className="pt-3 pb-2 border-b border-drop-border">
+            className="pt-3 pb-1 border-b border-white/10">
             <label htmlFor="description" className="text-md text-white">
               Description
             </label>
@@ -62,12 +62,12 @@ const SectionDropDown = ({ section, color, setColor, desc, setDesc, setIsOpen })
               onChange={(e) => setDesc(e.target.value)}
               onKeyDown={handleDescKeyDown}
               placeholder="Press enter to save"
-              className="rounded-xl min-h-18 w-full mt-1.5 p-1 field-sizing-content focus:outline-none text-white bg-drop-btn"
+              className="rounded-xl min-h-18 max-h-32 w-full mt-1.5 p-1 field-sizing-content vertical-scrollbar focus:outline-none text-white bg-drop-btn"
             />
           </form>
           <button
             onClick={handleDelete}
-            className="w-full gap-2 mt-2 py-2 px-3 rounded-xl cursor-pointer bg-drop-btn hover:bg-drop-btn-hover active:bg-drop-btn-active">
+            className="w-full gap-2 mt-2 py-2 px-3 rounded-xl cursor-pointer bg-prim-black hover:bg-neutral-900 active:bg-prim-black/30">
             <p className="text-lg text-center text-red-500">Delete Section</p>
           </button>
         </div>

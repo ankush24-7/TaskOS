@@ -14,6 +14,11 @@ export const UserProvider = ({ children }) => {
   const [selectedProfile, setSelectedProfile] = useState(null);
   const { showModal, setShowModal } = useModal({ modalState: false });
 
+  const handleShowModal = (user) => {
+    setShowModal(true);
+    setSelectedProfile(user);
+  }
+
   const handleModalClose = () => {
     setShowModal(false);
     setSelectedProfile(null);
@@ -53,8 +58,7 @@ export const UserProvider = ({ children }) => {
         setNetwork,
         requests,
         setRequests,
-        setShowModal,
-        setSelectedProfile,
+        handleShowModal,
       }}>
 
       {children}

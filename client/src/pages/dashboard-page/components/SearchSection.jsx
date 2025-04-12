@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useUser } from "@/contexts/UserContext";
 import { AddTask, RemoveIcon, Profile, Close } from "@/assets/icons/icons";
+import DisplayPicture from "@/components/ui/DisplayPicture";
 
 const SearchSection = ({ search, setSearch, team, setTeam }) => {
-  const { user, network } = useUser();
   const [loading, setLoading] = useState(true);
   const [resultLength, setResultLength] = useState(0);
   const [searchResult, setSearchResult] = useState([]);
+  const { user, network, handleShowModal } = useUser();
 
   const renderTeam = () => {
     if (!team) return;
@@ -16,15 +17,22 @@ const SearchSection = ({ search, setSearch, team, setTeam }) => {
           key={member._id}
           style={{ display: member._id === user._id && "none" }}
           className="flex items-center justify-between gap-2 rounded-xl px-1 py-2 odd:bg-white/20 even:bg-white/50">
-          <span className="flex items-center gap-1">
-            <Profile className="w-8 h-8 stroke-1 stroke-neutral-900" />
-            <span className="flex flex-col">
-              <p className="text-sm text-neutral-900">{member.username}</p>
-              <p className="text-xs leading-4 text-neutral-900">
+          <button 
+            onClick={() => handleShowModal(member)}
+            className="group flex items-center gap-1 cursor-pointer">
+            <DisplayPicture
+              radius="24px"
+              color={member.color}
+              firstName={member.name.firstName}
+              publicId={member.displayPicture?.publicId}
+            />
+            <span className="flex flex-col items-start">
+              <p className="text-xs group-hover:underline text-neutral-900">{member.username}</p>
+              <p className="text-[10px] leading-4 text-neutral-900">
                 {member.name.firstName + " " + (member.name.lastName || "")}
               </p>
             </span>
-          </span>
+          </button>
           <button
             onClick={() => handleRemoveMember(member._id)}
             className="cursor-pointer">
@@ -57,15 +65,20 @@ const SearchSection = ({ search, setSearch, team, setTeam }) => {
 
       setResultLength(searchFilter.length);
       setSearchResult(
-        searchFilter.map((user, i) => (
+        searchFilter.map((user) => (
           <div
             key={user._id}
-            className="flex items-center justify-between rounded-lg px-1 py-1.5 odd:bg-black/7">
-            <div className="flex items-center gap-2">
-              <Profile className="w-8 h-8 stroke-1 stroke-neutral-900" />
-              <span className="flex flex-col">
-                <p className="text-sm text-neutral-900">{user.username}</p>
-                <p className="text-xs leading-4 text-neutral-900">
+            className="flex items-center justify-between rounded-xl px-1 py-1.5 odd:bg-black/7">
+            <div className="flex items-center gap-1">
+              <DisplayPicture
+                radius="24px"
+                color={user.color}
+                firstName={user.name.firstName}
+                publicId={user.displayPicture?.publicId}
+              />
+              <span className="flex flex-col items-start">
+                <p className="text-xs text-neutral-900">{user.username}</p>
+                <p className="text-[10px] leading-4 text-neutral-900">
                   {user.name.firstName + " " + (user.name.lastName || "")}
                 </p>
               </span>
