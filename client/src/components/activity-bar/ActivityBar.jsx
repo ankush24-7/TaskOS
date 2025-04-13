@@ -52,16 +52,9 @@ function ActivityBar() {
           currentPath={location.pathname}
         />
         <ActivityBarItem
-          Icon={activityBarIcons.Star}
-          label="Starred"
-          to="/starred"
-          expanded={expanded}
-          currentPath={location.pathname}
-        />
-        <ActivityBarItem
           Icon={activityBarIcons.MyTasks}
-          label="My Tasks"
-          to="/my-tasks"
+          label="Assigned"
+          to="/my-processes"
           expanded={expanded}
           currentPath={location.pathname}
         />

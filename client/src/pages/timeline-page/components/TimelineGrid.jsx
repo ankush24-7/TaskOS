@@ -1,12 +1,23 @@
 import TimelineCards from "./TimelineCards";
+import { useNavigate } from "react-router-dom";
 import { useTimeline } from "@/contexts/TimelineContext";
 
 const TimelineGrid = () => {
+  const navigate = useNavigate();
   const { days, dates, currentWeekProcesses } = useTimeline();
 
   const pos = Math.floor(
     ((new Date().getHours() * 60 + new Date().getMinutes()) / (24 * 60)) * 100
   );
+
+  const handleClick = (process) => {
+    navigate(`/projects/${process.projectId}/dashboard/`, {
+      state: {
+        selectedProcess: process, 
+        showProcessModal: true,
+      },
+    });
+  }
 
   const TimelineColumn = ({ date, i }) => {
     return (
@@ -41,6 +52,7 @@ const TimelineGrid = () => {
                   startsAt={startsAt}
                   title={process.title}
                   backgroundColor={process.color.hex}
+                  handleClick={() => handleClick(process)}
                 />
               );
             } else if (duration === 30) {
@@ -53,6 +65,7 @@ const TimelineGrid = () => {
                   startsAt={startsAt}
                   title={process.title}
                   backgroundColor={process.color.hex}
+                  handleClick={() => handleClick(process)}
                 />
               );
             } else if (duration === 45) {
@@ -65,6 +78,7 @@ const TimelineGrid = () => {
                   startsAt={startsAt}
                   title={process.title}
                   backgroundColor={process.color.hex}
+                  handleClick={() => handleClick(process)}
                 />
               );
             } else {
@@ -77,7 +91,8 @@ const TimelineGrid = () => {
                   startsAt={startsAt}
                   title={process.title}
                   backgroundColor={process.color.hex}
-                />
+                  handleClick={() => handleClick(process)}
+                  />
               );
             }
           }

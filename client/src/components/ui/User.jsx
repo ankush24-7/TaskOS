@@ -10,7 +10,7 @@ const User = () => {
   const { user, setShowModal } = useUser();
   const { isOpen, setIsOpen, dropdownRef } = useDropDown();
 
-  const handleClick = () => {
+  const handleEditProfile = () => {
     setIsOpen(false);
     setShowModal(true);
   }
@@ -36,7 +36,7 @@ const User = () => {
           children={
             <div className="flex flex-col p-0.75 rounded-xl bg-neutral-800">
               <button 
-                onClick={handleClick}
+                onClick={handleEditProfile}
                 className="w-full flex gap-2 pl-2 pr-4 py-2 items-center whitespace-nowrap cursor-pointer rounded-xl text-white hover:bg-neutral-900">
                 <Profile className="w-5 h-5 stroke-white" />
                 <p>My Profile</p>
