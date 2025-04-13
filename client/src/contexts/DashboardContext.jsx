@@ -3,7 +3,7 @@ import { useToast } from "./ToastContext";
 import axiosInstance from "@/utils/axiosInstance";
 import projectAPI from "@/services/api/projectAPI";
 import processAPI from "@/services/api/processAPI";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { useEffect, useContext, useState, createContext } from "react";
 import ProcessModal from "@/components/modals/process-modal/ProcessModal";
 
@@ -13,15 +13,16 @@ export const useDashboard = () => useContext(DashboardContext);
 
 export const DashboardProvider = ({ children }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { setToastMessage } = useToast();
   const projectId = useParams().projectId;
   const [project, setProject] = useState({});
   const [sections, setSections] = useState([]);
   const [processes, setProcesses] = useState([]);
   const [processPosition, setProcessPosition] = useState(null);
-  const [selectedProcess, setSelectedProcess] = useState(null);
   const [selectedSection, setSelectedSection] = useState(null);
-  const { showModal: showProcessModal, setShowModal: setShowProcessModal } = useModal({ modalState: false });
+  const [selectedProcess, setSelectedProcess] = useState(null);
+  const { showModal: showProcessModal, setShowModal: setShowProcessModal, modalRef: processModalRef } = useModal();
 
   const fetchProject = async () => {
     try {
@@ -224,6 +225,15 @@ export const DashboardProvider = ({ children }) => {
     fetchData();
   }, [projectId]);
 
+  useEffect(() => {
+    if (location.state?.showProcessModal) {
+      setSelectedProcess(location.state.selectedProcess);
+      setShowProcessModal(true);
+
+      navigate(`/projects/${projectId}/dashboard`, { replace: true });
+    }
+  }, [location.state]);
+
   const projectCRUD = { updateProject, deleteProject };
   const sectionCRUD = { createSection, updateSection, updateSectionOrder, deleteSection };
   const processCRUD = { createProcess, updateProcess, updateProcessOrder, deleteProcess };
@@ -250,9 +260,10 @@ export const DashboardProvider = ({ children }) => {
       {children}
       { showProcessModal && (
         <ProcessModal 
+          ref = {processModalRef}
+          section={selectedSection} 
           selectedProcess={selectedProcess}
           setShowProcessModal={setShowProcessModal} 
-          section={selectedSection}
         />
       )}
     </DashboardContext.Provider>

@@ -29,10 +29,6 @@ const processSchema = new Schema(
       type: Boolean,
       default: false,
     },
-    archived: {
-      type: Boolean,
-      default: false,
-    },
     starred: {
       type: Boolean, 
       default: false,
