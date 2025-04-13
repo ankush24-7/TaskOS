@@ -48,7 +48,7 @@ function Section({ section, processes }) {
     <div
       ref={setNodeRef}
       style={style}
-      className="w-[19rem] h-full rounded-lg bg-black/20">
+      className="relative w-[19rem] h-full rounded-xl bg-black/20">
       <Header section={section} attributes={attributes} listeners={listeners} />
       <div className="h-[88%] pb-20 overflow-y-auto vertical-scrollbar">
         <div className="flex flex-col items-center px-3">
@@ -80,8 +80,8 @@ function Section({ section, processes }) {
           </button>
 
           {processes.length === 0 && (
-            <div className="relative w-full">
-              <p className="absolute left-1/2 -translate-x-1/2 max-w-60 text-ellipsis overflow-hidden mt-20 text-gray-400">
+            <div className="absolute inset-5 top-1/2">
+              <p className="w-full line-clamp-6 text-center text-ellipsis overflow-hidden text-gray-400">
                 {section.description || "No description"}
               </p>
             </div>

@@ -44,7 +44,7 @@ function Header({ section, attributes, listeners }) {
   }, [color]);
 
   return (
-    <div style={{ backgroundColor: color }} className="w-full rounded-t-lg">
+    <div style={{ backgroundColor: color }} className="w-full rounded-t-xl">
       <div className="flex items-center group px-3 py-2">
         <span {...attributes} {...listeners}>
           <DragIcon className="stroke-gray-200 hover:stroke-white cursor-grab" />
