@@ -1,12 +1,14 @@
+import { forwardRef } from "react";
 import BioForm from "./components/BioForm";
 import Profile from "./components/Profile";
 import { Close } from "@/assets/icons/icons";
 import PersonalInfoForm from "./components/PersonalInfoForm";
 
-const ProfileModal = ({ user, setUser, viewOnly, handleModalClose }) => {
+const ProfileModal = forwardRef(({ user, setUser, viewOnly, handleModalClose }, ref) => {
   return (
     <div className="absolute z-20 inset-0 overflow-hidden backdrop-blur-[1px] bg-black/10">
       <div
+        ref={ref}
         className="modal relative w-[37rem] h-[36rem] z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-3xl 
         drop-shadow-[10px_10px_10px_rgba(0,0,0,0.5)] bg-neutral-800 flex flex-col">
         <div className="h-34 rounded-t-3xl">
@@ -27,6 +29,6 @@ const ProfileModal = ({ user, setUser, viewOnly, handleModalClose }) => {
       </div>
     </div>
   );
-};
+});
 
 export default ProfileModal;
