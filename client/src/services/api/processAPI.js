@@ -18,6 +18,15 @@ const getProcessesByProject = async (projectId) => {
   }
 };
 
+const getProcessesByUser = async () => {
+  try {
+    const response = await axiosInstance.get("/process/my-processes");
+    return { status: 200, processes: response.data };
+  } catch (error) {
+    return { status: error.response?.status || 500 };
+  }
+}
+
 const getProcessesBySection = async (sectionId, projectId) => {
   try {
     const response = await axiosInstance.get(`/process/${sectionId}`, { params: { sectionId, projectId }});
@@ -60,6 +69,7 @@ const deleteProcess = async (processId, sectionId, projectId) => {
 
 const processAPI = {
   createProcess,
+  getProcessesByUser,
   getProcessesByProject,
   getProcessesBySection,
   getProcessesForTimeline,

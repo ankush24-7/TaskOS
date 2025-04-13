@@ -16,6 +16,7 @@ import { ToastProvider } from './contexts/ToastContext';
 import Projects from "@pages/projects-page/ProjectsPage";
 import TimelinePage from './pages/timeline-page/TimelinePage';
 import DashBoardPage from "@pages/dashboard-page/DashboardPage";
+import MyProcesses from './pages/my-processes-page/MyProcesses';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 createRoot(document.getElementById('root')).render(
@@ -30,6 +31,7 @@ createRoot(document.getElementById('root')).render(
             <Route path="/home" element={<HomePage />} exact />
             <Route path="/timeline" element={<TimelinePage />} />
             <Route path="/projects" element={<Projects />} exact />
+            <Route path="/my-processes" element={<MyProcesses />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/projects/:projectId/dashboard" element={<DashBoardPage />} />
           </Route>

@@ -66,12 +66,28 @@ const getProcesses = async (req, res) => {
   }
 };
 
+const getProcessesByUser = async (req, res) => {
+  const user = req.user.userId;
+
+  try {
+    const processes = await Process.find({ assignedTo: user })
+      .select("-pos -assignedTo -description -schedule -showDeadline -log")
+      .populate("projectId", "title")
+      .lean()
+      .exec();
+
+    res.status(200).json(processes);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
 const getProcessesForTimeline = async (req, res) => {
   const user = req.user.userId;
   
   try {
     const processes = await Process.find({ assignedTo: user })
-      .populate("assignedTo", "name username")
+      .select("-pos -priority -starred -assignedTo -description -showDeadline -log -deadline")
       .lean()
       .exec();
 
@@ -201,6 +217,7 @@ const deleteProcess = async (req, res) => {
 const processController = {
   createProcess,
   getProcesses,
+  getProcessesByUser,
   getProcessesBySection,
   getProcessesForTimeline,
   updateProcess,

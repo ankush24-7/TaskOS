@@ -7,11 +7,14 @@ const processController = require('../controllers/processController.js');
 router.route('/timeline')
   .get(processController.getProcessesForTimeline);
 
+router.route('/my-processes')
+  .get(processController.getProcessesByUser);
+
 router.use(verifyProjectId);
 
 router.route('/')
-  .post(verifySectionId, processController.createProcess)
-  .get(processController.getProcesses);
+  .get(processController.getProcesses)
+  .post(verifySectionId, processController.createProcess);
 
 router.use(verifySectionId);
 
