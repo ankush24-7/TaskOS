@@ -1,6 +1,8 @@
+import useDropDown from "@/hooks/useDropDown";
 import DropDown from "@/components/ui/DropDown";
 
-const ProcessColorDropDown = ({ color, setColor, setShowColors }) => {
+const ProcessColorDropDown = ({ color, setColor }) => {
+  const { isOpen: showColors, setIsOpen: setShowColors, dropdownRef: colorsRef } = useDropDown();
   const processColors = [
     ["#FFADAD", "Melon"],
     ["#FFDB99", "Sunset"],
@@ -19,24 +21,42 @@ const ProcessColorDropDown = ({ color, setColor, setShowColors }) => {
         key={i}
         type="button"
         onClick={() => setColor({ hex: c[0], name: c[1] })}
-        className={`w-6 h-6 rounded-full cursor-pointer ${c[0] === color ? "border-[1.5px]" : "border"}`}
+        className={`w-6 h-6 rounded-full cursor-pointer ${
+          c[0] === color ? "border-[1.5px]" : "border"
+        }`}
         style={{ backgroundColor: c[0] }}
       />
     ));
   };
 
   return (
-    <DropDown
-      showHeader={false}
-      setIsOpen={setShowColors}
-      position="bottom-left"
-      bgColor="#fff"
-      children={
-        <span className="flex flex-wrap justify-evenly w-28 gap-1 px-1 py-1.5">
-          {renderColors()}
-        </span>
-      }
-    />
+    <div className="relative w-fit" ref={colorsRef}>
+      <button
+        type="button"
+        onClick={() => setShowColors(!showColors)}
+        className="btn-shadow flex item-center w-fit p-1.5 gap-1.5 cursor-pointer rounded-full bg-white">
+        <span
+          style={{
+            backgroundColor: color.hex || "transparent",
+          }}
+          className="w-6 h-6 rounded-full border border-black"></span>
+        <p className="text-neutral-900">{color.name}</p>
+      </button>
+
+      {showColors && (
+        <DropDown
+          showHeader={false}
+          setIsOpen={setShowColors}
+          position="bottom-left"
+          bgColor="#fff"
+          children={
+            <span className="flex flex-wrap justify-evenly w-28 gap-1 px-1 py-1.5">
+              {renderColors()}
+            </span>
+          }
+        />
+      )}
+    </div>
   );
 };
 

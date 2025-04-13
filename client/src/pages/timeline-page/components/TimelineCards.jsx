@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 const getTimes = (process, startsAt, endsAt) => {
   let start = startsAt; 
   let end = endsAt;
@@ -26,60 +24,65 @@ const getTimes = (process, startsAt, endsAt) => {
     : `${startTime}${startMeridiem} - ${endTime}${endMeridiem}`;
 };
 
-export const FifteenMinutesProcess = ({ pos, backgroundColor, title, startsAt }) => {
+export const FifteenMinutesProcess = ({ pos, backgroundColor, title, startsAt, handleClick }) => {
   const time = startsAt.toLocaleTimeString([], {hour: "numeric", minute: "2-digit" });
 
   return (
-    <span
+    <button
+      onClick={handleClick}
       style={{
         top: `${pos}%`,
         backgroundColor,
       }}
-      className="absolute left-0.5 right-1 z-20 hover:z-30 flex px-0.5 rounded-md cursor-default overflow-hidden min-h-3.5 max-h-3.5 hover:max-h-32 hover:drop-shadow-[5px_5px_5px_rgba(0,0,0,0.8)] transition-discrete duration-500 ease-in-out">
+      className="absolute left-0.5 right-1 z-20 hover:z-30 flex px-0.5 rounded-md cursor-pointer overflow-hidden min-h-3.5 max-h-3.5 hover:max-h-32 hover:drop-shadow-[5px_5px_5px_rgba(0,0,0,0.8)] transition-discrete duration-500 ease-in-out">
       <p className="text-xs leading-[0.95rem] text-ellipsis overflow-hidden whitespace-nowrap hover:whitespace-normal text-prim-black">
         {`${title}, ${time}`}
       </p>
-    </span>
+    </button>
   );
 };
 
-export const ThirtyMinutesProcess = ({ pos, backgroundColor, title, startsAt, endsAt, process }) => {
+export const ThirtyMinutesProcess = ({ pos, backgroundColor, title, startsAt, endsAt, process, handleClick }) => {
   return (
-    <span
+    <button
+      onClick={handleClick}
       style={{
         top: `${pos}%`,
         backgroundColor,
       }}
-      className="absolute left-0.5 right-1 z-20 hover:z-30 flex px-0.5 rounded-md cursor-default overflow-hidden min-h-[28.75px] max-h-[28.75px] hover:max-h-32 hover:drop-shadow-[5px_5px_5px_rgba(0,0,0,0.8)] transition-discrete duration-500 ease-in-out">
+      className="absolute left-0.5 right-1 z-20 hover:z-30 flex px-0.5 rounded-md cursor-pointer overflow-hidden 
+      min-h-[28.75px] max-h-[28.75px] hover:max-h-32 hover:drop-shadow-[5px_5px_10px_rgba(0,0,0,0.8)] transition-discrete duration-500 ease-in-out">
       <p className="whitespace-pre-line text-xs leading-[0.95rem] line-clamp-2 hover:line-clamp-none text-prim-black">
         {`${title}
           ${getTimes(process, startsAt, endsAt)}`}
       </p>
-    </span>
+    </button>
   );
 };
 
-export const ThreeQuatersHourProcess = ({ pos, backgroundColor, title, startsAt, endsAt, process }) => {
+export const ThreeQuatersHourProcess = ({ pos, backgroundColor, title, startsAt, endsAt, process, handleClick }) => {
   return (
-    <span
+    <button
+      onClick={handleClick}
       style={{
         top: `${pos}%`,
         backgroundColor,
       }}
-      className="absolute left-0.5 right-1 z-20 hover:z-30 flex px-0.5 rounded-md cursor-default overflow-hidden min-h-[43.75px] max-h-[43.75px] hover:max-h-32 hover:drop-shadow-[5px_5px_5px_rgba(0,0,0,0.8)] transition-discrete duration-500 ease-in-out">
+      className="absolute left-0.5 right-1 z-20 hover:z-30 flex px-0.5 rounded-md cursor-pointer overflow-hidden min-h-[43.75px] max-h-[43.75px] hover:max-h-32 hover:drop-shadow-[5px_5px_5px_rgba(0,0,0,0.8)] transition-discrete duration-500 ease-in-out">
       <p className="whitespace-pre-line text-xs leading-[0.95rem] line-clamp-3 hover:line-clamp-none text-prim-black">
         {`${title}
           ${getTimes(process, startsAt, endsAt)}`}
       </p>
-    </span>
+    </button>
   );
 };
 
-export const HourProcess = ({ pos, backgroundColor, title, startsAt, endsAt, process }) => {
+export const HourProcess = ({ pos, backgroundColor, title, startsAt, endsAt, process, handleClick }) => {
   const height = (endsAt.getTime() - startsAt.getTime()) / 60000;
 
   return (
-    <div
+    <button
+      onClick={handleClick}
       style={{
         top: `${pos}%`,
         minHeight: `${height - 1.25}px`,
@@ -87,20 +90,20 @@ export const HourProcess = ({ pos, backgroundColor, title, startsAt, endsAt, pro
         backgroundColor,
       }}
       className="absolute left-0.5 right-1 z-20 flex px-0.5 rounded-md overflow-hidden hover:z-30 hover:max-h-32 
-      hover:drop-shadow-[2px_5px_5px_rgba(0,0,0,0.8)] transition-discrete duration-200 ease-in-out">
-      <p className="whitespace-pre-line text-xs leading-[0.95rem] line-clamp-3 hover:line-clamp-none text-prim-black">
+      hover:drop-shadow-[0_7px_5px_rgba(0,0,0)] transition-discrete duration-200 ease-in-out cursor-pointer">
+      <p className="whitespace-pre-line text-xs text-left leading-[0.95rem] line-clamp-3 hover:line-clamp-none text-prim-black">
         {`${title}
           ${getTimes(process, startsAt, endsAt)}`}
       </p>
-    </div>
+    </button>
   );
 };
 
 const TimelineCards = {
-  FifteenMinutesProcess,
-  ThirtyMinutesProcess,
-  ThreeQuatersHourProcess,
   HourProcess,
+  ThirtyMinutesProcess,
+  FifteenMinutesProcess,
+  ThreeQuatersHourProcess,
 };
 
 export default TimelineCards;

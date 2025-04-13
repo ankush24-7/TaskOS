@@ -1,7 +1,7 @@
 import { CSS } from "@dnd-kit/utilities";
 import dateUtils from "@/utils/dateUtils";
 import { useSortable } from "@dnd-kit/sortable";
-import { taskIcons, priorityIcons } from "@icons";
+import { processCardIcons, priorityIcons } from "@icons";
 import { useDashboard } from "@/contexts/DashboardContext";
 import DisplayPicture from "@/components/ui/DisplayPicture";
 
@@ -95,7 +95,7 @@ function ProcessCard({ process, openModal }) {
             setProcessPosition(process.pos);
           }}
           className="absolute z-20 left-1/2 -translate-x-1/2 -translate-y-2 p-0.5 rounded-full cursor-pointer opacity-0 group-hover:opacity-100 bg-white">
-            <taskIcons.Plus className="stroke-[2.5px] stroke-neutral-900" />
+            <processCardIcons.Plus className="stroke-[2.5px] stroke-neutral-900" />
         </button>
       </span>
 
@@ -120,13 +120,13 @@ function ProcessCard({ process, openModal }) {
             </span>
           ) : (
             <span className="flex items-center gap-1 mt-auto">
-              <taskIcons.Profile className="w-7 h-7 stroke-1 stroke-neutral-900" />
+              <processCardIcons.Profile className="w-7 h-7 stroke-1 stroke-neutral-900" />
               <p className="text-[15px] mt-[2px] leading-none text-neutral-900">
                 Assign
               </p>
             </span>
           )}
-          <taskIcons.Star
+          <processCardIcons.Star
             className={`stroke-[1.5] stroke-prim-black ${process.starred && "fill-amber-300"}`}
           />
         </div>
@@ -140,7 +140,7 @@ function ProcessCard({ process, openModal }) {
           <span className="flex items-center gap-3">
             {process.deadline && (
               <span className="flex items-end gap-1">
-                <taskIcons.CalendarIcon className="w-4 h-4 stroke-neutral-900" />
+                <processCardIcons.CalendarIcon className="w-4 h-4 stroke-neutral-900" />
                 <p className="text-sm leading-none text-neutral-900">
                   {dateUtils.formatDDMon(process.deadline)}
                 </p>
@@ -148,7 +148,7 @@ function ProcessCard({ process, openModal }) {
             )}
             {duration > 0 && (
               <span className="flex items-end gap-1">
-                <taskIcons.StopwatchIcon className="w-4 h-4 stroke-neutral-900" />
+                <processCardIcons.StopwatchIcon className="w-4 h-4 stroke-neutral-900" />
                 <p className="text-sm leading-none text-neutral-900">
                   {dateUtils.formatDuration(duration)}
                 </p>

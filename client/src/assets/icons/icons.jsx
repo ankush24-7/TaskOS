@@ -975,26 +975,11 @@ export function CameraIcon({ className = "" }) {
   )
 }
 
+export const authPageIcons = { ShowPassword, HidePassword };
+export const projectHeaderIcons = { Sparkles, Archive, SearchIcon };
+export const dashboardHeaderIcons = { Timeline, Team, ChevronDown, Sparkles };
+export const processCardIcons = { Profile, Plus, Star, CalendarIcon, StopwatchIcon };
+export const timelineHeaderIcons = { ChevronDown, RefreshIcon, ChevronLeft, ChevronRight };
 export const priorityIcons = { DefaultPriority, HighPriority, MediumPriority, LowPriority };
-export const taskIcons = { Profile, AddTask, Plus, Star, CalendarIcon, StopwatchIcon };
-export const homeNavIcons = { AddTask, Pen, Bell };
-export const timelineHeaderIcons = { ChevronDown, RefreshIcon, ChevronLeft, ChevronRight }
-export const timelineIcons = { ChevronLeft, ChevronRight, AnchorIcon }
-export const authPageIcons = { ShowPassword, HidePassword, Google };
-export const noteIcons = { Pen, Book };
-export const modalIcons = { Timeline, Profile, Del, Archive, Close, Complete, CalendarIcon, Star, ChevronDown, LogIcon };
-export const projectNavIcons = { Sparkles, Archive, SearchIcon, ChevronDown };
-export const dashboardNavIcons = { Timeline, Team, ChevronDown, Filter, VR, Menu, Sparkles };
-export const activityBarIcons = {
-  LogoIcon,
-  SearchIcon,
-  Home,
-  Rocket,
-  Timeline,
-  Star,
-  MyTasks,
-  ChevronsLeft,
-  Settings,
-  Logout,
-  Menu,
-};
+export const activityBarIcons = { LogoIcon, Home, Timeline, Rocket, Star, MyTasks, Settings, Logout };
+export const processModalIcons = { Timeline, Del, Close, Complete, CalendarIcon, Star, ChevronDown, LogIcon };

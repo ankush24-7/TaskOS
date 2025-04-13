@@ -1,6 +1,6 @@
 import * as navbarComp from "@navbtns";
 import User from "@components/ui/User";
-import { projectNavIcons } from "@icons";
+import { projectHeaderIcons } from "@icons";
 import { useNavigate } from "react-router-dom";
 import SearchBtn from "@components/ui/SearchBtn";
 import projectAPI from "@/services/api/projectAPI";
@@ -30,7 +30,7 @@ const ProjectNav = ({ search, setSearch, showArchived, setShowArchived }) => {
           onClick={openNewProject}
           label="New Project"
           Icon={() => (
-            <projectNavIcons.Sparkles className="w-5 h-5 group-hover:stroke-prim-yellow-50" stroke="#fff" />
+            <projectHeaderIcons.Sparkles className="w-5 h-5 group-hover:stroke-prim-yellow-50" stroke="#fff" />
           )}
         />
         <button
@@ -38,13 +38,13 @@ const ProjectNav = ({ search, setSearch, showArchived, setShowArchived }) => {
           onClick={toggleArchived}
           style={{ backgroundColor: showArchived ? "#111" : "" }}
           className="round-btn-hov-expand w-9 h-9 flex cursor-pointer items-center justify-center rounded-3xl hover:bg-prim-black active:bg-prim-black/10">
-          <projectNavIcons.Archive />
+          <projectHeaderIcons.Archive />
         </button>
         <User />
       </div>
 
       <div className="relative w-full sm:hidden">
-        <projectNavIcons.SearchIcon className="absolute top-1/2 -translate-y-1/2 ml-1 stroke-prim-black" />
+        <projectHeaderIcons.SearchIcon className="absolute top-1/2 -translate-y-1/2 ml-1 stroke-prim-black" />
         <input
           type="text"
           placeholder="Search"
