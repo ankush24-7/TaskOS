@@ -1,9 +1,9 @@
 import { CSS } from "@dnd-kit/utilities";
 import dateUtils from "@/utils/dateUtils";
 import { useSortable } from "@dnd-kit/sortable";
-import { processCardIcons, priorityIcons } from "@icons";
 import { useDashboard } from "@/contexts/DashboardContext";
 import DisplayPicture from "@/components/ui/DisplayPicture";
+import { processCardIcons, priorityIcons } from "@/assets/icons/icons";
 
 function ProcessCard({ process, openModal }) {
   const { setProcessPosition } = useDashboard();

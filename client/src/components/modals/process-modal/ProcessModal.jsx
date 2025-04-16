@@ -1,10 +1,10 @@
 import { forwardRef } from "react";
-import { processModalIcons } from "@icons";
 import CloseBtn from "@/components/ui/CloseBtn";
 import DateSelector from "./components/DateSelector";
 import useProcesModal from "@/hooks/useProcessModal";
 import RadioSwitch from "@/components/ui/RadioSwitch";
 import useDateSelector from "@/hooks/useDateSelector";
+import { processModalIcons } from "@/assets/icons/icons";
 import { useDashboard } from "@/contexts/DashboardContext";
 import { validateProcessName } from "@/utils/validateForm";
 import ProcessScheduler from "./components/ProcessScheduler";

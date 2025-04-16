@@ -1,4 +1,4 @@
-import AddBtn from "@components/ui/AddBtn";
+import AddBtn from "@/components/ui/AddBtn";
 import { TriangleIcon } from "@/assets/icons/icons";
 
 const ProjectTable = ({ projects, sort, setSort, order, setOrder, showArchived }) => {

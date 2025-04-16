@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { UserProvider } from "./contexts/UserContext";
-import ActivityBar from "@components/activity-bar/ActivityBar";
+import ActivityBar from "@/components/activity-bar/ActivityBar";
 
 function App() {
   return (

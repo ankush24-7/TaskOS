@@ -1,6 +1,6 @@
-import * as navBtns from "@navbtns";
 import Logo from "@/components/ui/Logo";
-import { activityBarIcons } from "@icons";
+import * as navBtns from "@/components/ui/NavbarBtns";
+import { activityBarIcons } from "@/assets/icons/icons";
 
 const GuestNav = () => {
   return (

@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { authPageIcons } from "@icons";
 import authAPI from "@/services/authAPI";
 import AuthHeader from "./components/AuthHeader";
 import { useToast } from "@/contexts/ToastContext";
+import { authPageIcons } from "@/assets/icons/icons";
 import { Link, useNavigate } from "react-router-dom";
 
 const LoginPage = () => {

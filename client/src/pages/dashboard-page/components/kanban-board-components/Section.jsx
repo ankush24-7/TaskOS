@@ -1,8 +1,7 @@
-import "@styles/scrollbars.css";
-import { AddTask } from "@icons";
 import Header from "./Header.jsx";
 import { CSS } from "@dnd-kit/utilities";
 import ProcessCard from "./ProcessCard.jsx";
+import { AddTask } from "@/assets/icons/icons";
 import { useDashboard } from "@/contexts/DashboardContext.jsx";
 import { SortableContext, useSortable } from "@dnd-kit/sortable";
 

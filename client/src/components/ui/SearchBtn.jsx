@@ -1,4 +1,4 @@
-import { SearchIcon } from "@icons";
+import { SearchIcon } from "@/assets/icons/icons";
 
 const SearchBtn = ({ placeholder, search, setSearch }) => {
   return (

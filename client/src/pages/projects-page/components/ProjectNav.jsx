@@ -1,9 +1,9 @@
-import * as navbarComp from "@navbtns";
-import User from "@components/ui/User";
-import { projectHeaderIcons } from "@icons";
+import User from "@/components/ui/User";
 import { useNavigate } from "react-router-dom";
-import SearchBtn from "@components/ui/SearchBtn";
+import SearchBtn from "@/components/ui/SearchBtn";
 import projectAPI from "@/services/api/projectAPI";
+import * as navbarComp from "@/components/ui/NavbarBtns";
+import { projectHeaderIcons } from "@/assets/icons/icons";
 
 const ProjectNav = ({ search, setSearch, showArchived, setShowArchived }) => {
   const navigate = useNavigate();

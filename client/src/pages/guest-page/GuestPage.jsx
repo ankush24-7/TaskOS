@@ -1,4 +1,3 @@
-import "@styles/animations.css";
 import GuestNav from "./components/GuestNav";
 import GuestHeroSection from "./components/GuestHeroSection";
 

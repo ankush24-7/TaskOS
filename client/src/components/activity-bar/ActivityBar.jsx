@@ -1,7 +1,7 @@
 import authAPI from "@/services/authAPI";
-import { activityBarIcons } from "@icons";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { activityBarIcons } from "@/assets/icons/icons";
 import ActivityBarItem, { CollapseButton, GrayButton } from "./ActivityBarItem";
 
 function ActivityBar() {

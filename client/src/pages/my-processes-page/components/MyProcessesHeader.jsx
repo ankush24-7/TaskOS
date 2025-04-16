@@ -1,7 +1,7 @@
-import * as navbarComp from "@navbtns";
 import User from "@/components/ui/User";
 import useDropDown from "@/hooks/useDropDown";
 import DropDown from "@/components/ui/DropDown";
+import * as navbarComp from "@/components/ui/NavbarBtns";
 import { SortIcon, ArrowIcon } from "@/assets/icons/icons";
 
 const MyProcessesHeader = ({ sortBy, setSortBy }) => {

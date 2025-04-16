@@ -1,5 +1,5 @@
-import { ChevronsLeft } from "@icons";
 import { Link } from "react-router-dom";
+import { ChevronsLeft } from "@/assets/icons/icons";
 
 export function CollapseButton({ expanded, setExpanded }) {
   const style = expanded

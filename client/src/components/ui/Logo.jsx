@@ -1,6 +1,5 @@
-import React from "react";
-import { LogoIcon } from "@icons";
 import { Link } from "react-router-dom";
+import { LogoIcon } from "@/assets/icons/icons";
 
 const Logo = () => {
   return (

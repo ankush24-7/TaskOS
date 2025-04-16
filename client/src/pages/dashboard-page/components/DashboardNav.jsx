@@ -1,8 +1,8 @@
-import * as navbarComp from "@navbtns";
 import User from "@/components/ui/User";
-import { dashboardHeaderIcons } from "@icons";
 import useDropDown from "@/hooks/useDropDown";
+import * as navbarComp from "@/components/ui/NavbarBtns";
 import { useDashboard } from "@/contexts/DashboardContext";
+import { dashboardHeaderIcons } from "@/assets/icons/icons";
 import ProjectDropDown from "./kanban-board-components/ProjectDropDown";
 
 function DashboardNav({ setShowModal }) {

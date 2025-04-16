@@ -1,4 +1,4 @@
-import Logo from "@components/ui/Logo";
+import Logo from "@/components/ui/Logo";
 
 const authHeader = () => {
   return (

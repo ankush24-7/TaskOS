@@ -1,5 +1,5 @@
-import * as navBtns from "@navbtns";
-import dashboardImage from "@assets/images/DashBoard.png";
+import * as navBtns from "@/components/ui/NavbarBtns";
+import dashboardImage from "@/assets/images/DashBoard.png";
 
 const GuestHeroSection = () => {
   return (
