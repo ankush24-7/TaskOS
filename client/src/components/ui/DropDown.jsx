@@ -31,18 +31,15 @@ const DropDown = ({ showHeader = true, width, position, bgColor = "#111", childr
       break;
   }
 
-  const style = { 
-    width: width && `${width}rem`,
-    backgroundColor: bgColor,
-  };
-
   return (
     <div 
-      style={ style }
+      style={{ width }}
       className={`dropdown absolute z-40 flex flex-col rounded-xl shadow-[5px_5px_7px_rgba(0,0,0,0.3)] ${position}`}>
       {showHeader && (
-        <div className="flex items-center justify-between px-2.5 py-1 rounded-t-xl">
-          <h1 className="text-lg text-center py-1 text-white">{header}</h1>
+        <div 
+          style={{ backgroundColor: bgColor }}
+          className="flex items-center justify-between px-2.5 py-1 rounded-t-xl">
+          <h1 className="text-md text-center py-1 text-white">{header}</h1>
           <CloseBtn onClick={() => setIsOpen(false)} />
         </div>
       )}

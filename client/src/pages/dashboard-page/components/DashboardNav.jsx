@@ -31,10 +31,6 @@ function DashboardNav({ setShowModal }) {
           onClick={handleCreateSection}
           Icon={() => <dashboardHeaderIcons.Sparkles className="w-5 h-5" stroke="#fff" />}
         />
-        <navbarComp.RoundBtn
-          Icon={() => <dashboardHeaderIcons.Team className="w-8 h-8 stroke-[0.75px] stroke-white" />}
-        />
-        <navbarComp.RoundBtn Icon={() => <dashboardHeaderIcons.Timeline />} />
         <User />
       </div>
 

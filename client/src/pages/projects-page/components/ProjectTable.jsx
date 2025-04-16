@@ -1,5 +1,5 @@
 import AddBtn from "@components/ui/AddBtn";
-import { SortIcon } from "@/assets/icons/icons";
+import { TriangleIcon } from "@/assets/icons/icons";
 
 const ProjectTable = ({ projects, sort, setSort, order, setOrder, showArchived }) => {
   const titles = [
@@ -34,7 +34,7 @@ const ProjectTable = ({ projects, sort, setSort, order, setOrder, showArchived }
         </button>
         <button className="cursor-pointer" onClick={handleOrderChange}>
           {isSelected(title) && (
-            <SortIcon className={`w-[0.9rem] h-[0.9rem] fill-prim-yellow-200 hover:fill-prim-yellow-50 
+            <TriangleIcon className={`w-[0.9rem] h-[0.9rem] fill-prim-yellow-200 hover:fill-prim-yellow-50 
               ${ order === "desc" ? "rotate-180" : "" }`}
             />
           )}
@@ -52,7 +52,7 @@ const ProjectTable = ({ projects, sort, setSort, order, setOrder, showArchived }
 
         <div className="w-full px-2 pt-0.5 overflow-y-scroll vertical-scrollbar">
           {projects.length === 0 ? (
-            <p className="text-xl text-center mt-20 text-gray-300 whitespace-pre-line">
+            <p className="text-xl text-center mt-40 text-gray-400 whitespace-pre-line">
               {showArchived 
                 ? "No archived projects" 
                 : `No projects found.\n Start a new project to see it here !`

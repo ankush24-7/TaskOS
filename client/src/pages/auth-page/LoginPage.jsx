@@ -64,15 +64,15 @@ const LoginPage = () => {
             </button>
           </span>
 
-          <Link to="/forgot-password">
+          {/* <Link to="/forgot-password">
             <p className="mt-10 underline text-[0.9rem] text-blue-200 hover:text-blue-400 w-fit">
               Forgot Password?
             </p>
-          </Link>
+          </Link> */}
 
           <button
             type="submit"
-            className="p-3 rounded-md my-2 w-full cursor-pointer text-white bg-prim-yellow-200 hover:bg-prim-yellow-300">
+            className="p-3 mt-10 rounded-md my-2 w-full cursor-pointer text-white bg-prim-yellow-200 hover:bg-prim-yellow-300">
             Log In
           </button>
         </form>
