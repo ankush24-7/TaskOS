@@ -1,5 +1,4 @@
 import * as navBtns from "@/components/ui/NavbarBtns";
-import dashboardImage from "@/assets/images/DashBoard.png";
 
 const GuestHeroSection = () => {
   return (
@@ -20,9 +19,9 @@ const GuestHeroSection = () => {
       </ul>
 
       <img
-        src={dashboardImage}
+        src={"https://res.cloudinary.com/dcm0pdfet/image/upload/v1744834312/Screenshot_2025-04-17_013824_hp2zox.png"}
         alt="dashboard image"
-        className="hero-img rotate w-[48rem] mx-auto rounded-xl relative right-4"
+        className="hero-img hero-dashboard-img w-[48rem] mx-auto rounded-xl relative right-4"
       />
     </div>
   );
