@@ -54,9 +54,8 @@ const ProcessAssigneeDropDown = ({ assignedTo, setAssignedTo }) => {
         <DropDown
           showHeader={false}
           position="bottom-left"
-          bgColor="#fff"
           children={
-            <div className="flex flex-col min-w-28 max-h-60">
+            <div className="flex flex-col min-w-28 max-h-60 rounded-xl bg-white">
               {project.teamMembers.map((member) => {
                 return (
                   <button

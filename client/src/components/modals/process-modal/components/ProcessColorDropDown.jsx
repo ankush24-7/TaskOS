@@ -46,11 +46,9 @@ const ProcessColorDropDown = ({ color, setColor }) => {
       {showColors && (
         <DropDown
           showHeader={false}
-          setIsOpen={setShowColors}
           position="bottom-left"
-          bgColor="#fff"
           children={
-            <span className="flex flex-wrap justify-evenly w-28 gap-1 px-1 py-1.5">
+            <span className="flex flex-wrap justify-evenly w-28 gap-1 px-1 py-1.5 rounded-xl bg-white">
               {renderColors()}
             </span>
           }

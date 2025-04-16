@@ -39,10 +39,10 @@ const ProcessModal = forwardRef(({ selectedProcess: process, setShowProcessModal
         completed,
         assignedTo,
         showDeadline,
-        deadline,
         schedule,
         startsAt,
         endsAt,
+        deadline: showDeadline ? deadline : null,
       };
       await processCRUD.createProcess(newProcess, section._id, section.processes.length);
     }
@@ -64,10 +64,6 @@ const ProcessModal = forwardRef(({ selectedProcess: process, setShowProcessModal
       };
       await processCRUD.updateProcess(updatedProcess);
     }
-    setShowProcessModal(false);
-  }
-
-  const handleCancel = () => {
     setShowProcessModal(false);
   }
 
@@ -158,8 +154,8 @@ const ProcessModal = forwardRef(({ selectedProcess: process, setShowProcessModal
                 </span>
                 <RadioSwitch
                   color={color.hex}
-                  state={showDeadline}
-                  setState={setShowDeadline}
+                  checked={showDeadline}
+                  setChecked={setShowDeadline}
                 />
               </div>
 
@@ -187,9 +183,9 @@ const ProcessModal = forwardRef(({ selectedProcess: process, setShowProcessModal
                   <p className="text-md text-neutral-900">Schedule</p>
                 </span>
                 <RadioSwitch 
-                  state={schedule} 
                   color={color.hex}
-                  setState={setSchedule} 
+                  checked={schedule} 
+                  setChecked={setSchedule} 
                 />
               </div>
 
@@ -221,7 +217,7 @@ const ProcessModal = forwardRef(({ selectedProcess: process, setShowProcessModal
           </button>
           <button
             type="button"
-            onClick={handleCancel}
+            onClick={() => setShowProcessModal(false)}
             className="px-3 py-1.5 rounded-xl cursor-pointer text-white bg-red-600 hover:bg-red-700">
             Cancel
           </button>

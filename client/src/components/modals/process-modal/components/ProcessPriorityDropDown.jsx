@@ -63,13 +63,12 @@ const ProcessPriorityDropDown = ({ priority, setPriority }) => {
         <DropDown
           showHeader={false}
           position="bottom-left"
-          bgColor="#fff"
           children={
-            <div className="flex justify-evenly p-0.5">
-              {priorityBtn(3, <HighPriority className="w-4 h-4" />)}
+            <div className="flex justify-evenly p-0.5 rounded-xl bg-white">
+              {priorityBtn(1, <HighPriority className="w-4 h-4" />)}
               {priorityBtn(2, <MediumPriority className="w-4 h-4" />)}
-              {priorityBtn(1, <LowPriority className="w-4 h-4" />)}
-              {priorityBtn(0, <DefaultPriority className="w-4 h-4" />)}
+              {priorityBtn(3, <LowPriority className="w-4 h-4" />)}
+              {priorityBtn(4, <DefaultPriority className="w-4 h-4" />)}
             </div>
           }
         />
