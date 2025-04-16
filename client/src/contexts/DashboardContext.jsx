@@ -226,13 +226,15 @@ export const DashboardProvider = ({ children }) => {
   }, [projectId]);
 
   useEffect(() => {
-    if (location.state?.showProcessModal) {
-      setSelectedProcess(location.state.selectedProcess);
+    if (location.state?.showProcessModal && processes.length > 0) {
+      console.log(location.state.selectedProcess._id);
+      const openProcess = processes.find((process) => process._id === location.state.selectedProcess._id);
+      setSelectedProcess(openProcess);
       setShowProcessModal(true);
 
       navigate(`/projects/${projectId}/dashboard`, { replace: true });
     }
-  }, [location.state]);
+  }, [location.state, processes]);
 
   const projectCRUD = { updateProject, deleteProject };
   const sectionCRUD = { createSection, updateSection, updateSectionOrder, deleteSection };

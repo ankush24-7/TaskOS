@@ -35,7 +35,7 @@ const SectionDropDown = ({ section, color, setColor, desc, setDesc, setIsOpen })
 
   return (
     <DropDown
-      width={17}
+      width="268px"
       position="bottom-right"
       header="Options"
       setIsOpen={setIsOpen}
