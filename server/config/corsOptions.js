@@ -1,5 +1,6 @@
 const whitelist = [
   "http://localhost:5173", 
+  "https://task-os-rho.vercel.app",
   "https://task-os-rho.vercel.app/",
 ];
 
