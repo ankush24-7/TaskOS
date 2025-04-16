@@ -1,6 +1,6 @@
 const whitelist = [
   "http://localhost:5173", 
-  "http://127.0.0.1:5173",
+  "https://task-os-rho.vercel.app/",
 ];
 
 const corsOptions = {
