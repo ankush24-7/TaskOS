@@ -11,6 +11,7 @@ Ideas.md
 Challenges.md
 
 node_modules
+.env
 dist
 dist-ssr
 *.local
