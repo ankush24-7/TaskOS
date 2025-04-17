@@ -26,17 +26,19 @@ createRoot(document.getElementById('root')).render(
     <Router>
       <ToastProvider>
         <Routes>
-          <Route path="/" element={<GuestPage />} exact />
+          <Route path="/" element={<GuestPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/sign-up" element={<SignUpPage />} />
+
           <Route path="/" element={<App />} >
-            <Route path="/home" element={<HomePage />} exact />
+            <Route path="/home" element={<HomePage />} />
             <Route path="/timeline" element={<TimelinePage />} />
-            <Route path="/projects" element={<Projects />} exact />
+            <Route path="/projects" element={<Projects />} />
             <Route path="/my-processes" element={<MyProcesses />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/projects/:projectId/dashboard" element={<DashBoardPage />} />
           </Route>
+          
           <Route path="*" element={<Error404 />} />
         </Routes>
       </ToastProvider>
