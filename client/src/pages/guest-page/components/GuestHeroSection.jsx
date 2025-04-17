@@ -21,7 +21,7 @@ const GuestHeroSection = () => {
       <img
         src={"https://res.cloudinary.com/dcm0pdfet/image/upload/v1744834312/Screenshot_2025-04-17_013824_hp2zox.png"}
         alt="dashboard image"
-        className="hero-img hero-dashboard-img w-[48rem] mx-auto rounded-xl relative right-4"
+        className="hero-img perspective-rotate w-[48rem] mx-auto rounded-xl relative right-4 shadow-[1rem_1rem_1rem_rgba(0,0,0,0.4)]"
       />
     </div>
   );
