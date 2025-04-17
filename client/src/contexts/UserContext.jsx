@@ -1,5 +1,7 @@
 import useModal from "@/hooks/useModal";
 import userAPI from "@/services/api/userAPI";
+import { useNavigate, Outlet } from "react-router-dom";
+import SpinLoader from "@/components/loaders/SpinLoader";
 import { useEffect, useState, useContext, createContext } from "react";
 import ProfileModal from "@/components/modals/profile-modal/ProfileModal";
 
@@ -7,10 +9,12 @@ const UserContext = createContext();
 
 export const useUser = () => useContext(UserContext);
 
-export const UserProvider = ({ children }) => {
+export const UserProvider = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [network, setNetwork] = useState([]);
   const [requests, setRequests] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [selectedProfile, setSelectedProfile] = useState(null);
   const { showModal, setShowModal, modalRef: ref } = useModal();
 
@@ -28,6 +32,11 @@ export const UserProvider = ({ children }) => {
     const getUser = async () => {
       try {
         const response = await userAPI.getUser();
+        if (response.status !== 200) {
+          navigate("/login", { replace: true });
+          return;
+        }
+
         const filteredUser = {
           _id: response.user._id,
           bio: response.user.bio,
@@ -41,6 +50,8 @@ export const UserProvider = ({ children }) => {
         setUser(filteredUser);
         setNetwork(response.user.network);
         setRequests(response.user.requests);
+
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -62,25 +73,33 @@ export const UserProvider = ({ children }) => {
         handleShowModal,
       }}>
 
-      {children}
-
-      {showModal &&
-        (selectedProfile ? (
-          <ProfileModal
-            ref={ref}
-            user={selectedProfile}
-            viewOnly={true}
-            handleModalClose={handleModalClose}
-          />
-        ) : (
-          <ProfileModal
-            ref={ref}
-            user={user}
-            viewOnly={false}
-            setUser={setUser}
-            handleModalClose={handleModalClose}
-          />
-        )
+      {isLoading ? (
+        <div className="w-full flex items-center justify-center bg-gradient-to-r from-grad-l to-grad-r">
+          <SpinLoader width="50px" height="50px" />
+        </div>
+      ) : (
+        <>
+          <Outlet />
+    
+          {showModal &&
+            (selectedProfile ? (
+              <ProfileModal
+                ref={ref}
+                user={selectedProfile}
+                viewOnly={true}
+                handleModalClose={handleModalClose}
+              />
+            ) : (
+              <ProfileModal
+                ref={ref}
+                user={user}
+                viewOnly={false}
+                setUser={setUser}
+                handleModalClose={handleModalClose}
+              />
+            )
+          )}
+        </>
       )}
     </UserContext.Provider>
   );
