@@ -32,7 +32,7 @@ export const UserProvider = () => {
     const getUser = async () => {
       try {
         const response = await userAPI.getUser();
-        if (response.status !== 200) {
+        if (response.status !== 200 && response.status !== 403) {
           navigate("/login", { replace: true });
           return;
         }

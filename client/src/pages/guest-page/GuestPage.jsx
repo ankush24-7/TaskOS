@@ -9,7 +9,7 @@ const GuestPage = () => {
   useEffect(() => {
     const checkToken = () => {
       const token = localStorage.getItem("accessToken");
-      if (token !== undefined && token !== "undefined") {
+      if (token !== undefined && token !== "undefined" && token !== null) {
         navigate("/home", { replace: true });
       }
     }
