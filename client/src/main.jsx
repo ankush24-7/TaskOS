@@ -3,6 +3,7 @@ import App from './App.jsx';
 import { StrictMode } from 'react';
 import "@/assets/styles/global.css";
 import "@/assets/styles/loaders.css";
+import Error404 from '@/pages/Error404';
 import "@/assets/styles/scrollbars.css";
 import "@/assets/styles/animations.css";
 import "@/assets/styles/text-editor.css";
@@ -36,6 +37,7 @@ createRoot(document.getElementById('root')).render(
             <Route path="/settings" element={<Settings />} />
             <Route path="/projects/:projectId/dashboard" element={<DashBoardPage />} />
           </Route>
+          <Route path="*" element={<Error404 />} />
         </Routes>
       </ToastProvider>
     </Router>
