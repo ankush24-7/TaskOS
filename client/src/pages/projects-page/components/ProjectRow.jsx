@@ -10,7 +10,7 @@ const ProjectRow = ({ title, _id, teamMembers, status, updatedAt, deadline, user
   return (
     <Link
       to={`/projects/${_id}/dashboard`}
-      className="flex sm:rounded-lg hover:bg-[#11111190]">
+      className="flex sm:rounded-lg hover:bg-prim-black/50">
       <div className="w-full flex justify-between items-center border-b sm:min-h-14 hover:border-transparent border-gray-400 text-white">
         <span className="w-full sm:pl-3 sm:w-[32%]">
           <p> {title} </p>

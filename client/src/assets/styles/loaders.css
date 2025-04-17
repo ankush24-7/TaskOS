@@ -1,10 +1,10 @@
-.loader {
+.loader-pulse {
   background: linear-gradient(90deg, rgba(240, 240, 240, 0.15) 0%, rgba(240, 240, 240, 0.225) 50%, rgba(240, 240, 240, 0.15) 100%);
   background-size: 200% 100%;
-  animation: loader 2s infinite linear;
+  animation: pulse 2s infinite linear;
 }
 
-@keyframes loader {
+@keyframes pulse {
   0% {
     background-position: 200% 0;
   }

@@ -1,7 +1,8 @@
 import AddBtn from "@/components/ui/AddBtn";
 import { TriangleIcon } from "@/assets/icons/icons";
+import ProjectTableLoader from "@/components/loaders/ProjectTableLoader";
 
-const ProjectTable = ({ projects, sort, setSort, order, setOrder, showArchived }) => {
+const ProjectTable = ({ projects, sort, setSort, order, setOrder, isLoading, showArchived }) => {
   const titles = [
     ["Title", "32%"],
     ["Status", "17%"],
@@ -51,15 +52,23 @@ const ProjectTable = ({ projects, sort, setSort, order, setOrder, showArchived }
         </div>
 
         <div className="w-full px-2 pt-0.5 overflow-y-scroll vertical-scrollbar">
-          {projects.length === 0 ? (
-            <p className="text-xl text-center mt-40 text-gray-400 whitespace-pre-line">
-              {showArchived 
-                ? "No archived projects" 
-                : `No projects found.\n Start a new project to see it here !`
-              }
-            </p>
-          ): (
-            projects
+          {isLoading ? (
+            <div className="flex flex-col gap-0.5">
+              <ProjectTableLoader />
+              <ProjectTableLoader />
+              <ProjectTableLoader />
+            </div>
+          ) : (
+            projects.length === 0 ? (
+              <p className="text-xl text-center mt-40 text-gray-400 whitespace-pre-line">
+                {showArchived 
+                  ? "No archived projects" 
+                  : `No projects found.\n Start a new project to see it here !`
+                }
+              </p>
+            ): (
+              projects
+            )
           )}
         </div>
 

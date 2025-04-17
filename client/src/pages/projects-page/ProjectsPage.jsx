@@ -13,6 +13,7 @@ const ProjectsPage = () => {
   const [projects, setProjects] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
   const [showArchived, setShowArchived] = useState(false);
 
   useEffect(() => {
@@ -53,8 +54,9 @@ const ProjectsPage = () => {
 
   useEffect(() => {
     const paginatePage = async () => {
-      const sortBy = sort || "updatedat";
+      setIsLoading(true);
       const orderBy = order || "desc";
+      const sortBy = sort || "updatedat";
       const { status, data } = await projectAPI.getProjectPage({ page: currentPage, search, sort: sortBy, order: orderBy, archived: showArchived });
       if (status === 200) {
         const projects = data.projects.map(project => <ProjectRow key={project._id} {...project} />);
@@ -63,6 +65,7 @@ const ProjectsPage = () => {
       } else {
         console.log(`Error ${status}: ${data}`);
       }
+      setIsLoading(false);
     };
 
     paginatePage();
@@ -82,6 +85,7 @@ const ProjectsPage = () => {
         order={order}
         setOrder={setOrder}
         projects={projects} 
+        isLoading={isLoading}
         showArchived={showArchived}
       />
       <Pagination 
