@@ -5,10 +5,12 @@ import AuthHeader from "./components/AuthHeader";
 import { useToast } from "@/contexts/ToastContext";
 import { authPageIcons } from "@/assets/icons/icons";
 import { Link, useNavigate } from "react-router-dom";
+import SpinLoader from "@/components/loaders/SpinLoader";
 
 const SignUpPage = () => {
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const { setToastMessage } = useToast();
   const [errors, setErrors] = useState({
@@ -70,6 +72,7 @@ const SignUpPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const { firstName, lastName, username, email, password } = e.target;
     const user = {
       name: {
@@ -84,6 +87,7 @@ const SignUpPage = () => {
     if (!user.name.firstName || !user.username || !user.email || !user.password) return;
     
     const res = await authAPI.authenticate(user, "register");
+    setIsLoading(false);
     if (res === 201) {
       navigate("/home");
       setToastMessage({ 
@@ -201,8 +205,12 @@ const SignUpPage = () => {
 
           <button
             type="submit"
-            className="p-3 rounded-md mt-5 mb-2 w-full cursor-pointer text-white bg-prim-yellow-200 hover:bg-prim-yellow-300">
-            Create Account
+            className="flex items-center justify-center p-3 rounded-md mt-5 mb-2 w-full cursor-pointer text-white bg-prim-yellow-200 hover:bg-prim-yellow-300">
+            {isLoading ? (
+              <SpinLoader width="24px" height="24px" color="#FFF" />
+            ) : (
+              "Create Account"
+            )}
           </button>
         </form>
 

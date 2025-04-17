@@ -4,14 +4,17 @@ import AuthHeader from "./components/AuthHeader";
 import { useToast } from "@/contexts/ToastContext";
 import { authPageIcons } from "@/assets/icons/icons";
 import { Link, useNavigate } from "react-router-dom";
+import SpinLoader from "@/components/loaders/SpinLoader";
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const { setToastMessage } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const { input, password } = e.target;
     const user = {
       input: input.value,
@@ -20,6 +23,7 @@ const LoginPage = () => {
     if (user.input === "" || user.password === "") return;
 
     const res = await authAPI.authenticate(user, "login");
+    setIsLoading(false);
     if (res === 200) {
       navigate("/home");
       setToastMessage({ message: "Welcome Back", type: "success" });
@@ -72,8 +76,12 @@ const LoginPage = () => {
 
           <button
             type="submit"
-            className="p-3 mt-10 rounded-md my-2 w-full cursor-pointer text-white bg-prim-yellow-200 hover:bg-prim-yellow-300">
-            Log In
+            className="flex items-center justify-center p-3 mt-10 rounded-md my-2 w-full cursor-pointer text-white bg-prim-yellow-200 hover:bg-prim-yellow-300">
+            {isLoading ? (
+              <SpinLoader width="24px" height="24px" color="#FFF" />
+            ) : (
+              "Log In"
+            )}
           </button>
         </form>
 
