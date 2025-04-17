@@ -2,7 +2,7 @@ import axios from "axios";
 import authAPI from "@/services/authAPI";
 
 const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: "https://taskos.onrender.com",
   timeout: 30000,
   headers: {
     "Content-Type": "application/json",
