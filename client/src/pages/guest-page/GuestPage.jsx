@@ -7,10 +7,14 @@ const GuestPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-    if (token) {
-      navigate("/home", { replace: true });
+    const checkToken = () => {
+      const token = localStorage.getItem("accessToken");
+      if (token !== undefined && token !== "undefined") {
+        navigate("/home", { replace: true });
+      }
     }
+
+    checkToken();
   }, []);
 
   return (
