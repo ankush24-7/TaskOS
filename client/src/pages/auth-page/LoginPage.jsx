@@ -26,15 +26,19 @@ const LoginPage = () => {
     setIsLoading(false);
     if (res === 200) {
       navigate("/home");
-      setToastMessage({ message: "Welcome Back", type: "success" });
+      setToastMessage({ 
+        type: "success",
+        position: "top-center",
+        message: "Welcome Back", 
+      });
     }
-    else setToastMessage({ message: res, type: "error" });
+    else setToastMessage({ message: res, type: "error", position: "top-center" });
   };
 
   return (
-    <div className="w-full h-dvh flex-grow overflow-y-scroll scrollbar-hide pb-10 bg-gradient-to-r from-grad-l to-grad-r">
+    <div className="w-full h-dvh flex-grow overflow-y-scroll scrollbar-hide sm:pb-10 bg-gradient-to-r from-grad-l to-grad-r">
       <AuthHeader />
-      <div className="auth-form flex flex-col items-center w-full h-full px-10 pt-8 pb-16 mt-20 mx-auto bg-prim-black/30">
+      <div className="auth-form flex flex-col items-center w-full h-full px-10 pt-8 pb-16 sm:mt-20 mx-auto bg-prim-black/30">
         <p className="text-white text-3xl">Welcome Back</p>
         <form className="flex flex-col w-full mt-10" onSubmit={handleSubmit}>
           <label htmlFor="input" className="text-white">Username or Email</label>

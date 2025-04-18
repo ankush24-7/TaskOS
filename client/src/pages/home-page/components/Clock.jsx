@@ -25,7 +25,7 @@ const Clock = () => {
       <h1 className="text-white font-medium leading-[4.5rem] -translate-x-1.5 text-7xl sm:text-[90px] sm:font-semibold">
         {dateTime.time}
       </h1>
-      <h2 className="text-white leading-12 text-2xl sm:text-3xl">{dateTime.date}</h2>
+      <h2 className="text-white text-2xl sm:text-3xl sm:leading-12">{dateTime.date}</h2>
     </div>
   );
 };

@@ -4,7 +4,7 @@ export function IconBtn({ onClick, Icon, label }) {
   return (
     <button 
       onClick={onClick}
-      className="flex sm:gap-1.5 group items-center cursor-pointer rounded-lg sm:rounded-xl pl-2 pr-1 py-1.5 sm:px-3 border-[1.5px] border-white hover:bg-prim-black">
+      className="flex group items-center cursor-pointer rounded-xl pl-2 pr-1 py-1.5 gap-1 sm:gap-1.5 sm:px-3 border-[1.5px] border-white hover:bg-prim-black">
       <p className="text-white">{label}</p>
       {Icon && <Icon />}
     </button>

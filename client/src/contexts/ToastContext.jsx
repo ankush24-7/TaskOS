@@ -7,7 +7,7 @@ export const useToast = () => useContext(ToastContext);
 
 export const ToastProvider = ({ children }) => {
   const [toastMessage, setToastMessage] = useState(null);
-  const [position, setPosition] = useState("bottom-right");
+  const [position, setPosition] = useState("top-center");
 
   useEffect(() => {
     if (toastMessage) {

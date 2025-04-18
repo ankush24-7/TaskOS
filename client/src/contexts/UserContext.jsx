@@ -32,8 +32,8 @@ export const UserProvider = () => {
     const getUser = async () => {
       try {
         const response = await userAPI.getUser();
-        if (response.status !== 200 && response.status !== 403) {
-          navigate("/login", { replace: true });
+        if (!response.user) {
+          navigate("/", { replace: true });
           return;
         }
 
@@ -74,7 +74,7 @@ export const UserProvider = () => {
       }}>
 
       {isLoading ? (
-        <div className="w-full flex items-center justify-center bg-gradient-to-r from-grad-l to-grad-r">
+        <div className="w-full h-full flex items-center justify-center bg-gradient-to-r from-grad-l to-grad-r">
           <SpinLoader width="50px" height="50px" />
         </div>
       ) : (

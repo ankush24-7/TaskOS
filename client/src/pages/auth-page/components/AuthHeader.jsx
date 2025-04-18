@@ -2,7 +2,7 @@ import Logo from "@/components/ui/Logo";
 
 const authHeader = () => {
   return (
-    <header className="px-10 pt-5 fixed">
+    <header className="hidden px-10 pt-5 sm:block sm:fixed">
       <Logo />
     </header>
   );

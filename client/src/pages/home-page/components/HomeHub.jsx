@@ -56,7 +56,7 @@ const HomeHub = () => {
   };
 
   return (
-    <section className="h-[450px] max-w-[50%] grow-1 flex flex-col pb-2 rounded-2xl bg-stone-900">
+    <section className="h-full sm:h-[450px] w-full sm:max-w-[50%] flex flex-col pb-2 rounded-2xl bg-stone-900">
       <div className="relative w-full flex px-0.5 text-lg rounded-t-2xl bg-prim-black">
         {renderTabs()}
 
