@@ -31,7 +31,9 @@ const handleRegistration = async (req, res) => {
     
     res.cookie('jwt', refreshToken, {
       httpOnly: true,
-      maxAge: 86400000,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'None',
+      maxAge: 24 * 60 * 60 * 1000,
     });
     return res.status(201).json({ message: 'User created successfully', accessToken });
   } catch (error) {
