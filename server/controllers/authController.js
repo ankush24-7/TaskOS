@@ -33,7 +33,7 @@ const handleRegistration = async (req, res) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'None',
-      maxAge: 24 * 60 * 60 * 1000,
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
     return res.status(201).json({ message: 'User created successfully', accessToken });
   } catch (error) {
@@ -68,7 +68,9 @@ const handleLogin = async (req, res) => {
 
     res.cookie('jwt', refreshToken, {
       httpOnly: true,
-      maxAge: 86400000,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'None',
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
     return res.json({ message: 'User logged in successfully', accessToken });
   } catch (error) {
