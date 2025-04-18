@@ -1,4 +1,3 @@
-import AddBtn from "@/components/ui/AddBtn";
 import { TriangleIcon } from "@/assets/icons/icons";
 import ProjectTableLoader from "@/components/loaders/ProjectTableLoader";
 
@@ -73,7 +72,6 @@ const ProjectTable = ({ projects, sort, setSort, order, setOrder, isLoading, sho
         </div>
 
       </div>
-      <AddBtn />
     </>
   );
 };

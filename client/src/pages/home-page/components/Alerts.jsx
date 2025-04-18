@@ -40,7 +40,7 @@ const Alerts = () => {
           {alerts.length ? (
             alerts
           ) : (
-            <p className="text-xl text-center pt-36 text-gray-400">
+            <p className="text-xl text-center pt-52 sm:pt-36 text-gray-400">
               No new alerts
             </p>
           )}

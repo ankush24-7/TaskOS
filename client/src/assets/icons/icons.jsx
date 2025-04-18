@@ -979,11 +979,50 @@ export function ArrowIcon({ className = "" }){
   )
 }
 
+export function ExternalLink({ className = "" }) {
+  return (
+    <svg 
+      width="24" 
+      height="24" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="currentColor" 
+      strokeWidth="2" 
+      strokeLinecap="round" 
+      strokeLinejoin="round" 
+      className={className}>
+      <path d="M22 12A10 10 0 1 1 12 2"/>
+      <path d="M22 2 12 12"/>
+      <path d="M16 2h6v6"/>
+    </svg>
+  )
+}
+
+export function LastUpdatedIcon({ className = "" }) {
+  return (
+    <svg 
+      width="24" 
+      height="24" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="currentColor" 
+      strokeWidth="2" 
+      strokeLinecap="round"
+      strokeLinejoin="round" 
+      className={className}>
+      <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+      <path d="M3 3v5h5"/>
+      <path d="M12 7v5l4 2"/>
+    </svg>
+  )
+}
+
 export const authPageIcons = { ShowPassword, HidePassword };
 export const projectHeaderIcons = { Sparkles, Archive, SearchIcon };
 export const dashboardHeaderIcons = { Timeline, Team, ChevronDown, Sparkles };
 export const processCardIcons = { Profile, Plus, Star, CalendarIcon, StopwatchIcon };
 export const timelineHeaderIcons = { ChevronDown, RefreshIcon, ChevronLeft, ChevronRight };
 export const priorityIcons = { DefaultPriority, HighPriority, MediumPriority, LowPriority };
+export const projectCardIcons = { ExternalLink, LastUpdatedIcon, ChevronDown, CalendarIcon };
 export const activityBarIcons = { LogoIcon, Home, Timeline, Rocket, Star, MyTasks, Settings, Logout, Menu };
 export const processModalIcons = { Timeline, Del, Close, Complete, CalendarIcon, Star, ChevronDown, LogIcon };

@@ -21,7 +21,7 @@ const Clock = () => {
   }, [currentTime])
 
   return (
-    <div className="flex flex-col items-center gap-1 sm:items-start">
+    <div className="hidden sm:flex flex-col gap-1 items-start">
       <h1 className="text-white font-medium leading-[4.5rem] -translate-x-1.5 text-7xl sm:text-[90px] sm:font-semibold">
         {dateTime.time}
       </h1>
