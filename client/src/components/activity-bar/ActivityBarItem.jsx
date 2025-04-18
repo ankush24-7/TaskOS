@@ -12,10 +12,17 @@ export function CollapseButton({ expanded, setExpanded }) {
       onClick={() => setExpanded(!expanded)}>
       <ChevronsLeft
         stroke="#9ca3af"
-        className={`w-8 h-8 transition-transform duration-700 ease-in-out group-hover:stroke-white ${expanded && "rotate-180 fixed"}`}
+        className={`w-8 h-8 transition-transform duration-700 ease-in-out group-hover:stroke-white ${
+          expanded && "rotate-180 fixed"
+        }`}
       />
-      <p className={`text-lg ml-10 text-nowrap text-gray-400 group-hover:text-white 
-        ${ expanded ? "relative opacity-100" : "absolute opacity-0 -translate-y-10 -translate-x-20" }`}>
+      <p
+        className={`text-lg ml-10 text-nowrap text-gray-400 group-hover:text-white 
+        ${
+          expanded
+            ? "relative opacity-100"
+            : "absolute opacity-0 -translate-y-10 -translate-x-20"
+        }`}>
         Collapse
       </p>
     </button>
@@ -32,14 +39,8 @@ export function GrayButton({ Icon, label, to, onClick, expanded }) {
       to={to}
       onClick={onClick}
       className={style + " group  overflow-hidden"}>
-      <Icon
-        stroke="#9ca3af"
-        className={`w-7 h-7 rotation group-hover:stroke-white ${
-          expanded && "fixed"
-        }`}
-      />
-      <p
-        className={`text-lg ml-10 text-nowrap text-gray-400 group-hover:text-white
+      <Icon className={`w-7 h-7 rotation stroke-[#9CA3AF] group-hover:stroke-white ${expanded && "fixed"}`} />
+      <p className={`text-lg ml-10 text-nowrap text-gray-400 group-hover:text-white
           ${
             expanded
               ? "relative opacity-100"
@@ -51,27 +52,29 @@ export function GrayButton({ Icon, label, to, onClick, expanded }) {
   );
 }
 
-function ActivityBarItem({ Icon, label, to, expanded, stroke = "#fff", currentPath = "" }) {
-  const isActive = currentPath === "" ? false : currentPath.startsWith(to);
-  const style = expanded
-    ? "flex items-center py-2 px-3 rounded-lg"
-    : `w-fit h-fit ml-1.5 p-2 hover:rounded-2xl ${isActive ? "rounded-2xl": "rounded-3xl"}`;
+function ActivityBarItem({ Icon, label, to, expanded, currentPath = "" }) {
+  const isActive = currentPath && currentPath.startsWith(to);
+
+  const activeStyle = isActive ? "bg-prim-yellow-250" : "";
+  const hoverStyle = "activity-bar-hov-expand overflow-hidden hover:bg-prim-yellow-250";
+  const baseStyle = expanded
+    ? "flex items-center py-2 px-3 rounded-2xl sm:rounded-lg"
+    : `w-fit h-fit ml-1.5 p-2 hover:rounded-2xl ${
+        isActive ? "rounded-2xl" : "rounded-3xl"
+      }`;
+
+  const labelClass = `hidden sm:block text-lg ml-10 text-nowrap text-white
+    ${
+      expanded
+        ? "relative opacity-100"
+        : "absolute opacity-0 -translate-y-10 -translate-x-20"
+    }
+  `;
 
   return (
-    <Link
-      to={to}
-      className={
-        style + ` activity-bar-hov-expand overflow-hidden hover:bg-prim-yellow-250 ${isActive && "bg-prim-yellow-250"}`
-      }>
-      <Icon className={`w-7 h-7 ${expanded && "sm:fixed"}`} stroke={stroke} />
-      <p
-        className={`hidden text-lg ml-10 text-nowrap sm:block
-          ${
-            expanded
-              ? "relative opacity-100"
-              : "absolute opacity-0 -translate-y-10 -translate-x-20"
-          }`}
-        style={{ color: stroke }}>
+    <Link to={to} className={`${baseStyle} ${hoverStyle} ${activeStyle}`}>
+      <Icon className={`w-7 h-7 ${expanded && "sm:fixed"}`} />
+      <p className={labelClass}>
         {label}
       </p>
     </Link>
