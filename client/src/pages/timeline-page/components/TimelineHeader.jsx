@@ -9,13 +9,10 @@ const TimelineHeader = () => {
   const { isOpen: showTimelineDropDown, setIsOpen: setShowTimelineDropDown, dropdownRef: timelineDropDownRef } = useDropDown();
   
   return (
-    <header className="flex justify-between items-center py-2 px-3 sm:py-3 sm:px-0">
-      <span className="flex items-center gap-4">
-        <button className="group flex items-center py-0.5 pl-3 pr-2 gap-0.5 rounded-full cursor-pointer hover:bg-prim-black/50">
-          <p className="text-2xl text-white">{month + " " + year}</p>
-          <timelineHeaderIcons.ChevronDown className="w-5 h-5 opacity-0 group-hover:opacity-100" />
-        </button>
-        <span className="flex items-center gap-2">
+    <header className="flex justify-between items-center py-2 px-1.5 sm:py-3 sm:px-0">
+      <span className="flex items-center gap-3 sm:gap-5">
+        <p className="text-xl sm:text-2xl text-white">{month + " " + year}</p>
+        <span className="flex items-center sm:ml-1 sm:gap-2">
           <button 
             onClick={() => setOffset(prev => prev - days)}
             className="p-1 rounded-full cursor-pointer hover:bg-prim-black/50">
@@ -29,15 +26,15 @@ const TimelineHeader = () => {
         </span>
         <button
           onClick={() => setOffset(0)}
-          className="h-fit py-2 px-5 ml-5 rounded-full cursor-pointer border-[1.5px] border-white hover:bg-prim-black/50">
+          className="h-fit px-2.5 py-1.5 rounded-full cursor-pointer border-[1.5px] sm:py-2 sm:px-5 border-white hover:bg-prim-black/50">
           <p className="text-lg leading-none text-white">Today</p>
         </button>
       </span>
-      <span className="flex items-center gap-8">
+      <span className="flex items-center gap-2 sm:gap-8">
         <div className="relative" ref={timelineDropDownRef}>
           <button
             onClick={() => setShowTimelineDropDown(!showTimelineDropDown)}
-            className="flex items-center gap-2.5 h-fit py-2 pl-5 pr-3 rounded-full cursor-pointer border-[1.5px] border-white hover:bg-prim-black/50">
+            className="flex items-center h-fit gap-1 py-1 px-1.5 pl-1.5 rounded-full cursor-pointer border-[1.5px] sm:gap-2.5 sm:py-2 sm:pl-5 sm:pr-3 border-white hover:bg-prim-black/50">
             <p className="text-lg leading-none text-white">
               {days === 1 ? "Day" : days === 3 ? "3 days" : days === 4 ? "4 days" : "Week"}
             </p>
@@ -52,7 +49,9 @@ const TimelineHeader = () => {
           className="p-2 rounded-full cursor-pointer hover:bg-prim-black/50">
           <timelineHeaderIcons.RefreshIcon className="w-6 h-6 stroke-white" />
         </button>
-        <User />
+        <span className="hidden sm:block">
+         <User />
+        </span>
       </span>
     </header>
   );

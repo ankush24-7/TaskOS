@@ -21,7 +21,7 @@ const TimelinePage = () => {
   }, []);
 
   return (
-    <div className="flex flex-col w-full flex-grow sm:px-10 bg-gradient-to-r from-grad-l to-grad-r">
+    <div className="flex flex-col w-full h-full justify-between sm:justify-start sm:px-10">
       <TimelineProvider processes={processes}>
         <TimelineHeader />
         <Timeline />

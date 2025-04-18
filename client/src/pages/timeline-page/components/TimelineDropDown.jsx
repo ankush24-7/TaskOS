@@ -7,8 +7,7 @@ const TimelineDropDown = () => {
   return (
     <DropDown
       showHeader={false}
-      width={7}
-      position="bottom-left"
+      position="bottom-center"
       children={
         <div className="flex flex-col p-0.75 rounded-xl bg-neutral-800">
           <button

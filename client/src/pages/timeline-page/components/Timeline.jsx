@@ -59,8 +59,8 @@ const Timeline = () => {
   }, []);
 
   return (
-    <div className="relative max-h-130 w-full flex flex-col flex-grow rounded-2xl bg-stone-900/80">
-      <div className="flex rounded-t-2xl pt-1 pl-8.25 bg-prim-black">
+    <div className="relative w-full flex flex-col flex-grow max-h-154 sm:rounded-2xl sm:max-h-130 bg-stone-900/80">
+      <div className="flex pt-1 pl-8.25 sm:rounded-t-2xl bg-prim-black">
         {renderHeader()}
       </div>
       <div className="flex overflow-y-scroll scrollbar-hide last:border-r-0">
