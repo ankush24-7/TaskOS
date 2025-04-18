@@ -1,12 +1,8 @@
 import { Link } from "react-router-dom";
 import dateUtils from "@/utils/dateUtils";
+import renderMembers from "@/utils/renderMembers";
 
 const ProjectRow = ({ title, _id, teamMembers, status, updatedAt, deadline, userId }) => {
-  const renderMembers = () => {
-    const team = teamMembers.filter((member) => member._id !== userId._id);
-    return team.map((member) => member.username).join(", ");
-  };
-
   return (
     <Link
       to={`/projects/${_id}/dashboard`}
@@ -15,7 +11,7 @@ const ProjectRow = ({ title, _id, teamMembers, status, updatedAt, deadline, user
         <span className="w-full sm:pl-3 sm:w-[32%]">
           <p> {title} </p>
           <p className="whitespace-nowrap overflow-hidden text-ellipsis text-xs w-[95%]">
-            {renderMembers()}
+            {renderMembers(teamMembers, userId)}
           </p>
         </span>
         <span className="hidden w-[17%] sm:block sm:pl-3">
