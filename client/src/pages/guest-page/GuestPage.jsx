@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import authAPI from "@/services/authAPI";
 import GuestNav from "./components/GuestNav";
 import { useNavigate } from "react-router-dom";
 import GuestHeroSection from "./components/GuestHeroSection";
@@ -7,9 +8,10 @@ const GuestPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const checkToken = () => {
-      const token = localStorage.getItem("accessToken");
-      if (token !== undefined && token !== "undefined" && token !== null) {
+    const checkToken = async () => {
+      const res = await authAPI.checkRefreshToken();
+      console.log(res);
+      if (res === 200) {
         navigate("/home", { replace: true });
       }
     }

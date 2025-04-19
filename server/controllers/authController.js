@@ -79,8 +79,9 @@ const handleLogin = async (req, res) => {
   }
 };
 
-const handleGuestAccess = async (req, res) => {
+const checkRefreshToken = async (req, res) => {
   const cookies = req.cookies;
+  console.log("cookies", cookies);
   if (!cookies?.jwt) return res.sendStatus(400);
 
   const refreshToken = cookies.jwt;
@@ -106,5 +107,5 @@ const handleGuestAccess = async (req, res) => {
 module.exports = { 
   handleRegistration, 
   handleLogin,
-  handleGuestAccess
+  checkRefreshToken,
 };
