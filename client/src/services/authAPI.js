@@ -1,3 +1,4 @@
+import { base } from "@/utils/axiosInstance";
 import axiosInstance from "@/utils/axiosInstance";
 
 const authenticate = async (user, route) => {
@@ -12,6 +13,7 @@ const authenticate = async (user, route) => {
 
 const logout = async () => {
   try {
+    console.log("Logging out...");
     await axiosInstance.post("/logout");
     localStorage.removeItem("accessToken");
   } catch (error) {
@@ -21,7 +23,7 @@ const logout = async () => {
 
 const refresh = async () => {
   try {
-    const response = await axiosInstance.post("/refresh");
+    const response = await base.post("/refresh");
     return response.data.accessToken;
   } catch (error) {
     console.error(error);

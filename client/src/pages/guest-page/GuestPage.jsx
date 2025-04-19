@@ -9,8 +9,8 @@ const GuestPage = () => {
 
   useEffect(() => {
     const checkToken = async () => {
-      const response = await authAPI.check();
-      if (response === 200) {
+      const response = await authAPI.refresh();
+      if (response) {
         navigate("/home", { replace: true });
       }
     }

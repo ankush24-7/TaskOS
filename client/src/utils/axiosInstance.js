@@ -11,6 +11,13 @@ const axiosInstance = axios.create({
   withCredentials: true,
 });
 
+export const base = axios.create({
+  baseURL: process.env.NODE_ENV === "production"
+    ? "https://taskos.onrender.com"
+    : "http://localhost:3000",
+  withCredentials: true,
+})
+
 let isRefreshing = false;
 let failedQueue = [];
 
@@ -71,7 +78,7 @@ axiosInstance.interceptors.response.use(
         return axiosInstance(originalRequest);
       } catch (refreshError) {
         processQueue(refreshError, null);
-        console.error("Refresh failed:", refreshError);
+        console.log("Refresh failed:", refreshError);
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;
