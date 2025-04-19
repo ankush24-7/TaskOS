@@ -79,33 +79,12 @@ const handleLogin = async (req, res) => {
   }
 };
 
-const checkRefreshToken = async (req, res) => {
-  const cookies = req.cookies;
-  console.log("cookies", cookies);
-  if (!cookies?.jwt) return res.sendStatus(400);
-
-  const refreshToken = cookies.jwt;
-  const user = await User.findOne({ refreshToken }).exec();
-  if (!user) return res.sendStatus(403);
-
-  jwt.verify(
-    refreshToken,
-    process.env.REFRESH_TOKEN_SECRET,
-    (err, decoded) => {
-      if (err) return res.sendStatus(403);
-
-      const accessToken = jwt.sign(
-        { userId: decoded.userId },
-        process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: '15min' }
-      );
-      return res.json({ accessToken });
-    }
-  );
+const check = async (req, res) => {
+  return res.sendStatus(200);
 }
 
 module.exports = { 
-  handleRegistration, 
+  check,
   handleLogin,
-  checkRefreshToken,
+  handleRegistration, 
 };
