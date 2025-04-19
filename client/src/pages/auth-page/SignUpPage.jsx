@@ -84,7 +84,11 @@ const SignUpPage = () => {
       password: password.value,
       color: displayColors[Math.floor(Math.random() * displayColors.length)],
     };
-    if (!user.name.firstName || !user.username || !user.email || !user.password) return;
+    if (!user.name.firstName || !user.username || !user.email || !user.password) {
+      setIsLoading(false);
+      setToastMessage({ message: "Please fill all fields", type: "error", position: "top-center" });
+      return;
+    }
     
     const res = await authAPI.authenticate(user, "register");
     setIsLoading(false);

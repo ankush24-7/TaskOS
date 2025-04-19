@@ -1,4 +1,5 @@
 import { TriangleIcon } from "@/assets/icons/icons";
+import ProjectCardLoader from "@/components/loaders/ProjectCardLoader";
 import ProjectTableLoader from "@/components/loaders/ProjectTableLoader";
 
 const ProjectTable = ({ projects, sort, setSort, order, setOrder, isLoading, showArchived }) => {
@@ -44,35 +45,35 @@ const ProjectTable = ({ projects, sort, setSort, order, setOrder, isLoading, sho
   };
 
   return (
-    <>
-      <div className="flex flex-col flex-grow max-h-[31rem] mt-1 pb-2 rounded-3xl sm:bg-stone-900/80">
-        <div className="w-full hidden sm:flex p-2 text-lg rounded-t-3xl divide-x divide-gray-400/0 hover:divide-gray-400 bg-prim-black"> 
-          {renderHeader()}
-        </div>
-
-        <div className="w-full px-2 pt-0.5 overflow-y-scroll vertical-scrollbar">
-          {isLoading ? (
-            <div className="flex flex-col gap-0.5">
-              <ProjectTableLoader />
-              <ProjectTableLoader />
-              <ProjectTableLoader />
-            </div>
-          ) : (
-            projects.length === 0 ? (
-              <p className="text-xl text-center mt-40 text-gray-400 whitespace-pre-line">
-                {showArchived 
-                  ? "No archived projects" 
-                  : `No projects found.\n Start a new project to see it here !`
-                }
-              </p>
-            ): (
-              projects
-            )
-          )}
-        </div>
-
+    <div className="flex flex-col flex-grow max-h-[31rem] mt-1 py-0.5 sm:py-0 mx-3 sm:mx-0 rounded-2xl sm:rounded-3xl bg-stone-900">
+      <div className="w-full hidden sm:flex p-2 text-lg rounded-t-3xl divide-x divide-gray-400/0 hover:divide-gray-400 bg-prim-black"> 
+        {renderHeader()}
       </div>
-    </>
+
+      <div className="w-full px-2 pt-0.5 overflow-y-scroll vertical-scrollbar">
+        {isLoading ? (
+          <div className="flex flex-col gap-0.5">
+            <ProjectTableLoader />
+            <ProjectTableLoader />
+            <ProjectTableLoader />
+            <ProjectCardLoader />
+            <ProjectCardLoader />
+            <ProjectCardLoader />
+          </div>
+        ) : (
+          projects.length === 0 ? (
+            <p className="text-xl text-center mt-40 text-gray-400 whitespace-pre-line">
+              {showArchived 
+                ? "No archived projects" 
+                : `No projects found.\n Start a new project to see it here !`
+              }
+            </p>
+          ): (
+            projects
+          )
+        )}
+      </div>
+    </div>
   );
 };
 

@@ -18,7 +18,7 @@ const ProjectCard = ({ title, _id, teamMembers, status, updatedAt, deadline, use
   }, [expanded]);
 
   return (
-    <div className="w-full flex flex-col justify-center px-3 py-2 pb-2.5 mt-1 rounded-2xl bg-stone-900/50">
+    <div className="w-full flex flex-col justify-center px-3 py-2 pb-2.5 mt-1 rounded-2xl bg-prim-black/60">
       <div className="w-full flex justify-between items-center">
         <span className="flex gap-2.5 items-end">
           <p className="text-lg leading-none text-white">{title}</p>

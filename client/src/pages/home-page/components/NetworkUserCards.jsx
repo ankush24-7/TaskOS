@@ -97,7 +97,7 @@ export function NetworkUserCard({ user }) {
   };
   
   return (
-    <div className="flex justify-between items-center px-2 py-1.5 rounded-lg odd:bg-prim-black/50">
+    <div className="flex justify-between items-center px-2 py-1.5 rounded-2xl odd:bg-prim-black/50">
       <button 
         onClick={() => handleShowModal(user)}
         className="flex group items-center gap-2 cursor-pointer">

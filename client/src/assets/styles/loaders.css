@@ -1,5 +1,5 @@
 .loader-pulse {
-  background: linear-gradient(90deg, rgba(240, 240, 240, 0.15) 0%, rgba(240, 240, 240, 0.225) 50%, rgba(240, 240, 240, 0.15) 100%);
+  background: linear-gradient(120deg, rgba(240, 240, 240, 0.15) 35%, rgba(240, 240, 240, 0.225) 50%, rgba(240, 240, 240, 0.15) 65%);
   background-size: 200% 100%;
   animation: pulse 2s infinite linear;
 }

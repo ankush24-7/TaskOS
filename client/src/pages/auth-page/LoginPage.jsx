@@ -20,7 +20,11 @@ const LoginPage = () => {
       input: input.value,
       password: password.value,
     };
-    if (user.input === "" || user.password === "") return;
+    if (user.input === "" || user.password === "") {
+      setIsLoading(false);
+      setToastMessage({ message: "Please fill all fields", type: "error", position: "top-center" });
+      return;
+    }
 
     const res = await authAPI.authenticate(user, "login");
     setIsLoading(false);
