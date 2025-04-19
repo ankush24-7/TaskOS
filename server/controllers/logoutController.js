@@ -22,6 +22,7 @@ const handleLogout = async (req, res) => {
     sameSite: "None",
     secure: process.env.NODE_ENV === "production",
   });
+  
   res.status(204).json({ status: "Success", response });
 };
 
