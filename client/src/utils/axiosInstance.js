@@ -2,7 +2,9 @@ import axios from "axios";
 import authAPI from "@/services/authAPI";
 
 const axiosInstance = axios.create({
-  baseURL: "https://taskos.onrender.com",
+  baseURL: process.env.NODE_ENV === "production"
+    ? "https://taskos.onrender.com"
+    : "http://localhost:3000",
   headers: {
     "Content-Type": "application/json",
   },

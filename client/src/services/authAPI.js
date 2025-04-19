@@ -28,11 +28,9 @@ const refresh = async () => {
   }
 }
 
-const checkRefreshToken = async () => {
+const check = async () => {
   try {
-    const response = await axiosInstance.get("/auth/checkRefreshToken");
-    console.log("response", response);
-    localStorage.setItem("accessToken", response.data.accessToken);
+    const response = await axiosInstance.get("/auth/check");
     return response.status;
   } catch (error) {
     console.error(error);
@@ -40,10 +38,10 @@ const checkRefreshToken = async () => {
 }
 
 const authAPI = { 
+  check,
   logout, 
   refresh,
   authenticate,
-  checkRefreshToken,
 }; 
 
 export default authAPI;
