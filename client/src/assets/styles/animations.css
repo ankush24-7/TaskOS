@@ -16,14 +16,14 @@
 }
 
 .modal {
-  animation : fadeIn 0.2s linear forwards;
+  animation : fadeInGrow 0.2s linear forwards;
 }
 
 .dropdown {
-  animation: fadeIn 0.1s linear forwards
+  animation: fadeInGrow 0.1s linear forwards
 }
 
-@keyframes fadeIn {
+@keyframes fadeInGrow {
   from {
     opacity: 0;
     scale: 0.8;
@@ -51,5 +51,48 @@
   100% {
     stroke-dasharray: 0, 289;
     stroke-dashoffset: -289;
+  }
+}
+
+.mobile-menu.open {
+  animation: slideInUp 0.3s ease-in-out forwards;
+}
+
+.mobile-menu.close {
+  animation: slideOutDown 0.3s ease-in-out forwards;
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(-100%);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 0;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

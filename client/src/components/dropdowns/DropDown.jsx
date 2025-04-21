@@ -1,4 +1,4 @@
-import CloseBtn from "./CloseBtn";
+import CloseBtn from "@/components/ui/CloseBtn";
 
 const DropDown = ({ showHeader = true, width, position, bgColor = "#111", children, header, setIsOpen }) => {
   switch (position) {

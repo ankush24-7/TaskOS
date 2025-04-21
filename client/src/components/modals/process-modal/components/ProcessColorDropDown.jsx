@@ -1,5 +1,5 @@
 import useDropDown from "@/hooks/useDropDown";
-import DropDown from "@/components/ui/DropDown";
+import DropDown from "@/components/dropdowns/DropDown";
 
 const ProcessColorDropDown = ({ color, setColor }) => {
   const { isOpen: showColors, setIsOpen: setShowColors, dropdownRef: colorsRef } = useDropDown();

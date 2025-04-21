@@ -1,5 +1,5 @@
 import useDropDown from "@/hooks/useDropDown";
-import DropDown from "@/components/ui/DropDown";
+import DropDown from "@/components/dropdowns/DropDown";
 import { ChevronDown } from "@/assets/icons/icons";
 import { useDashboard } from "@/contexts/DashboardContext";
 import DisplayPicture from "@/components/ui/DisplayPicture";

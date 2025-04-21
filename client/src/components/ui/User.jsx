@@ -1,4 +1,4 @@
-import DropDown from "./DropDown";
+import DropDown from "../dropdowns/DropDown";
 import authAPI from "@/services/authAPI";
 import useDropDown from "@/hooks/useDropDown";
 import DisplayPicture from "./DisplayPicture";

@@ -1,4 +1,4 @@
-import DropDown from "@/components/ui/DropDown";
+import DropDown from "@/components/dropdowns/DropDown";
 import { Pen, Archive, Del } from "@/assets/icons/icons";
 import { useDashboard } from "@/contexts/DashboardContext";
 

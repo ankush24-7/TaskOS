@@ -1,5 +1,5 @@
 import useDropDown from "@/hooks/useDropDown";
-import DropDown from "@/components/ui/DropDown";
+import DropDown from "@/components/dropdowns/DropDown";
 import { priorityIcons } from "@/assets/icons/icons";
 
 const renderPriority = (priority) => {

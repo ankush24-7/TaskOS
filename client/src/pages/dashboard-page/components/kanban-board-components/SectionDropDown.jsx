@@ -1,4 +1,4 @@
-import DropDown from "@/components/ui/DropDown";
+import DropDown from "@/components/dropdowns/DropDown";
 import ColorPalette from "@/components/ui/ColorPalette";
 import { useDashboard } from "@/contexts/DashboardContext";
 
