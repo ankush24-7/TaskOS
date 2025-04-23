@@ -88,7 +88,7 @@ function KanbanBoard() {
   );
 
   return (
-    <div className="mx-3.5 px-1.5 pt-0.25 flex-grow horizontal-scrollbar overflow-x-scroll rounded-2xl overflow-y-hidden bg-neutral-800">
+    <div className="lg:mx-3.5 px-1.5 lg:pt-0.25 flex-grow horizontal-scrollbar overflow-x-scroll rounded-2xl overflow-y-hidden bg-neutral-800">
       <DndContext
         sensors={sensors}
         onDragEnd={onDragEnd}

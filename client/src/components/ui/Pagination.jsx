@@ -17,7 +17,7 @@ const pagination = ({ currentPage, setCurrentPage, totalPages }) => {
   }
 
   return (
-    <footer className="w-full mt-2">
+    <footer className="w-full mt-2 hidden md:flex">
       <span className="flex items-center w-fit gap-2 mx-auto">
         <button
           onClick={handlePrev}

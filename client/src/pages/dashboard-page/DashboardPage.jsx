@@ -11,7 +11,7 @@ function DashBoardPage() {
   const { showModal, setShowModal } = useModal({ modalState: newProject });
 
   return (
-    <div className="h-screen w-full flex flex-col pb-4 overflow-y-hidden bg-gradient-to-r from-grad-l to-grad-r">
+    <div className="h-screen w-full flex flex-col pb-4 overflow-y-hidden px-2 md:px-4 lg:px-5 bg-gradient-to-r from-grad-l to-grad-r">
       <DashboardProvider>
         {showModal && (
           <ProjectModal 

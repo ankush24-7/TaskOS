@@ -39,8 +39,9 @@ const ProjectModal = ({ newProject, setShowModal }) => {
   }
 
   return (
-    <div className="absolute z-20 inset-0 flex justify-center pt-10 backdrop-blur-[1px] bg-black/5">
-      <div className="modal relative z-30 flex flex-col items-center w-[50rem] h-[34rem] rounded-3xl drop-shadow-[20px_20px_20px_rgba(0,0,0,0.3)] bg-[#E0EBF5]">
+    <div className="absolute z-20 inset-0 flex justify-center md:pt-16 lg:pt-10 backdrop-blur-[1px] bg-black/5">
+      <div className="modal relative z-30 flex flex-col items-center w-full md:w-8/10 lg:w-[50rem] h-full md:h-[34rem] md:rounded-3xl 
+      drop-shadow-[20px_20px_20px_rgba(0,0,0,0.3)] bg-[#E0EBF5]">
         <div className="flex w-full justify-between px-4 py-3 rounded-t-3xl border-b border-black/10 bg-drop-header">
           <h1 className="text-lg text-neutral-900">
             {newProject ? "Create Project" : "Edit Project"}
@@ -48,10 +49,10 @@ const ProjectModal = ({ newProject, setShowModal }) => {
           <CloseBtn onClick={() => setShowModal(false)} dark={false} />
         </div>
 
-        <div className="flex p-4 w-full h-full border-b border-black/10">
+        <div className="flex flex-col md:flex-row p-4 w-full h-full border-b border-black/10">
           <form
             onSubmit={(e) => e.preventDefault()}
-            className="flex flex-col w-3/4 pr-4 border-r border-black/10">
+            className="flex flex-col w-3/4 pr-4 md:border-r border-black/10">
             <div className="flex flex-col w-full">
               <label htmlFor="name" className="text-md text-neutral-900">
                 Project Name
@@ -97,7 +98,7 @@ const ProjectModal = ({ newProject, setShowModal }) => {
             </div>
           </form>
 
-          <section className="h-full flex flex-col pl-4">
+          <section className="h-full flex flex-col pt-4 md:pt-0 md:pl-4">
             <SearchSection
               search={search}
               setSearch={setSearch}
@@ -110,7 +111,7 @@ const ProjectModal = ({ newProject, setShowModal }) => {
         <div className="flex gap-4 justify-end w-full p-4">
           <button 
             onClick={handleSubmit}
-            className="px-4 py-1.5 rounded-lg cursor-pointer bg-prim-yellow-200 hover:bg-prim-yellow-300 active:bg-prim-yellow-50">
+            className="px-4 py-1.5 rounded-lg cursor-pointer bg-prim-yellow-100 hover:bg-prim-yellow-200 active:bg-prim-yellow-250">
             <p className="text-md text-white">Save</p>
           </button>
           <button 

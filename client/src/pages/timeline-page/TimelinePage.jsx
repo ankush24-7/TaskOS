@@ -21,12 +21,12 @@ const TimelinePage = () => {
   }, []);
 
   return (
-    <div className="flex flex-col w-full h-full justify-between sm:justify-start sm:px-10">
-      <TimelineProvider processes={processes}>
+    <TimelineProvider processes={processes}>
+      <div className="flex flex-col w-full justify-between overflow-y-hidden pb-2 md:pb-6 md:justify-start lg:pb-0 px-2 md:px-4 lg:px-10">
         <TimelineHeader />
         <Timeline />
-      </TimelineProvider>
-    </div>
+      </div>
+    </TimelineProvider>
   );
 };
 

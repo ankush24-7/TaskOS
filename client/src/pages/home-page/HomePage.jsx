@@ -20,9 +20,9 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="w-full flex-grow">
+    <div className="w-full flex-grow px-2 md:px-4 lg:px-10">
       <HomeNav greeting={greeting} />
-      <div className="w-full h-full flex-grow flex flex-col px-2 pb-18 gap-4 sm:flex-row sm:justify-between sm:p-10 sm:gap-0">
+      <div className="w-full h-full flex-grow flex mt-2 flex-col pb-18 gap-6 lg:gap-0 lg:flex-row lg:justify-between lg:p-10">
         <Clock />
         <HomeHub />
       </div>

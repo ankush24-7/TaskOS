@@ -1,7 +1,7 @@
-import Header from "./Header.jsx";
 import { CSS } from "@dnd-kit/utilities";
 import ProcessCard from "./ProcessCard.jsx";
 import { AddTask } from "@/assets/icons/icons";
+import SectionHeader from "./SectionHeader.jsx";
 import { useDashboard } from "@/contexts/DashboardContext.jsx";
 import { SortableContext, useSortable } from "@dnd-kit/sortable";
 
@@ -48,7 +48,7 @@ function Section({ section, processes }) {
       ref={setNodeRef}
       style={style}
       className="relative w-[19rem] h-full rounded-xl bg-black/20">
-      <Header section={section} attributes={attributes} listeners={listeners} />
+      <SectionHeader section={section} attributes={attributes} listeners={listeners} />
       <div className="h-[88%] pb-20 overflow-y-auto vertical-scrollbar">
         <div className="flex flex-col items-center px-3">
           <SortableContext items={processes.map((process) => process._id)}>

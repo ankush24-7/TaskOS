@@ -109,16 +109,16 @@ const MyProcesses = () => {
   }, []);
 
   return (
-    <div className="h-screen w-full flex flex-col pb-4 px-10 overflow-y-hidden bg-gradient-to-r from-grad-l to-grad-r">
+    <div className="h-screen w-full flex flex-col pb-19 lg:pb-24 px-2 md:px-4 lg:px-10 overflow-y-hidden bg-gradient-to-r from-grad-l to-grad-r">
       <MyProcessesHeader 
         sortBy={sortBy}
         setSortBy={setSortBy}
       />
 
       {processes.length > 0 ? (
-        <div className="w-full h-130 flex divide-x-2 rounded-2xl divide-white/20 bg-neutral-800">
-          <div className="px-3 py-3 w-4/5 vertical-scrollbar overflow-y-scroll rounded-l-2xl">
-            <div className="flex flex-wrap gap-5">
+        <div className="w-full h-full flex divide-x-2 rounded-2xl divide-white/20 bg-stone-900">
+          <div className="px-3 py-3 w-2/3 md:w-4/5 scrollbar-hide overflow-y-scroll rounded-l-2xl">
+            <div className="flex flex-wrap gap-3 lg:gap-5">
               {processes.map((process) => {
                 if (!process.checked) return null;
                 const duration = (process.endsAt && process.startsAt && (new Date(process.endsAt) - new Date(process.startsAt)) / 60000) || 0;
@@ -127,7 +127,7 @@ const MyProcesses = () => {
                     onClick={() => handleClick(process)}
                     key={process._id}
                     style={{ backgroundColor: process.color.hex, willChange: "transform"}}
-                    className="w-[277px] h-40 flex flex-col px-2.5 py-2 rounded-2xl cursor-pointer transition-normal duration-400 
+                    className="w-[240px] lg:w-[277px] h-40 flex flex-col px-2.5 py-2 rounded-2xl cursor-pointer transition-normal duration-400 
                     linear drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)] hover:drop-shadow-[6px_6px_6px_rgba(0,0,0)] hover:scale-101">
                     <div className="flex justify-between items-center">
                       <p className="text-[15px] max-w-28 text-ellipsis overflow-hidden whitespace-nowrap text-neutral-900">{process.projectId.title}</p>
@@ -166,12 +166,12 @@ const MyProcesses = () => {
           </div>
           
           {projects.length > 0 && (
-            <div className="flex flex-col flex-grow px-2 py-3 rounded-r-2xl">
+            <div className="flex flex-col flex-grow px-2 py-3 rounded-r-2xl vertical-scrollbar overflow-y-scroll">
               <h2 className="text-xl text-center text-white">Projects</h2>
               <div className="flex flex-col gap-1 mt-4">
                 {projects.map((project, index) => (
-                  <div key={index} className="flex items-center justify-between px-4 py-2 rounded-xl bg-neutral-700">
-                    <p className="text-white">{project.title}</p>
+                  <div key={index} className="flex items-center gap-1 justify-between px-2 lg:px-4 py-2 rounded-xl bg-neutral-700">
+                    <p className="max-w-15 truncate text-white">{project.title}</p>
                     <CheckBox 
                       checked={project.checked}
                       handleClick={() => handleCheckbox(index)}

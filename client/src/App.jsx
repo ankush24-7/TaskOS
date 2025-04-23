@@ -3,9 +3,9 @@ import ActivityBar from "@/components/activity-bar/ActivityBar";
 
 function App() {
   return (
-    <div className="max-h-dvh h-dvh flex flex-col-reverse antialiased overflow-y-hidden bg-gradient-to-r from-grad-l to-grad-r sm:flex-row">
-      <ActivityBar />
+    <div className="max-h-dvh h-dvh flex flex-col antialiased justify-between overflow-y- bg-gradient-to-r from-grad-l to-grad-r md:flex-row-reverse">
       <UserProvider />
+      <ActivityBar />
     </div>
   );
 }

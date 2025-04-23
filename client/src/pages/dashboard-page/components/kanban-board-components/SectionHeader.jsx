@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Ellipses, DragIcon } from "@/assets/icons/icons";
 import { useDashboard } from "@/contexts/DashboardContext";
 
-function Header({ section, attributes, listeners }) {
+function SectionHeader({ section, attributes, listeners }) {
   const count = section.processes.length;  
   const { sectionCRUD } = useDashboard();
   const [name, setName] = useState(section.name);
@@ -75,7 +75,7 @@ function Header({ section, attributes, listeners }) {
           <button
             onClick={() => setIsOpen(true)}
             className={`group rounded-full p-0.5 mt-1 cursor-pointer group-hover:opacity-100 hover:bg-prim-black/15
-              ${isOpen ? "opacity-100 bg-prim-black/15" : "opacity-0"} `}>
+              ${isOpen ? "opacity-100 bg-prim-black/15" : "opacity-100 lg:opacity-0"} `}>
             <Ellipses className="hover:stroke-white w-6 h-6" />
           </button>
 
@@ -95,4 +95,4 @@ function Header({ section, attributes, listeners }) {
   );
 }
 
-export default Header;
+export default SectionHeader;

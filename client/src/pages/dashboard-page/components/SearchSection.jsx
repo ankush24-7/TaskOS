@@ -104,7 +104,7 @@ const SearchSection = ({ search, setSearch, team, setTeam }) => {
       <form
         onSubmit={(e) => e.preventDefault()}
         className="relative">
-        <label htmlFor="search" className="absolute -top-96">Manage Team</label>
+        <label htmlFor="search" className="absolute -top-200">Manage Team</label>
         <input
           id="search"
           type="text"

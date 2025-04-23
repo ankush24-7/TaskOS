@@ -6,28 +6,30 @@ const ProjectRow = ({ title, _id, teamMembers, status, updatedAt, deadline, user
   return (
     <Link
       to={`/projects/${_id}/dashboard`}
-      className="flex sm:rounded-lg hover:bg-prim-black/50">
-      <div className="w-full flex justify-between items-center border-b sm:min-h-14 hover:border-transparent border-gray-400 text-white">
-        <span className="w-full sm:pl-3 sm:w-[32%]">
+      className="flex rounded-xl hover:bg-prim-black/80">
+      <div 
+        className="w-full flex justify-between items-center border-b min-h-14 hover:border-transparent border-gray-400 
+        text-white transition-border duration-300 ease-in-out">
+        <span className="pl-3 w-[32%]">
           <p> {title} </p>
           <p className="whitespace-nowrap overflow-hidden text-ellipsis text-xs w-[95%]">
             {renderMembers(teamMembers, userId)}
           </p>
         </span>
-        <span className="hidden w-[17%] sm:block sm:pl-3">
+        <span className="w-[17%] block pl-3">
           <p>{status}</p>
         </span>
-        <span className="hidden w-[17%] sm:block sm:pl-3">
+        <span className="w-[17%] block pl-3">
           <p className="whitespace-nowrap overflow-hidden text-ellipsis">
             {dateUtils.formatProjectDate(updatedAt)}
           </p>
         </span>
-        <span className="hidden w-[17%] sm:block sm:pl-3">
+        <span className="w-[17%] block pl-3">
           <p className="whitespace-nowrap overflow-hidden text-ellipsis">
             {dateUtils.formatProjectDate(deadline)}
           </p>
         </span>
-        <span className="hidden w-[17%] sm:block sm:pl-3">
+        <span className="w-[17%] block pl-3">
           <p className="whitespace-nowrap overflow-hidden text-ellipsis">
             {userId.username}
           </p>

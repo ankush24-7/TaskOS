@@ -14,7 +14,7 @@ function DashboardNav({ setShowModal }) {
   }
 
   return (
-    <nav className="w-full flex py-2 items-center justify-between sm:px-5">
+    <nav className="w-full flex py-2 items-center justify-between">
       <div className="relative" ref={dropdownRef}>
         <navbarComp.IconBtn
           onClick={() => setIsOpen(true)}
@@ -25,7 +25,7 @@ function DashboardNav({ setShowModal }) {
         {isOpen && <ProjectDropDown setIsOpen={setIsOpen} setShowModal={setShowModal} />}
       </div>
 
-      <div className="hidden sm:flex justify-end items-center gap-8">
+      <div className="flex justify-end items-center gap-4 md:gap-6 lg:gap-8">
         <navbarComp.IconBtn
           label="New Section"
           onClick={handleCreateSection}
@@ -33,10 +33,6 @@ function DashboardNav({ setShowModal }) {
         />
         <User />
       </div>
-
-      <span className="sm:hidden">
-        <User />
-      </span>
     </nav>
   );
 }

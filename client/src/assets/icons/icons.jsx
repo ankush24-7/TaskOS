@@ -1042,9 +1042,9 @@ export function CalanderSyncIcon({ className = "" }) {
 }
 
 export const authPageIcons = { ShowPassword, HidePassword };
-export const projectHeaderIcons = { Sparkles, Archive, SearchIcon };
 export const dashboardHeaderIcons = { Timeline, Team, ChevronDown, Sparkles };
 export const processCardIcons = { Profile, Plus, Star, CalendarIcon, StopwatchIcon };
+export const projectHeaderIcons = { Sparkles, Archive, SearchIcon, SortIcon, ArrowIcon };
 export const priorityIcons = { DefaultPriority, HighPriority, MediumPriority, LowPriority };
 export const projectCardIcons = { ExternalLink, LastUpdatedIcon, ChevronDown, CalendarIcon };
 export const activityBarIcons = { LogoIcon, Home, Timeline, Rocket, Star, MyTasks, Settings, Logout, Menu };
