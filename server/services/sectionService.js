@@ -1,4 +1,4 @@
-const sectionDao = require('../dao/sectionDao');
+const sectionDao = require('../dao/sectionDAO');
 
 const createSection = async (sectionData) => {
   const { name, pos } = sectionData;
