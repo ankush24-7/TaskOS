@@ -1,8 +1,8 @@
 const handleParams = (req, res, next) => {
   const userId = req.user.userId;
-  const { sort = "updatedat", order = "desc", search, page = 1, archived = "false" } = req.query;
-  const limit = 8;
-  const skip = (parseInt(page) - 1) * limit;
+  const { limit, sort = "updatedat", order = "desc", search, page = 1, archived = "false" } = req.query;
+  const lim = parseInt(limit) || 10; 
+  const skip = (parseInt(page) - 1) * lim;
   const sortOrder = order === "asc" ? 1 : -1;
   const filter = {
     teamMembers: { $in: [userId] }, 
@@ -33,7 +33,14 @@ const handleParams = (req, res, next) => {
     }
   }
 
-  req.query = { sort: sortBy, skip, filter, limit };
+  const queryData = {
+    filter,
+    skip,
+    sort: sortBy,
+    limit: lim,
+  };
+  
+  req.query = queryData;
   next();
 };
 

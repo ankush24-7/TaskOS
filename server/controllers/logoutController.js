@@ -1,29 +1,19 @@
-const User = require("../models/User");
+const userService = require("../services/userService");
 
 const handleLogout = async (req, res) => {
   const cookies = req.cookies;
   if (!cookies?.jwt) return res.sendStatus(204);
   const refreshToken = cookies.jwt;
 
-  const user = await User.findOne({ refreshToken }).exec();
-  if (!user) {
-    res.clearCookie("jwt", { 
-      httpOnly: true,
-      sameSite: "None",
-      secure: process.env.NODE_ENV === "production",
-    });
-    return res.sendStatus(204);
-  }
+  await userService.logoutUser(refreshToken);
 
-  user.refreshToken = "";
-  const response = await user.save();
   res.clearCookie("jwt", { 
     httpOnly: true,
     sameSite: "None",
     secure: process.env.NODE_ENV === "production",
   });
   
-  res.status(204).json({ status: "Success", response });
+  res.sendStatus(204);
 };
 
 module.exports = handleLogout;

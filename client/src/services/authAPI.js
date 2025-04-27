@@ -13,7 +13,6 @@ const authenticate = async (user, route) => {
 
 const logout = async () => {
   try {
-    console.log("Logging out...");
     await axiosInstance.post("/logout");
     localStorage.removeItem("accessToken");
   } catch (error) {

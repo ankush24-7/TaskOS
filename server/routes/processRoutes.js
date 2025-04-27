@@ -13,7 +13,7 @@ router.route('/my-processes')
 router.use(verifyProjectId);
 
 router.route('/')
-  .get(processController.getProcesses)
+  .get(processController.getProcessesByProject)
   .post(verifySectionId, processController.createProcess);
 
 router.use(verifySectionId);

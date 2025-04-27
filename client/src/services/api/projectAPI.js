@@ -9,9 +9,9 @@ const createProject = async (project) => {
   }
 };
 
-const getProjectPage = async ({ page = 1, search = "", sort = "updatedat", order = "desc", archived = "false" }) => {
+const getProjectPage = async ({ limit, page = 1, search = "", sort = "updatedat", order = "desc", archived = "false" }) => {
   try {
-    const response = await axiosInstance.get(`/project?page=${page}&search=${search}&sort=${sort}&order=${order}&archived=${archived}`);
+    const response = await axiosInstance.get(`/project?page=${page}&limit=${limit}&search=${search}&sort=${sort}&order=${order}&archived=${archived}`);
     return { status: 200, data: response.data };
   } catch (error) {
     return { status: error.response.status, data: error.response?.data?.message };
