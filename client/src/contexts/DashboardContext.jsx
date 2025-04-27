@@ -146,19 +146,16 @@ export const DashboardProvider = ({ children }) => {
     }
   }
 
-  const createProcess = async (process, sectionId, len) => {
+  const createProcess = async (process, sectionId) => {
     try {
-      if (processPosition !== len) {
-        const processes = await fetchProcessesBySection(sectionId);
-        Promise.all(processes.map((process) => {
-          if (process.pos >= processPosition) {
-            updateProcess({ ...process, pos: process.pos + 1 });
-          }
-        }))
-      }
+      const processes = await fetchProcessesBySection(sectionId);
+      Promise.all(processes.map((process) => {
+        if (process.pos >= processPosition) {
+          updateProcess({ ...process, pos: process.pos + 1 });
+        }
+      }));
 
       process.pos = processPosition;
-    
       const { status, message } = await processAPI.createProcess(process, sectionId, projectId);
       if (status === 201) {
         await fetchSections();

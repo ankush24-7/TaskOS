@@ -65,8 +65,8 @@ function Section({ section, processes }) {
 
           <button
             onClick={() => {
-              openModal()
-              setProcessPosition(processes.length)
+              openModal();
+              setProcessPosition(processes.slice(-1)[0]?.pos + 1 || 1);
             }}
             className={`w-full h-40 group flex flex-col items-center justify-center gap-2 mx-auto px-2 py-2.5 rounded-2xl 
               cursor-pointer border-dashed border-2 border-gray-400 hover:border-white hover:bg-prim-black/10 

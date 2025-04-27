@@ -44,7 +44,7 @@ const ProcessModal = forwardRef(({ selectedProcess: process, setShowProcessModal
         endsAt,
         deadline: showDeadline ? deadline : null,
       };
-      await processCRUD.createProcess(newProcess, section._id, section.processes.length);
+      await processCRUD.createProcess(newProcess, section._id);
     }
     else {
       const updatedProcess = {
@@ -68,11 +68,11 @@ const ProcessModal = forwardRef(({ selectedProcess: process, setShowProcessModal
   }
 
   return (
-    <div className="absolute z-20 inset-0 flex justify-center lg:pt-10 backdrop-blur-[1px] bg-black/10">
+    <div className="absolute z-20 inset-0 flex justify-center md:pt-10 backdrop-blur-[1px] bg-black/10">
       <div
         ref={ref}
         style={{ backgroundColor: color.hex }}
-        className="modal absolute z-30 flex flex-col w-full md:w-[80%] lg:w-[50rem] h-full lg:h-[34rem] md:rounded-3xl divide-y 
+        className="modal absolute z-30 flex flex-col w-full md:w-[80%] lg:w-[50rem] h-full md:h-[80%] lg:h-[34rem] md:rounded-3xl divide-y 
         drop-shadow-[20px_20px_20px_rgba(0,0,0,0.3)] overflow-y-scroll scrollbar-hide divide-black/10">
         <div className="w-full flex justify-between items-center px-4 py-2.5 rounded-t-3xl">
           <ProcessAssigneeDropDown
@@ -101,7 +101,7 @@ const ProcessModal = forwardRef(({ selectedProcess: process, setShowProcessModal
           </div>
         </div>
 
-        <div className="h-full flex flex-col md:flex-row divide-x divide-black/5">
+        <div className="h-full flex flex-col md:flex-row pb-10 md:pb-0 divide-x divide-black/5">
           <div className="flex flex-col w-full md:w-2/3 pt-4 pb-10 px-4">
             <label htmlFor="title" className="text-neutral-900">
               Title*
@@ -212,18 +212,20 @@ const ProcessModal = forwardRef(({ selectedProcess: process, setShowProcessModal
 
         <div 
           style={{ backgroundColor: color.hex }}
-          className="sticky bottom-0 md:block flex items-center justify-end gap-4 px-4 py-2 rounded-b-3xl">
-          <button
-            onClick={handleSubmit}
-            className="px-3 py-1.5 rounded-xl cursor-pointer text-white bg-prim-yellow-100 hover:bg-prim-yellow-200">
-            Save
-          </button>
-          <button
-            type="button"
-            onClick={() => setShowProcessModal(false)}
-            className="px-3 py-1.5 rounded-xl cursor-pointer text-white bg-red-600 hover:bg-red-700">
-            Cancel
-          </button>
+          className="sticky bottom-0 md:block px-4 py-2 rounded-b-3xl">
+          <div className="flex items-center justify-end gap-4">
+            <button
+              onClick={handleSubmit}
+              className="px-3 py-1.5 rounded-xl cursor-pointer text-white bg-prim-yellow-100 hover:bg-prim-yellow-200">
+              Save
+            </button>
+            <button
+              type="button"
+              onClick={() => setShowProcessModal(false)}
+              className="px-3 py-1.5 rounded-xl cursor-pointer text-white bg-red-600 hover:bg-red-700">
+              Cancel
+            </button>
+          </div>
         </div>
       </div>
     </div>
