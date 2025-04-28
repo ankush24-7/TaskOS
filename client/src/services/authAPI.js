@@ -13,7 +13,7 @@ const authenticate = async (user, route) => {
 
 const logout = async () => {
   try {
-    await axiosInstance.post("/logout");
+    await axiosInstance.post("/auth/logout");
     localStorage.removeItem("accessToken");
   } catch (error) {
     console.error(error);
@@ -22,7 +22,7 @@ const logout = async () => {
 
 const refresh = async () => {
   try {
-    const response = await base.post("/refresh");
+    const response = await base.post("/auth/refresh");
     return response.data.accessToken;
   } catch (error) {
     console.error(error);
