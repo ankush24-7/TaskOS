@@ -25,7 +25,7 @@ const Profile = ({ user, setUser, viewOnly }) => {
       setUploading(true);
       const formData = new FormData();
       formData.append("displayPicture", file);
-      const { status, displayPicture } = await userAPI.postDisplayPicture(formData);
+      const { status, publicId } = await userAPI.postDisplayPicture(formData);
 
       setUploading(false);
 
@@ -33,7 +33,7 @@ const Profile = ({ user, setUser, viewOnly }) => {
         setUser((prev) => {
           return {
             ...prev,
-            displayPicture: { publicId: displayPicture.publicId },
+            displayPicture: { publicId },
           };
         });
       }

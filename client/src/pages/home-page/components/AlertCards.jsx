@@ -1,5 +1,5 @@
-import userAPI from "@/services/api/userAPI";
 import { useUser } from "@/contexts/UserContext";
+import requestAPI from "@/services/api/requestAPI";
 import DisplayPicture from "@/components/ui/DisplayPicture";
 
 export function ConnectCard({ req }) {
@@ -8,13 +8,13 @@ export function ConnectCard({ req }) {
   const updateRequests = () => setRequests((prev) => prev.filter((r) => r._id !== req._id));
 
   const handleConnect = async () => {
-    await userAPI.acceptRequest(req.sender._id);
+    await requestAPI.acceptConnectRequest(req.sender._id);
     setNetwork((prev) => [...prev, req.sender]);
     updateRequests();
   };
 
   const handleDismiss = async () => {
-    await userAPI.dismissRequest(req.sender._id);
+    await requestAPI.dismissConnectRequest(req.sender._id);
     updateRequests();
   };
 

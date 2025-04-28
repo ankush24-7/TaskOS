@@ -1,8 +1,9 @@
 import { useState } from "react";
 import userAPI from "@/services/api/userAPI";
+import { useUser } from "@/contexts/UserContext";
+import requestAPI from "@/services/api/requestAPI";
 import DisplayPicture from "../../../components/ui/DisplayPicture";
 import SpinLoader from "../../../components/loaders/SpinLoader";
-import { useUser } from "@/contexts/UserContext";
 
 export function FoundUserCard({ user, label }) {
   const [text, setText] = useState(label);
@@ -11,14 +12,14 @@ export function FoundUserCard({ user, label }) {
 
   const handleConnect = async () => {
     setIsLoading(true);
-    const response = await userAPI.sendConnectRequest(user._id);
+    const response = await requestAPI.sendConnectRequest(user._id);
     if (response.status === 200) setText("Requested");
     setIsLoading(false);
   };
 
   const handleCancel = async () => {
     setIsLoading(true);
-    const response = await userAPI.cancelConnectRequest(user._id);
+    const response = await requestAPI.cancelConnectRequest(user._id);
     if (response.status === 200) setText("Connect");
     setIsLoading(false);
   };

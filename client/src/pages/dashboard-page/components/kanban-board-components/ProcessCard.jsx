@@ -91,7 +91,6 @@ function ProcessCard({ process, openModal }) {
         <button 
           onClick={() => {
             openModal();
-            console.log("setting", process.pos);
             setProcessPosition(process.pos);
           }}
           className="absolute z-20 left-1/2 -translate-x-1/2 -translate-y-2 p-0.5 rounded-full cursor-pointer opacity-0 group-hover:opacity-100 bg-white">
