@@ -43,15 +43,16 @@ TaskOS/
 │   │   └── vite.config.js
 │   └── index.html
 ├── server/
-│   ├── config/
-│   ├── controllers/
-│   ├── dao/
-│   ├── middlewares/
-│   ├── models/
-│   ├── routes/
-│   ├── services/
-│   ├── utils/
-│   └── server.js
+|   └── src/
+|       ├── config/
+|       ├── controllers/
+|       ├── dao/
+|       ├── middlewares/
+|       ├── models/
+|       ├── routes/
+|       ├── services/
+|       ├── utils/
+|       └── server.js
 ├── LICENSE
 └── README.md
 ```

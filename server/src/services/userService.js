@@ -11,7 +11,7 @@ const getUser = async (userId) => {
   return userDAO.findUserProfileById(userId);
 };
 
-const updateUser = async (userId, data) => {
+const updateUser = async (userId, updateData) => {
   const {
     firstName,
     lastName,
@@ -21,7 +21,7 @@ const updateUser = async (userId, data) => {
     organization,
     bio,
     preferences,
-  } = data;
+  } = updateData;
 
   const user = await userDAO.findUserById(userId);
   if (!user) throw new Error('User does not exist');
