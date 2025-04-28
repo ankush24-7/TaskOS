@@ -2,26 +2,14 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const streamifier = require("streamifier");
 const cloudinary = require("../utils/cloudinary");
+const userService = require("../services/userService");
 
 const searchUsers = async (req, res) => {
   const userId = req.user.userId;
   const search = req.query.search;
-  const filter = {
-    $or: [
-      { "name.firstName": { $regex: `^${search}`, $options: "i" } },
-      { "name.lastName": { $regex: `^${search}`, $options: "i" } },
-      { username: { $regex: search, $options: "i" } },
-    ],
-    _id: { $ne: userId },
-  };
 
   try {
-    const users = await User.find(filter)
-      .select("-password -refreshToken -preferences")
-      .populate("network", "name username")
-      .populate("requests.sender", "name username")
-      .lean()
-      .exec();
+    const users = await userService.searchUsers(userId, search);
     return res.json({ users });
   } catch (error) {
     return res.status(500).json({ message: error.message });
@@ -39,43 +27,9 @@ const postDisplayPicture = async (req, res) => {
   }
 
   try {
-    const user = await User.findById(userId).exec();
-    if (!user) {
-      return res.status(404).json({ message: "User does not exist" });
-    }
-
-    if (user.displayPicture?.publicId) {
-      await cloudinary.uploader.destroy(user.displayPicture.publicId);
-    }
-
-    const uploadFromBuffer = (buffer) => {
-      return new Promise((resolve, reject) => {
-        const stream = cloudinary.uploader.upload_stream(
-          {
-            folder: "displayPictures",
-            eager: ["t_profile48", "t_profile88", "t_profile180"],
-          },
-          (error, result) => {
-            if (error) reject(error);
-            else resolve(result);
-          }
-        );
-
-        streamifier.createReadStream(buffer).pipe(stream);
-      });
-    };
-
-    const result = await uploadFromBuffer(image.buffer);
-
-    const displayPicture = {
-      publicId: result.public_id,
-    };
-
-    user.displayPicture = displayPicture;
-    await user.save();
-
+    const publicId = await userService.postDisplayPicture(userId, image.buffer);
     return res.status(200).json({
-      displayPicture,
+      publicId,
       message: "Image uploaded successfully",
     });
 
@@ -92,20 +46,7 @@ const deleteDisplayPicture = async (req, res) => {
   }
 
   try {
-    const user = await User.findOne({ _id: userId }).exec();
-    if (!user) {
-      return res.status(404).json({ message: "User does not exist" });
-    }
-
-    if (user.displayPicture?.publicId) {
-      await cloudinary.uploader.destroy(user.displayPicture.publicId);
-      user.displayPicture = {
-        publicId: null,
-        url: null,
-      };
-      await user.save();
-    }
-
+    const user = await userService.deleteDisplayPicture(userId);
     return res.status(200).json({ message: "Display picture deleted" });
   } catch (error) {
     return res.status(500).json({ message: "Server error" });
@@ -213,106 +154,12 @@ const getUser = async (req, res) => {
   }
 };
 
-const sendConnectRequest = async (req, res) => {
-  const id = req.params.id;
-  const userId = req.user.userId;
-
-  try {
-    const user = await User.findOne({ _id: id }).exec();
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-    const newRequest = {
-      sender: userId,
-      type: "connect",
-    };
-    user.requests.push(newRequest);
-    await user.save();
-    return res.sendStatus(200);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const cancelConnectRequest = async (req, res) => {
-  const id = req.params.id;
-  const userId = req.user.userId;
-
-  try {
-    const user = await User.findOne({ _id: id }).populate("requests").exec();
-    if (!user) return res.status(404).json({ message: "User not found" });
-
-    user.requests = user.requests.filter(
-      (req) => req.sender.toString() !== userId
-    );
-    await user.save();
-    return res.sendStatus(200);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const acceptRequest = async (req, res) => {
-  const senderId = req.params.id;
-  const userId = req.user.userId;
-
-  try {
-    const user = await User.findOne({ _id: userId })
-      .populate("requests")
-      .exec();
-    const sender = await User.findOne({ _id: senderId })
-      .populate("requests")
-      .exec();
-    if (!user || !sender)
-      return res.status(404).json({ message: "User not found" });
-
-    user.requests = user.requests.filter(
-      (req) => req.sender.toString() !== senderId
-    );
-    user.network.push(senderId);
-    sender.network.push(userId);
-    await user.save();
-    await sender.save();
-    return res.sendStatus(200);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const dismissRequest = async (req, res) => {
-  const senderId = req.params.id;
-  const userId = req.user.userId;
-
-  try {
-    const user = await User.findOne({ _id: userId })
-      .populate("requests")
-      .exec();
-    if (!user) return res.status(404).json({ message: "User not found" });
-
-    user.requests = user.requests.filter(
-      (req) => req.sender.toString() !== senderId
-    );
-    await user.save();
-    return res.sendStatus(200);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 const deleteConnection = async (req, res) => {
-  const senderId = req.params.id;
   const userId = req.user.userId;
+  const connectionId = req.params.id;
 
   try {
-    const user = await User.findOne({ _id: userId }).exec();
-    const sender = await User.findOne({ _id: senderId }).exec();
-    if (!user || !sender)
-      return res.status(404).json({ message: "User not found" });
-
-    user.network = user.network.filter((id) => id.toString() !== senderId);
-    sender.network = sender.network.filter((id) => id.toString() !== userId);
-    await user.save();
-    await sender.save();
+    await userService.deleteConnection(userId, connectionId);
     return res.sendStatus(200);
   } catch (error) {
     console.log(error);
@@ -323,11 +170,8 @@ module.exports = {
   getUser,
   updateUser,
   searchUsers,
-  acceptRequest,
-  dismissRequest,
   deleteConnection,
-  sendConnectRequest,
   postDisplayPicture,
   deleteDisplayPicture,
-  cancelConnectRequest,
+  deleteConnection,
 };

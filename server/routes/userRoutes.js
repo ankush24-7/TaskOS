@@ -14,14 +14,6 @@ router.route("/")
 router.route("/search")
   .get(userController.searchUsers);
 
-router.route("/reciever/connect-request/:id")
-  .post(userController.acceptRequest)
-  .delete(userController.dismissRequest);
-
-router.route("/sender/connect-request/:id")
-  .post(userController.sendConnectRequest)
-  .delete(userController.cancelConnectRequest);
-
 router.route("/network/:id")
   .delete(userController.deleteConnection);
 

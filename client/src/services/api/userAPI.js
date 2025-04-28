@@ -46,7 +46,7 @@ const postDisplayPicture = async (formData) => {
 
     return { 
       status: 200, 
-      displayPicture: response.data.displayPicture, 
+      publicId: response.data.publicId, 
       message: response.data.message 
     };
   } catch (error) {
@@ -69,30 +69,6 @@ const deleteDisplayPicture = async () => {
   }
 }
 
-const sendConnectRequest = async (userId) => {
-  try {
-    await axiosInstance.post(`/user/sender/connect-request/${userId}`);
-    return { status: 200, message: "Request sent" };
-  } catch (error) {
-    return {
-      status: error.response?.status,
-      message: error.response?.data?.message,
-    };
-  }
-};
-
-const cancelConnectRequest = async (userId) => {
-  try {
-    await axiosInstance.delete(`/user/sender/connect-request/${userId}`);
-    return { status: 200, message: "Request cancelled" };
-  } catch (error) {
-    return {
-      status: error.response?.status,
-      message: error.response?.data?.message,
-    };
-  }
-};
-
 const removeConnection = async (userId) => {
   try {
     await axiosInstance.delete(`/user/network/${userId}`);
@@ -104,30 +80,6 @@ const removeConnection = async (userId) => {
     };
   }
 };
-
-const acceptRequest = async (senderId) => {
-  try {
-    await axiosInstance.post(`/user/reciever/connect-request/${senderId}`);
-    return { status: 200, message: "Request accepted" };
-  } catch (error) {
-    return {
-      status: error.response?.status,
-      message: error.response?.data?.message,
-    };
-  }
-}
-
-const dismissRequest = async (senderId) => {
-  try {
-    await axiosInstance.delete(`/user/reciever/connect-request/${senderId}`);
-    return { status: 200, message: "Request dismissed" };
-  } catch (error) {
-    return {
-      status: error.response?.status,
-      message: error.response?.data?.message,
-    };
-  }
-}
 
 const getPreference = async (key) => {
   try {
@@ -157,15 +109,11 @@ const updatePreferences = async (preferences) => {
 const userAPI = {
   getUser,
   searchUsers,
-  acceptRequest,
   getPreference,
-  dismissRequest,
   updateUserInfo,
   removeConnection,
   updatePreferences,
-  sendConnectRequest,
   postDisplayPicture,
-  cancelConnectRequest,
   deleteDisplayPicture,
 };
 

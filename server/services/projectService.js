@@ -1,19 +1,19 @@
-const projectDao = require('../dao/projectDAO');
+const projectDAO = require('../dao/projectDAO');
 
 const createProject = async (projectData) => {
   const { userId, title } = projectData;
   if (!userId || !title) {
     throw new Error('User ID and Title are required');
   }
-  return await projectDao.createProject(projectData);
+  return await projectDAO.createProject(projectData);
 };
 
 const getProjects = async (queryData) => {
-  return await projectDao.getProjects(queryData);
+  return await projectDAO.getProjects(queryData);
 };
 
 const getProjectByID = async (projectId) => {
-  const project = await projectDao.getProjectByID(projectId);
+  const project = await projectDAO.getProjectByID(projectId);
   if (!project) {
     throw new Error('Project not found');
   }
@@ -21,19 +21,19 @@ const getProjectByID = async (projectId) => {
 };
 
 const updateProject = async (projectId, updateData) => {
-  const project = await projectDao.findProjectById(projectId);
+  const project = await projectDAO.findProjectById(projectId);
   if (!project) {
     throw new Error('Project not found');
   }
-  return await projectDao.updateProject(project, updateData);
+  return await projectDAO.updateProject(project, updateData);
 };
 
 const deleteProject = async (projectId) => {
-  const project = await projectDao.findProjectById(projectId);
+  const project = await projectDAO.findProjectById(projectId);
   if (!project) {
     throw new Error('Project not found');
   }
-  return await projectDao.deleteProject(projectId);
+  return await projectDAO.deleteProject(projectId);
 };
 
 module.exports = {

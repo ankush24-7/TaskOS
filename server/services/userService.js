@@ -1,95 +1,131 @@
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const userDAO = require("../dao/userDAO");
-const generateTokens = require("../utils/generateTokens");
+const bcrypt = require('bcrypt');
+const userDAO = require('../dao/userDAO');
+const streamifier = require('streamifier');
+const cloudinary = require('../utils/cloudinary');
 
-async function registerUser({ name, username, email, color, password }) {
-  const emailAlreadyExists = await userDAO.findUserByEmail(email);
-  if (emailAlreadyExists) {
-    throw new Error("User already exists");
-  }
+const searchUsers = async (userId, search) => {
+  return userDAO.searchUsers(search, userId);
+};
 
-  const usernameAlreadyExists = await userDAO.findUserByUsername(username);
-  if (usernameAlreadyExists) {
-    throw new Error("Username already exists");
-  }
+const getUser = async (userId) => {
+  return userDAO.findUserProfileById(userId);
+};
 
-  const hashedPassword = await bcrypt.hash(password, 10);
-
-  const user = await userDAO.createUser({
-    name,
+const updateUser = async (userId, data) => {
+  const {
+    firstName,
+    lastName,
     username,
     email,
-    color,
-    password: hashedPassword,
-  });
+    password,
+    organization,
+    bio,
+    preferences,
+  } = data;
 
-  const { accessToken, refreshToken } = generateTokens(user);
-  user.refreshToken = refreshToken;
-  await userDAO.saveUser(user);
+  const user = await userDAO.findUserById(userId);
+  if (!user) throw new Error('User does not exist');
 
-  return { accessToken, refreshToken };
-}
+  if (bio !== user.bio) user.bio = bio;
+  if (firstName) user.name.firstName = firstName;
+  if (lastName !== user.name.lastName) user.name.lastName = lastName;
+  if (organization !== user.organization) user.organization = organization;
 
-async function loginUser({ input, password }) {
-  const user = await userDAO.findUserByEmailOrUsername(input);
-  if (!user) {
-    throw new Error("User not found");
+  if (username) {
+    const duplicate = await userDAO.findUserByUsername(username);
+    if (duplicate) throw new Error('Username already exists');
+    user.username = username;
   }
 
-  const isMatch = await bcrypt.compare(password, user.password);
-  if (!isMatch) {
-    throw new Error("Wrong Password");
+  if (email) {
+    const duplicate = await userDAO.findUserByEmail(email);
+    if (duplicate) throw new Error('Email already exists');
+    user.email = email;
   }
 
-  const { accessToken, refreshToken } = generateTokens(user);
-  user.refreshToken = refreshToken;
-  await userDAO.saveUser(user);
-
-  return { accessToken, refreshToken };
-}
-
-async function logoutUser(refreshToken) {
-  const user = await userDAO.findUserByRefreshToken(refreshToken);
-  if (user) {
-    user.refreshToken = null;
-    await userDAO.saveUser(user);
+  if (password) {
+    user.password = await bcrypt.hash(password, 10);
   }
-}
 
-async function refreshUser(refreshToken) {
-  try {
-    const decoded = await new Promise((resolve, reject) => {
-      jwt.verify(
-        refreshToken,
-        process.env.REFRESH_TOKEN_SECRET,
-        (err, decoded) => {
-          if (err) reject(new Error('Invalid refresh token'));
-          else resolve(decoded);
+  if (preferences) {
+    for (const key in preferences) {
+      if (preferences.hasOwnProperty(key)) {
+        user.preferences[key] = {
+          ...user.preferences[key],
+          ...preferences[key],
+        };
+      }
+    }
+  }
+
+  await user.save();
+  return {
+    name: user.name,
+    username: user.username,
+    email: user.email,
+    organization: user.organization,
+  };
+};
+
+const postDisplayPicture = async (userId, imageBuffer) => {
+  const user = await userDAO.findUserById(userId);
+  if (!user) throw new Error('User does not exist');
+
+  if (user.displayPicture?.publicId) {
+    await cloudinary.uploader.destroy(user.displayPicture.publicId);
+  }
+
+  const uploadFromBuffer = (buffer) => {
+    return new Promise((resolve, reject) => {
+      const stream = cloudinary.uploader.upload_stream(
+        {
+          folder: "displayPictures",
+          eager: ["t_profile48", "t_profile88", "t_profile180"],
+        },
+        (error, result) => {
+          if (error) reject(error);
+          else resolve(result);
         }
       );
+      streamifier.createReadStream(buffer).pipe(stream);
     });
+  };
 
-    const user = await userDAO.findUserByRefreshToken(refreshToken);
-    if (!user) {
-      throw new Error('User not found');
-    }
+  const result = await uploadFromBuffer(imageBuffer);
+  user.displayPicture = { publicId: result.public_id };
+  await user.save();
+  return result.public_id;
+};
 
-    const accessToken = jwt.sign(
-      { userId: decoded.userId },
-      process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: '15min' }
-    );
+const deleteDisplayPicture = async (userId) => {
+  const user = await userDAO.findUserById(userId);
+  if (!user) throw new Error('User does not exist');
 
-    return accessToken;
-  } catch (error) {
-    throw error;
+  if (user.displayPicture?.publicId) {
+    await cloudinary.uploader.destroy(user.displayPicture.publicId);
+    user.displayPicture = { publicId: null, url: null };
+    await user.save();
   }
-}
+};
+
+const deleteConnection = async (userId, connectionId) => {
+  const user = await userDAO.findUserById(userId);
+  const target = await userDAO.findUserById(connectionId);
+
+  if (!user || !target) throw new Error('User not found');
+
+  user.network = user.network.filter((id) => id.toString() !== connectionId);
+  target.network = target.network.filter((id) => id.toString() !== userId);
+
+  await user.save();
+  await target.save();
+};
 
 module.exports = {
-  registerUser,
-  loginUser,
-  logoutUser,
-  refreshUser
+  searchUsers,
+  getUser,
+  updateUser,
+  postDisplayPicture,
+  deleteDisplayPicture,
+  deleteConnection,
 };
