@@ -30,7 +30,7 @@ const ProjectTable = ({ projects, sort, setSort, order, setOrder, isLoading, sho
       <span key={index} style={{ width }} className="pl-3 flex items-center gap-3">
         <button
           onClick={() => handleSortChange(title)}
-          className="cursor-pointer font-normal text-gray-300 hover:text-white">
+          className="cursor-pointer truncate text-gray-300 hover:text-white">
           {title}
         </button>
         <button className="cursor-pointer" onClick={handleOrderChange}>
@@ -45,17 +45,23 @@ const ProjectTable = ({ projects, sort, setSort, order, setOrder, isLoading, sho
   };
 
   return (
-    <div className="flex flex-col flex-grow max-h-[31rem] mt-1 py-0.5 sm:py-0 mx-3 sm:mx-0 rounded-2xl sm:rounded-3xl bg-stone-900">
-      <div className="w-full hidden sm:flex p-2 text-lg rounded-t-3xl divide-x divide-gray-400/0 hover:divide-gray-400 bg-prim-black"> 
+    <div className="flex flex-col flex-grow max-h-9/10 min-h-9/10 md:max-h-8/10 md:min-h-8/10 py-0.5 md:py-0 rounded-2xl md:rounded-3xl mt-2 md:mt-0 bg-stone-900">
+      <div className="w-full hidden md:flex p-2 text-lg rounded-t-3xl divide-x divide-gray-400/0 hover:divide-gray-400 bg-prim-black"> 
         {renderHeader()}
       </div>
 
-      <div className="w-full px-2 pt-0.5 overflow-y-scroll vertical-scrollbar">
+      <div className="w-full px-2 pt-0.5 pb-1 max-h-[100%] overflow-y-scroll vertical-scrollbar">
         {isLoading ? (
           <div className="flex flex-col gap-0.5">
             <ProjectTableLoader />
             <ProjectTableLoader />
             <ProjectTableLoader />
+            <ProjectTableLoader />
+            <ProjectTableLoader />
+            <ProjectTableLoader />
+            <ProjectCardLoader />
+            <ProjectCardLoader />
+            <ProjectCardLoader />
             <ProjectCardLoader />
             <ProjectCardLoader />
             <ProjectCardLoader />

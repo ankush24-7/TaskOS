@@ -59,7 +59,9 @@ const ProjectsPage = () => {
       setIsLoading(true);
       const orderBy = order || "desc";
       const sortBy = sort || "updatedat";
-      const { status, data } = await projectAPI.getProjectPage({ page: currentPage, search, sort: sortBy, order: orderBy, archived: showArchived });
+      const width = window.innerWidth;
+      const limit = width >= 1024 ? 8 : width >= 768 ? 9 : 10;
+      const { status, data } = await projectAPI.getProjectPage({ limit, page: currentPage, search, sort: sortBy, order: orderBy, archived: showArchived });
       if (status === 200) {
         let projects;
         if (isScreenLarge) {
@@ -79,8 +81,12 @@ const ProjectsPage = () => {
   }, [search, order, sort, currentPage, showArchived]);
 
   return (
-    <div className="flex flex-col w-full flex-grow sm:px-10">
+    <div className="flex flex-col w-full h-8/10 pb-2 px-2 md:px-4 md:h-full lg:px-10">
       <ProjectNav 
+        sort={sort}
+        setSort={setSort}
+        order={order}
+        setOrder={setOrder}
         search={search} 
         setSearch={setSearch} 
         showArchived={showArchived}
