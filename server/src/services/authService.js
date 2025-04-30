@@ -34,12 +34,12 @@ async function registerUser({ name, username, email, color, password }) {
 async function loginUser({ input, password }) {
   const user = await userDAO.findUserByEmailOrUsername(input);
   if (!user) {
-    throw new Error("User not found");
+    throw new Error("Invalid credentials");
   }
 
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
-    throw new Error("Wrong Password");
+    throw new Error("Invalid credentials");
   }
 
   const { accessToken, refreshToken } = generateTokens(user);
