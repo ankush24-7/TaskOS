@@ -37,19 +37,19 @@ const searchUsers = async (search, excludeUserId) => {
     .exec();
 };
 
-async function findUserByEmail(email) {
+const findUserByEmail = async (email) => {
   return await User.findOne({ email }).lean().exec();
 }
 
-async function findUserByUsername(username) {
+const findUserByUsername = async (username) => {
   return await User.findOne({ username }).lean().exec();
 }
 
-async function findUserByRefreshToken(refreshToken) {
+const findUserByRefreshToken = async (refreshToken) => {
   return await User.findOne({ refreshToken }).exec();
 }
 
-async function findUserByEmailOrUsername(input) {
+const findUserByEmailOrUsername = async (input) => {
   if (input.includes("@")) {
     return await User.findOne({ email: input }).exec();
   } else {
@@ -57,12 +57,12 @@ async function findUserByEmailOrUsername(input) {
   }
 }
 
-async function createUser(userData) {
+const createUser = async (userData) => {
   const newUser = new User(userData);
   return await newUser.save();
 }
 
-async function saveUser(user) {
+const saveUser = async (user) => {
   return await user.save();
 }
 

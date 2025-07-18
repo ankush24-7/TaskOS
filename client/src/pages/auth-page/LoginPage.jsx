@@ -67,7 +67,7 @@ const LoginPage = () => {
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="rounded-r-md w-10 bg-white hover:bg-black/[0.15]">
+              className="rounded-r-md w-10 cursor-pointer bg-white hover:bg-black/[0.15]">
               {showPassword ? (
                 <authPageIcons.HidePassword fill="#818181" className="w-5 mx-auto" />
               ) : (

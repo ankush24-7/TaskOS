@@ -3,7 +3,6 @@ const getCloudinaryProfilePicURL = (publicId, radius) => {
   return `https://res.cloudinary.com/dcm0pdfet/image/upload/t_profile${dimension}/${publicId}`;
 };
 
-
 const DisplayPicture = ({ publicId, color, firstName, radius }) => {
   if (publicId) {
     const cloudinaryUrl = getCloudinaryProfilePicURL(publicId, radius);

@@ -5,7 +5,7 @@ const sendConnectRequest = async (req, res) => {
   const senderId = req.user.userId;
 
   try {
-    const user = await requestService.sendConnectRequest(senderId, targetId);
+    await requestService.sendConnectRequest(senderId, targetId);
     return res.sendStatus(200);
   } catch (error) {
     console.log(error);

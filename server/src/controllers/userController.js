@@ -102,5 +102,4 @@ module.exports = {
   deleteConnection,
   postDisplayPicture,
   deleteDisplayPicture,
-  deleteConnection,
 };
